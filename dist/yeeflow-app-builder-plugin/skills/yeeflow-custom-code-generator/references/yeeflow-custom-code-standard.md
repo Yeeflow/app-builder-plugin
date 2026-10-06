@@ -124,3 +124,7 @@ Validators should enforce:
 - Unknown SDK calls require SDK-detail proof or a blocked status.
 - Unresolved placeholders fail.
 - A Form Action Custom Code step without export-proven package storage shape must not be advertised as package-ready.
+
+## Direct native action dispatch
+
+See [Direct Form Action execution](direct-form-action-execution.md) for the product-provided `executeAction` contract, event and selected-record patterns, compatibility boundary, and runtime acceptance requirements.

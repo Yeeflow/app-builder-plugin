@@ -725,6 +725,11 @@ For Workflow Sublist updates, use the explicit Workflow editor compatibility che
 - Declare the requested currency explicitly and apply consistent currency and zero-value presentation to input fields, calculated controls and summaries. Verify a zero and nonzero value in the rendered form; configuration alone is not display proof.
 - Receipt concurrency, retry idempotency, return/revise and multi-account permissions require their own runtime evidence; a successful single-user path does not certify them.
 
+
+## Direct Form Action Execution
+
+For Custom Code button clicks, guarded value changes, and custom collection row interactions, read the bundled Custom Code Generator reference `references/direct-form-action-execution.md` (resolve it from that skill's directory). Prefer the product-provided `CodeInContext.executeAction(action)` API on hosts exposing it. Generate the native action definition and declared variable bindings together; use real action IDs or unique names, serialize shared row context, await execution, and preserve readonly/confirmation and error handling. No arbitrary argument payload or business result is supported. Do not assume a custom row click establishes native Collection context or that a void variable setter has propagated. Replace hidden-button/CSS-ID triggering only where direct host support is confirmed. Validate real host behavior separately from offline helper tests.
+
 <!-- plugin-resource-access -->
 ## Portable access to bundled resources
 

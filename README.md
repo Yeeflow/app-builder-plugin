@@ -1,3 +1,5 @@
+> **1.17.0 release candidate:** Direct Form Action execution from Custom Code. See [candidate notes](docs/releases/yeeflow-app-builder-v1.17.0.md). Stable installation remains 1.16.4 until install acceptance.
+
 # Yeeflow Plugin
 
 Release **1.16.4**, based on **v1.16.3**. Keeps the unified OAuth MCP connection and all 27 skills, and makes the bundled resource layout and script paths portable; see [release notes](docs/releases/yeeflow-app-builder-v1.16.4.md).
