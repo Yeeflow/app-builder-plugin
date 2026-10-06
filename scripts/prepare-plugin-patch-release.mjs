@@ -332,6 +332,12 @@ mirrors.push(["docs/releases/yeeflow-app-builder-v1.16.0.md", "docs/releases/yee
 
 for (const file of ["docs/standards/plugin-resource-access.md", "docs/standards/plugin-host-build-profiles.md", "scripts/test-skill-entrypoint-compat.mjs", "docs/releases/yeeflow-app-builder-v1.16.1.md"]) mirrors.push([file, file]);
 
+// Direct Form Action support must survive subsequent distribution rebuilds.
+for (const file of ["references/direct-form-action-execution.md", "references/yeeflow-custom-code-standard.md", "examples/form-action-dispatch.mjs", "scripts/test-form-action-dispatch.mjs"]) {
+  mirrors.push([`skills/installed/yeeflow-custom-code-generator/${file}`, `skills/yeeflow-custom-code-generator/${file}`]);
+}
+mirrors.push(["docs/releases/yeeflow-app-builder-v1.17.0.md", "docs/releases/yeeflow-app-builder-v1.17.0.md"]);
+
 for (const [sourcePath, destinationPath] of mirrors) {
   const destination = resolve(root, "dist/yeeflow-app-builder-plugin", destinationPath);
   mkdirSync(dirname(destination), { recursive: true });

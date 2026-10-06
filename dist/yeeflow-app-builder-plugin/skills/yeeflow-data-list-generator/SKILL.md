@@ -815,6 +815,11 @@ Read `docs/standards/product-14.5/incremental-alignment.md` and its versioned `c
 
 Use validateField/patchField from the product contract module for explicit field updates. The 20 declared defaults remain strings; do not invent encodings for non-string input or delete values on the 7 undeclared types. Retain other export-backed field types. IsFilter and IsSort are distinct: an IsFilter update without confirmed transport support fails explicitly. Keep DataList Sublist host-specific lowering and editor choices intact.
 
+
+## Direct Form Action Execution
+
+For Custom Code button clicks, guarded value changes, and custom collection row interactions, read the bundled Custom Code Generator reference `references/direct-form-action-execution.md` (resolve it from that skill's directory). Prefer the product-provided `CodeInContext.executeAction(action)` API on hosts exposing it. Generate the native action definition and declared variable bindings together; use real action IDs or unique names, serialize shared row context, await execution, and preserve readonly/confirmation and error handling. No arbitrary argument payload or business result is supported. Do not assume a custom row click establishes native Collection context or that a void variable setter has propagated. Replace hidden-button/CSS-ID triggering only where direct host support is confirmed. Validate real host behavior separately from offline helper tests.
+
 <!-- plugin-resource-access -->
 ## Portable access to bundled resources
 

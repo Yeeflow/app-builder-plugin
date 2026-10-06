@@ -55,7 +55,7 @@ The same helper is the page-body entry point for standalone preparation. Existin
 - Recognize placeholders by `type=codein` AND `nv_label=custom_code_placeholder`; enumerate, do not treat the label as unique. Fill/rename or remove every placeholder. Generate new control IDs for clones while preserving existing IDs on in-place updates.
 - Split code by business function. Share values through declared temporary variables bound to output targets and consumer inputs. Verify consumers update or re-query on changes and avoid stale-response races.
 - Prefer native Data Filters for supported search/select/radio criteria; pass their own filter variables into consuming Custom Code parameters. Implement custom filtering only when native behavior does not meet the requirement.
-- Prefer native Button + Form Action for record opening and page actions. Configure unique CSS IDs distinct from UUIDs and Navigator labels. Write intended context before invoking the action. Programmatic triggers survive header cleanup; visually hidden triggers must remain rendered/invocable.
+- Prefer `CodeInContext.executeAction` for Custom Code record opening and page actions on supported hosts. Use the Custom Code Generator direct-form-action-execution reference. Define target actions and variables, verify context propagation, and serialize shared row inputs before calling. Keep native Button/CSS-ID triggers only for verified legacy compatibility; do not silently fall back after a failed direct call.
 
 ## Validation and evidence
 

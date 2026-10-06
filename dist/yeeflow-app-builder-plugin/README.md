@@ -1,6 +1,6 @@
 # Yeeflow Plugin
 
-Release **1.16.3**, based on stable **v1.16.2**. Consolidates all four capability domains into one OAuth MCP connection and retains all 27 skills; see [release notes](docs/releases/yeeflow-app-builder-v1.16.3.md).
+Release **1.17.0** adds direct Form Action execution guidance and helpers for Custom Code. Keeps all 27 Skills and the unified OAuth MCP connection. See [release notes](docs/releases/yeeflow-app-builder-v1.17.0.md); live host validation remains pending.
 
 Official Yeeflow plugin repository. Work with business data, manage tasks, and build apps in Yeeflow.
 
@@ -12,7 +12,7 @@ This repository is the clean successor to `Yeeflow/yeeflow-codex-plugins`. It pr
 - Marketplace ID: `yeeflow`
 - Plugin: Yeeflow
 - Plugin ID: `yeeflow-app-builder`
-- Version: `1.16.3`
+- Version: `1.17.0`
 - Active dist path: `dist/yeeflow-app-builder-plugin`
 
 Version `1.10.6` previously removed stale OAuth/REST references from the bundled skills and adds an OpenAI plugin submission packet. Live Yeeflow work uses the unified hosted MCP service, with server-negotiated authentication and no bundled credentials. Configuration readback remains separate from Designer/runtime proof.
@@ -32,13 +32,13 @@ Expected installed identity:
 ```text
 Marketplace: Yeeflow
 Plugin: Yeeflow
-Version: 1.16.3
+Version: 1.17.0
 ```
 
 Verify metadata from a checkout:
 
 ```sh
-node scripts/inspect-codex-plugin-cache-metadata.mjs --root . --expect-version 1.16.3
+node scripts/inspect-codex-plugin-cache-metadata.mjs --root . --expect-version 1.17.0
 ```
 
 ## Collection generation rules

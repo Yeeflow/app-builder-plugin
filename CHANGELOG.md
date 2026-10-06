@@ -1,3 +1,7 @@
+## 1.17.0 — 2026-10-06
+
+Direct Form Action execution by ID or unique name from Custom Code, with guarded event and selected-record patterns, shared dispatch locking, error recovery and focused tests. Owner authorized stable publication before subsequent local runtime acceptance.
+
 # 1.16.2 — Yeeflow branding
 
 ## 1.16.3
