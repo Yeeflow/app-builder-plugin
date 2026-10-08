@@ -12,7 +12,7 @@ npm run test:claude-plugin
 npm run test:plugin-host-profiles
 ```
 
-The builder reuses the existing tracked-file archive selector and dependency repairs, then converts only a temporary payload into `dist/yeeflow-claude-plugin`. It does not change the OpenAI payload or its transport settings. The ZIP has `.claude-plugin/plugin.json`, `.mcp.json`, 27 Skills and their shared dependencies at its root. Generated Claude files must be rebuilt rather than edited manually.
+The builder reuses the existing tracked-file archive selector and dependency repairs, then converts only a temporary payload into `dist/yeeflow-claude-plugin`. It does not change the OpenAI payload or its transport settings. The ZIP has `.claude-plugin/plugin.json`, `.mcp.json`, 27 Skills and their shared dependencies at its root. Generated Claude files must be rebuilt rather than edited manually. The regression test compares the checked-in Claude directory against a fresh build, so a stale repository payload cannot pass merely because a new ZIP builds correctly.
 
 Skills receive Claude-specific resource reading, hosted MCP discovery, OAuth and local-execution guidance after the frontmatter. Host-specific cache-update instructions are removed. Historical developer paths in Skills become historical artifact labels. References describing OpenAI release operations remain historical/maintainer documentation, not Claude publishing instructions. Never claim filesystem or Node execution in a host that does not expose those tools.
 

@@ -16,6 +16,11 @@ for (const args of [[], ["--output", "package.json"], ["--output", "dist/overwri
   assert.notEqual(bad.status, 0);
 }
 const before = new Map(protectedFiles.map(f => [f, digest(f)]));
+// Repository installation reads the committed generated directory, not this
+// freshly built ZIP. Detect a stale payload before regeneration can hide it.
+const generated = resolve(root, "dist/yeeflow-claude-plugin");
+assert.ok(existsSync(generated), "Build the Claude distribution before testing");
+const generatedBefore = new Map(files(generated).map(f => [relative(generated, f), digest(f)]));
 const temp = mkdtempSync(resolve(tmpdir(), "yeeflow-claude-test-"));
 try {
   const zip = resolve(temp, "claude.zip");
@@ -24,6 +29,11 @@ try {
   execFileSync("unzip", ["-q", zip, "-d", out]);
   assert.ok(!existsSync(resolve(out, ".codex-plugin")));
   assert.ok(!existsSync(resolve(out, ".app.json")));
+  const rebuilt = new Map(files(out).map(f => [relative(out, f), digest(f)]));
+  assert.deepEqual([...rebuilt.keys()].sort(), [...generatedBefore.keys()].sort(), "CLAUDE_DISTRIBUTION_STALE: generated file inventory differs; rebuild and commit it");
+  for (const [file, hash] of generatedBefore) {
+    assert.equal(rebuilt.get(file), hash, "CLAUDE_DISTRIBUTION_STALE: " + file + "; rebuild and commit it");
+  }
   const manifest = JSON.parse(readFileSync(resolve(out, ".claude-plugin/plugin.json")));
   assert.equal(manifest.version, JSON.parse(readFileSync(resolve(source, ".codex-plugin/plugin.json"))).version);
   assert.equal(manifest.name, "yeeflow-app-builder");
@@ -52,5 +62,5 @@ try {
   const result = spawnSync(process.execPath, [resolve(out, "scripts/test-skill-entrypoint-compat.mjs")], { cwd: temp, encoding: "utf8" });
   assert.equal(result.status, 0, result.stdout + result.stderr);
   assert.match(result.stdout, /guardrail tests passed/);
-  console.log("CLAUDE_PLUGIN_PASS: root ZIP layout; 27 skills; shared resource parity; validator entrypoints; OpenAI files unchanged");
+  console.log("CLAUDE_PLUGIN_PASS: root ZIP layout; committed payload freshness; 27 skills; shared resource parity; validator entrypoints; OpenAI files unchanged");
 } finally { rmSync(temp, { recursive: true, force: true }); }

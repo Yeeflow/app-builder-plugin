@@ -12,6 +12,8 @@ Source baseline: origin/stable 7f4c6f23, Yeeflow 1.17.0. Claude adaptation remai
 - After the user approved adding the connector and read-only OAuth verification, Claude web added the connector using the default published client identity (CIMD). Starting OAuth returned HTTP 400 `invalid_request_error` in the browser log and left the connector Not connected. No authorization/login popup opened. This is an observed auth-start failure, not proof of its server-side cause.
 - The connector UI exposes Remove, with no edit option observed. A DCR registration test is pending action-time confirmation to remove/recreate only the unused test connector.
 - Claude CLI MCP health check resolves the plugin server and reports `Needs authentication`; authenticated tool discovery has not been tested.
+- The generated-payload freshness guard passes for the current repository directory and rejects an injected stale manifest version. Local screenshots and install artifacts are excluded from Git.
+- Current GitHub workflows perform validation only; neither a push nor a Claude tag invokes a store-publication job.
 - Claude archive regression verifies root ZIP layout, complete Skill inventory, shared resource parity, executable validator entrypoints and unchanged OpenAI source files.
 - Existing Codex/ChatGPT Web archive-profile regressions pass for both packages, including shared payload parity and validator entrypoints.
 

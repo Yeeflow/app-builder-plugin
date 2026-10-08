@@ -282,3 +282,6 @@ packages/**/lib/
 !.claude-plugin/marketplace.json
 !dist/yeeflow-claude-plugin/
 !dist/yeeflow-claude-plugin/**
+
+# Local Claude screenshots and install artifacts
+/artifacts/claude/
