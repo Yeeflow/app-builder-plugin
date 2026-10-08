@@ -38,7 +38,13 @@ A write/runtime test requires an explicitly selected disposable workspace and au
 
 `.claude-plugin/marketplace.json` points only to `dist/yeeflow-claude-plugin`. Existing Codex marketplace and OpenAI build profiles retain their own paths. Commit the generated Claude directory with the source changes; ZIP artifacts remain ignored.
 
-Once merged/pushed to the branch Claude uses, Add marketplace can use `Yeeflow/app-builder-codex-plugin`. Before then, use local ZIP or local Claude Code marketplace. A local manifest alone does not make repository installation available remotely.
+Once merged/pushed to the branch Claude uses, Add marketplace can use `Yeeflow/app-builder-codex-plugin`. Before then, use the ZIP, a local marketplace, or the tested branch-pinned Claude Code command:
+
+```sh
+claude plugin install yeeflow-app-builder --marketplace Yeeflow/app-builder-codex-plugin#codex/claude-plugin-adaptation
+```
+
+ A local manifest alone does not make repository installation available remotely.
 
 Use Claude-specific tags such as `claude-v1.17.0-rc1`; final Claude tags require documented installation acceptance. Do not reuse OpenAI release tags or modify its submission packet for a Claude-only change. Shared Skill or MCP changes may affect both hosts and require both-host validation. The compatibility workflow tests packages on pull requests; it does not publish or release either host.
 
