@@ -9,14 +9,15 @@ Source baseline: origin/stable 7f4c6f23, Yeeflow 1.17.0. Claude adaptation remai
 - `plugin details` inventories 27 Skills and one MCP server, `yeeflow_mcp`. Runtime tool schemas are not resolved by that inventory command.
 - Claude Code installed the package from the remote GitHub branch `codex/claude-plugin-adaptation` using its repository marketplace.
 - Claude web accepted the 6.8 MB ZIP upload, enabled the plugin, and displayed version 1.17.0, 27 Skills and one connector. This verifies web installation, not Desktop installation or authenticated tool calls.
-- Claude web discovered the MCP OAuth settings and reached Add custom connector Step 2 of 2; the Add action and authorization are pending user confirmation.
+- After the user approved adding the connector and read-only OAuth verification, Claude web added the connector using the default published client identity (CIMD). Starting OAuth returned HTTP 400 `invalid_request_error` in the browser log and left the connector Not connected. No authorization/login popup opened. This is an observed auth-start failure, not proof of its server-side cause.
+- The connector UI exposes Remove, with no edit option observed. A DCR registration test is pending action-time confirmation to remove/recreate only the unused test connector.
 - Claude CLI MCP health check resolves the plugin server and reports `Needs authentication`; authenticated tool discovery has not been tested.
 - Claude archive regression verifies root ZIP layout, complete Skill inventory, shared resource parity, executable validator entrypoints and unchanged OpenAI source files.
 - Existing Codex/ChatGPT Web archive-profile regressions pass for both packages, including shared payload parity and validator entrypoints.
 
 ## Not yet verified
 
-Claude Desktop upload, Claude-account synchronization, Yeeflow OAuth completion, runtime MCP tool discovery/invocation and business application rendering remain unverified. No Yeeflow tenant records were modified. The checked browser is signed in and the uploaded plugin is enabled. The connector is not added/authenticated yet; adding this new access requires action-time confirmation under the computer-use policy. No Claude Desktop application was present in the checked application inventory.
+Claude Desktop upload, Claude-account synchronization, Yeeflow OAuth completion, runtime MCP tool discovery/invocation and business application rendering remain unverified. No Yeeflow tenant records were modified. The checked browser is signed in and the uploaded plugin is enabled. The connector is added but unauthenticated after the auth-start error. Replacing the unused test configuration for a DCR attempt requires action-time confirmation under the computer-use policy. No Claude Desktop application was present in the checked application inventory.
 
 ## Workspace interruption
 

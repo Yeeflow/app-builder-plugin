@@ -18,7 +18,7 @@ Skills receive Claude-specific resource reading, hosted MCP discovery, OAuth and
 
 ## Test installation
 
-In Claude Desktop: Customize > Plugins > Add > Upload plugin. Select the ZIP and check the plugin name/version and Skill inventory. Complete Yeeflow login through Claude's MCP/connector OAuth flow. Never copy OpenAI credentials or tokens.
+In Claude Desktop: Customize > Plugins > Add > Upload plugin. Select the ZIP and check the plugin name/version and Skill inventory. Complete Yeeflow login through Claude's MCP/connector OAuth flow. In the current web test, the default published-client identity (CIMD) reaches configuration but fails at auth start with HTTP 400. A DCR test remains pending; do not claim either registration mode is runtime-supported until login and authenticated reads succeed. Never copy OpenAI credentials or tokens.
 
 If Claude Code is available:
 
