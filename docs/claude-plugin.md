@@ -20,6 +20,8 @@ Skills receive Claude-specific resource reading, hosted MCP discovery, OAuth and
 
 In Claude Desktop: Customize > Plugins > Add > Upload plugin. Select the ZIP and check the plugin name/version and Skill inventory. Complete Yeeflow login through Claude's MCP/connector OAuth flow. The web tests installed the package in both Free and Pro accounts, but OAuth failed before a login popup opened: default published-client identity (CIMD) returned HTTP 400, and automatic registration (DCR) in the Pro account displayed a sign-in registration failure. Do not claim either registration mode is runtime-supported until login and authenticated reads succeed. Never copy OpenAI credentials or tokens.
 
+After the reported allowlist update, the authorized Pro-account test connector was removed and rebuilt with CIMD selected; sign-in registration still failed. [Claude's auth requirements](https://claude.com/docs/connectors/building/authentication#dcr-and-cimd-details) explain that this UI choice can fall back to DCR if the issuer metadata does not advertise both CIMD support and public-client token authentication. Check live metadata and registration logs before attributing the failure to a specific mechanism. See the dated verification report for support references.
+
 If Claude Code is available:
 
 ```sh
