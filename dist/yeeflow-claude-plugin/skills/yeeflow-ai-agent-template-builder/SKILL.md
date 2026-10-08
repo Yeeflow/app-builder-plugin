@@ -1,0 +1,95 @@
+---
+name: yeeflow-ai-agent-template-builder
+description: Build, validate, and maintain Yeeflow AI Agent template manifests from Word catalogs, icon manifests, prompt drafts, exported .yaia packages, and live Yeeflow creation logs. Use when preparing reusable Yeeflow AI Agent templates, checking template completeness, mapping icons to templates, or coordinating Agent creation/export workflows.
+---
+
+## Claude host requirements
+
+Resolve this plugin root from the loaded skill path (<plugin-root>/skills/<skill-name>/SKILL.md), or CLAUDE_PLUGIN_ROOT when provided. Read bundled resources with Claude's available file tools. Resolve shared docs, scripts and core from the plugin root, never from a developer checkout or another host's cache.
+
+Use only the discovered tools of this plugin's unified yeeflow_mcp connection. Authenticate through Claude's connector/MCP OAuth flow. Never copy OpenAI login tokens or invent tool namespace prefixes. Do not fall back to direct REST calls, API keys or retired MCP endpoints.
+
+Run bundled validators with the host's available Node runtime. File execution is available only where Claude supplies a filesystem and execution tools. In chat, report missing execution access and continue supported MCP work; never claim unexecuted validation passed. Use browser tools only when available and authorized; API acceptance, readback, designer rendering and runtime proof are separate.
+
+Do not edit installed plugin caches or another host's skills. Put learning changes in an explicitly selected development checkout and rebuild this Claude package there. Maintainer references describing Codex/OpenAI publishing are for those platforms; Claude publishing uses docs/claude-plugin.md and scripts/build-claude-plugin.mjs in the source repository.
+
+
+
+# Yeeflow AI Agent Template Builder
+
+## Core Workflow
+
+1. Read the source catalog first. Prefer `docs/Yeeflow_AI_Agent_Template_Configuration_Catalog.docx`; fall back to an explicit user-provided list only when parsing is blocked.
+2. Build or update a creation manifest with one entry per AI Agent:
+   - `name`
+   - `short_description`
+   - `icon_file_path`
+   - `input_variables`
+   - `output_variables`
+   - `persona_and_prompt`
+   - `tool_calls`
+   - `validation_status`
+3. Validate that every template has exactly one matching icon file and that all variables have name, type, and short description.
+4. Keep tool calls as guidance unless the user provides real Yeeflow resources, workflows, Agents, or HTTP/API connections.
+5. Update the workspace logs after any live Yeeflow operation.
+
+## Expected Workspace Files
+
+- `working/final-ai-agent-creation-manifest.json`
+- `assets/icons/icon_manifest.json`
+- `working/creation-log.md`
+- `working/live-ai-agent-prompt-update-result.json`
+- `ouput/AI Agents/*.yaia` when exports are requested
+
+## Safety Rules
+
+- Do not create duplicate Agents.
+- Do not add tools during reusable-template setup unless resource bindings are explicit.
+- Do not delete or rename live Agents unless the user explicitly asks.
+- Publish only after name, description, prompt, variables, and icon are verified.
+- If using imports, verify the resulting Agent in Yeeflow and publish only after checking the expected fields.
+
+## Useful Script
+
+Run `scripts/validate_ai_agent_manifest.js <manifest.json> [icon_manifest.json]` to check basic manifest structure and icon mapping.
+
+<!-- agent-copilot-application-resource-learning:start -->
+## App-Level Agent Resource Learning
+
+The app-level .yap structure is export-proven but generated import behavior is not yet runtime-proven. In a .yap, AI Agent resources are stored under OtherModules Type "Agents" with resource Type = 0. Components Type = 1 are knowledge bindings; Components Type = 2 are tools. Proven tool subtypes include list query/create/update/delete, connection-backed HTTP/API tools, OpenAPI operation tools, connected-Agent tools, and current application resource access.
+
+Reusable templates should keep operational tools as guidance unless target app resources are explicit. App-bound generation must include a resource graph for lists, knowledge, Agents, Copilots, and connections, with fresh IDs and no real credentials.
+
+### Knowledge Source Binding Gate
+
+For every real app-bound Knowledge source, create or read back the `Knowledge` resource first. Bind it in the Agent `Components[]` with `Type = 1`, the exact Knowledge ID in `Source`, and the matching Knowledge name. A component name, a prompt sentence, or a source description alone is not a binding.
+
+Only name a Knowledge source in `Settings.Prompt` after that binding is present and re-read. Before generated-final packaging or publishing, run `node scripts/validate-knowledge-source-bindings.mjs <app.yap-or-decoded-data.json> --mode final`. This validates binding identity and prompt claims; it does not prove live retrieval quality.
+
+Runtime import update: generated app-contained AI Agent resources imported successfully in the Asia Tech visitor Copilot app after setting top-level `Publisher: 0`. Do not generate app-level Agent records with `Publisher: null`; treat missing/null/non-numeric Publisher as an import blocker for generated-final packages. This proves import acceptance only, not Agent execution.
+
+For app-contained Access application resources tools, use compact list-resource entries with numeric bitmask permissions: `{ id: <ListID>, permissions: <number> }`. Permission bits are create/add = `1`, update/edit = `2`, delete = `4`, read/view = `8`; combine with bitwise OR.
+<!-- agent-copilot-application-resource-learning:end -->
+
+<!-- scheduled-workflow-ai-assistant-learning:start -->
+## Workflow-Callable Agent Templates
+
+When an Agent is intended for workflow AI Assistant use, define input and output variables with stable IDs that workflow `AI.properties.inputVariables[]` and `AI.properties.outputVariables[]` can map. The export-proven pattern calls an app-contained Agent from Scheduled Workflow using `properties.data.AgentID`; generated app packages must include and remap the Agent with the workflow.
+
+`Spark & AI (1).yap` proves a second workflow-host pattern for the same mechanism: a data-list workflow can pass a current-row image field into Agent input `type = "img"` and pass native `ListDataID` into a text input for same-row update behavior. It also proves a current application-resource access tool shape with `Components[].Type = 2`, `SubType = 10`, `Settings.Data.Value = <current app/listset id>`, and scoped list access in `Settings.resources.dataLists.items[]`. Reusable templates should describe this as a binding requirement unless the target app/list/workflow graph is explicit.
+<!-- scheduled-workflow-ai-assistant-learning:end -->
+
+<!-- plugin-resource-access -->
+## Portable access to bundled resources
+
+Resolve this plugin's root from the current host-provided skill location: a skill is under `<plugin-root>/skills/<skill-name>`. Never hardcode a developer checkout, a macOS home directory, a Linux cache path, or a particular plugin version.
+
+Use the skill-resource reader for files within the selected skill subtree. Shared references such as `docs/reference/...`, root validators and `core/...` are relative to the plugin root, not the current working directory. When the resource reader cannot read outside the skill subtree, read the existing shared file through the host's filesystem tools at its resolved plugin-root path. A resource-interface error alone does not prove the bundled file is missing. If no filesystem reader is available, report that access limitation; do not invent reference contents.
+
+Resolve scripts relative to the mounted plugin and run with the host's available Node runtime. The application-generator validator entrypoint delegates to the root validator so shared dependencies resolve from the same package, including when launched from a temporary directory. Do not install dependencies or call remote write tools merely to read a template. Keep skill reads, script validation, live MCP reads, and business runtime acceptance as separate evidence.
+
+## Unified Yeeflow MCP connection
+
+Use the single `yeeflow_mcp` connection at `https://api.yeeflow.com/v1/mcp` for all live Yeeflow work. App Builder, Operations, Admin and Service Portal are capability domains within this connection, not separate servers or logins. Discover the current host-exposed tool names and schemas; do not invent namespace prefixes or assume tool contracts stayed identical after migration.
+
+A single OAuth connection does not grant additional permissions. Operations serves business users; application structure/settings and resource creation require the appropriate application-administrator rights. Organization administration and Service Portal capabilities retain their own permission and context checks. Editor/Visitor access is not application-administrator access. On authentication failure reconnect this unified endpoint through the host; on permission denial stop the denied action without falling back to a former endpoint or another identity. Keep existing confirmation, readback, pagination, RowVersion and data-minimization rules.

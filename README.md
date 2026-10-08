@@ -116,3 +116,7 @@ Do not use the legacy repo or legacy identity for current installs unless explic
 ## Host-specific builds
 
 The archive builder supports Codex (direct MCP) and ChatGPT Web (registered Apps), retaining all 27 skills and shared references. See [build profiles and verification](docs/standards/plugin-host-build-profiles.md). Run `npm run test:plugin-host-profiles` before releasing either package.
+
+## Claude distribution
+
+Claude uses its own `dist/yeeflow-claude-plugin` and `.claude-plugin/marketplace.json`. See [build and installation testing](docs/claude-plugin.md). This testing candidate does not change the OpenAI submission package or publication status.

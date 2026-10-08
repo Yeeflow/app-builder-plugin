@@ -1,0 +1,359 @@
+#!/usr/bin/env node
+
+import { copyFileSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { spawnSync } from "node:child_process";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
+
+import { applyHostProfile } from "./plugin-host-profile.mjs";
+
+const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
+const packageManifest = readJson("package.json");
+const pluginManifestPath = "dist/yeeflow-app-builder-plugin/.codex-plugin/plugin.json";
+const pluginManifest = readJson(pluginManifestPath);
+
+if (!/^\d+\.\d+\.\d+$/u.test(packageManifest.version || "")) {
+  throw new Error("PLUGIN_PATCH_RELEASE_VERSION_INVALID");
+}
+
+// Keep the active compact icons byte-identical to the approved official symbol.
+for (const target of ["icon.png", "logo.png"]) {
+  copyFileSync(resolve(root, "dist/yeeflow-app-builder-plugin/assets/yeeflow-logo-only-blue.png"), resolve(root, "dist/yeeflow-app-builder-plugin/assets", target));
+}
+pluginManifest.version = packageManifest.version;
+writeFileSync(resolve(root, pluginManifestPath), `${JSON.stringify(pluginManifest, null, 2)}\n`);
+
+const mirrors = [
+  "scripts/test-unified-mcp-migration.mjs",
+  "docs/yeeflow-codex-managed-app-connector.md",
+  "docs/releases/yeeflow-app-builder-v1.16.3.md",
+  "docs/standards/unified-mcp-migration.md",
+  "scripts/inspect-codex-plugin-cache-metadata.mjs",
+  "docs/releases/yeeflow-app-builder-v1.16.2.md",
+  "docs/releases/yeeflow-app-builder-v1.15.3.md",
+  "scripts/test-set-variable-golden-reference-gates.mjs",
+  "docs/releases/yeeflow-app-builder-v1.15.2.md",
+  "docs/releases/yeeflow-app-builder-v1.15.0.md",
+  "docs/releases/yeeflow-app-builder-v1.14.0.md",
+  "README.md",
+  "CHANGELOG.md",
+  "build-ydp-wrapper.js",
+  "validate-ydp.js",
+  "scripts/lib/standalone-ydp-codec.cjs",
+  "scripts/lib/standalone-dashboard-resource-gates.mjs",
+  "scripts/lib/approval-form-layout-builder.mjs",
+  "scripts/validate-dashboard-page-layout-template.mjs",
+  "scripts/yapk-first-generation-preflight.mjs",
+  "scripts/test-dashboard-workbench-page-layout-template-gates.mjs",
+  "scripts/validate-approval-form-layout-template.mjs",
+  "scripts/validate-dashboard-grid-table-collections.mjs",
+  "scripts/lib/dashboard-action-target-remapper.mjs",
+  "scripts/validate-dashboard-action-reference-closure.mjs",
+  "scripts/test-dashboard-action-reference-closure.mjs",
+  "scripts/lib/dashboard-live-component-resource-sync.mjs",
+  "scripts/test-dashboard-live-component-resource-sync.mjs",
+  "scripts/validate-dashboard-dataset-presentation-golden-references.mjs",
+  "scripts/collection-control-generation-standard.js",
+  "scripts/validate-dashboard-generation-hard-gates.mjs",
+  "scripts/validate-page-scope-template-dependencies.mjs",
+  "scripts/test-ydp-wrapper-gates.mjs",
+  "scripts/test-dashboard-v11-validator-alignment-gates.mjs",
+  "scripts/test-dashboard-page-layout-plan-conformance-gates.mjs",
+  "scripts/test-dashboard-generation-hard-gates.mjs",
+  "scripts/test-approval-form-layout-template-gates.mjs",
+  "scripts/test-public-form-complete-data-list-generation-gates.mjs",
+  "scripts/test-fixtures/core-standalone-dashboard-body.br.base64",
+  "build-ycs.js",
+  "validate-ycs.js",
+  "build-scheduled-ywf-wrapper.js",
+  "validate-scheduled-ywf.js",
+  "build-ai-resource-wrapper.js",
+  "validate-ai-resource-wrapper.js",
+  "build-yaia-wrapper.js",
+  "validate-yaia.js",
+  "build-yaic-wrapper.js",
+  "validate-yaic.js",
+  "finalize-ai-resource-from-official-response.js",
+  "finalize-yaia-from-official-response.js",
+  "finalize-yaic-from-official-response.js",
+  "scripts/generate-scheduled-ywf-from-plan.mjs",
+  "scripts/lib/standalone-artifact-utils.cjs",
+  "scripts/test-ycs-wrapper-gates.mjs",
+  "scripts/test-scheduled-ywf-wrapper-gates.mjs",
+  "scripts/test-ai-resource-wrapper-gates.mjs",
+  "scripts/test-standalone-resource-release-gates.mjs",
+  "scripts/test-skill-relative-reference-gates.mjs",
+  "scripts/test-repo-root-hygiene.mjs",
+  "scripts/test-plugin-mcp-integration.mjs",
+  "scripts/validate-knowledge-source-bindings.mjs",
+  "scripts/test-knowledge-source-bindings.mjs",
+  "scripts/lib/application-icon-validation.cjs",
+  "scripts/lib/yeeflow-incremental-build-ledger.mjs",
+  "scripts/validate-incremental-mcp-build-ledger.mjs",
+  "scripts/plan-incremental-mcp-operation.mjs",
+  "scripts/test-incremental-mcp-build-ledger.mjs",
+  "scripts/test-incremental-mcp-operation.mjs",
+  "scripts/test-mcp-incremental-capability-registry.mjs",
+  "scripts/test-formnewreport-physical-field-contract.mjs",
+  "schemas/mcp-incremental-capability-registry.v1.json",
+  "fixtures/standalone-resource-tools/custom-service.valid.input.json",
+  "fixtures/dashboard-action-reference-closure/clone-before-remap.json",
+  "fixtures/dashboard-live-component-resource-sync/drifted-dashboard-component.json",
+  "fixtures/dashboard-live-component-resource-sync/embedded-custom-code-dashboard-component.json",
+  "fixtures/live-lookup-write-closure/management-action-plan.valid.json",
+  "fixtures/approval-form-control-closure/sales-quotation-approval.valid.json",
+  "fixtures/standalone-resource-tools/custom-service.invalid-secret.input.json",
+  "fixtures/standalone-resource-tools/scheduled-workflow.valid.input.json",
+  "fixtures/standalone-resource-tools/scheduled-workflow.issued-ids.json",
+  "fixtures/standalone-resource-tools/agent.structural-envelope.json",
+  "fixtures/standalone-resource-tools/agent.import-read.json",
+  "fixtures/standalone-resource-tools/copilot.structural-envelope.json",
+  "fixtures/standalone-resource-tools/copilot.import-read.json",
+  "fixtures/standalone-resource-tools/agent.official-response-evidence.json",
+  "fixtures/standalone-resource-tools/copilot.official-response-evidence.json",
+  "fixtures/standalone-resource-tools/scheduled-workflow.shared-plan.json",
+  "fixtures/standalone-resource-tools/scheduled-workflow.shared-plan-issued-ids.json",
+  "fixtures/knowledge-source-bindings/valid-app.json",
+  "fixtures/knowledge-source-bindings/unresolved-source-app.json",
+  "fixtures/knowledge-source-bindings/unbound-claim-app.json",
+  "scripts/validate-approval-workflow-publish-readiness.mjs",
+  "scripts/test-approval-workflow-publish-readiness-gates.mjs",
+  "scripts/validate-workflow-layout-golden-reference.mjs",
+  "scripts/test-workflow-layout-golden-reference-gates.mjs",
+  "scripts/test-approval-workflow-unicode-node-name-regressions.mjs",
+  "scripts/test-approval-form-multi-field-immutable-projection.mjs",
+  "scripts/materialize-full-app-generated-final.mjs",
+  "scripts/test-full-app-materialization-entrypoint-gates.mjs",
+  "scripts/validate-data-list-form-layout-template.mjs",
+  "scripts/test-data-list-form-layout-template-gates.mjs",
+  "scripts/validate-data-list-completion-contract.mjs",
+  "scripts/test-data-list-completion-contract.mjs",
+  "scripts/validate-live-lookup-write-closure.mjs",
+  "scripts/test-live-lookup-write-closure.mjs",
+  "scripts/lib/data-list-workflow-type1-materializer.mjs",
+  "scripts/lib/data-list-workflow-live-bundle.mjs",
+  "scripts/lib/data-list-workflow-live-merge.mjs",
+  "scripts/lib/document-library-materializer.mjs",
+  "scripts/lib/document-library-live-materializer.mjs",
+  "scripts/lib/document-library-live-merge.mjs",
+  "scripts/materialize-live-data-list-workflow-type1.mjs",
+  "scripts/merge-live-data-list-workflow-type1.mjs",
+  "scripts/materialize-live-document-library.mjs",
+  "scripts/merge-live-document-library.mjs",
+  "scripts/test-data-list-workflow-type1-materializer.mjs",
+  "scripts/test-data-list-workflow-live-bundle.mjs",
+  "scripts/test-data-list-workflow-live-merge.mjs",
+  "scripts/test-document-library-live-materializer.mjs",
+  "scripts/test-document-library-materialization-gates.mjs",
+  "scripts/validate-approval-form-fields-template.mjs",
+  "scripts/validate-approval-form-control-closure.mjs",
+  "scripts/test-approval-form-control-closure.mjs",
+  "scripts/test-release-1.0.3-clean-room-contracts.mjs",
+  "scripts/test-fixtures/release-1.0.3-clean-room-plan.mjs",
+  "scripts/test-full-app-materialization-entrypoint-gates.mjs",
+  "scripts/test-responsive-collection-default-routing.mjs",
+  "scripts/test-retired-collection-template-migrations.mjs",
+  "scripts/test-collection-control-generation-standard.mjs",
+  "scripts/test-dashboard-dataset-presentation-golden-references.mjs",
+  "scripts/validate-tab-gantt-golden-references.mjs",
+  "scripts/test-tab-gantt-golden-references.mjs",
+  "docs/reference/dashboard-dataset-presentation-golden-references.json",
+  "docs/reference/workflow-layout-golden-references.json",
+  "docs/reference/collection-control-responsive.template.json",
+  "docs/reference/collection-control-responsive-multiple-select.template.json",
+  "docs/reference/tab-control-workspace.template.json",
+  "docs/reference/gantt-control-linked-activity.template.json",
+  "docs/reference/tab-gantt-control-golden-references.json",
+  "docs/standards/dashboard-dataset-presentation-golden-reference-standard.md",
+  "docs/standards/dashboard-collection-schema-dependency-closure-standard.md",
+  "docs/standards/dashboard-action-reference-closure-standard.md",
+  "docs/standards/dashboard-page-layouts-v1.1-standard.md",
+  "docs/standards/dashboard-page-layouts-workbench-standard.md",
+  "docs/standards/approval-form-layouts-v1.1-standard.md",
+  "docs/standards/approval-form-control-closure-standard.md",
+  "docs/standards/approval-workflow-final-layout-closure-standard.md",
+  "docs/standards/approval-workflow-route-orthogonality-standard.md",
+  "docs/standards/workflow-layout-golden-reference-standard.md",
+  "docs/standards/collection-control-generation-standard.md",
+  "docs/standards/collection-template-retirement-migration.md",
+  "docs/standards/tab-gantt-control-golden-reference-standard.md",
+  "docs/standards/data-list-generation-standard.md",
+  "docs/training/live-lookup-write-closure-training-report.md",
+  "docs/training/approval-form-control-closure-training-report.md",
+  "docs/studies/tab-gantt-control-golden-reference-study.md",
+  "docs/training/tab-gantt-control-golden-reference-training-report.md",
+  "docs/training/dashboard-action-reference-closure-training-report.md",
+  "docs/training/dashboard-live-mcp-resource-authority-training-report.md",
+  "docs/training/dashboard-lookup-dynamic-field-display-contract-training-report.md",
+  "docs/training/approval-workflow-final-layout-closure-training-report.md",
+  "docs/training/approval-workflow-route-orthogonality-training-report.md",
+  "docs/training/data-list-mcp-view-completion-training-report.md",
+  "docs/standards/app-plan-standard-template.md",
+  "docs/app-plan-standard-template.md",
+  "docs/README.md",
+  "docs/releases/yeeflow-app-builder-v1.1.0.md",
+  "docs/releases/yeeflow-app-builder-v1.2.0.md",
+  "docs/releases/yeeflow-app-builder-v1.4.0.md",
+  "docs/releases/yeeflow-app-builder-v1.4.1.md",
+  "docs/releases/yeeflow-app-builder-v1.5.0.md",
+  "docs/releases/yeeflow-app-builder-v1.5.1.md",
+  "docs/releases/yeeflow-app-builder-v1.6.0.md",
+  "docs/releases/yeeflow-app-builder-v1.6.1.md",
+  "docs/releases/yeeflow-app-builder-v1.6.2.md",
+  "docs/releases/yeeflow-app-builder-v1.9.0.md",
+  "docs/releases/yeeflow-app-builder-v1.10.0.md",
+  "docs/releases/yeeflow-app-builder-v1.12.4.md",
+  "docs/releases/yeeflow-app-builder-v1.12.5.md",
+  "docs/releases/yeeflow-app-builder-v1.12.6.md",
+  "docs/releases/yeeflow-app-builder-v1.12.7.md",
+  "docs/releases/yeeflow-app-builder-v1.12.8.md",
+  "docs/releases/yeeflow-app-builder-v1.12.9.md",
+  "docs/releases/yeeflow-app-builder-v1.12.10.md",
+  "docs/releases/yeeflow-app-builder-v1.13.0.md",
+  "docs/releases/yeeflow-app-builder-v1.2.0-standalone-resource-acceptance.json",
+  "docs/reference/full-app-generation-entrypoints.json",
+  "scripts/validate-pre-id-allocation-readiness.mjs",
+  "scripts/test-pre-id-allocation-readiness-gates.mjs",
+  "scripts/validate-data-report-detail.mjs",
+  "scripts/test-data-report-detail.mjs",
+  "scripts/normalize-plugin-distribution.mjs",
+  "fixtures/data-report-live-contract/data-report.detail.valid.json",
+  "docs/yapk-generation-guardrails.md",
+  "docs/studies/form-report-resource.md",
+].map((sourcePath) => [sourcePath, sourcePath]);
+
+mirrors.push(
+  ["generated-skills/yeeflow-ai-agent-template-builder/agents/openai.yaml", "skills/yeeflow-ai-agent-template-builder/agents/openai.yaml"],
+  ["generated-skills/yeeflow-knowledge-source-operator/SKILL.md", "skills/yeeflow-knowledge-source-operator/SKILL.md"],
+  ["generated-skills/yeeflow-knowledge-source-operator/agents/openai.yaml", "skills/yeeflow-knowledge-source-operator/agents/openai.yaml"],
+  ["generated-skills/yeeflow-ai-agent-template-builder/SKILL.md", "skills/yeeflow-ai-agent-template-builder/SKILL.md"],
+  ["generated-skills/yeeflow-agent-prompt-designer/SKILL.md", "skills/yeeflow-agent-prompt-designer/SKILL.md"],
+  ["generated-skills/yeeflow-copilot-template-builder/SKILL.md", "skills/yeeflow-copilot-template-builder/SKILL.md"],
+  ["generated-skills/yeeflow-copilot-instruction-designer/SKILL.md", "skills/yeeflow-copilot-instruction-designer/SKILL.md"],
+  ["generated-skills/yeeflow-ai-agent-ui-operator/SKILL.md", "skills/yeeflow-ai-agent-ui-operator/SKILL.md"],
+  ["skills/installed/yeeflow-approval-form-generator/agents/openai.yaml", "skills/yeeflow-approval-form-generator/agents/openai.yaml"],
+  ["skills/installed/yeeflow-custom-code-generator/agents/openai.yaml", "skills/yeeflow-custom-code-generator/agents/openai.yaml"],
+  ["skills/installed/yeeflow-custom-code-generator/references/attachment-and-ai-recognition-golden-reference.md", "skills/yeeflow-custom-code-generator/references/attachment-and-ai-recognition-golden-reference.md"],
+  ["skills/installed/yeeflow-custom-code-generator/examples/attachment-sdk-pattern.tsx", "skills/yeeflow-custom-code-generator/examples/attachment-sdk-pattern.tsx"],
+  ["skills/installed/yeeflow-custom-code-generator/examples/approval-ai-recognition-pattern.tsx", "skills/yeeflow-custom-code-generator/examples/approval-ai-recognition-pattern.tsx"],
+  ["skills/installed/yeeflow-custom-code-generator/examples/runtime-types.d.ts", "skills/yeeflow-custom-code-generator/examples/runtime-types.d.ts"],
+  ["skills/installed/yeeflow-custom-code-generator/scripts/validate-attachment-patterns.mjs", "skills/yeeflow-custom-code-generator/scripts/validate-attachment-patterns.mjs"],
+  ["skills/installed/yeeflow-custom-code-generator/scripts/test-attachment-pattern-gates.mjs", "skills/yeeflow-custom-code-generator/scripts/test-attachment-pattern-gates.mjs"],
+  ["skills/installed/yeeflow-custom-service-generator/agents/openai.yaml", "skills/yeeflow-custom-service-generator/agents/openai.yaml"],
+  ["skills/installed/yeeflow-dashboard-generator/agents/openai.yaml", "skills/yeeflow-dashboard-generator/agents/openai.yaml"],
+  ["skills/installed/yeeflow-expression-generator/agents/openai.yaml", "skills/yeeflow-expression-generator/agents/openai.yaml"],
+  ["skills/installed/yeeflow-service-portal-generator/agents/openai.yaml", "skills/yeeflow-service-portal-generator/agents/openai.yaml"],
+  ["skills/installed/yeeflow-ui-generation-hard-gates/agents/openai.yaml", "skills/yeeflow-ui-generation-hard-gates/agents/openai.yaml"],
+  ["generated-skills/yeeflow-custom-code-generator/SKILL.md", "skills/yeeflow-custom-code-generator/SKILL.md"],
+  ["generated-skills/yeeflow-custom-service-generator/SKILL.md", "skills/yeeflow-custom-service-generator/SKILL.md"],
+  ["generated-skills/yeeflow-service-portal-generator/SKILL.md", "skills/yeeflow-service-portal-generator/SKILL.md"],
+  ["skills/installed/yeeflow-custom-service-generator/scripts/build-ycs.js", "skills/yeeflow-custom-service-generator/scripts/build-ycs.js"],
+  ["skills/installed/yeeflow-custom-service-generator/scripts/validate-ycs.js", "skills/yeeflow-custom-service-generator/scripts/validate-ycs.js"],
+  ["skills/installed/yeeflow-scheduled-workflow-generator/SKILL.md", "skills/yeeflow-scheduled-workflow-generator/SKILL.md"],
+  ["skills/installed/yeeflow-scheduled-workflow-generator/agents/openai.yaml", "skills/yeeflow-scheduled-workflow-generator/agents/openai.yaml"],
+  ["skills/installed/yeeflow-scheduled-workflow-generator/references/standalone-scheduled-ywf-profile.md", "skills/yeeflow-scheduled-workflow-generator/references/standalone-scheduled-ywf-profile.md"],
+  ["skills/installed/yeeflow-scheduled-workflow-generator/scripts/build-scheduled-ywf-wrapper.js", "skills/yeeflow-scheduled-workflow-generator/scripts/build-scheduled-ywf-wrapper.js"],
+  ["skills/installed/yeeflow-scheduled-workflow-generator/scripts/validate-scheduled-ywf.js", "skills/yeeflow-scheduled-workflow-generator/scripts/validate-scheduled-ywf.js"],
+  ["skills/installed/yeeflow-scheduled-workflow-generator/scripts/generate-scheduled-ywf-from-plan.mjs", "skills/yeeflow-scheduled-workflow-generator/scripts/generate-scheduled-ywf-from-plan.mjs"],
+  ["generated-skills/yeeflow-agent-import-export-operator/SKILL.md", "skills/yeeflow-agent-import-export-operator/SKILL.md"],
+  ["generated-skills/yeeflow-agent-import-export-operator/references/export-format.md", "skills/yeeflow-agent-import-export-operator/references/export-format.md"],
+  ["generated-skills/yeeflow-agent-import-export-operator/scripts/build-yaia-wrapper.js", "skills/yeeflow-agent-import-export-operator/scripts/build-yaia-wrapper.js"],
+  ["generated-skills/yeeflow-agent-import-export-operator/scripts/validate-yaia.js", "skills/yeeflow-agent-import-export-operator/scripts/validate-yaia.js"],
+  ["generated-skills/yeeflow-agent-import-export-operator/scripts/finalize-yaia-from-official-response.js", "skills/yeeflow-agent-import-export-operator/scripts/finalize-yaia-from-official-response.js"],
+  ["generated-skills/yeeflow-copilot-import-export-operator/SKILL.md", "skills/yeeflow-copilot-import-export-operator/SKILL.md"],
+  ["generated-skills/yeeflow-copilot-import-export-operator/scripts/build-yaic-wrapper.js", "skills/yeeflow-copilot-import-export-operator/scripts/build-yaic-wrapper.js"],
+  ["generated-skills/yeeflow-copilot-import-export-operator/scripts/validate-yaic.js", "skills/yeeflow-copilot-import-export-operator/scripts/validate-yaic.js"],
+  ["generated-skills/yeeflow-copilot-import-export-operator/scripts/finalize-yaic-from-official-response.js", "skills/yeeflow-copilot-import-export-operator/scripts/finalize-yaic-from-official-response.js"],
+  ["scripts/build-ydp-wrapper.js", "scripts/build-ydp-wrapper.js"],
+  ["scripts/validate-ydp.js", "scripts/validate-ydp.js"],
+  ["skills/installed/yeeflow-dashboard-generator/scripts/build-ydp-wrapper.js", "skills/yeeflow-dashboard-generator/scripts/build-ydp-wrapper.js"],
+  ["skills/installed/yeeflow-dashboard-generator/scripts/validate-ydp.js", "skills/yeeflow-dashboard-generator/scripts/validate-ydp.js"],
+  ["skills/installed/yeeflow-application-generator/scripts/build-ydp-wrapper.js", "skills/yeeflow-application-generator/scripts/build-ydp-wrapper.js"],
+  ["skills/installed/yeeflow-application-generator/scripts/validate-ydp.js", "skills/yeeflow-application-generator/scripts/validate-ydp.js"],
+  ["skills/installed/yeeflow-application-builder/SKILL.md", "skills/yeeflow-application-builder/SKILL.md"],
+  ["skills/installed/yeeflow-mcp-incremental-application-builder/SKILL.md", "skills/yeeflow-mcp-incremental-application-builder/SKILL.md"],
+  ["skills/installed/yeeflow-mcp-incremental-application-builder/agents/openai.yaml", "skills/yeeflow-mcp-incremental-application-builder/agents/openai.yaml"],
+  ["skills/installed/yeeflow-form-report-generator/SKILL.md", "skills/yeeflow-form-report-generator/SKILL.md"],
+  ["skills/installed/yeeflow-application-generator/SKILL.md", "skills/yeeflow-application-generator/SKILL.md"],
+  ["skills/installed/yeeflow-data-list-generator/SKILL.md", "skills/yeeflow-data-list-generator/SKILL.md"],
+  ["skills/installed/yeeflow-approval-form-generator/SKILL.md", "skills/yeeflow-approval-form-generator/SKILL.md"],
+  ["skills/installed/yeeflow-data-list-generator/agents/openai.yaml", "skills/yeeflow-data-list-generator/agents/openai.yaml"],
+  ["skills/installed/yeeflow-dashboard-generator/SKILL.md", "skills/yeeflow-dashboard-generator/SKILL.md"],
+  ["skills/installed/yeeflow-runtime-test-orchestrator/SKILL.md", "skills/yeeflow-runtime-test-orchestrator/SKILL.md"],
+  ["skills/installed/yeeflow-package-validator/SKILL.md", "skills/yeeflow-package-validator/SKILL.md"],
+  ["skills/installed/yeeflow-yapk-package-generator/SKILL.md", "skills/yeeflow-yapk-package-generator/SKILL.md"],
+  ["skills/installed/yeeflow-data-report-generator/SKILL.md", "skills/yeeflow-data-report-generator/SKILL.md"],
+  ["skills/installed/yeeflow-data-report-generator/agents/openai.yaml", "skills/yeeflow-data-report-generator/agents/openai.yaml"],
+  ["skills/installed/yeeflow-data-report-generator/references/data-report-live-contract.md", "skills/yeeflow-data-report-generator/references/data-report-live-contract.md"],
+);
+
+mirrors.push(
+  ["docs/releases/yeeflow-app-builder-v1.15.1.md", "docs/releases/yeeflow-app-builder-v1.15.1.md"],
+  ["scripts/lib/planned-field-constraints.mjs", "scripts/lib/planned-field-constraints.mjs"],
+  ["scripts/lib/approval-planned-branches.mjs", "scripts/lib/approval-planned-branches.mjs"],
+  ["scripts/lib/generated-plan-conformance.mjs", "scripts/lib/generated-plan-conformance.mjs"],
+  ["scripts/test-schema-coverage-repairs.mjs", "scripts/test-schema-coverage-repairs.mjs"],
+  ["scripts/test-workflow-designer-readback.mjs", "scripts/test-workflow-designer-readback.mjs"],
+  ["scripts/test-list-variable-expression.mjs", "scripts/test-list-variable-expression.mjs"],
+  ["yeeflow-expression-utils.js", "yeeflow-expression-utils.js"],
+  ["yeeflow-expression-utils.js", "skills/yeeflow-expression-generator/references/yeeflow-expression-utils.js"],
+  ["scripts/test-workflow-set-data-list-materialization-gates.mjs", "scripts/test-workflow-set-data-list-materialization-gates.mjs"],
+  ["docs/standards/approval-workflow-designer-editability-standard.md", "docs/standards/approval-workflow-designer-editability-standard.md"],
+  ["docs/standards/workflow-set-data-list-golden-reference-standard.md", "docs/standards/workflow-set-data-list-golden-reference-standard.md"],
+  ["scripts/test-workflow-set-data-list-materialization-gates.mjs", "scripts/test-workflow-set-data-list-materialization-gates.mjs"],
+  ["scripts/test-workflow-query-data-golden-reference-gates.mjs", "scripts/test-workflow-query-data-golden-reference-gates.mjs"],
+  ["scripts/lib/document-library-materializer.mjs", "scripts/lib/document-library-materializer.mjs"],
+  ["validate-ywf-def.js", "validate-ywf-def.js"],
+);
+
+// Explicit reviewed additions; never glob untracked files into a release.
+for (const entry of readJson("docs/standards/product-schema/distribution-files.json").mirrors) {
+  mirrors.push([entry.source, entry.destination]);
+}
+for (const entry of readJson("docs/templates/dashboard-page-layouts-custom-code/distribution-files.json").mirrors) {
+  mirrors.push([entry.source, entry.destination]);
+}
+for (const entry of readJson("docs/standards/product-14.5/distribution-files.json").mirrors) {
+  mirrors.push([entry.source, entry.destination]);
+}
+
+for (const file of ["scripts/lib/dashboard-dataset-composition.mjs", "scripts/test-dashboard-dataset-composition.mjs", "docs/standards/dashboard-dataset-composition-standard.md", "docs/releases/yeeflow-app-builder-v1.15.4.md", "scripts/test-dashboard-master-detail-workspace-page-layout-template-gates.mjs", "docs/standards/collection-grid-table-generation-standard.md"]) mirrors.push([file, file]);
+mirrors.push(["skills/installed/yeeflow-ui-generation-hard-gates/SKILL.md", "skills/yeeflow-ui-generation-hard-gates/SKILL.md"]);
+
+for (const file of ["scripts/lib/normalize-filter-binding.mjs", "scripts/lib/collection-native-badge.mjs", "scripts/test-normalize-filter-binding.mjs", "scripts/test-collection-native-rich-training.mjs", "scripts/test-full-app-materialization-entrypoint-gates.mjs", "scripts/test-ui-hard-gates-all.mjs", "docs/reference/collection-control-responsive.template.json", "docs/standards/native-collection-rich-content-training.md", "docs/releases/yeeflow-app-builder-v1.15.5.md"]) mirrors.push([file, file]);
+
+mirrors.push(["docs/releases/yeeflow-app-builder-v1.15.6.md", "docs/releases/yeeflow-app-builder-v1.15.6.md"]);
+
+for (const file of ["scripts/lib/collection-toolbar-style.mjs", "scripts/test-collection-toolbar-style.mjs", "docs/standards/collection-toolbar-style-standard.md", "scripts/lib/dashboard-collection-presentation.mjs", "scripts/test-dashboard-collection-presentation.mjs", "docs/standards/dashboard-collection-choice-pagination-standard.md", "docs/training/collection-choice-pagination-toolbar-training-report.md", "docs/releases/yeeflow-app-builder-v1.15.7.md"]) mirrors.push([file, file]);
+mirrors.push(["skills/installed/yeeflow-feature-learning-orchestrator/SKILL.md", "skills/yeeflow-feature-learning-orchestrator/SKILL.md"]);
+
+for (const entry of readJson("docs/standards/native-collection-density-distribution.json").mirrors) mirrors.push([entry.source, entry.destination]);
+mirrors.push(["docs/releases/yeeflow-app-builder-v1.16.0.md", "docs/releases/yeeflow-app-builder-v1.16.0.md"]);
+
+for (const file of ["docs/standards/plugin-resource-access.md", "docs/standards/plugin-host-build-profiles.md", "scripts/test-skill-entrypoint-compat.mjs", "docs/releases/yeeflow-app-builder-v1.16.1.md"]) mirrors.push([file, file]);
+
+// Direct Form Action support must survive subsequent distribution rebuilds.
+for (const file of ["references/direct-form-action-execution.md", "references/yeeflow-custom-code-standard.md", "examples/form-action-dispatch.mjs", "scripts/test-form-action-dispatch.mjs"]) {
+  mirrors.push([`skills/installed/yeeflow-custom-code-generator/${file}`, `skills/yeeflow-custom-code-generator/${file}`]);
+}
+mirrors.push(["docs/releases/yeeflow-app-builder-v1.17.0.md", "docs/releases/yeeflow-app-builder-v1.17.0.md"]);
+
+for (const [sourcePath, destinationPath] of mirrors) {
+  const destination = resolve(root, "dist/yeeflow-app-builder-plugin", destinationPath);
+  mkdirSync(dirname(destination), { recursive: true });
+  copyFileSync(resolve(root, sourcePath), destination);
+  if (sourcePath === "skills/installed/yeeflow-custom-code-generator/SKILL.md") {
+    writeFileSync(destination, readFileSync(destination, "utf8").replaceAll("../../../docs/", "../../docs/"));
+  }
+}
+
+const normalization = spawnSync(process.execPath, [resolve(root, "scripts/normalize-plugin-distribution.mjs"), resolve(root, "dist/yeeflow-app-builder-plugin")], { encoding: "utf8" });
+if (normalization.status !== 0) throw new Error(`PLUGIN_DISTRIBUTION_NORMALIZATION_FAILED ${normalization.stderr || normalization.stdout}`);
+
+applyHostProfile(resolve(root, "dist/yeeflow-app-builder-plugin"), root, { profile: "codex" }, null);
+
+console.log(`PLUGIN_PATCH_RELEASE_PREPARED version=${packageManifest.version} mirroredFiles=${mirrors.length}`);
+
+function readJson(relativePath) {
+  return JSON.parse(readFileSync(resolve(root, relativePath), "utf8"));
+}
