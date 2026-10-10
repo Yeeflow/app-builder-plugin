@@ -6,13 +6,13 @@ Current repository: [Yeeflow/app-builder-plugin](https://github.com/Yeeflow/app-
 
 ## Version and packages
 
-The current package version is **1.17.0**, with 27 Skills and the unified OAuth MCP connection. The existing OpenAI package includes direct Form Action execution guidance and helpers for Custom Code; see the [1.17.0 release notes](docs/releases/yeeflow-app-builder-v1.17.0.md) for feature-specific validation boundaries.
+The current Codex/OpenAI package version is **1.17.0**, with 27 Skills and the unified OAuth MCP connection. The existing OpenAI package includes direct Form Action execution guidance and helpers for Custom Code; see the [1.17.0 release notes](docs/releases/yeeflow-app-builder-v1.17.0.md) for feature-specific validation boundaries.
 
 | Host | Marketplace / plugin | Package on `main` and `stable` |
 | --- | --- | --- |
 | Codex App | `yeeflow` / `yeeflow-app-builder` | `dist/yeeflow-app-builder-plugin` |
 | ChatGPT Web | Host-specific registered Apps profile | Built from the shared OpenAI payload; see [build profiles](docs/standards/plugin-host-build-profiles.md) |
-| Claude candidate | `yeeflow-claude` / `yeeflow` (1.17.2) | `dist/yeeflow-claude-plugin` |
+| Claude | `yeeflow-claude` / `yeeflow` (1.17.2) | `dist/yeeflow-claude-plugin` |
 
 The repository name is independent of the plugin identity. Codex identities remain unchanged; the Claude public-directory candidate uses `yeeflow` with display name Yeeflow. Publishing source changes to GitHub does not submit or update an OpenAI store listing or migrate existing installations.
 
@@ -57,11 +57,49 @@ claude plugin marketplace add Yeeflow/app-builder-plugin#stable
 claude plugin install yeeflow@yeeflow-claude
 ```
 
-The marketplace add/install sequence and branch pinning follow the [official Claude Code marketplace documentation](https://code.claude.com/docs/en/plugins/host-marketplace). Installation from this new private repository has not yet been verified. For the ZIP upload and local marketplace routes, build steps and recorded verification boundaries, see [Yeeflow for Claude](https://github.com/Yeeflow/app-builder-plugin/blob/stable/docs/claude-plugin.md).
+The marketplace add/install sequence and branch pinning follow the [official Claude Code marketplace documentation](https://code.claude.com/docs/en/plugins/host-marketplace). The Claude web marketplace installation was verified on 2026-10-10; Claude Code installation remains separately unverified. For the ZIP upload and local marketplace routes, build steps and recorded verification boundaries, see [Yeeflow for Claude](https://github.com/Yeeflow/app-builder-plugin/blob/stable/docs/claude-plugin.md).
 
-For the Claude web/desktop **Add marketplace** repository flow, use `Yeeflow/app-builder-plugin` without a branch suffix. The default `main` branch includes both `.claude-plugin/marketplace.json` and the directory it references. The `#stable` command above is for Claude Code; do not assume the web form accepts CLI branch syntax. Repository access and successful marketplace synchronization still require verification in the target account.
+For the Claude web/desktop **Add marketplace** repository flow, use `Yeeflow/app-builder-plugin` without a branch suffix. The default `main` branch includes both `.claude-plugin/marketplace.json` and the directory it references. The `#stable` command above is for Claude Code; do not assume the web form accepts CLI branch syntax. Repository access is required in each target account.
 
 Complete Yeeflow OAuth through the selected host's MCP connection. Each host authenticates separately; do not copy credentials or tokens between hosts.
+
+### Claude web and desktop: add the marketplace
+
+1. Sign in to Claude and select the intended account or organization (for example, your Yeeflow Team).
+2. Open **Customize → Plugins → Add → Add marketplace**.
+3. Select or paste `https://github.com/Yeeflow/app-builder-plugin` and click **Sync**. This repository is private, so the connected GitHub account must have repository access.
+4. Use the repository URL without `#stable`. This web flow reads the default `main` branch; both `main` and `stable` contain the complete Claude package.
+5. After synchronization completes, open **Discover**, find **Yeeflow** from `app-builder-plugin`, and click **Add**.
+6. In **Yours**, open Yeeflow and confirm it is enabled and shows **1.17.2**, **27 skills**, and **1 connector** (`yeeflow_mcp`).
+7. Open its connector and complete the Yeeflow OAuth connection if requested. Use the intended Yeeflow account; Claude and other hosts authenticate separately.
+
+### Update an existing marketplace installation
+
+Open **Customize → Plugins → Add → Manage marketplaces**. For `app-builder-plugin`, open the action menu and choose **Check for updates**. Wait for synchronization, inspect any sync warnings, then check the installed plugin's version. Updating GitHub alone does not prove the installed plugin has updated.
+
+The Claude plugin identifier changed from `yeeflow-app-builder` to `yeeflow`. If the old name remains installed, locate **Yeeflow** in Discover and add it; check Yours for stale or duplicate installations before testing. Avoid enabling both identities in the same test. Start a new conversation after an update; an existing conversation is not reliable evidence of the newly installed package.
+
+### Use Yeeflow
+
+Start a new conversation with:
+
+```text
+use yeeflow plugin to list all the workspaces
+```
+
+For application planning, try:
+
+```text
+Use the Yeeflow application builder skill to plan an asset management application. Do not create anything yet.
+```
+
+Select the workspace/application and approve the proposed scope before any write. A workspace-list result proves that read operation only, not application creation or full runtime acceptance. If a conversation rejects timestamp formatting, preserve the error and compare a fresh conversation; a fresh-session success does not establish that the original issue is resolved.
+
+### Verified installation and icon limitation
+
+On 2026-10-10, Chrome in the Renger / Yeeflow organization synchronized marketplace commit `b1bce89` and installed/enabled **Yeeflow 1.17.2**, with 27 skills and one connector. Yours showed one marketplace plugin named Yeeflow. This verifies installation and displayed metadata; no new live MCP or application runtime test was performed in that verification.
+
+The package contains the official blue Yeeflow mark and declares `icon`. However, this Git marketplace importer reported that `icon` and `privacyPolicyUrl` were unrecognized and stripped them. The installed plugin therefore still displayed the default code glyph. These are [directory listing fields](https://code.claude.com/docs/en/plugins-reference#directory-listing-fields); their declaration does not prove support in every importer. Logo display in the public directory requires separate verification. The service privacy policy remains available at https://www.yeeflow.com/privacy.
 
 ## Collection generation rules
 

@@ -2,12 +2,52 @@
 
 Claude 1.17.0 has passed the recorded package, repository installation and web upload checks. On 2026-10-10, the user confirmed that the MCP issue was resolved and separately confirmed application creation and verification through the Yeeflow plugin in Codex. Those results are recorded with their host and evidence source in [the latest verification status](claude-plugin-verification-2026-10-10.md). Its package and repository marketplace are separate from the existing OpenAI submission and publication lifecycle.
 
+## Current web installation guide
+
+### Claude web and desktop: add the marketplace
+
+1. Sign in to Claude and select the intended account or organization (for example, your Yeeflow Team).
+2. Open **Customize → Plugins → Add → Add marketplace**.
+3. Select or paste `https://github.com/Yeeflow/app-builder-plugin` and click **Sync**. This repository is private, so the connected GitHub account must have repository access.
+4. Use the repository URL without `#stable`. This web flow reads the default `main` branch; both `main` and `stable` contain the complete Claude package.
+5. After synchronization completes, open **Discover**, find **Yeeflow** from `app-builder-plugin`, and click **Add**.
+6. In **Yours**, open Yeeflow and confirm it is enabled and shows **1.17.2**, **27 skills**, and **1 connector** (`yeeflow_mcp`).
+7. Open its connector and complete the Yeeflow OAuth connection if requested. Use the intended Yeeflow account; Claude and other hosts authenticate separately.
+
+### Update an existing marketplace installation
+
+Open **Customize → Plugins → Add → Manage marketplaces**. For `app-builder-plugin`, open the action menu and choose **Check for updates**. Wait for synchronization, inspect any sync warnings, then check the installed plugin's version. Updating GitHub alone does not prove the installed plugin has updated.
+
+The Claude plugin identifier changed from `yeeflow-app-builder` to `yeeflow`. If the old name remains installed, locate **Yeeflow** in Discover and add it; check Yours for stale or duplicate installations before testing. Avoid enabling both identities in the same test. Start a new conversation after an update; an existing conversation is not reliable evidence of the newly installed package.
+
+### Use Yeeflow
+
+Start a new conversation with:
+
+```text
+use yeeflow plugin to list all the workspaces
+```
+
+For application planning, try:
+
+```text
+Use the Yeeflow application builder skill to plan an asset management application. Do not create anything yet.
+```
+
+Select the workspace/application and approve the proposed scope before any write. A workspace-list result proves that read operation only, not application creation or full runtime acceptance. If a conversation rejects timestamp formatting, preserve the error and compare a fresh conversation; a fresh-session success does not establish that the original issue is resolved.
+
+### Verified installation and icon limitation
+
+On 2026-10-10, Chrome in the Renger / Yeeflow organization synchronized marketplace commit `b1bce89` and installed/enabled **Yeeflow 1.17.2**, with 27 skills and one connector. Yours showed one marketplace plugin named Yeeflow. This verifies installation and displayed metadata; no new live MCP or application runtime test was performed in that verification.
+
+The package contains the official blue Yeeflow mark and declares `icon`. However, this Git marketplace importer reported that `icon` and `privacyPolicyUrl` were unrecognized and stripped them. The installed plugin therefore still displayed the default code glyph. These are [directory listing fields](https://code.claude.com/docs/en/plugins-reference#directory-listing-fields); their declaration does not prove support in every importer. Logo display in the public directory requires separate verification. The service privacy policy remains available at https://www.yeeflow.com/privacy.
+
 ## Build
 
 Use Node and zip/unzip from the repository root:
 
 ```sh
-npm run build:claude-plugin -- --output artifacts/claude/yeeflow-claude-1.17.0.zip
+npm run build:claude-plugin -- --output artifacts/claude/yeeflow-1.17.2.zip
 npm run test:claude-plugin
 npm run test:plugin-host-profiles
 ```
@@ -40,7 +80,7 @@ A write/runtime test requires an explicitly selected disposable workspace and au
 
 `.claude-plugin/marketplace.json` points only to `dist/yeeflow-claude-plugin`. Existing Codex marketplace and OpenAI build profiles retain their own paths. Commit the generated Claude directory with the source changes; ZIP artifacts remain ignored.
 
-The organization development repository is now `Yeeflow/app-builder-plugin`; it is private. Access to this source requires the appropriate repository authorization. The earlier remote install smoke test used the original repository before it was locked; installation from the new private repository has not been verified. Use the validated ZIP or a local marketplace while arranging host-specific private-repository access. The adaptation was merged into `stable` through [PR #1](https://github.com/Yeeflow/app-builder-plugin/pull/1) on 2026-10-10 (merge commit `68974a1c25fa777848b37f447a4f252b8a0f5835`). The complete support is now reconciled into the default `main` branch, and `stable` is promoted by fast-forward to the same validated commit. Both branches contain the marketplace and its referenced plugin directory.
+The organization development repository is now `Yeeflow/app-builder-plugin`; it is private. Access to this source requires the appropriate repository authorization. The earlier remote install smoke test used the original repository before it was locked; web marketplace installation from the new private repository was verified on 2026-10-10 for Yeeflow 1.17.2. Claude Code installation requires separate verification. The adaptation was merged into `stable` through [PR #1](https://github.com/Yeeflow/app-builder-plugin/pull/1) on 2026-10-10 (merge commit `68974a1c25fa777848b37f447a4f252b8a0f5835`). The complete support is now reconciled into the default `main` branch, and `stable` is promoted by fast-forward to the same validated commit. Both branches contain the marketplace and its referenced plugin directory.
 
 For Claude Code clients that support authenticated private GitHub marketplaces, the branch-pinned source is:
 
@@ -49,7 +89,7 @@ claude plugin marketplace add Yeeflow/app-builder-plugin#stable
 claude plugin install yeeflow@yeeflow-claude
 ```
 
-The add/install sequence and `#stable` branch pinning follow the [official Claude Code hosting documentation](https://code.claude.com/docs/en/plugins/host-marketplace). For the Claude web/desktop Add marketplace repository flow, use `Yeeflow/app-builder-plugin` without `#stable`: the default `main` branch now contains the full marketplace and distribution. CLI branch suffix support is not evidence that the web form accepts that syntax. A successful sync and installation in the target account must still be recorded; availability of the files in Git is not installation proof. A local manifest alone does not make repository installation available remotely. See [the organization copy record](repository-copy-2026-10-10.md) for the preserved release branches and compatibility boundary. Existing Codex user configurations are not migrated by this source copy.
+The add/install sequence and `#stable` branch pinning follow the [official Claude Code hosting documentation](https://code.claude.com/docs/en/plugins/host-marketplace). For the Claude web/desktop Add marketplace repository flow, use `Yeeflow/app-builder-plugin` without `#stable`: the default `main` branch now contains the full marketplace and distribution. CLI branch suffix support is not evidence that the web form accepts that syntax. The 1.17.2 web sync and installation are recorded above; each other target account still needs verification; availability of the files in Git is not installation proof. A local manifest alone does not make repository installation available remotely. See [the organization copy record](repository-copy-2026-10-10.md) for the preserved release branches and compatibility boundary. Existing Codex user configurations are not migrated by this source copy.
 
 Use Claude-specific tags such as `claude-v1.17.0-rc1`; final Claude tags require documented installation acceptance. Do not reuse OpenAI release tags or modify its submission packet for a Claude-only change. Shared Skill or MCP changes may affect both hosts and require both-host validation. The compatibility workflow tests packages on pull requests; it does not publish or release either host.
 
@@ -74,12 +114,12 @@ node scripts/prepare-claude-public-repository.mjs --output artifacts/claude/publ
 
 The exporter requires an empty destination and preserves existing files. It copies only the Claude payload to the new repository root and creates a root-source marketplace. Initialize and publish that directory as a dedicated distribution repository only after review. The portal plugin path is empty for this repository, unlike `dist/yeeflow-claude-plugin` in the development repository. Set the final repository URL in the builder and candidate documentation when the destination is created. The company development repository remains private.
 
-Current generated distribution remains above the documented 512-file / 256-KiB reviewer-hold thresholds. This candidate preserves shared dependencies instead of deleting referenced files merely to avoid review. No portal validation, security-scan approval, candidate install smoke, or final release is implied. Service data retention and personal-data answers still require implementation-backed confirmation. See the publication readiness audit for baseline findings.
+Current generated distribution remains above the documented 512-file / 256-KiB reviewer-hold thresholds. This candidate preserves shared dependencies instead of deleting referenced files merely to avoid review. The web installation check above does not imply portal validation, security-scan approval, live MCP/runtime acceptance, or a final release tag. Service data retention and personal-data answers still require implementation-backed confirmation. See the publication readiness audit for baseline findings.
 
 ## Shared data projection
 
 The Claude build consolidates reviewed identical normalized JSON mirrors into directly readable ordinary files. See [optimization evidence](claude-shared-resource-optimization-2026-10-10.md). The generated `claude-shared-resources.json` maps old paths to canonical paths with SHA-256; no extraction or resource download step is required. Scripts and documentation are projected during build, so do not edit generated distribution files directly. Historical RC staging directories remain local snapshots; regenerate staging from the current distribution before publishing.
 
-Version decision (2026-10-10): at the user’s explicit request, use 1.17.1 directly without an RC. This version choice does not establish Claude installation or runtime acceptance, which remain pending. No GitHub release tag is created by this change.
+Historical version decision (before the 1.17.2 update, 2026-10-10): at the user’s explicit request, use 1.17.1 directly without an RC. This version choice does not establish Claude installation or runtime acceptance, which were pending at that point. The current web installation status is recorded above; live runtime acceptance remains separate. No GitHub release tag was created by that change.
 
-Icon update (2026-10-10): Claude 1.17.2 declares icon ./assets/yeeflow-logo-only-blue.png using the existing official square blue Yeeflow mark. The patch version distinguishes this metadata update from 1.17.1. Client display and installation require separate verification.
+Icon update (2026-10-10): Claude 1.17.2 declares icon ./assets/yeeflow-logo-only-blue.png using the existing official square blue Yeeflow mark. The patch version distinguishes this metadata update from 1.17.1. Web installation and name/version display were verified as described above; the Git importer stripped the icon and privacyPolicyUrl fields, so the generic icon remains.
