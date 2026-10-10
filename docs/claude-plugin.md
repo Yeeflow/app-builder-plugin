@@ -1,6 +1,6 @@
 # Yeeflow for Claude
 
-Claude 1.17.0 is a testing candidate until installation, OAuth and live operation evidence below is recorded. Its package and repository marketplace are separate from the existing OpenAI submission and publication lifecycle.
+Claude 1.17.0 has passed the recorded package, repository installation and web upload checks. On 2026-10-10, the user confirmed that the MCP issue was resolved and separately confirmed application creation and verification through the Yeeflow plugin in Codex. Those results are recorded with their host and evidence source in [the latest verification status](claude-plugin-verification-2026-10-10.md). Its package and repository marketplace are separate from the existing OpenAI submission and publication lifecycle.
 
 ## Build
 
@@ -18,9 +18,9 @@ Skills receive Claude-specific resource reading, hosted MCP discovery, OAuth and
 
 ## Test installation
 
-In Claude Desktop: Customize > Plugins > Add > Upload plugin. Select the ZIP and check the plugin name/version and Skill inventory. Complete Yeeflow login through Claude's MCP/connector OAuth flow. The web tests installed the package in both Free and Pro accounts, but OAuth failed before a login popup opened: default published-client identity (CIMD) returned HTTP 400, and automatic registration (DCR) in the Pro account displayed a sign-in registration failure. Do not claim either registration mode is runtime-supported until login and authenticated reads succeed. Never copy OpenAI credentials or tokens.
+In Claude Desktop: Customize > Plugins > Add > Upload plugin. Select the ZIP and check the plugin name/version and Skill inventory. Complete Yeeflow login through Claude's MCP/connector OAuth flow. Never copy OpenAI credentials or tokens.
 
-After the reported allowlist update, the authorized Pro-account test connector was removed and rebuilt with CIMD selected; sign-in registration still failed. [Claude's auth requirements](https://claude.com/docs/connectors/building/authentication#dcr-and-cimd-details) explain that this UI choice can fall back to DCR if the issuer metadata does not advertise both CIMD support and public-client token authentication. Check live metadata and registration logs before attributing the failure to a specific mechanism. See the dated verification report for support references.
+The [2026-10-08](claude-plugin-verification-2026-10-08.md) and [2026-10-09](claude-plugin-verification-2026-10-09.md) reports preserve historical OAuth failures. The user confirmed resolution on 2026-10-10; those historical errors are not the current reported blocker. [Claude's auth requirements](https://claude.com/docs/connectors/building/authentication#dcr-and-cimd-details) explain that CIMD selection requires both CIMD support and public-client token authentication in issuer metadata. The final registration mechanism and server-side fix were not independently captured in this checkout. Application creation verified in Codex is recorded as Codex evidence, not as a Claude-specific application test.
 
 If Claude Code is available:
 

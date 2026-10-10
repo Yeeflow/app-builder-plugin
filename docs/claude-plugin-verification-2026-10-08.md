@@ -2,6 +2,8 @@
 
 Source baseline: origin/stable 7f4c6f23, Yeeflow 1.17.0. Claude adaptation remains a testing candidate.
 
+Historical report: on 2026-10-10, the user confirmed MCP resolution and separate application creation/verification in Codex. See [the current status](claude-plugin-verification-2026-10-10.md); failures below describe the checks on this report's date.
+
 ## Verified locally
 
 - Claude Code 2.1.293 (official @anthropic-ai/claude-code package) accepted the plugin manifest and repository marketplace with no warnings.
