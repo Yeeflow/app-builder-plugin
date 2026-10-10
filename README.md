@@ -1,5 +1,7 @@
 # Yeeflow Plugin
 
+Organization development repository: [Yeeflow/app-builder-plugin](https://github.com/Yeeflow/app-builder-plugin). This private copy preserves the existing Git history, release branches, tags and plugin identities, including the separate Claude adaptation branch. See [copy status and development workflow](docs/repository-copy-2026-10-10.md). Existing installation examples below retain their original source for compatibility; they do not switch installed users to the private organization repository.
+
 Release **1.17.0** adds direct Form Action execution guidance and helpers for Custom Code. Keeps all 27 Skills and the unified OAuth MCP connection. See [release notes](docs/releases/yeeflow-app-builder-v1.17.0.md); live host validation remains pending.
 
 Official Yeeflow plugin repository. Work with business data, manage tasks, and build apps in Yeeflow.

@@ -27,3 +27,7 @@ Source/PR publication, merging into the default branch, a versioned GitHub Relea
 - Codex and ChatGPT Web archive regressions passed, including shared-payload parity and validator entrypoints.
 - Claude package regression passed: fresh tracked-file build equals the checked-in distribution, ZIP root layout is correct, all 27 skills are present, and protected OpenAI files remain unchanged.
 - `git diff --check` passed. Screenshots and local test artifacts remain ignored and are not publication inputs.
+
+## Organization repository publication
+
+After the original repository rejected publication, the user authorized copying the complete local source to the newly created private organization repository, [Yeeflow/app-builder-plugin](https://github.com/Yeeflow/app-builder-plugin). On 2026-10-10, the atomic push and remote readback succeeded for all 431 locally retained source branches and 220 tags. The Claude branch included all four previously unpublished commits through `32e3d3ea2023d0107abaa02cdc923a3ac5617ff9`; main and stable retained the 1.17.0 baseline exactly. The source repository could not be refreshed while locked, so completeness is relative to the verified local snapshot. See [the copy record](repository-copy-2026-10-10.md).

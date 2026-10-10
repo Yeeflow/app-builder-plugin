@@ -40,13 +40,15 @@ A write/runtime test requires an explicitly selected disposable workspace and au
 
 `.claude-plugin/marketplace.json` points only to `dist/yeeflow-claude-plugin`. Existing Codex marketplace and OpenAI build profiles retain their own paths. Commit the generated Claude directory with the source changes; ZIP artifacts remain ignored.
 
-Once merged/pushed to the branch Claude uses, Add marketplace can use `Yeeflow/app-builder-codex-plugin`. Before then, use the ZIP, a local marketplace, or the tested branch-pinned Claude Code command:
+The organization development repository is now `Yeeflow/app-builder-plugin`; it is private. Access to this source requires the appropriate repository authorization. The earlier remote install smoke test used the original repository before it was locked; installation from the new private repository has not been verified. Use the validated ZIP or a local marketplace while arranging host-specific private-repository access. After the adaptation is merged into the branch used by Claude, the marketplace is available from that branch to supported, authorized clients.
+
+For clients that support authenticated private GitHub marketplaces, the equivalent branch-pinned source is:
 
 ```sh
-claude plugin install yeeflow-app-builder --marketplace Yeeflow/app-builder-codex-plugin#codex/claude-plugin-adaptation
+claude plugin install yeeflow-app-builder --marketplace Yeeflow/app-builder-plugin#codex/claude-plugin-adaptation
 ```
 
- A local manifest alone does not make repository installation available remotely.
+A local manifest alone does not make repository installation available remotely. See [the organization copy record](repository-copy-2026-10-10.md) for the preserved release branches and compatibility boundary. Existing Codex user configurations are not migrated by this source copy.
 
 Use Claude-specific tags such as `claude-v1.17.0-rc1`; final Claude tags require documented installation acceptance. Do not reuse OpenAI release tags or modify its submission packet for a Claude-only change. Shared Skill or MCP changes may affect both hosts and require both-host validation. The compatibility workflow tests packages on pull requests; it does not publish or release either host.
 
