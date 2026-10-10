@@ -3,8 +3,8 @@
 const fs = require("fs");
 const path = require("path");
 
-const DEFAULT_FUNCTIONS_PATH = path.join(__dirname, "yeeflow-expression-functions.normalized.json");
-const DEFAULT_OPERATORS_PATH = path.join(__dirname, "yeeflow-expression-operators.normalized.json");
+const DEFAULT_FUNCTIONS_PATH = path.join(__dirname, "../../../yeeflow-expression-functions.normalized.json");
+const DEFAULT_OPERATORS_PATH = path.join(__dirname, "../../../yeeflow-expression-operators.normalized.json");
 const VARIABLE_VALUE_TYPES = new Set(["number", "text", "date", "boolean", "string", "user"]);
 
 let cachedReferences = null;

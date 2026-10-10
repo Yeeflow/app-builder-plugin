@@ -5,7 +5,7 @@
   },
   "plugins": [
     {
-      "name": "yeeflow-app-builder",
+      "name": "yeeflow",
       "source": "./dist/yeeflow-claude-plugin",
       "description": "Build Yeeflow applications with guided skills and hosted MCP."
     }

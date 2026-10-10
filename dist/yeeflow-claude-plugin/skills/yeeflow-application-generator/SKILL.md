@@ -5,6 +5,8 @@ description: generate, inspect, validate, package, debug, and improve small yeef
 
 ## Claude host requirements
 
+If the Skill tool reports a virtual or missing base directory, do not assume bundled files are missing. When filesystem tools are available, locate .claude-plugin/plugin.json under the host-provided plugin mounts, verify its name is yeeflow and version matches this session, and resolve resources from that actual root. Do not use another installed version or another host cache. If multiple roots match, stop and report ambiguity.
+
 Resolve this plugin root from the loaded skill path (<plugin-root>/skills/<skill-name>/SKILL.md), or CLAUDE_PLUGIN_ROOT when provided. Read bundled resources with Claude's available file tools. Resolve shared docs, scripts and core from the plugin root, never from a developer checkout or another host's cache.
 
 Use only the discovered tools of this plugin's unified yeeflow_mcp connection. Authenticate through Claude's connector/MCP OAuth flow. Never copy OpenAI login tokens or invent tool namespace prefixes. Do not fall back to direct REST calls, API keys or retired MCP endpoints.
@@ -508,7 +510,7 @@ Employee Family Implant Test export update: for requester/applicant forms, prefe
 
 Sublist summary binding update: the manually reselected Product Selection summary in `Employee & Family Implant Application Management_Test.yap` still exports as `{ "prefix": "__variables_", "value": "TotalApplicationAmount" }`. Do not invent extra name/label/type metadata. Instead validate that the target variable exists and is numeric, the source row field exists and is numeric, and runtime tests blur/commit row edits before asserting the summary-bound total. A later comparison export, `Implant Application Request (1).ywf`, proved an import-time FlowKey collision: generated FlowKey `EFI` was replaced inside the JSON property name `prefix`, producing `pr<runtimeFlowKey>x` and breaking summary-to-variable binding, while a designer-created comparison sublist kept `prefix` and worked. Avoid FlowKeys/form keys that are substrings of reserved JSON property names such as `prefix`; inspect generated/wrapped/exported forms for corrupted summary binding keys before runtime claims. For policy-critical form actions such as quota checks, submit guards, workflow amount routing, and persistence, add an explicit preflight set-variable step that recalculates the top-level total with `arraySum(<ListVariableId>, "<SubtotalFieldId>", [], [])`; use this recalculated workflow variable even when summary binding is also present.
 
-Expression generation update: when a package includes calculated controls, dynamic display rules, custom validation rules, lookup/data filters, workflow transition conditions, workflow action conditions, default values, request numbers, or subtotal/total/date/string formulas, use `yeeflow-expression-functions.normalized.json`, `yeeflow-expression-function-knowledge-base.normalized.json`, `yeeflow-expression-operators.normalized.json`, `yeeflow-expression-utils.js`, `docs/yeeflow-expression-editor-ui-contexts.md`, and the `yeeflow-expression-generator` skill. Generate Yeeflow expression-token arrays, not JavaScript formulas. Validate expressions before package build and keep unknown functions/operators as stop conditions for generated final packages. Use enriched business-scenario metadata for function selection, but do not generate UI-observed metadata-pending functions such as `addWorkDays` or `addWorkHours`.
+Expression generation update: when a package includes calculated controls, dynamic display rules, custom validation rules, lookup/data filters, workflow transition conditions, workflow action conditions, default values, request numbers, or subtotal/total/date/string formulas, use `<plugin-root>/yeeflow-expression-functions.normalized.json`, `yeeflow-expression-function-knowledge-base.normalized.json`, `<plugin-root>/yeeflow-expression-operators.normalized.json`, `yeeflow-expression-utils.js`, `docs/yeeflow-expression-editor-ui-contexts.md`, and the `yeeflow-expression-generator` skill. Generate Yeeflow expression-token arrays, not JavaScript formulas. Validate expressions before package build and keep unknown functions/operators as stop conditions for generated final packages. Use enriched business-scenario metadata for function selection, but do not generate UI-observed metadata-pending functions such as `addWorkDays` or `addWorkHours`.
 
 For purchase/order-style approvals with line items, prefer native list summary binding over hand-built top-level total formulas. Bind subtotal sum to a top-level number variable and use that variable for ContentList persistence, dynamic display, validation, and workflow branch conditions.
 
@@ -609,7 +611,7 @@ Stop before final `.yap` build if any of these are true:
 - invalid or incomplete root app shell
 - missing root navigation or app page
 - unresolved AI/connection/knowledge/document/external resources
-- workflow action properties do not satisfy `workflow-action-configurations.normalized.json`
+- workflow action properties do not satisfy `<plugin-root>/scripts/workflow-action-configurations.normalized.json`
 - expression formulas or conditions do not satisfy the normalized expression references
 - placeholders remain in final mode
 - validators fail
@@ -826,8 +828,8 @@ Load only the relevant reference:
 - `references/validate-yap-graph.md`: graph validator behavior.
 - `references/build-yap-wrapper.md`: wrapper builder usage and safety rules.
 - `references/examples-summary.md`: proven baseline and quick pattern reminders.
-- In the active generator workspace, use `docs/workflow-action-configuration-reference.md`, `docs/workflow-action-generation-rules.md`, and `workflow-action-configurations.normalized.json` as the official workflow action configuration reference when generating or validating workflow nodes.
-- In the active generator workspace, use `control-configurations.normalized.json`, `field-configurations.normalized.json`, `docs/yeeflow-control-to-field-mapping.md`, and `docs/yeeflow-control-field-generation-rules.md` when planning approval-form controls, data-list persistence, custom list forms, and app-level control-to-field mappings.
+- In the active generator workspace, use `docs/workflow-action-configuration-reference.md`, `docs/workflow-action-generation-rules.md`, and `<plugin-root>/scripts/workflow-action-configurations.normalized.json` as the official workflow action configuration reference when generating or validating workflow nodes.
+- In the active generator workspace, use `<plugin-root>/control-configurations.normalized.json`, `<plugin-root>/field-configurations.normalized.json`, `docs/yeeflow-control-to-field-mapping.md`, and `docs/yeeflow-control-field-generation-rules.md` when planning approval-form controls, data-list persistence, custom list forms, and app-level control-to-field mappings.
 - In the active generator workspace, use `workflow-action-config-validator.js`, `yeeflow-control-field-schema-utils.js`, and `yeeflow-expression-utils.js` when available; these are the compact helper/validator entry points for workflow action, control/field schema, and expression checks.
 
 ## Workflow Action Configuration Reference

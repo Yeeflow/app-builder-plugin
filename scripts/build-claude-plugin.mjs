@@ -4,6 +4,7 @@ import { tmpdir } from "node:os";
 import { resolve, dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { execFileSync } from "node:child_process";
+import { consolidateClaudeResources } from "./claude-shared-resources.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const args = process.argv.slice(2);
@@ -25,15 +26,17 @@ try {
   rmSync(join(stage, ".app.json"), { force: true });
   mkdirSync(join(stage, ".claude-plugin"));
   const manifest = {
-    name: original.name, version: original.version,
+    name: "yeeflow", displayName: "Yeeflow", version: "1.17.1-rc.1",
     description: "Build and maintain Yeeflow business applications with guided skills and hosted MCP.",
-    author: original.author, homepage: "https://www.yeeflow.com",
-    repository: "https://github.com/Yeeflow/app-builder-codex-plugin",
+    license: "MIT", author: {...original.author, email: "support@yeeflow.com"}, homepage: "https://www.yeeflow.com",
+    repository: "https://github.com/Yeeflow/app-builder-plugin",
     keywords: ["yeeflow", "applications", "workflow"],
     skills: "./skills/", mcpServers: "./.mcp.json"
   };
   writeFileSync(join(stage, ".claude-plugin/plugin.json"), JSON.stringify(manifest, null, 2) + "\n");
   const guidance = `## Claude host requirements
+
+If the Skill tool reports a virtual or missing base directory, do not assume bundled files are missing. When filesystem tools are available, locate .claude-plugin/plugin.json under the host-provided plugin mounts, verify its name is yeeflow and version matches this session, and resolve resources from that actual root. Do not use another installed version or another host cache. If multiple roots match, stop and report ambiguity.
 
 Resolve this plugin root from the loaded skill path (<plugin-root>/skills/<skill-name>/SKILL.md), or CLAUDE_PLUGIN_ROOT when provided. Read bundled resources with Claude's available file tools. Resolve shared docs, scripts and core from the plugin root, never from a developer checkout or another host's cache.
 
@@ -65,6 +68,10 @@ Do not edit installed plugin caches or another host's skills. Put learning chang
   }
   if (count !== 27) throw new Error("Expected 27 skills; review source inventory before release");
   writeFileSync(join(stage, "CLAUDE-README.md"), "# Yeeflow for Claude\n\nVersion " + manifest.version + ". Testing candidate: installation, OAuth and live runtime acceptance require separate verification. See the source repository docs/claude-plugin.md.\n");
+  writeFileSync(join(stage, "README.md"), readFileSync(resolve(root, "docs/claude-public-readme.md"), "utf8"));
+  writeFileSync(join(stage, "LICENSE"), readFileSync(resolve(root, "docs/claude-plugin-LICENSE.txt"), "utf8"));
+  const sharing = consolidateClaudeResources(stage);
+  console.log("CLAUDE_SHARED_RESOURCES " + JSON.stringify({removedFiles:sharing.removedFiles,savedBytes:sharing.savedBytes}));
   // ZIP has plugin files at its root, including the hidden manifest directory.
   mkdirSync(dirname(output), { recursive: true });
   rmSync(output, { force: true });

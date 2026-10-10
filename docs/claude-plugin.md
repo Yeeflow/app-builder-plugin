@@ -28,7 +28,7 @@ If Claude Code is available:
 claude plugin validate ./dist/yeeflow-claude-plugin
 claude plugin validate .
 claude plugin marketplace add "$(pwd)"
-claude plugin install yeeflow-app-builder@yeeflow-claude
+claude plugin install yeeflow@yeeflow-claude
 claude plugin list
 ```
 
@@ -46,7 +46,7 @@ For Claude Code clients that support authenticated private GitHub marketplaces, 
 
 ```sh
 claude plugin marketplace add Yeeflow/app-builder-plugin#stable
-claude plugin install yeeflow-app-builder@yeeflow-claude
+claude plugin install yeeflow@yeeflow-claude
 ```
 
 The add/install sequence and `#stable` branch pinning follow the [official Claude Code hosting documentation](https://code.claude.com/docs/en/plugins/host-marketplace). For the Claude web/desktop Add marketplace repository flow, use `Yeeflow/app-builder-plugin` without `#stable`: the default `main` branch now contains the full marketplace and distribution. CLI branch suffix support is not evidence that the web form accepts that syntax. A successful sync and installation in the target account must still be recorded; availability of the files in Git is not installation proof. A local manifest alone does not make repository installation available remotely. See [the organization copy record](repository-copy-2026-10-10.md) for the preserved release branches and compatibility boundary. Existing Codex user configurations are not migrated by this source copy.
@@ -59,3 +59,23 @@ Official marketplace reference: https://code.claude.com/docs/en/plugin-marketpla
 ## Source integration and promotion
 
 Use development branches and PRs into `main` for future changes. After the affected host checks and required installation acceptance pass, fast-forward `stable` to the accepted `main` commit. The 2026-10-10 reconciliation restores this branch order without rebuilding either package, changing version 1.17.0, moving existing release tags, or publishing to a store. Independent host packaging and tag namespaces remain unchanged.
+
+## Public-directory candidate (2026-10-10)
+
+The Claude-only candidate is **Yeeflow**, identifier `yeeflow`, version `1.17.1-rc.1`; Codex remains `yeeflow-app-builder` 1.17.0. Existing verification records apply to the older Claude identity, not this candidate. MIT licensing was approved by the user for the Claude bundle. Company support: support@yeeflow.com; privacy policy: https://www.yeeflow.com/privacy.
+
+Build and validate:
+
+```sh
+node scripts/build-claude-plugin.mjs --output artifacts/claude/yeeflow-1.17.1-rc.1.zip
+node scripts/test-claude-plugin.mjs
+node scripts/prepare-claude-public-repository.mjs --output artifacts/claude/public-repository-candidate
+```
+
+The exporter requires an empty destination and preserves existing files. It copies only the Claude payload to the new repository root and creates a root-source marketplace. Initialize and publish that directory as a dedicated distribution repository only after review. The portal plugin path is empty for this repository, unlike `dist/yeeflow-claude-plugin` in the development repository. Set the final repository URL in the builder and candidate documentation when the destination is created. The company development repository remains private.
+
+Current generated distribution remains above the documented 512-file / 256-KiB reviewer-hold thresholds. This candidate preserves shared dependencies instead of deleting referenced files merely to avoid review. No portal validation, security-scan approval, candidate install smoke, or final release is implied. Service data retention and personal-data answers still require implementation-backed confirmation. See the publication readiness audit for baseline findings.
+
+## Shared data projection
+
+The Claude build consolidates reviewed identical normalized JSON mirrors into directly readable ordinary files. See [optimization evidence](claude-shared-resource-optimization-2026-10-10.md). The generated `claude-shared-resources.json` maps old paths to canonical paths with SHA-256; no extraction or resource download step is required. Scripts and documentation are projected during build, so do not edit generated distribution files directly. Use the `public-repository-1.17.1-rc.1-shared` staging directory for the current candidate.

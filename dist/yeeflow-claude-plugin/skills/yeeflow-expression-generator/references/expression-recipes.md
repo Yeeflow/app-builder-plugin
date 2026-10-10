@@ -1,6 +1,6 @@
 # Yeeflow Expression Generation Rules
 
-Use `yeeflow-expression-functions.normalized.json`, `yeeflow-expression-function-knowledge-base.normalized.json`, `yeeflow-expression-operators.normalized.json`, and `yeeflow-expression-utils.js` before generating expressions.
+Use `<plugin-root>/yeeflow-expression-functions.normalized.json`, `<plugin-root>/yeeflow-expression-function-knowledge-base.normalized.json`, `<plugin-root>/yeeflow-expression-operators.normalized.json`, and `yeeflow-expression-utils.js` before generating expressions.
 
 ## Default Rules
 

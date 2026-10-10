@@ -81,7 +81,7 @@ Observed function list included:
 
 Generator guidance:
 
-- use `yeeflow-expression-functions.normalized.json` and `yeeflow-expression-function-knowledge-base.normalized.json` for generation-safe functions
+- use `<plugin-root>/yeeflow-expression-functions.normalized.json` and `<plugin-root>/yeeflow-expression-function-knowledge-base.normalized.json` for generation-safe functions
 - `addWorkDays` and `addWorkHours` are observed in the UI but metadata-pending; do not generate them yet
 - choose functions by business intent using category, keywords, and businessScenarios metadata
 
