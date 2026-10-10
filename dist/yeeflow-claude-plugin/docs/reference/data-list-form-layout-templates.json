@@ -1,0 +1,200 @@
+{
+  "schemaVersion": 1,
+  "registryId": "data-list-form-layouts-v1.1",
+  "defaultVersion": "data-list-form-layouts-v1.1",
+  "description": "Approved page-level golden reference templates for generated Yeeflow custom Data List forms. These templates align Data List forms with Dashboard Page Layouts v1.1 and Workbench Dashboard visual structure while keeping New/Edit, standard View, and full-page Workbench View responsibilities separate.",
+  "sourceExport": "Data list page layouts (1).ydl",
+  "sourceDataListName": "Data list page layouts",
+  "approvedTemplateIds": [
+    "data_list_form_layout_new_edit_v1_1",
+    "data_list_form_layout_view_item_v1_1",
+    "data_list_form_layout_workbench"
+  ],
+  "requiredRoot": {
+    "backgroundColor": "#f4f7fb",
+    "rootContainerCw": "2",
+    "rootPadding": "zero-token-array",
+    "mainContentRequired": true
+  },
+  "allowedBusinessContentContainers": [
+    "page_title_content",
+    "Operations",
+    "section_content_area",
+    "section_title_header",
+    "kpi_card_wrapper",
+    "primary_working_area",
+    "right_side_panel",
+    "chart_cards_section",
+    "reverse_related_collection_section"
+  ],
+  "allowedRepeatableRemovableModules": [
+    "1_columns_section",
+    "content_card_wrapper",
+    "2_columns_section",
+    "3_columns_section",
+    "2_columns_60/40_section",
+    "kpi_metrics_wrapper",
+    "kpi_card_wrapper",
+    "kpi_cards_kpi_row",
+    "1_row_section",
+    "2_rows_section",
+    "3_rows_section",
+    "chart_cards_section",
+    "right_side_panel",
+    "reverse_related_collection_section"
+  ],
+  "unusedSectionPolicy": {
+    "generatedFinalMustPruneUnusedSections": true,
+    "emptySectionContentAreaForbidden": true,
+    "titleOnlyCopiedSectionsForbidden": true,
+    "templateResidualLabelsForbidden": true,
+    "appliesToModules": [
+      "1_columns_section",
+      "content_card_wrapper",
+      "content_card_60_wrapper",
+      "content_card_40_wrapper",
+      "2_columns_section",
+      "3_columns_section",
+      "2_columns_60/40_section",
+      "1_row_section",
+      "2_rows_section",
+      "3_rows_section",
+      "chart_cards_section",
+      "right_side_panel"
+    ]
+  },
+  "templates": [
+    {
+      "templateId": "data_list_form_layout_new_edit_v1_1",
+      "displayName": "New and Edit form",
+      "sourceTemplate": "docs/reference/data-list-form-layout-new-edit.template.json",
+      "requiredForFormTypes": [
+        "new",
+        "edit"
+      ],
+      "forbiddenForFormTypes": [
+        "view"
+      ],
+      "role": "New/Edit current-record form",
+      "requiredTemplateRegions": [
+        "main",
+        "content",
+        "1_columns_section",
+        "content_card_wrapper",
+        "section_title_area",
+        "section_title_header",
+        "section_content_area"
+      ],
+      "forbiddenTemplateRegions": [
+        "page_title_section",
+        "kpi_metrics_wrapper"
+      ],
+      "allowedComponentFamilies": [
+        "current-item Dynamic field controls",
+        "current-item Dynamic user controls",
+        "current-item Dynamic image controls",
+        "current-item Dynamic file controls",
+        "Text/Heading controls",
+        "configured action buttons in Operations"
+      ],
+      "forbiddenComponentFamilies": [
+        "Collection templates",
+        "Data Analytics templates",
+        "related record lists",
+        "Dashboard-only page shells",
+        "Approval form controls"
+      ],
+      "appPlanUse": "Select this template for every New Item or Edit Item custom Data List form. If New and Edit use separate forms, both must still select data_list_form_layout_new_edit_v1_1."
+    },
+    {
+      "templateId": "data_list_form_layout_view_item_v1_1",
+      "displayName": "View item",
+      "sourceTemplate": "docs/reference/data-list-form-layout-view-item.template.json",
+      "requiredForFormTypes": [
+        "view"
+      ],
+      "forbiddenForFormTypes": [
+        "new",
+        "edit"
+      ],
+      "role": "View current-record plus related-context form",
+      "requiredTemplateRegions": [
+        "main",
+        "content",
+        "page_title_section",
+        "page_title_content",
+        "page_title_text",
+        "page_title_description",
+        "kpi_metrics_wrapper",
+        "1_columns_section",
+        "content_card_wrapper",
+        "section_title_area",
+        "section_title_header",
+        "section_content_area"
+      ],
+      "allowedComponentFamilies": [
+        "current-item Dynamic controls",
+        "Dashboard-validated Collection templates",
+        "Data Analytics templates",
+        "KPI cards",
+        "related business data regions",
+        "configured action buttons in Operations"
+      ],
+      "forbiddenComponentFamilies": [
+        "Approval form controls",
+        "Dashboard page root shells copied as competing roots"
+      ],
+      "appPlanUse": "Select this template for every View Item custom Data List form. It may include current-record details plus related datasets, Data Analytics, KPI cards, and Dashboard-validated component golden references inside allowed slots."
+    },
+    {
+      "templateId": "data_list_form_layout_workbench",
+      "displayName": "Workbench item details",
+      "sourceTemplate": "docs/reference/data-list-form-layout-workbench.template.json",
+      "requiredForFormTypes": [
+        "view"
+      ],
+      "forbiddenForFormTypes": [
+        "new",
+        "edit"
+      ],
+      "requiredOpenIn": "Full page",
+      "layoutViewOpenType": "new",
+      "hideDefaultOperationButtonsRequired": true,
+      "role": "Full-page Workbench View item detail form for rich item context",
+      "requiredTemplateRegions": [
+        "main",
+        "content",
+        "page_title_header",
+        "page_title_content",
+        "page_title_text",
+        "page_title_description",
+        "main_work_queue_section",
+        "main_work_queue_wrapper",
+        "primary_working_area"
+      ],
+      "optionalTemplateRegions": [
+        "right_side_panel",
+        "dashboard_standard_filter_group",
+        "chart_cards_section",
+        "kpi_metrics_wrapper",
+        "kpi_cards_kpi_row"
+      ],
+      "allowedComponentFamilies": [
+        "current-item Dynamic controls",
+        "Dashboard-validated Collection templates",
+        "Data Analytics templates inside chart_cards_section",
+        "KPI cards",
+        "related business data regions",
+        "configured action buttons in Operations"
+      ],
+      "forbiddenComponentFamilies": [
+        "New/Edit current-record editing shells",
+        "Approval form controls",
+        "Dashboard page root shells copied as competing roots",
+        "empty chart_cards_section",
+        "empty right_side_panel"
+      ],
+      "appPlanUse": "Select this template for View Item custom Data List or Document Library forms when the record detail page needs a full-page workbench with primary working area, optional right-side panel, related datasets, charts, KPI cards, and explicit record actions. The App Plan must declare Open in: Full page."
+    }
+  ]
+}

@@ -1,5 +1,7 @@
 # Yeeflow Plugin
 
+Organization development repository: [Yeeflow/app-builder-plugin](https://github.com/Yeeflow/app-builder-plugin). This private copy preserves the existing Git history, release branches, tags and plugin identities, including the separate Claude adaptation branch. See [copy status and development workflow](docs/repository-copy-2026-10-10.md). Existing installation examples below retain their original source for compatibility; they do not switch installed users to the private organization repository.
+
 Release **1.17.0** adds direct Form Action execution guidance and helpers for Custom Code. Keeps all 27 Skills and the unified OAuth MCP connection. See [release notes](docs/releases/yeeflow-app-builder-v1.17.0.md); live host validation remains pending.
 
 Official Yeeflow plugin repository. Work with business data, manage tasks, and build apps in Yeeflow.
@@ -116,3 +118,7 @@ Do not use the legacy repo or legacy identity for current installs unless explic
 ## Host-specific builds
 
 The archive builder supports Codex (direct MCP) and ChatGPT Web (registered Apps), retaining all 27 skills and shared references. See [build profiles and verification](docs/standards/plugin-host-build-profiles.md). Run `npm run test:plugin-host-profiles` before releasing either package.
+
+## Claude distribution
+
+Claude uses its own `dist/yeeflow-claude-plugin` and `.claude-plugin/marketplace.json`. See [build and installation testing](docs/claude-plugin.md). This testing candidate does not change the OpenAI submission package or publication status.

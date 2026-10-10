@@ -1,0 +1,94 @@
+---
+name: yeeflow-plugin-release-manager
+description: Standardize Yeeflow App Builder Plugin rebuild and release workflows. Use when bundled Yeeflow skills are updated, the user asks to rebuild or update the Yeeflow App Builder Plugin, create a new plugin version, prepare a release candidate, validate a plugin package, or finalize an RC after private marketplace install smoke testing.
+---
+
+## Claude host requirements
+
+Resolve this plugin root from the loaded skill path (<plugin-root>/skills/<skill-name>/SKILL.md), or CLAUDE_PLUGIN_ROOT when provided. Read bundled resources with Claude's available file tools. Resolve shared docs, scripts and core from the plugin root, never from a developer checkout or another host's cache.
+
+Use only the discovered tools of this plugin's unified yeeflow_mcp connection. Authenticate through Claude's connector/MCP OAuth flow. Never copy OpenAI login tokens or invent tool namespace prefixes. Do not fall back to direct REST calls, API keys or retired MCP endpoints.
+
+Run bundled validators with the host's available Node runtime. File execution is available only where Claude supplies a filesystem and execution tools. In chat, report missing execution access and continue supported MCP work; never claim unexecuted validation passed. Use browser tools only when available and authorized; API acceptance, readback, designer rendering and runtime proof are separate.
+
+Do not edit installed plugin caches or another host's skills. Put learning changes in an explicitly selected development checkout and rebuild this Claude package there. Maintainer references describing Codex/OpenAI publishing are for those platforms; Claude publishing uses docs/claude-plugin.md and scripts/build-claude-plugin.mjs in the source repository.
+
+
+
+# Yeeflow Plugin Release Manager
++## Hosted MCP-Only Yeeflow Access
+
+For live Yeeflow work, use only the appropriate hosted MCP tool. Its service negotiates authentication; standalone OAuth, local REST/API helpers, API-key fallbacks, profile/environment configuration, and direct endpoint calls are retired and must not be used. `workspace_list` is the sole workspace-discovery route. Require explicit confirmation for writes, and treat MCP acceptance as distinct from materialization and runtime proof.
+
+## Public Tenant Safety
+
+- Never hardcode a tenant-specific Yeeflow URL. Use `https://<yourdomain>.yeeflow.com` in docs and examples.
+- For every Yeeflow API call, check OAuth first; if OAuth is not authenticated, return `auth_required` / `login_flow_required`, request the Yeeflow plugin login flow, preserve the original operation, and do not suggest API keys, `.env.local`, or local Node commands. Keep `YEEFLOW_API_KEY` only as a legacy/deprecated fallback where existing code still supports it.
+- Derive tenant/app links from OAuth token context where available; use `YEEFLOW_TENANT_URL` only as an optional manual tenant UI/browser-link fallback and never as the API base.
+- Treat `YEEFLOW_BASE_URL` as a legacy API base URL alias only, not as a tenant URL.
+- Support `YEEFLOW_PROFILE` where scripts support profiles. It selects one active local tenant profile per run using `YEEFLOW_<PROFILE>_API_KEY`, `YEEFLOW_<PROFILE>_TENANT_URL`, and `YEEFLOW_<PROFILE>_TENANT_ID`.
+- Validate and redact environment variables before API calls and never print API keys, raw API responses, tenant IDs, private URLs, raw `Resource`, raw `Sign`, decoded payloads, or generated runtime packages.
+- Keep generated examples tenant-neutral unless the user explicitly requests a target-tenant-specific package and provides safe mappings.
+
+## Core Rule
+
+RC tag equals build ready for testing. Final tag equals install-tested and accepted for users.
+
+Never create a final non-RC release tag before the private marketplace install smoke test passes and the result is documented.
+
+The next Yeeflow App Builder plugin release should include the `yeeflow-yapk-package-generator` skill, `validate-yapk-package.js`, `scripts/inspect-yapk-schema-standard.mjs`, YAPK study docs, normalized YAPK schema refs, and the safe YAPK schema summary. Do not include raw `.yapk` packages, raw `Resource`, raw `Sign`, tenant/app/list/package IDs, decoded full payloads, raw API responses, screenshots, or secrets. Adding the YAPK skill may increase the bundled skill count by one.
+
+## Release Workflow
+
+1. Fetch tags and latest `origin/main`.
+2. Detect the latest final plugin release tag automatically. Ignore `-rc*` tags when deciding the latest final release.
+3. Read the current plugin version from `dist/yeeflow-app-builder-plugin/.codex-plugin/plugin.json`.
+4. Compare latest main with the latest final plugin release tag for bundled skill paths.
+5. If no bundled skills changed, report that no rebuild is required and stop.
+6. If skills changed, choose the next version, create a rebuild branch, rebuild the plugin folder and zip, update metadata and docs, validate, commit, push, and create an RC tag.
+7. After the user confirms private marketplace install smoke passed, record the result and create the final annotated tag.
+
+Use [plugin-rebuild-lifecycle.md](references/plugin-rebuild-lifecycle.md) for the detailed command flow.
+
+## Versioning
+
+Use [plugin-versioning-rules.md](references/plugin-versioning-rules.md) to choose patch or minor:
+
+- patch for minor docs, rules, validator, packaging, or clarification updates
+- minor for meaningful new capability, new bundled support skill, or runtime-proven feature expansion
+
+Do not create a final tag as part of the rebuild task. Create only the RC tag until install smoke passes.
+
+## Validation And Smoke
+
+Use [plugin-release-checklist.md](references/plugin-release-checklist.md) before committing or tagging. Use [plugin-install-smoke-test.md](references/plugin-install-smoke-test.md) to document:
+
+- install source
+- Git ref
+- sparse paths
+- marketplace name
+- plugin name
+- smoke prompts tested
+- UI cache or icon behavior
+- install result
+
+When running artifact checks from a source checkout, root files and `dist/yeeflow-app-builder-plugin` mirrors must be byte-identical. When running the same checks from an installed Codex plugin cache root, the root is already the plugin payload; do not require a nested `dist/yeeflow-app-builder-plugin` directory inside that cache root.
+
+## Reporting
+
+Report latest detected version, changed bundled skills, version decision, archive path, validation results, commit hash, branch status, RC tag or final tag, and whether plugin rebuild is still pending.
+
+<!-- plugin-resource-access -->
+## Portable access to bundled resources
+
+Resolve this plugin's root from the current host-provided skill location: a skill is under `<plugin-root>/skills/<skill-name>`. Never hardcode a developer checkout, a macOS home directory, a Linux cache path, or a particular plugin version.
+
+Use the skill-resource reader for files within the selected skill subtree. Shared references such as `docs/reference/...`, root validators and `core/...` are relative to the plugin root, not the current working directory. When the resource reader cannot read outside the skill subtree, read the existing shared file through the host's filesystem tools at its resolved plugin-root path. A resource-interface error alone does not prove the bundled file is missing. If no filesystem reader is available, report that access limitation; do not invent reference contents.
+
+Resolve scripts relative to the mounted plugin and run with the host's available Node runtime. The application-generator validator entrypoint delegates to the root validator so shared dependencies resolve from the same package, including when launched from a temporary directory. Do not install dependencies or call remote write tools merely to read a template. Keep skill reads, script validation, live MCP reads, and business runtime acceptance as separate evidence.
+
+## Unified Yeeflow MCP connection
+
+Use the single `yeeflow_mcp` connection at `https://api.yeeflow.com/v1/mcp` for all live Yeeflow work. App Builder, Operations, Admin and Service Portal are capability domains within this connection, not separate servers or logins. Discover the current host-exposed tool names and schemas; do not invent namespace prefixes or assume tool contracts stayed identical after migration.
+
+A single OAuth connection does not grant additional permissions. Operations serves business users; application structure/settings and resource creation require the appropriate application-administrator rights. Organization administration and Service Portal capabilities retain their own permission and context checks. Editor/Visitor access is not application-administrator access. On authentication failure reconnect this unified endpoint through the host; on permission denial stop the denied action without falling back to a former endpoint or another identity. Keep existing confirmation, readback, pagination, RowVersion and data-minimization rules.
