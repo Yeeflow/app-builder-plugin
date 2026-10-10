@@ -2,13 +2,13 @@
 
 Work with business data, manage tasks, and build applications in Yeeflow through guided skills and the unified hosted MCP connection. This repository maintains separate packages for Codex, ChatGPT Web and Claude.
 
-Current repository: [Yeeflow/app-builder-plugin](https://github.com/Yeeflow/app-builder-plugin). It is private; repository-based installation requires access to this repository. Use the **`stable` branch** for the current installation source. GitHub displays `main` by default; the Claude package and marketplace were merged into `stable` through [PR #1](https://github.com/Yeeflow/app-builder-plugin/pull/1).
+Current repository: [Yeeflow/app-builder-plugin](https://github.com/Yeeflow/app-builder-plugin). It is private; repository-based installation requires access to this repository. The default **`main` branch** contains the complete Codex and Claude marketplace sources. **`stable`** follows the validated release commit for branch-pinned installations. Claude support first entered `stable` through [PR #1](https://github.com/Yeeflow/app-builder-plugin/pull/1) and has now been reconciled into `main`.
 
 ## Version and packages
 
 The current package version is **1.17.0**, with 27 Skills and the unified OAuth MCP connection. The existing OpenAI package includes direct Form Action execution guidance and helpers for Custom Code; see the [1.17.0 release notes](docs/releases/yeeflow-app-builder-v1.17.0.md) for feature-specific validation boundaries.
 
-| Host | Marketplace / plugin | Package on `stable` |
+| Host | Marketplace / plugin | Package on `main` and `stable` |
 | --- | --- | --- |
 | Codex App | `yeeflow` / `yeeflow-app-builder` | `dist/yeeflow-app-builder-plugin` |
 | ChatGPT Web | Host-specific registered Apps profile | Built from the shared OpenAI payload; see [build profiles](docs/standards/plugin-host-build-profiles.md) |
@@ -50,7 +50,7 @@ ChatGPT Web uses a separate build profile with registered Apps. The Codex reposi
 
 ## Install in Claude
 
-Claude uses its own marketplace and package on `stable`. For Claude Code with authenticated access to this private GitHub repository:
+Claude uses its own marketplace and package on `main` and `stable`. For Claude Code with authenticated access to this private GitHub repository:
 
 ```sh
 claude plugin marketplace add Yeeflow/app-builder-plugin#stable
@@ -58,6 +58,8 @@ claude plugin install yeeflow-app-builder@yeeflow-claude
 ```
 
 The marketplace add/install sequence and branch pinning follow the [official Claude Code marketplace documentation](https://code.claude.com/docs/en/plugins/host-marketplace). Installation from this new private repository has not yet been verified. For the ZIP upload and local marketplace routes, build steps and recorded verification boundaries, see [Yeeflow for Claude](https://github.com/Yeeflow/app-builder-plugin/blob/stable/docs/claude-plugin.md).
+
+For the Claude web/desktop **Add marketplace** repository flow, use `Yeeflow/app-builder-plugin` without a branch suffix. The default `main` branch includes both `.claude-plugin/marketplace.json` and the directory it references. The `#stable` command above is for Claude Code; do not assume the web form accepts CLI branch syntax. Repository access and successful marketplace synchronization still require verification in the target account.
 
 Complete Yeeflow OAuth through the selected host's MCP connection. Each host authenticates separately; do not copy credentials or tokens between hosts.
 
@@ -77,7 +79,7 @@ See the [native column width and density standard](docs/standards/native-collect
 ## What Is Included
 
 - `.agents/plugins/marketplace.json` for Codex marketplace installation.
-- On `stable`: `.claude-plugin/marketplace.json` and `dist/yeeflow-claude-plugin` for Claude installation.
+- `.claude-plugin/marketplace.json` and `dist/yeeflow-claude-plugin` for Claude installation.
 - `dist/yeeflow-app-builder-plugin` with bundled skills, plugin metadata, and `.mcp.json` hosted MCP configuration.
 - `skills/` and `generated-skills/` source mirrors for ongoing development.
 - `scripts/` and root development helpers for YAP/YAPK/YDL/YWF generation, inspection, validation, and package automation dry-runs.
@@ -140,4 +142,10 @@ Changing an installation source, publishing a GitHub Release and updating a stor
 
 The OpenAI archive builder supports Codex (direct MCP) and ChatGPT Web (registered Apps), retaining all 27 Skills and shared references. See [build profiles and verification](docs/standards/plugin-host-build-profiles.md). Run `npm run test:plugin-host-profiles` before releasing either package.
 
-On `stable`, Claude uses a separate builder and distribution. See [Claude build and installation testing](https://github.com/Yeeflow/app-builder-plugin/blob/stable/docs/claude-plugin.md). Shared Skill or MCP changes require validation for the affected hosts. GitHub package checks do not publish either package to a store.
+Claude uses a separate builder and distribution. See [Claude build and installation testing](https://github.com/Yeeflow/app-builder-plugin/blob/stable/docs/claude-plugin.md). Shared Skill or MCP changes require validation for the affected hosts. GitHub package checks do not publish either package to a store.
+
+## Development and release branches
+
+Keep `main` as the default integration branch and `stable` as the validated installation channel. Start development from the latest `main` in a dedicated branch, push the reviewed changes, and merge through a PR into `main` after the required checks and acceptance. Promote `stable` by fast-forwarding it to the accepted `main` commit; do not publish unrelated changes directly to `stable`.
+
+For a new package version, rebuild and validate the affected host distributions, use RC tags when needed, and document installation acceptance before creating a final tag and GitHub Release. Preserve existing release tags. Store submissions, installed-source migration and live tenant runtime acceptance remain separate operations.

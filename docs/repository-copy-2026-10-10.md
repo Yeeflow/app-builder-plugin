@@ -25,6 +25,12 @@ Issues, pull requests, GitHub Release records/assets, secrets, branch protection
 
 ## Subsequent merge and README update
 
-[PR #1](https://github.com/Yeeflow/app-builder-plugin/pull/1) was merged into `stable` on 2026-10-10 at `68974a1c25fa777848b37f447a4f252b8a0f5835`. The merged tree matched the tested PR head exactly, and the OpenAI distribution was unchanged. `stable` now includes the Claude marketplace and package. The default `main` branch retains the original package baseline; its root README is being updated separately to point installation readers to `stable` without promoting package changes to `main`.
+[PR #1](https://github.com/Yeeflow/app-builder-plugin/pull/1) was merged into `stable` on 2026-10-10 at `68974a1c25fa777848b37f447a4f252b8a0f5835`. The merged tree matched the tested PR head exactly, and the OpenAI distribution was unchanged. At that stage `stable` included the Claude marketplace and package, while the default `main` branch retained the original package baseline. PRs #2 and #3 then updated the documentation and root README respectively; the later reconciliation below supersedes that temporary branch split.
 
 Current installation instructions use the new organization URL. Historical release documents and already released package contents keep their original source information. This documentation update does not change plugin identities, migrate installed users, or establish installation acceptance from the new private repository.
+
+## Restore the standard main-to-stable release order
+
+The owner authorized reconciling the complete Claude support into `main` through a PR and then fast-forwarding `stable` to the accepted `main` commit. The integration preserves the histories of both branches. The default branch stays `main`, so repository consumers that read the default branch can find `.claude-plugin/marketplace.json` and the complete directory it references.
+
+This is a branch reconciliation of existing validated 1.17.0 payloads. Neither host distribution is rebuilt or changed, and existing release tags remain at their original commits. No new final tag, GitHub Release, OpenAI store update or installed-source migration is part of this operation. After promotion, future changes follow development branch → PR into `main` → required validation/acceptance → fast-forward `stable` to the accepted `main` commit.

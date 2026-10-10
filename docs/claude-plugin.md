@@ -40,18 +40,22 @@ A write/runtime test requires an explicitly selected disposable workspace and au
 
 `.claude-plugin/marketplace.json` points only to `dist/yeeflow-claude-plugin`. Existing Codex marketplace and OpenAI build profiles retain their own paths. Commit the generated Claude directory with the source changes; ZIP artifacts remain ignored.
 
-The organization development repository is now `Yeeflow/app-builder-plugin`; it is private. Access to this source requires the appropriate repository authorization. The earlier remote install smoke test used the original repository before it was locked; installation from the new private repository has not been verified. Use the validated ZIP or a local marketplace while arranging host-specific private-repository access. The adaptation was merged into `stable` through [PR #1](https://github.com/Yeeflow/app-builder-plugin/pull/1) on 2026-10-10 (merge commit `68974a1c25fa777848b37f447a4f252b8a0f5835`). Use that branch explicitly; the default `main` branch has not received the Claude package.
+The organization development repository is now `Yeeflow/app-builder-plugin`; it is private. Access to this source requires the appropriate repository authorization. The earlier remote install smoke test used the original repository before it was locked; installation from the new private repository has not been verified. Use the validated ZIP or a local marketplace while arranging host-specific private-repository access. The adaptation was merged into `stable` through [PR #1](https://github.com/Yeeflow/app-builder-plugin/pull/1) on 2026-10-10 (merge commit `68974a1c25fa777848b37f447a4f252b8a0f5835`). The complete support is now reconciled into the default `main` branch, and `stable` is promoted by fast-forward to the same validated commit. Both branches contain the marketplace and its referenced plugin directory.
 
-For clients that support authenticated private GitHub marketplaces, the equivalent branch-pinned source is:
+For Claude Code clients that support authenticated private GitHub marketplaces, the branch-pinned source is:
 
 ```sh
 claude plugin marketplace add Yeeflow/app-builder-plugin#stable
 claude plugin install yeeflow-app-builder@yeeflow-claude
 ```
 
-The add/install sequence and `#stable` branch pinning follow the [official Claude Code hosting documentation](https://code.claude.com/docs/en/plugins/host-marketplace). A local manifest alone does not make repository installation available remotely. See [the organization copy record](repository-copy-2026-10-10.md) for the preserved release branches and compatibility boundary. Existing Codex user configurations are not migrated by this source copy.
+The add/install sequence and `#stable` branch pinning follow the [official Claude Code hosting documentation](https://code.claude.com/docs/en/plugins/host-marketplace). For the Claude web/desktop Add marketplace repository flow, use `Yeeflow/app-builder-plugin` without `#stable`: the default `main` branch now contains the full marketplace and distribution. CLI branch suffix support is not evidence that the web form accepts that syntax. A successful sync and installation in the target account must still be recorded; availability of the files in Git is not installation proof. A local manifest alone does not make repository installation available remotely. See [the organization copy record](repository-copy-2026-10-10.md) for the preserved release branches and compatibility boundary. Existing Codex user configurations are not migrated by this source copy.
 
 Use Claude-specific tags such as `claude-v1.17.0-rc1`; final Claude tags require documented installation acceptance. Do not reuse OpenAI release tags or modify its submission packet for a Claude-only change. Shared Skill or MCP changes may affect both hosts and require both-host validation. The compatibility workflow tests packages on pull requests; it does not publish or release either host.
 
 Official format reference: https://code.claude.com/docs/en/plugins-reference
 Official marketplace reference: https://code.claude.com/docs/en/plugin-marketplaces
+
+## Source integration and promotion
+
+Use development branches and PRs into `main` for future changes. After the affected host checks and required installation acceptance pass, fast-forward `stable` to the accepted `main` commit. The 2026-10-10 reconciliation restores this branch order without rebuilding either package, changing version 1.17.0, moving existing release tags, or publishing to a store. Independent host packaging and tag namespaces remain unchanged.
