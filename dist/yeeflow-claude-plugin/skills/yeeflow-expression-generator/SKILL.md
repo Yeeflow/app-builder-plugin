@@ -5,6 +5,8 @@ description: generate, inspect, validate, and document Yeeflow expression editor
 
 ## Claude host requirements
 
+If the Skill tool reports a virtual or missing base directory, do not assume bundled files are missing. When filesystem tools are available, locate .claude-plugin/plugin.json under the host-provided plugin mounts, verify its name is yeeflow and version matches this session, and resolve resources from that actual root. Do not use another installed version or another host cache. If multiple roots match, stop and report ambiguity.
+
 Resolve this plugin root from the loaded skill path (<plugin-root>/skills/<skill-name>/SKILL.md), or CLAUDE_PLUGIN_ROOT when provided. Read bundled resources with Claude's available file tools. Resolve shared docs, scripts and core from the plugin root, never from a developer checkout or another host's cache.
 
 Use only the discovered tools of this plugin's unified yeeflow_mcp connection. Authenticate through Claude's connector/MCP OAuth flow. Never copy OpenAI login tokens or invent tool namespace prefixes. Do not fall back to direct REST calls, API keys or retired MCP endpoints.
@@ -42,9 +44,9 @@ Package type note: expression fixes for a new app can be generated in `.yap`; ex
 
 Use the active workspace references first:
 
-- `yeeflow-expression-functions.normalized.json`
-- `yeeflow-expression-function-knowledge-base.normalized.json`
-- `yeeflow-expression-operators.normalized.json`
+- `<plugin-root>/yeeflow-expression-functions.normalized.json`
+- `<plugin-root>/yeeflow-expression-function-knowledge-base.normalized.json`
+- `<plugin-root>/yeeflow-expression-operators.normalized.json`
 - `yeeflow-expression-utils.js`
 - `docs/yeeflow-expression-editor-reference.md`
 - `docs/yeeflow-expression-generation-rules.md`

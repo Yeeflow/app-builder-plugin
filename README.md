@@ -12,9 +12,9 @@ The current package version is **1.17.0**, with 27 Skills and the unified OAuth 
 | --- | --- | --- |
 | Codex App | `yeeflow` / `yeeflow-app-builder` | `dist/yeeflow-app-builder-plugin` |
 | ChatGPT Web | Host-specific registered Apps profile | Built from the shared OpenAI payload; see [build profiles](docs/standards/plugin-host-build-profiles.md) |
-| Claude | `yeeflow-claude` / `yeeflow-app-builder` | `dist/yeeflow-claude-plugin` |
+| Claude candidate | `yeeflow-claude` / `yeeflow` (1.17.1-rc.1) | `dist/yeeflow-claude-plugin` |
 
-The repository name is independent of the plugin identity. Existing marketplace and plugin IDs remain unchanged. Publishing source changes to GitHub does not submit or update an OpenAI store listing or migrate existing installations.
+The repository name is independent of the plugin identity. Codex identities remain unchanged; the Claude public-directory candidate uses `yeeflow` with display name Yeeflow. Publishing source changes to GitHub does not submit or update an OpenAI store listing or migrate existing installations.
 
 ## Install in Codex App
 
@@ -54,7 +54,7 @@ Claude uses its own marketplace and package on `main` and `stable`. For Claude C
 
 ```sh
 claude plugin marketplace add Yeeflow/app-builder-plugin#stable
-claude plugin install yeeflow-app-builder@yeeflow-claude
+claude plugin install yeeflow@yeeflow-claude
 ```
 
 The marketplace add/install sequence and branch pinning follow the [official Claude Code marketplace documentation](https://code.claude.com/docs/en/plugins/host-marketplace). Installation from this new private repository has not yet been verified. For the ZIP upload and local marketplace routes, build steps and recorded verification boundaries, see [Yeeflow for Claude](https://github.com/Yeeflow/app-builder-plugin/blob/stable/docs/claude-plugin.md).

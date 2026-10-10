@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const { validateExpressionTokens } = require("./yeeflow-expression-utils");
 
-const DEFAULT_REFERENCE_PATH = path.join(__dirname, "workflow-action-configurations.normalized.json");
+const DEFAULT_REFERENCE_PATH = path.join(__dirname, "../../../scripts/workflow-action-configurations.normalized.json");
 const SECRET_KEY_RE = /(token|secret|password|credential|clientsecret|api[_-]?key|accesskey|authorization|bearer|pwd)/i;
 const UNSAFE_ACTION_RE = /^(AI|AzureOpenAI|Connector|HttpRequest|AcrobatSign|DocuSign|PandaDoc)$/i;
 const EMAIL_RE = /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/i;

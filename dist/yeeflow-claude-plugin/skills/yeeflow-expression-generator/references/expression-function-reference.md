@@ -6,8 +6,8 @@ Sources:
 - second-pass enriched function knowledge base: `expression training data generator_2.txt`
 - expression-editor screenshots for UI context and observed function-tab behavior
 
-Use the normalized machine-readable reference in `yeeflow-expression-functions.normalized.json` for validators and generators.
-Use `yeeflow-expression-function-knowledge-base.normalized.json` for richer bilingual descriptions, parameter names, business scenarios, and keywords.
+Use the normalized machine-readable reference in `<plugin-root>/yeeflow-expression-functions.normalized.json` for validators and generators.
+Use `<plugin-root>/yeeflow-expression-function-knowledge-base.normalized.json` for richer bilingual descriptions, parameter names, business scenarios, and keywords.
 
 ## Selection Guidance
 

@@ -1,0 +1,20 @@
+#!/usr/bin/env node
+import { cpSync, existsSync, mkdirSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
+import { resolve, dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+const args = process.argv.slice(2);
+if (args.length !== 2 || args[0] !== '--output') throw new Error('Usage: node scripts/prepare-claude-public-repository.mjs --output <empty-directory>');
+const source = join(root, 'dist/yeeflow-claude-plugin');
+const output = resolve(args[1]);
+if (existsSync(output) && readdirSync(output).length) throw new Error('Output must be empty; existing files are preserved');
+if (output === root || output.startsWith(source + '/')) throw new Error('Output must be outside the source distribution');
+const manifest = JSON.parse(readFileSync(join(source, '.claude-plugin/plugin.json')));
+if (manifest.name !== 'yeeflow' || manifest.displayName !== 'Yeeflow') throw new Error('Build the Yeeflow Claude candidate first');
+mkdirSync(output, {recursive: true});
+cpSync(source, output, {recursive: true});
+writeFileSync(join(output, '.claude-plugin/marketplace.json'), JSON.stringify({name:'yeeflow-claude', owner:{name:'Yeeflow'}, plugins:[{name:'yeeflow',source:'./',description:manifest.description}]}, null, 2) + '\n');
+writeFileSync(join(output, '.gitignore'), '.DS_Store\nnode_modules/\n.env\n.env.*\nartifacts/\noutputs/\n*.log\n');
+const files = dir => readdirSync(dir, {withFileTypes:true}).flatMap(e => e.isDirectory()?files(join(dir,e.name)):[join(dir,e.name)]);
+const all = files(output);
+console.log(JSON.stringify({output,name:manifest.name,version:manifest.version,files:all.length,bytes:all.reduce((n,f)=>n+statSync(f).size,0),licenseReady:!!manifest.license||existsSync(join(output,'LICENSE')),publication:'not submitted; portal validation and service disclosures pending'},null,2));
