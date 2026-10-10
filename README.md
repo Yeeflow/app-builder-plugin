@@ -1,26 +1,27 @@
-# Yeeflow Plugin
+# Yeeflow App Builder Plugin
 
-Release **1.17.0** adds direct Form Action execution guidance and helpers for Custom Code. Keeps all 27 Skills and the unified OAuth MCP connection. See [release notes](docs/releases/yeeflow-app-builder-v1.17.0.md); live host validation remains pending.
+Work with business data, manage tasks, and build applications in Yeeflow through guided skills and the unified hosted MCP connection. This repository maintains separate packages for Codex, ChatGPT Web and Claude.
 
-Official Yeeflow plugin repository. Work with business data, manage tasks, and build apps in Yeeflow.
+Current repository: [Yeeflow/app-builder-plugin](https://github.com/Yeeflow/app-builder-plugin). It is private; repository-based installation requires access to this repository. Use the **`stable` branch** for the current installation source. GitHub displays `main` by default; the Claude package and marketplace were merged into `stable` through [PR #1](https://github.com/Yeeflow/app-builder-plugin/pull/1).
 
-This repository is the clean successor to `Yeeflow/yeeflow-codex-plugins`. It preserves the useful scripts, schemas, validators, studies, generated skills, and plugin distribution assets while using a new non-colliding Codex plugin identity.
+## Version and packages
 
-## Identity
+The current package version is **1.17.0**, with 27 Skills and the unified OAuth MCP connection. The existing OpenAI package includes direct Form Action execution guidance and helpers for Custom Code; see the [1.17.0 release notes](docs/releases/yeeflow-app-builder-v1.17.0.md) for feature-specific validation boundaries.
 
-- Marketplace: Yeeflow
-- Marketplace ID: `yeeflow`
-- Plugin: Yeeflow
-- Plugin ID: `yeeflow-app-builder`
-- Version: `1.17.0`
-- Active dist path: `dist/yeeflow-app-builder-plugin`
+| Host | Marketplace / plugin | Package on `stable` |
+| --- | --- | --- |
+| Codex App | `yeeflow` / `yeeflow-app-builder` | `dist/yeeflow-app-builder-plugin` |
+| ChatGPT Web | Host-specific registered Apps profile | Built from the shared OpenAI payload; see [build profiles](docs/standards/plugin-host-build-profiles.md) |
+| Claude | `yeeflow-claude` / `yeeflow-app-builder` | `dist/yeeflow-claude-plugin` |
 
-Version `1.10.6` previously removed stale OAuth/REST references from the bundled skills and adds an OpenAI plugin submission packet. Live Yeeflow work uses the unified hosted MCP service, with server-negotiated authentication and no bundled credentials. Configuration readback remains separate from Designer/runtime proof.
+The repository name is independent of the plugin identity. Existing marketplace and plugin IDs remain unchanged. Publishing source changes to GitHub does not submit or update an OpenAI store listing or migrate existing installations.
 
-## Install In Codex App
+## Install in Codex App
+
+For a new repository-based installation with access to the private repository:
 
 ```text
-Source: https://github.com/Yeeflow/app-builder-codex-plugin.git
+Source: https://github.com/Yeeflow/app-builder-plugin.git
 Git ref: stable
 Sparse paths:
   .agents/plugins/marketplace.json
@@ -35,11 +36,30 @@ Plugin: Yeeflow
 Version: 1.17.0
 ```
 
-Verify metadata from a checkout:
+The source above identifies the current repository; a Codex installation from this new private source has not yet been recorded. Existing installations keep their configured source until explicitly migrated. Do not remove a working installation solely because the repository URL changed.
+
+Verify metadata from a checkout of `stable`:
 
 ```sh
 node scripts/inspect-codex-plugin-cache-metadata.mjs --root . --expect-version 1.17.0
 ```
+
+## ChatGPT Web package
+
+ChatGPT Web uses a separate build profile with registered Apps. The Codex repository installation settings above are specific to Codex App. See [host build profiles and verification](docs/standards/plugin-host-build-profiles.md) for packaging; store submission and updates follow the OpenAI publication process separately.
+
+## Install in Claude
+
+Claude uses its own marketplace and package on `stable`. For Claude Code with authenticated access to this private GitHub repository:
+
+```sh
+claude plugin marketplace add Yeeflow/app-builder-plugin#stable
+claude plugin install yeeflow-app-builder@yeeflow-claude
+```
+
+The marketplace add/install sequence and branch pinning follow the [official Claude Code marketplace documentation](https://code.claude.com/docs/en/plugins/host-marketplace). Installation from this new private repository has not yet been verified. For the ZIP upload and local marketplace routes, build steps and recorded verification boundaries, see [Yeeflow for Claude](https://github.com/Yeeflow/app-builder-plugin/blob/stable/docs/claude-plugin.md).
+
+Complete Yeeflow OAuth through the selected host's MCP connection. Each host authenticates separately; do not copy credentials or tokens between hosts.
 
 ## Collection generation rules
 
@@ -57,6 +77,7 @@ See the [native column width and density standard](docs/standards/native-collect
 ## What Is Included
 
 - `.agents/plugins/marketplace.json` for Codex marketplace installation.
+- On `stable`: `.claude-plugin/marketplace.json` and `dist/yeeflow-claude-plugin` for Claude installation.
 - `dist/yeeflow-app-builder-plugin` with bundled skills, plugin metadata, and `.mcp.json` hosted MCP configuration.
 - `skills/` and `generated-skills/` source mirrors for ongoing development.
 - `scripts/` and root development helpers for YAP/YAPK/YDL/YWF generation, inspection, validation, and package automation dry-runs.
@@ -107,12 +128,16 @@ Generated runtime packages and raw proof payloads remain excluded.
 
 Release packaging and cache smoke must use tracked files as the source of truth. Do not package the raw working tree with ad hoc `zip dist/...` commands; use `git ls-files`-based packaging or an equivalent tracked-file manifest so untracked local artifacts cannot enter a release. Run `node scripts/test-repo-root-hygiene.mjs` before release packaging; it fails on tracked or untracked Finder/copy-style duplicates such as `name 2.md`, `name 3.json`, `name 4.mjs`, or `SKILL 2.md`.
 
-## Migration Note
+## Repository and installation history
 
-The legacy repository used marketplace `yeeflow-internal`, plugin `yeeflow-builder`, and dist path `dist/yeeflow-builder-plugin`. That identity has repeatedly materialized stale Codex App cache entries such as `0.5.8`. This repository intentionally uses `yeeflow` / `yeeflow-app-builder` and `dist/yeeflow-app-builder-plugin`.
+The previous repository was renamed from `Yeeflow/app-builder-codex-plugin` to `yeeflowsupport/app-builder-codex-plugin` when the personal account was renamed. It is retained as a historical source and was locked at the time of the organization copy. Use `Yeeflow/app-builder-plugin` for current development and the `stable` installation source above. See the [organization copy and merge record](https://github.com/Yeeflow/app-builder-plugin/blob/stable/docs/repository-copy-2026-10-10.md).
 
-Do not use the legacy repo or legacy identity for current installs unless explicitly testing migration behavior.
+The earlier `Yeeflow/yeeflow-codex-plugins` repository used marketplace `yeeflow-internal`, plugin `yeeflow-builder`, and `dist/yeeflow-builder-plugin`. Current Codex packages use `yeeflow` / `yeeflow-app-builder` and `dist/yeeflow-app-builder-plugin`. Use the current identity for new installations.
+
+Changing an installation source, publishing a GitHub Release and updating a store listing are separate steps. Historical release documents and already released package contents describe their original release source; this README documents the current organization repository.
 
 ## Host-specific builds
 
-The archive builder supports Codex (direct MCP) and ChatGPT Web (registered Apps), retaining all 27 skills and shared references. See [build profiles and verification](docs/standards/plugin-host-build-profiles.md). Run `npm run test:plugin-host-profiles` before releasing either package.
+The OpenAI archive builder supports Codex (direct MCP) and ChatGPT Web (registered Apps), retaining all 27 Skills and shared references. See [build profiles and verification](docs/standards/plugin-host-build-profiles.md). Run `npm run test:plugin-host-profiles` before releasing either package.
+
+On `stable`, Claude uses a separate builder and distribution. See [Claude build and installation testing](https://github.com/Yeeflow/app-builder-plugin/blob/stable/docs/claude-plugin.md). Shared Skill or MCP changes require validation for the affected hosts. GitHub package checks do not publish either package to a store.
