@@ -1,0 +1,14 @@
+{
+  "name": "yeeflow-claude",
+  "owner": {
+    "name": "Yeeflow"
+  },
+  "plugins": [
+    {
+      "name": "yeeflow-app-builder",
+      "source": "./dist/yeeflow-claude-plugin",
+      "description": "Build Yeeflow applications with guided skills and hosted MCP."
+    }
+  ],
+  "description": "Yeeflow guided application building for Claude."
+}

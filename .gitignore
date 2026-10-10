@@ -276,3 +276,12 @@ packages/**/lib/
 !docs/standards/product-schema/distribution-files.json
 !docs/standards/product-schema/mcp-envelopes.json
 !docs/standards/product-schema/adapter-evidence.json
+
+# Separate Claude distribution
+!.claude-plugin/
+!.claude-plugin/marketplace.json
+!dist/yeeflow-claude-plugin/
+!dist/yeeflow-claude-plugin/**
+
+# Local Claude screenshots and install artifacts
+/artifacts/claude/
