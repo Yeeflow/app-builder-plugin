@@ -62,12 +62,12 @@ Use development branches and PRs into `main` for future changes. After the affec
 
 ## Public-directory candidate (2026-10-10)
 
-The Claude-only candidate is **Yeeflow**, identifier `yeeflow`, version `1.17.1-rc.1`; Codex remains `yeeflow-app-builder` 1.17.0. Existing verification records apply to the older Claude identity, not this candidate. MIT licensing was approved by the user for the Claude bundle. Company support: support@yeeflow.com; privacy policy: https://www.yeeflow.com/privacy.
+The Claude-only candidate is **Yeeflow**, identifier `yeeflow`, version `1.17.1`; Codex remains `yeeflow-app-builder` 1.17.0. Existing verification records apply to the older Claude identity, not this candidate. MIT licensing was approved by the user for the Claude bundle. Company support: support@yeeflow.com; privacy policy: https://www.yeeflow.com/privacy.
 
 Build and validate:
 
 ```sh
-node scripts/build-claude-plugin.mjs --output artifacts/claude/yeeflow-1.17.1-rc.1.zip
+node scripts/build-claude-plugin.mjs --output artifacts/claude/yeeflow-1.17.1.zip
 node scripts/test-claude-plugin.mjs
 node scripts/prepare-claude-public-repository.mjs --output artifacts/claude/public-repository-candidate
 ```
@@ -78,4 +78,6 @@ Current generated distribution remains above the documented 512-file / 256-KiB r
 
 ## Shared data projection
 
-The Claude build consolidates reviewed identical normalized JSON mirrors into directly readable ordinary files. See [optimization evidence](claude-shared-resource-optimization-2026-10-10.md). The generated `claude-shared-resources.json` maps old paths to canonical paths with SHA-256; no extraction or resource download step is required. Scripts and documentation are projected during build, so do not edit generated distribution files directly. Use the `public-repository-1.17.1-rc.1-shared` staging directory for the current candidate.
+The Claude build consolidates reviewed identical normalized JSON mirrors into directly readable ordinary files. See [optimization evidence](claude-shared-resource-optimization-2026-10-10.md). The generated `claude-shared-resources.json` maps old paths to canonical paths with SHA-256; no extraction or resource download step is required. Scripts and documentation are projected during build, so do not edit generated distribution files directly. Historical RC staging directories remain local snapshots; regenerate staging from the current distribution before publishing.
+
+Version decision (2026-10-10): at the user’s explicit request, use 1.17.1 directly without an RC. This version choice does not establish Claude installation or runtime acceptance, which remain pending. No GitHub release tag is created by this change.

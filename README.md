@@ -12,7 +12,7 @@ The current package version is **1.17.0**, with 27 Skills and the unified OAuth 
 | --- | --- | --- |
 | Codex App | `yeeflow` / `yeeflow-app-builder` | `dist/yeeflow-app-builder-plugin` |
 | ChatGPT Web | Host-specific registered Apps profile | Built from the shared OpenAI payload; see [build profiles](docs/standards/plugin-host-build-profiles.md) |
-| Claude candidate | `yeeflow-claude` / `yeeflow` (1.17.1-rc.1) | `dist/yeeflow-claude-plugin` |
+| Claude candidate | `yeeflow-claude` / `yeeflow` (1.17.1) | `dist/yeeflow-claude-plugin` |
 
 The repository name is independent of the plugin identity. Codex identities remain unchanged; the Claude public-directory candidate uses `yeeflow` with display name Yeeflow. Publishing source changes to GitHub does not submit or update an OpenAI store listing or migrate existing installations.
 

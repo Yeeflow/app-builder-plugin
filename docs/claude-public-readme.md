@@ -30,7 +30,7 @@ Local validation, MCP acceptance, configuration readback, Designer rendering and
 
 ## Release candidate
 
-Claude plugin identifier: `yeeflow`. Display name: **Yeeflow**. Version: `1.17.1-rc.1`.
+Claude plugin identifier: `yeeflow`. Display name: **Yeeflow**. Version: `1.17.1`.
 
 This replaces the earlier Claude identifier `yeeflow-app-builder`; existing installations may need an explicit migration. Codex retains its existing identity and version. Maintained source: https://github.com/Yeeflow/app-builder-plugin.
 
