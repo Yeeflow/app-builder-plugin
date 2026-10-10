@@ -1,0 +1,198 @@
+{
+  "schemaVersion": "1.0",
+  "purpose": "Declare the plugin-supported full-application generation entrypoints and distinguish them from validation, delivery, API, proof, and sample generator helpers.",
+  "entrypoints": [
+    {
+      "id": "script:materialize-full-app-generated-final",
+      "kind": "standalone-full-app-materializer",
+      "path": "scripts/materialize-full-app-generated-final.mjs",
+      "bundledPath": "scripts/materialize-full-app-generated-final.mjs",
+      "displayName": "Full-App Generated-Final Materializer",
+      "callable": true,
+      "callableAs": "node-cli",
+      "invocationContract": {
+        "executionMode": "node-cli-callable",
+        "command": "node scripts/materialize-full-app-generated-final.mjs --functional-spec functional-specification.md --app-plan yeeflow-app-plan.md --out-dir dist --api-id-manifest api-issued-ids.json --json",
+        "requiredInputs": [
+          "functional-specification.md",
+          "yeeflow-app-plan.md",
+          "api-issued-ids.json"
+        ],
+        "mustProceedAfterPlanningPass": true,
+        "planningPassContinuation": "When planning gates pass and business defaults are user-default-approved-for-generation, this node CLI is the callable generated-final materialization handoff only when the App Plan resource graph can be fully materialized. Do not stop solely because no standalone CLI exists, but also do not emit placeholder packages for nontrivial App Plans; fail closed with a concrete resource-graph capability finding that includes exact planned resource names, counts, required output surfaces, packageEmitted=false, and signingEligible=false.",
+        "hardStops": [
+          "business defaults are not user-default-approved-for-generation",
+          "API-issued ID manifest is missing or invalid",
+          "materializer cannot generate the full App Plan resource graph",
+          "required generated-final validators fail",
+          "user explicitly requested planning-only or no package generation"
+        ],
+        "proofBoundary": "This CLI creates generated-final package artifacts only. It never signs, installs, imports, upgrades, seeds data, or runs browser/runtime proof."
+      },
+      "inputs": [
+        "functional-specification.md",
+        "yeeflow-app-plan.md",
+        "api-issued-ids.json"
+      ],
+      "primaryMarkdownContracts": [
+        "functional-specification.md",
+        "yeeflow-app-plan.md"
+      ],
+      "defaultPackageType": "yapk",
+      "supportedOutputs": [
+        "generated-final .yapk",
+        "decoded resource JSON",
+        "ID provenance report",
+        "generation report"
+      ],
+      "requiredPlanningGates": [
+        "validate-functional-specification.mjs",
+        "validate-app-plan-template.mjs",
+        "validate-app-plan-resource-order.mjs",
+        "validate-business-clarification-gate.mjs --mode generation",
+        "validate-generation-readiness-review.mjs",
+        "validate-functional-spec-to-app-plan-traceability.mjs",
+        "validate-pre-id-allocation-readiness.mjs",
+        "validate-data-list-form-layout-template.mjs",
+        "validate-data-list-form-fields-template.mjs",
+        "validate-approval-form-fields-template.mjs",
+        "validate-approval-form-control-closure.mjs",
+        "validate-dashboard-dataset-presentation-golden-references.mjs"
+      ],
+      "requiredGeneratedFinalGates": [
+        "yapk-first-generation-preflight.mjs",
+        "validate-yapk-package.js",
+        "validate-yapk-id-provenance.mjs",
+        "validate-yapk-navigation-runtime-metadata.mjs"
+      ],
+      "proofBoundary": "A materialized package is not signing/install/runtime proof. Placeholder/schema-smoke output is never signing eligible. Nontrivial App Plans that use supported first-generation resource categories must emit a minimal generated-final resource graph for data lists, approval forms, FormNewReports, custom list layouts, dashboards, and grouped navigation, while keeping signingEligible false until generated-final preflight passes. If unsupported categories remain, fail closed with an actionable resource-graph finding. The parser must not over-count fields, dashboard sections, metrics, filters, item-template rows, validator commands, or prose as resources."
+    },
+    {
+      "id": "skill:yeeflow-application-builder",
+      "kind": "skill-orchestrated-full-app-generator",
+      "path": "skills/installed/yeeflow-application-builder/SKILL.md",
+      "bundledPath": "skills/yeeflow-application-builder/SKILL.md",
+      "displayName": "Yeeflow Application Builder",
+      "callable": true,
+      "callableAs": "codex-skill-entrypoint",
+      "invocationContract": {
+        "executionMode": "codex-skill-callable",
+        "entrySkill": "yeeflow-application-builder",
+        "requiredInputs": [
+          "functional-specification.md",
+          "yeeflow-app-plan.md"
+        ],
+        "mustProceedAfterPlanningPass": true,
+        "planningPassContinuation": "When planning gates pass and business defaults are user-default-approved-for-generation, continue with this skill entrypoint to generate the generated-final .yapk. Do not stop solely because no standalone CLI exists.",
+        "hardStops": [
+          "business defaults are not user-default-approved-for-generation",
+          "OAuth or workspace discovery is required and unavailable for API-issued IDs",
+          "required generated-final validators fail",
+          "user explicitly requested planning-only or no package generation"
+        ]
+      },
+      "inputs": [
+        "functional-specification.md",
+        "yeeflow-app-plan.md"
+      ],
+      "primaryMarkdownContracts": [
+        "functional-specification.md",
+        "yeeflow-app-plan.md"
+      ],
+      "defaultPackageType": "yapk",
+      "supportedOutputs": [
+        "generated-final .yapk",
+        "validation reports",
+        "ID provenance report",
+        "signing/install/runtime proof reports when explicitly authorized"
+      ],
+      "requiredPlanningGates": [
+        "validate-functional-specification.mjs",
+        "validate-app-plan-template.mjs",
+        "validate-app-plan-resource-order.mjs",
+        "validate-business-clarification-gate.mjs --mode generation",
+        "validate-generation-readiness-review.mjs",
+        "validate-functional-spec-to-app-plan-traceability.mjs",
+        "validate-pre-id-allocation-readiness.mjs",
+        "validate-data-list-form-layout-template.mjs",
+        "validate-data-list-form-fields-template.mjs",
+        "validate-approval-form-fields-template.mjs",
+        "validate-approval-form-control-closure.mjs",
+        "validate-dashboard-dataset-presentation-golden-references.mjs"
+      ],
+      "requiredGeneratedFinalGates": [
+        "yapk-first-generation-preflight.mjs",
+        "validate-dashboard-dataset-presentation-golden-references.mjs",
+        "validate-generated-final-resource-completeness.mjs",
+        "validate-yapk-id-provenance.mjs",
+        "validate-yapk-navigation-runtime-metadata.mjs",
+        "validate-yapk-package.js"
+      ],
+      "proofBoundary": "This is a Codex skill-orchestrated generator entrypoint, not a standalone CLI. It may create packages through the active plugin skills and scripts, but success requires generated-final package artifacts plus the required validators. Delivery helpers, runtime-proof generators, and sample-specific scripts do not satisfy this entrypoint."
+    },
+    {
+      "id": "skill:yeeflow-application-generator",
+      "kind": "skill-orchestrated-full-app-generator",
+      "path": "skills/installed/yeeflow-application-generator/SKILL.md",
+      "bundledPath": "skills/yeeflow-application-generator/SKILL.md",
+      "displayName": "Yeeflow Application Generator",
+      "callable": true,
+      "callableAs": "codex-skill-entrypoint",
+      "invocationContract": {
+        "executionMode": "codex-skill-callable",
+        "entrySkill": "yeeflow-application-generator",
+        "requiredInputs": [
+          "functional-specification.md",
+          "yeeflow-app-plan.md"
+        ],
+        "mustProceedAfterPlanningPass": true,
+        "planningPassContinuation": "Use this supporting skill under the top-level builder flow to continue from approved planning contracts into generated-final package creation. Do not stop solely because no standalone CLI exists.",
+        "hardStops": [
+          "business defaults are not user-default-approved-for-generation",
+          "required generated-final validators fail",
+          "user explicitly requested planning-only or no package generation"
+        ]
+      },
+      "inputs": [
+        "functional-specification.md",
+        "yeeflow-app-plan.md"
+      ],
+      "primaryMarkdownContracts": [
+        "functional-specification.md",
+        "yeeflow-app-plan.md"
+      ],
+      "defaultPackageType": "yapk",
+      "supportedOutputs": [
+        "generated-final .yapk",
+        "validation reports",
+        "ID provenance report"
+      ],
+      "requiredPlanningGates": [
+        "validate-functional-specification.mjs",
+        "validate-app-plan-template.mjs",
+        "validate-app-plan-resource-order.mjs",
+        "validate-pre-id-allocation-readiness.mjs",
+        "validate-data-list-form-layout-template.mjs",
+        "validate-data-list-form-fields-template.mjs",
+        "validate-approval-form-fields-template.mjs",
+        "validate-approval-form-control-closure.mjs",
+        "validate-dashboard-dataset-presentation-golden-references.mjs"
+      ],
+      "requiredGeneratedFinalGates": [
+        "yapk-first-generation-preflight.mjs",
+        "validate-yapk-package.js"
+      ],
+      "proofBoundary": "This skill can participate in full app package generation under the top-level application builder flow. It is not a replacement for generated-final validators, signing proof, install proof, or runtime proof."
+    }
+  ],
+  "nonFullAppEntrypoints": [
+    {
+      "pattern": "generate-*-runtime-proof.mjs",
+      "reason": "Focused proof/demo generators only; they are not generic Functional Spec + App Plan to full-app YAPK generators."
+    },
+    {
+      "path": "tools/generators/generate-vendor-onboarding-yapk-schema-v2.mjs",
+      "reason": "Sample-specific generator; not a generic full-app generator."
+    }
+  ]
+}

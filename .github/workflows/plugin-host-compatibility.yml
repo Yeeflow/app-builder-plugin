@@ -13,5 +13,5 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24
-      - name: Verify both archived host profiles and validator entrypoints
-        run: npm run test:plugin-mcp-integration && npm run test:unified-mcp && npm run test:plugin-host-profiles
+      - name: Verify isolated host archives and validator entrypoints
+        run: npm run test:plugin-mcp-integration && npm run test:unified-mcp && npm run test:plugin-host-profiles && npm run test:claude-plugin

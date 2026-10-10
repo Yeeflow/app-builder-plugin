@@ -1,0 +1,99 @@
+---
+name: yeeflow-agent-import-export-operator
+description: Export, inspect, validate, and organize Yeeflow AI Agent .yaia template packages. Use when saving Agents as templates, checking exported packages, studying Yeeflow import/export payloads, or preparing safe import/export batches without guessing resource bindings.
+---
+
+## Claude host requirements
+
+Resolve this plugin root from the loaded skill path (<plugin-root>/skills/<skill-name>/SKILL.md), or CLAUDE_PLUGIN_ROOT when provided. Read bundled resources with Claude's available file tools. Resolve shared docs, scripts and core from the plugin root, never from a developer checkout or another host's cache.
+
+Use only the discovered tools of this plugin's unified yeeflow_mcp connection. Authenticate through Claude's connector/MCP OAuth flow. Never copy OpenAI login tokens or invent tool namespace prefixes. Do not fall back to direct REST calls, API keys or retired MCP endpoints.
+
+Run bundled validators with the host's available Node runtime. File execution is available only where Claude supplies a filesystem and execution tools. In chat, report missing execution access and continue supported MCP work; never claim unexecuted validation passed. Use browser tools only when available and authorized; API acceptance, readback, designer rendering and runtime proof are separate.
+
+Do not edit installed plugin caches or another host's skills. Put learning changes in an explicitly selected development checkout and rebuild this Claude package there. Maintainer references describing Codex/OpenAI publishing are for those platforms; Claude publishing uses docs/claude-plugin.md and scripts/build-claude-plugin.mjs in the source repository.
+
+
+
+# Yeeflow Agent Import Export Operator
+
+## Export Workflow
+
+1. Confirm the source Yeeflow category and Agent names.
+2. Query or inspect live Agents and collect IDs.
+3. Export each Agent one at a time using the authenticated Yeeflow session or known API route.
+4. Save files under the requested folder. Preserve `.yaia` extension.
+5. Validate:
+   - expected file count
+   - non-empty files
+   - readable outer JSON wrapper
+   - exact outer keys `Category`, `Description`, `IconUrl`, `Name`, `PackageJson`, `TemplateId`, and `Type`
+   - `Type = 0`
+   - no accidental duplicate or stale export
+
+## Known Yeeflow Export Notes
+
+- `.yaia` files are JSON wrappers with an opaque `PackageJson` payload.
+- Prior evidence indicates `PackageJson` is Base64 around Brotli-compressed inner text, but wrapper details may vary.
+- Do not generate import packages from guessed binary structure. Use normalized `importRead` / `import` paths only after validation.
+- Tool definitions can contain real list, workflow, Agent, or HTTP bindings. Do not clone those blindly into reusable templates.
+
+## Safety Rules
+
+- Do not import until the user explicitly asks.
+- Do not overwrite, delete, rename, or duplicate live Agents unless the user explicitly asks.
+- Treat exported files as templates only after validating names and package shape.
+
+## Useful Script
+
+Run `scripts/validate_yaia_exports.js <folder> [expected-count]` to validate an export folder.
+
+## Independent File Finalization
+
+Do not synthesize `PackageJson`. Obtain a complete Agent wrapper and normalized `importRead` result from the official Yeeflow import/export path. Store them in one canonical evidence JSON with the exact keys `source`, `operation`, `endpointKind`, `responseId`, `envelope`, and `importRead`, then run:
+
+```bash
+node scripts/finalize-yaia-from-official-response.js \
+  official-agent-response-evidence.json output.yaia \
+  --receipt output.yaia.receipt.json \
+  --issued-ids issued-ids.json
+
+node scripts/validate-yaia.js output.yaia \
+  --stage final \
+  --provenance official-provenance.json \
+  --import-read normalized-import-read.json \
+  --issued-ids issued-ids.json
+```
+
+The finalizer calculates the integrity receipt automatically and is fixed to final mode. It must fail when response metadata or `importRead` evidence is missing, the envelope contains extra keys, or the generated hashes do not match. The receipt proves artifact/evidence consistency; it does not cryptographically authenticate that the caller actually used an official Yeeflow endpoint. Preserve the authenticated session/API response evidence separately. Structural mode may validate an existing wrapper without claiming it is generated-final or importable.
+
+<!-- agent-copilot-application-resource-learning:start -->
+## Application Resource Export Learning
+
+The DEMO Innovation Ecosystem Platform .yap study proves that app-contained AI Agents live in Data.OtherModules where Type = "Agents" and individual AI Agent resources use Type = 0. The same module also contains Copilots with Type = 1. Treat app-contained Agent exports differently from standalone .yaia packages: tool bindings may reference app data lists, knowledge resources, other AI resources, and application connections.
+
+When inspecting app-level exports, decode read-only, preserve large numeric IDs as strings, and redact tenant/user IDs, connection IDs, endpoints, OAuth/client metadata, token-like values, and credentials. Do not clone Components blindly into reusable templates. For generated packages, unresolved Settings.Data.Value references to lists, connections, current app/listset, or connected Agents are blockers in final mode.
+<!-- agent-copilot-application-resource-learning:end -->
+
+<!-- scheduled-workflow-ai-assistant-learning:start -->
+## Workflow Invocation Learning
+
+`AI Agent and Copilot Local Resource Baseline8.yap` proves app-contained AI Agents can be invoked from workflow `AI` nodes, not only from Copilots. The workflow stores the target Agent ID in `properties.data.AgentID` and maps inputs/outputs through `properties.inputVariables[]` and `properties.outputVariables[]`. When inspecting app-level exports, include workflow references to Agents in the dependency graph and do not execute live AI during validation.
+
+`Spark & AI (1).yap` adds a data-list workflow invocation case: the host list registers the workflow in `FlowMappings[]`, the workflow `AI` node maps an `icon-upload` list field into Agent input `label_image`, and native `ListDataID` into a row-ID input for same-item update behavior. When inspecting similar exports, redact uploaded-image details and record payloads, and separately map any application-resource access tool that can update app data.
+<!-- scheduled-workflow-ai-assistant-learning:end -->
+
+<!-- plugin-resource-access -->
+## Portable access to bundled resources
+
+Resolve this plugin's root from the current host-provided skill location: a skill is under `<plugin-root>/skills/<skill-name>`. Never hardcode a developer checkout, a macOS home directory, a Linux cache path, or a particular plugin version.
+
+Use the skill-resource reader for files within the selected skill subtree. Shared references such as `docs/reference/...`, root validators and `core/...` are relative to the plugin root, not the current working directory. When the resource reader cannot read outside the skill subtree, read the existing shared file through the host's filesystem tools at its resolved plugin-root path. A resource-interface error alone does not prove the bundled file is missing. If no filesystem reader is available, report that access limitation; do not invent reference contents.
+
+Resolve scripts relative to the mounted plugin and run with the host's available Node runtime. The application-generator validator entrypoint delegates to the root validator so shared dependencies resolve from the same package, including when launched from a temporary directory. Do not install dependencies or call remote write tools merely to read a template. Keep skill reads, script validation, live MCP reads, and business runtime acceptance as separate evidence.
+
+## Unified Yeeflow MCP connection
+
+Use the single `yeeflow_mcp` connection at `https://api.yeeflow.com/v1/mcp` for all live Yeeflow work. App Builder, Operations, Admin and Service Portal are capability domains within this connection, not separate servers or logins. Discover the current host-exposed tool names and schemas; do not invent namespace prefixes or assume tool contracts stayed identical after migration.
+
+A single OAuth connection does not grant additional permissions. Operations serves business users; application structure/settings and resource creation require the appropriate application-administrator rights. Organization administration and Service Portal capabilities retain their own permission and context checks. Editor/Visitor access is not application-administrator access. On authentication failure reconnect this unified endpoint through the host; on permission denial stop the denied action without falling back to a former endpoint or another identity. Keep existing confirmation, readback, pagination, RowVersion and data-minimization rules.
