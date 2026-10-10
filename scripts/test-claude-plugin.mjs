@@ -35,7 +35,7 @@ try {
     assert.equal(rebuilt.get(file), hash, "CLAUDE_DISTRIBUTION_STALE: " + file + "; rebuild and commit it");
   }
   const manifest = JSON.parse(readFileSync(resolve(out, ".claude-plugin/plugin.json")));
-  assert.equal(manifest.version, "1.17.1-rc.1");
+  assert.equal(manifest.version, "1.17.1");
   assert.equal(manifest.displayName, "Yeeflow");
   assert.equal(manifest.license, "MIT");
   assert.equal(manifest.author.email, "support@yeeflow.com");
