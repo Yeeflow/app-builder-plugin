@@ -26,7 +26,7 @@ try {
   rmSync(join(stage, ".app.json"), { force: true });
   mkdirSync(join(stage, ".claude-plugin"));
   const manifest = {
-    name: "yeeflow", displayName: "Yeeflow", version: "1.18.0",
+    name: "yeeflow", displayName: "Yeeflow", version: "1.18.1",
     description: "Build and maintain Yeeflow business applications with guided skills and hosted MCP.",
     license: "MIT", author: {...original.author, email: "support@yeeflow.com"}, homepage: "https://www.yeeflow.com",
     repository: "https://github.com/Yeeflow/app-builder-plugin",

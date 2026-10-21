@@ -343,6 +343,7 @@ for (const file of ["SKILL.md", "agents/openai.yaml", "references/feature-catalo
   mirrors.push([`skills/installed/yeeflow-feature-configuration-guide/${file}`, `skills/yeeflow-feature-configuration-guide/${file}`]);
 }
 mirrors.push(["docs/releases/yeeflow-app-builder-v1.18.0.md", "docs/releases/yeeflow-app-builder-v1.18.0.md"]);
+mirrors.push(["docs/releases/yeeflow-app-builder-v1.18.1.md", "docs/releases/yeeflow-app-builder-v1.18.1.md"]);
 
 for (const [sourcePath, destinationPath] of mirrors) {
   const destination = resolve(root, "dist/yeeflow-app-builder-plugin", destinationPath);
