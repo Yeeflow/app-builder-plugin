@@ -1,3 +1,7 @@
+## 1.18.1 — 2026-10-22
+
+Fix the Feature Configuration Guide helper printing nothing when the plugin is mounted through a symlinked path (Claude's synced plugin cache). Add a direct-and-symlinked helper regression test to CI. 28 Skills; no content changes.
+
 ## 1.18.0 — 2026-10-22
 
 Add the `yeeflow-feature-configuration-guide` skill (28 Skills): choose, configure and troubleshoot individual Yeeflow features from a 287-entry catalog of official Help Center references, loaded on demand through a read-only Node helper. Keeps the explicit confirm-before-every-write rule and routes application builds, generation, validation and runtime evidence to the existing skills. Codex and Claude packages both move to 1.18.0.

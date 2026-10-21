@@ -5,7 +5,7 @@
 //   node knowledge.mjs read G09-034 G09-142
 //
 // Read-only. Reads ../references/feature-catalog.json relative to this script.
-import { readFileSync } from "node:fs";
+import { readFileSync, realpathSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -99,7 +99,10 @@ function main(argv) {
   throw new Error(`Unknown command: ${command}\n` + usage());
 }
 
-if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+// Plugin caches are often reached through symlinks: Node reports the real path in
+// import.meta.url but keeps the invoked path in argv[1], so compare real paths.
+const realOrSelf = path => { try { return realpathSync(path); } catch { return resolve(path); } };
+if (process.argv[1] && realOrSelf(process.argv[1]) === realOrSelf(fileURLToPath(import.meta.url))) {
   try { process.exitCode = main(process.argv.slice(2)); }
   catch (error) { console.error(error.message); process.exitCode = 2; }
 }

@@ -14,4 +14,4 @@ jobs:
         with:
           node-version: 24
       - name: Verify isolated host archives and validator entrypoints
-        run: npm run test:plugin-mcp-integration && npm run test:unified-mcp && npm run test:plugin-host-profiles && npm run test:claude-plugin
+        run: npm run test:plugin-mcp-integration && npm run test:unified-mcp && npm run test:plugin-host-profiles && npm run test:claude-plugin && npm run test:feature-configuration-guide
