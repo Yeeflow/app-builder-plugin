@@ -31,7 +31,7 @@ try {
   const dir=resolve(out,profile==='codex'?'yeeflow-app-builder-plugin':'yeeflow-app-builder-web-review');folders[profile]=dir;
   const manifest=JSON.parse(readFileSync(resolve(dir,'.codex-plugin/plugin.json')));
   const skills=readdirSync(resolve(dir,'skills')).filter(x=>existsSync(resolve(dir,'skills',x,'SKILL.md')));
-  assert.equal(skills.length,27);
+  assert.equal(skills.length,28);
   for(const skill of skills) assert.match(readFileSync(resolve(dir,'skills',skill,'SKILL.md'),'utf8'),/Portable access to bundled resources/);
   if(profile==='codex') {assert.equal(manifest.mcpServers,'./.mcp.json');assert.ok(existsSync(resolve(dir,'.mcp.json')));}
   else {assert.equal(manifest.name,'yeeflow-app-builder-web-review');assert.equal(manifest.apps,'./.app.json');assert.equal(manifest.mcpServers,undefined);assert.ok(!existsSync(resolve(dir,'.mcp.json')));assert.ok(!existsSync(resolve(dir,'mcp.json')));assert.deepEqual(JSON.parse(readFileSync(resolve(dir,'.app.json'))),apps);}
@@ -44,5 +44,5 @@ try {
   const rel=relative(codex,file);if(['.codex-plugin/plugin.json','.mcp.json','mcp.json','.app.json'].includes(rel))continue;
   assert.deepEqual(readFileSync(resolve(web,rel)),readFileSync(file),`host payload drift: ${rel}`);
  }
- console.log('PLUGIN_HOST_PROFILES_PASS: 2 archives; 27 skills each; shared payload parity; both entrypoint regressions; invalid mappings rejected');
+ console.log('PLUGIN_HOST_PROFILES_PASS: 2 archives; 28 skills each; shared payload parity; both entrypoint regressions; invalid mappings rejected');
 }finally{rmSync(temp,{recursive:true,force:true});}

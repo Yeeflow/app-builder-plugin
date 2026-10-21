@@ -11,7 +11,7 @@ Claude 1.17.0 has passed the recorded package, repository installation and web u
 3. Select or paste `https://github.com/Yeeflow/app-builder-plugin` and click **Sync**. This repository is private, so the connected GitHub account must have repository access.
 4. Use the repository URL without `#stable`. This web flow reads the default `main` branch; both `main` and `stable` contain the complete Claude package.
 5. After synchronization completes, open **Discover**, find **Yeeflow** from `app-builder-plugin`, and click **Add**.
-6. In **Yours**, open Yeeflow and confirm it is enabled and shows **1.17.2**, **27 skills**, and **1 connector** (`yeeflow_mcp`).
+6. In **Yours**, open Yeeflow and confirm it is enabled and shows **1.18.0**, **28 skills**, and **1 connector** (`yeeflow_mcp`).
 7. Open its connector and complete the Yeeflow OAuth connection if requested. Use the intended Yeeflow account; Claude and other hosts authenticate separately.
 
 ### Update an existing marketplace installation
@@ -47,7 +47,7 @@ The package contains the official blue Yeeflow mark and declares `icon`. However
 Use Node and zip/unzip from the repository root:
 
 ```sh
-npm run build:claude-plugin -- --output artifacts/claude/yeeflow-1.17.2.zip
+npm run build:claude-plugin -- --output artifacts/claude/yeeflow-1.18.0.zip
 npm run test:claude-plugin
 npm run test:plugin-host-profiles
 ```
@@ -102,12 +102,12 @@ Use development branches and PRs into `main` for future changes. After the affec
 
 ## Public-directory candidate (2026-10-10)
 
-The Claude-only candidate is **Yeeflow**, identifier `yeeflow`, version `1.17.2`; Codex remains `yeeflow-app-builder` 1.17.0. Existing verification records apply to the older Claude identity, not this candidate. MIT licensing was approved by the user for the Claude bundle. Company support: support@yeeflow.com; privacy policy: https://www.yeeflow.com/privacy.
+The Claude package is **Yeeflow**, identifier `yeeflow`, version `1.18.0` (28 skills); Codex `yeeflow-app-builder` is also 1.18.0. Earlier 1.17.2 installation records below remain historical. Existing verification records apply to the older Claude identity, not this candidate. MIT licensing was approved by the user for the Claude bundle. Company support: support@yeeflow.com; privacy policy: https://www.yeeflow.com/privacy.
 
 Build and validate:
 
 ```sh
-node scripts/build-claude-plugin.mjs --output artifacts/claude/yeeflow-1.17.2.zip
+node scripts/build-claude-plugin.mjs --output artifacts/claude/yeeflow-1.18.0.zip
 node scripts/test-claude-plugin.mjs
 node scripts/prepare-claude-public-repository.mjs --output artifacts/claude/public-repository-candidate
 ```

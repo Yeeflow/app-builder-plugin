@@ -1,0 +1,4 @@
+interface:
+  display_name: "Yeeflow Feature Configuration Guide"
+  short_description: "Choose and configure Yeeflow features with official references."
+  default_prompt: "Use $yeeflow-feature-configuration-guide to choose the right Yeeflow controls, actions, or workflow steps, explain how to configure them from official references, and apply only confirmed changes."

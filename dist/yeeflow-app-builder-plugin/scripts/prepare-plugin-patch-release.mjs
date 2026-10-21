@@ -338,6 +338,12 @@ for (const file of ["references/direct-form-action-execution.md", "references/ye
 }
 mirrors.push(["docs/releases/yeeflow-app-builder-v1.17.0.md", "docs/releases/yeeflow-app-builder-v1.17.0.md"]);
 
+// 1.18.0: feature configuration guide grounded in official Help Center references.
+for (const file of ["SKILL.md", "agents/openai.yaml", "references/feature-catalog.json", "references/concepts.md", "references/tasks.md", "references/sources.md", "references/application-implementation.md", "scripts/knowledge.mjs"]) {
+  mirrors.push([`skills/installed/yeeflow-feature-configuration-guide/${file}`, `skills/yeeflow-feature-configuration-guide/${file}`]);
+}
+mirrors.push(["docs/releases/yeeflow-app-builder-v1.18.0.md", "docs/releases/yeeflow-app-builder-v1.18.0.md"]);
+
 for (const [sourcePath, destinationPath] of mirrors) {
   const destination = resolve(root, "dist/yeeflow-app-builder-plugin", destinationPath);
   mkdirSync(dirname(destination), { recursive: true });

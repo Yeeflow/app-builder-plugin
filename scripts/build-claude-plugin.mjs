@@ -26,7 +26,7 @@ try {
   rmSync(join(stage, ".app.json"), { force: true });
   mkdirSync(join(stage, ".claude-plugin"));
   const manifest = {
-    name: "yeeflow", displayName: "Yeeflow", version: "1.17.2",
+    name: "yeeflow", displayName: "Yeeflow", version: "1.18.0",
     description: "Build and maintain Yeeflow business applications with guided skills and hosted MCP.",
     license: "MIT", author: {...original.author, email: "support@yeeflow.com"}, homepage: "https://www.yeeflow.com",
     repository: "https://github.com/Yeeflow/app-builder-plugin",
@@ -68,7 +68,7 @@ Do not edit installed plugin caches or another host's skills. Put learning chang
     writeFileSync(file, body);
     count++;
   }
-  if (count !== 27) throw new Error("Expected 27 skills; review source inventory before release");
+  if (count !== 28) throw new Error("Expected 28 skills; review source inventory before release");
   writeFileSync(join(stage, "CLAUDE-README.md"), "# Yeeflow for Claude\n\nVersion " + manifest.version + ". Testing candidate: installation, OAuth and live runtime acceptance require separate verification. See the source repository docs/claude-plugin.md.\n");
   writeFileSync(join(stage, "README.md"), readFileSync(resolve(root, "docs/claude-public-readme.md"), "utf8"));
   writeFileSync(join(stage, "LICENSE"), readFileSync(resolve(root, "docs/claude-plugin-LICENSE.txt"), "utf8"));

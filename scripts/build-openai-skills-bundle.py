@@ -52,8 +52,8 @@ def main() -> None:
     skills = sorted(
         name for name in entries if name.startswith("skills/") and name.endswith("/SKILL.md")
     )
-    if len(skills) != 27:
-        raise SystemExit(f"Expected 27 skills; found {len(skills)}")
+    if len(skills) != 28:
+        raise SystemExit(f"Expected 28 skills; found {len(skills)}")
 
     output = args.output.resolve()
     output.mkdir(parents=True, exist_ok=True)

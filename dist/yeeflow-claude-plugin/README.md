@@ -1,6 +1,6 @@
 # Yeeflow
 
-Yeeflow helps Claude work with business applications, records, tasks and workflows through guided skills and Yeeflow's hosted MCP connection. This package bundles 27 skills, shared templates and local validation tools. It supports application planning, incremental application building, package inspection and component generation.
+Yeeflow helps Claude work with business applications, records, tasks and workflows through guided skills and Yeeflow's hosted MCP connection. This package bundles 28 skills, shared templates and local validation tools. It supports application planning, incremental application building, package inspection and component generation.
 
 ## Requirements and connection
 
@@ -15,7 +15,7 @@ After installing the plugin, enable it and connect its Yeeflow connector in Cust
 3. Select or paste `https://github.com/Yeeflow/app-builder-plugin` and click **Sync**. This repository is private, so the connected GitHub account must have repository access.
 4. Use the repository URL without `#stable`. This web flow reads the default `main` branch; both `main` and `stable` contain the complete Claude package.
 5. After synchronization completes, open **Discover**, find **Yeeflow** from `app-builder-plugin`, and click **Add**.
-6. In **Yours**, open Yeeflow and confirm it is enabled and shows **1.17.2**, **27 skills**, and **1 connector** (`yeeflow_mcp`).
+6. In **Yours**, open Yeeflow and confirm it is enabled and shows **1.18.0**, **28 skills**, and **1 connector** (`yeeflow_mcp`).
 7. Open its connector and complete the Yeeflow OAuth connection if requested. Use the intended Yeeflow account; Claude and other hosts authenticate separately.
 
 ### Update an existing marketplace installation
@@ -68,7 +68,7 @@ Local validation, MCP acceptance, configuration readback, Designer rendering and
 
 ## Version
 
-Claude plugin identifier: `yeeflow`. Display name: **Yeeflow**. Version: `1.17.2`.
+Claude plugin identifier: `yeeflow`. Display name: **Yeeflow**. Version: `1.18.0`.
 
 This replaces the earlier Claude identifier `yeeflow-app-builder`; existing installations may need an explicit migration. Codex retains its existing identity and version. Maintained source: https://github.com/Yeeflow/app-builder-plugin.
 
