@@ -12,7 +12,7 @@ function walk(p){return readdirSync(p,{withFileTypes:true}).flatMap(e=>e.isDirec
 assert.deepEqual(json(resolve(dist,'.mcp.json')),{mcpServers:{yeeflow_mcp:{type:'http',url:'https://api.yeeflow.com/v1/mcp'}}});
 assert.equal(existsSync(resolve(dist,'.app.json')),false,'Codex payload must not retain registered legacy Apps');
 const skills=readdirSync(resolve(dist,'skills')).filter(s=>existsSync(resolve(dist,'skills',s,'SKILL.md')));
-assert.equal(skills.length,27);
+assert.equal(skills.length,28);
 for(const name of skills){
  const body=readFileSync(resolve(dist,'skills',name,'SKILL.md'),'utf8');
  assert.match(body,/## Unified Yeeflow MCP connection/);
@@ -32,4 +32,4 @@ if(source){
   if(existsSync(file)) assert.doesNotMatch(readFileSync(file,'utf8'),old);
  }
 }
-console.log('UNIFIED_MCP_MIGRATION_PASS: one credential-free connection; all 27 skills; no active retired connection instructions');
+console.log('UNIFIED_MCP_MIGRATION_PASS: one credential-free connection; all 28 skills; no active retired connection instructions');

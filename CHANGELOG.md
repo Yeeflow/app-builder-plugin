@@ -1,3 +1,7 @@
+## 1.18.0 — 2026-10-22
+
+Add the `yeeflow-feature-configuration-guide` skill (28 Skills): choose, configure and troubleshoot individual Yeeflow features from a 287-entry catalog of official Help Center references, loaded on demand through a read-only Node helper. Keeps the explicit confirm-before-every-write rule and routes application builds, generation, validation and runtime evidence to the existing skills. Codex and Claude packages both move to 1.18.0.
+
 ## 1.17.0 — 2026-10-06
 
 Direct Form Action execution by ID or unique name from Custom Code, with guarded event and selected-record patterns, shared dispatch locking, error recovery and focused tests. Owner authorized stable publication before subsequent local runtime acceptance.

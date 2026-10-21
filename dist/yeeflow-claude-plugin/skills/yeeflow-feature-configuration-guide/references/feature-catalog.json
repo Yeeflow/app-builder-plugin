@@ -1,0 +1,4096 @@
+{
+ "schema_version": 2,
+ "language": "en",
+ "material_date": "2026-10-15",
+ "entry_count": 287,
+ "note": "Concise English paraphrases of official Yeeflow Help Center articles. Read entries through scripts/knowledge.mjs; each entry links to its authoritative article.",
+ "entries": [
+  {
+   "id": "G09-002",
+   "name": "Dashboard designer",
+   "domain": "designers",
+   "aliases": [
+    "Dashboard designer"
+   ],
+   "summary": "Build a dashboard by arranging controls, data displays, filters, and page interactions.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8655992-dashboard-designer"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-003",
+   "name": "Approval form designer",
+   "domain": "designers",
+   "aliases": [
+    "Approval form designer"
+   ],
+   "summary": "Design submission, task, and print pages and bind their controls to approval variables.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8655998-approval-form-designer"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-004",
+   "name": "How do I use global fonts and colors",
+   "domain": "designers",
+   "aliases": [
+    "How do I use global fonts and colors"
+   ],
+   "summary": "Reuse global fonts and colors through style references rather than separate local values.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8656012-how-do-i-use-global-fonts-and-colors"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-005",
+   "name": "Right Click and Copy / Paste Controls",
+   "domain": "designers",
+   "aliases": [
+    "Right Click and Copy / Paste Controls"
+   ],
+   "summary": "Copy controls or styles, then check bindings and action targets in the destination context.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8656005-right-click-and-copy-paste-controls"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-006",
+   "name": "Public form designer",
+   "domain": "designers",
+   "aliases": [
+    "Public form designer"
+   ],
+   "summary": "Design public data collection and its submission feedback for the associated data list.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8656033-public-form-designer"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-007",
+   "name": "List form designer",
+   "domain": "designers",
+   "aliases": [
+    "List form designer"
+   ],
+   "summary": "Design the forms used to create, edit, and view list records.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8656021-list-form-designer"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-008",
+   "name": "Add Controls panel",
+   "domain": "designers",
+   "aliases": [
+    "Add Controls panel"
+   ],
+   "summary": "Select controls available in the current designer; availability depends on the design context.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8656100-add-controls-panel"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-009",
+   "name": "Yeeflow canvas overview",
+   "domain": "designers",
+   "aliases": [
+    "Yeeflow canvas overview"
+   ],
+   "summary": "Use the canvas to select, position, nest, and configure controls.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8656108-yeeflow-canvas-overview"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-010",
+   "name": "Navigator",
+   "domain": "designers",
+   "aliases": [
+    "Navigator"
+   ],
+   "summary": "Use the control tree to locate nested controls and manage their order.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8656207-navigator"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-011",
+   "name": "Page Background and Content Area Styles",
+   "domain": "designers",
+   "aliases": [
+    "Page Background and Content Area Styles"
+   ],
+   "summary": "Configure the page background and content area separately, including width and spacing.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8656280-page-background-and-content-area-styles"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-012",
+   "name": "Thank you page & Redirect (Approval Form Only)",
+   "domain": "designers",
+   "aliases": [
+    "Thank you page & Redirect (Approval Form Only)",
+    "Thank you page & Redirect"
+   ],
+   "summary": "Configure a completion message or redirect for the applicable submission context.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/9008330-thank-you-page-redirect-approval-form-only"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-013",
+   "name": "Default Control Styles for Appearance",
+   "domain": "designers",
+   "aliases": [
+    "Default Control Styles for Appearance"
+   ],
+   "summary": "Maintain reusable default control appearances at the supported global or application scope.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/11711340-default-control-styles-for-appearance"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-014",
+   "name": "Understanding form controls and the associated variables / fields",
+   "domain": "designers",
+   "aliases": [
+    "Understanding form controls and the associated variables / fields"
+   ],
+   "summary": "Distinguish the visual control from its associated variable or list field and match their types.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8656656-understanding-form-controls-and-the-associated-variables-fields"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-015",
+   "name": "Title of field controls",
+   "domain": "designers",
+   "aliases": [
+    "Title of field controls"
+   ],
+   "summary": "Configure a field title independently of the underlying saved field name.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8656673-title-of-field-controls"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-016",
+   "name": "Single line",
+   "domain": "fields",
+   "aliases": [
+    "Single line"
+   ],
+   "summary": "Collect short plain text with a binding, length limits, validation, and change actions where supported.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8656676-single-line"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-017",
+   "name": "Multiple line",
+   "domain": "fields",
+   "aliases": [
+    "Multiple line"
+   ],
+   "summary": "Collect multiline plain text; use a rich-text field when formatting must be saved.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8656679-multiple-line"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-018",
+   "name": "Rich Text",
+   "domain": "fields",
+   "aliases": [
+    "Rich Text"
+   ],
+   "summary": "Collect and save formatted text; distinguish this from a display-only paragraph.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8656695-rich-text"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-019",
+   "name": "Number",
+   "domain": "fields",
+   "aliases": [
+    "Number"
+   ],
+   "summary": "Collect numeric values with suitable precision, formatting, and range rules.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8656685-number"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-020",
+   "name": "Percent",
+   "domain": "fields",
+   "aliases": [
+    "Percent"
+   ],
+   "summary": "Store a numeric fraction and display it as a percentage; keep formula and display conventions consistent.",
+   "considerations": "For example, a stored value of 0.75 is displayed as 75%. Do not substitute the displayed percentage for the underlying numeric convention.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8656686-percent"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-021",
+   "name": "Currency",
+   "domain": "fields",
+   "aliases": [
+    "Currency"
+   ],
+   "summary": "Present monetary values with currency formatting and precision; define calculations independently.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661474-currency"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-022",
+   "name": "Single select",
+   "domain": "fields",
+   "aliases": [
+    "Single select"
+   ],
+   "summary": "Select one value from a configured option set.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8656692-single-select"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-023",
+   "name": "Multiple select",
+   "domain": "fields",
+   "aliases": [
+    "Multiple select"
+   ],
+   "summary": "Select multiple values and use a field or variable that supports multiple values.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8656702-multiple-select"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-024",
+   "name": "Switch",
+   "domain": "fields",
+   "aliases": [
+    "Switch"
+   ],
+   "summary": "Capture a Boolean value through an on/off switch.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8656704-switch"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-025",
+   "name": "Date Picker",
+   "domain": "fields",
+   "aliases": [
+    "Date Picker"
+   ],
+   "summary": "Collect a date or supported date-time value; verify display preferences and time-zone meaning.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8656706-date-picker"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-026",
+   "name": "Date Range",
+   "domain": "fields",
+   "aliases": [
+    "Date Range"
+   ],
+   "summary": "Collect a start and end date as a range and validate their order.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8656711-date-range"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-027",
+   "name": "Time Picker",
+   "domain": "fields",
+   "aliases": [
+    "Time Picker"
+   ],
+   "summary": "Collect a time value and distinguish time-of-day from a complete date-time.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8656715-time-picker"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-028",
+   "name": "Hyperlink",
+   "domain": "fields",
+   "aliases": [
+    "Hyperlink"
+   ],
+   "summary": "Save a link and present suitable display text for opening it.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8656720-hyperlink"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-029",
+   "name": "Image",
+   "domain": "fields",
+   "aliases": [
+    "Image"
+   ],
+   "summary": "Upload and save an image field; use Picture for page imagery instead.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8656721-image"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-030",
+   "name": "Attachment",
+   "domain": "fields",
+   "aliases": [
+    "Attachment"
+   ],
+   "summary": "Upload attachments with appropriate count, size, file-type, and access settings.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8656726-attachment"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-031",
+   "name": "Calculation",
+   "domain": "fields",
+   "aliases": [
+    "Calculation",
+    "formula",
+    "computed field"
+   ],
+   "summary": "Calculate a value from an expression and bind the result to the appropriate variable.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8656727-calculation"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-032",
+   "name": "SubList (Approval form only)",
+   "domain": "fields",
+   "aliases": [
+    "SubList (Approval form only)",
+    "SubList",
+    "detail rows",
+    "line items",
+    "sub list"
+   ],
+   "summary": "Collect repeated detail rows within an approval form, with row fields and operations.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8656731-sublist-approval-form-only"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-033",
+   "name": "User",
+   "domain": "fields",
+   "aliases": [
+    "User"
+   ],
+   "summary": "Select users or allowed identities and keep identity values distinct from display names.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8656734-user"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-034",
+   "name": "Lookup",
+   "domain": "fields",
+   "aliases": [
+    "Lookup",
+    "related record",
+    "relationship",
+    "reference field"
+   ],
+   "summary": "Select related records using their item IDs; configure display fields, filters, sorting, and compatible field mappings.",
+   "considerations": "Separate the stored Item ID, display field, and business key. Configure additional-field mappings only between compatible field types. Check the documented filter and index restrictions.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8656835-lookup"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-035",
+   "name": "Lookup List",
+   "domain": "fields",
+   "aliases": [
+    "Lookup List",
+    "lookup detail rows",
+    "bulk select"
+   ],
+   "summary": "Select multiple source records and map them into rows of an associated List control in an approval form.",
+   "considerations": "This control adds selected source records to an associated List as rows. Its selected-item values are not a substitute for defining the target row mappings. Check its approval-form applicability.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8656862-lookup-list"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-036",
+   "name": "Rating",
+   "domain": "fields",
+   "aliases": [
+    "Rating"
+   ],
+   "summary": "Collect ratings in approval forms; verify the associated variable type rather than inferring it from numeric appearance.",
+   "considerations": "The approval-form rating article describes a text attribute with a numeric presentation. Do not assume it has the same type as a data-list rating.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8656893-rating"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-037",
+   "name": "Department",
+   "domain": "fields",
+   "aliases": [
+    "Department"
+   ],
+   "summary": "Select a department from the configured organization structure.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8656906-department"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-038",
+   "name": "Location",
+   "domain": "fields",
+   "aliases": [
+    "Location"
+   ],
+   "summary": "Select a configured location value.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8656911-location"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-039",
+   "name": "Cost Center",
+   "domain": "fields",
+   "aliases": [
+    "Cost Center"
+   ],
+   "summary": "Select a cost center for business allocation.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8656913-cost-center"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-040",
+   "name": "Metadata",
+   "domain": "fields",
+   "aliases": [
+    "Metadata"
+   ],
+   "summary": "Select one value from a maintained metadata category.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8656916-metadata"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-041",
+   "name": "Multiple Metadata",
+   "domain": "fields",
+   "aliases": [
+    "Multiple Metadata"
+   ],
+   "summary": "Select multiple values from a metadata category and use compatible multivalue bindings.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661463-multiple-metadata"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-042",
+   "name": "Signature",
+   "domain": "fields",
+   "aliases": [
+    "Signature"
+   ],
+   "summary": "Collect a signature within a form; distinguish it from an external electronic-signature workflow.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661465-signature"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-043",
+   "name": "Tags",
+   "domain": "fields",
+   "aliases": [
+    "Tags"
+   ],
+   "summary": "Use tags to classify records and support retrieval.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661466-tags"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-088",
+   "name": "Rating (Data list only)",
+   "domain": "fields",
+   "aliases": [
+    "Rating (Data list only)",
+    "Rating"
+   ],
+   "summary": "Use a data-list rating field to represent numeric scores with rating symbols.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/9753556-rating-data-list-only"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-044",
+   "name": "Section Overview",
+   "domain": "layout",
+   "aliases": [
+    "Section Overview"
+   ],
+   "summary": "Organize related controls into sections with shared layout and presentation.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661476-section-overview"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-045",
+   "name": "Columns - Create, Edit and Style",
+   "domain": "layout",
+   "aliases": [
+    "Columns - Create, Edit and Style"
+   ],
+   "summary": "Arrange section content in columns and verify behavior on narrower screens.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661493-columns-create-edit-and-style"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-046",
+   "name": "Grid",
+   "domain": "layout",
+   "aliases": [
+    "Grid"
+   ],
+   "summary": "Place controls in a grid with row, column, spacing, and span settings.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661496-grid"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-047",
+   "name": "Container Overview",
+   "domain": "layout",
+   "aliases": [
+    "Container Overview"
+   ],
+   "summary": "Arrange child controls within a container using its layout and alignment options.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661499-container-overview"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-048",
+   "name": "Container-Execute type",
+   "domain": "layout",
+   "aliases": [
+    "Container-Execute type"
+   ],
+   "summary": "Configure what a container click does, including actions, navigation, form opening, or collection-item operations.",
+   "considerations": "A container can execute an action, link, add-item operation, dashboard opening, or approval-form opening. Collection-item behavior requires a suitable collection context.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/9018628-container-execute-type"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-049",
+   "name": "Text",
+   "domain": "layout",
+   "aliases": [
+    "Text"
+   ],
+   "summary": "Display a heading or title without creating a saved business field.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661501-text"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-050",
+   "name": "Paragraph",
+   "domain": "layout",
+   "aliases": [
+    "Paragraph"
+   ],
+   "summary": "Present formatted page content; use Rich Text for user-entered formatted values.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661502-paragraph"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-051",
+   "name": "Picture",
+   "domain": "layout",
+   "aliases": [
+    "Picture"
+   ],
+   "summary": "Display a page image from a configured source with suitable sizing.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661504-picture"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-052",
+   "name": "Divider",
+   "domain": "layout",
+   "aliases": [
+    "Divider"
+   ],
+   "summary": "Separate page content with a styled divider.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661506-divider"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-053",
+   "name": "Spacer",
+   "domain": "layout",
+   "aliases": [
+    "Spacer"
+   ],
+   "summary": "Add deliberate whitespace between page elements.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661507-spacer"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-054",
+   "name": "Button",
+   "domain": "layout",
+   "aliases": [
+    "Button"
+   ],
+   "summary": "Provide a clickable button whose behavior is configured independently of its appearance.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661510-button"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-055",
+   "name": "Button-Execute type",
+   "domain": "layout",
+   "aliases": [
+    "Button-Execute type"
+   ],
+   "summary": "Choose the button execution type, such as an action, link, form opening, or collection-item operation.",
+   "considerations": "Button execution type is distinct from button style. Check the selected action or target form and the parameters passed to it.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8894288-button-execute-type"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-056",
+   "name": "Tabs",
+   "domain": "layout",
+   "aliases": [
+    "Tabs"
+   ],
+   "summary": "Organize content into tabs and check how hidden content interacts with values and validation.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661511-tabs"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-057",
+   "name": "Toggle",
+   "domain": "layout",
+   "aliases": [
+    "Toggle"
+   ],
+   "summary": "Expand and collapse content; this does not represent a Boolean field value.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661513-toggle"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-058",
+   "name": "Print Button (Approval form only)",
+   "domain": "layout",
+   "aliases": [
+    "Print Button (Approval form only)",
+    "Print Button"
+   ],
+   "summary": "Open an associated approval-form print page through a print button.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661514-print-button-approval-form-only"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-059",
+   "name": "Icon",
+   "domain": "layout",
+   "aliases": [
+    "Icon"
+   ],
+   "summary": "Display an icon and configure supported appearance or interaction.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8741794-icon"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-060",
+   "name": "Timer",
+   "domain": "layout",
+   "aliases": [
+    "Timer"
+   ],
+   "summary": "Display a countdown and configure its expiry behavior; do not treat it as a persistent background scheduler.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/9720555-timer"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-061",
+   "name": "Table",
+   "domain": "layout",
+   "aliases": [
+    "Table"
+   ],
+   "summary": "Arrange controls in table cells for structured presentation or printing; use Data Table for querying records.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/10259913-table"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-062",
+   "name": "Icon List",
+   "domain": "layout",
+   "aliases": [
+    "Icon List"
+   ],
+   "summary": "Present a list of items with icons, text, and supported links.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661519-icon-list"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-063",
+   "name": "Dropbar",
+   "domain": "layout",
+   "aliases": [
+    "Dropbar"
+   ],
+   "summary": "Expose supplementary content through a compact dropbar interaction.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661524-dropbar"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-064",
+   "name": "Alert",
+   "domain": "layout",
+   "aliases": [
+    "Alert"
+   ],
+   "summary": "Display an informational, success, warning, or danger message.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661530-alert"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-065",
+   "name": "Progress Bar",
+   "domain": "layout",
+   "aliases": [
+    "Progress Bar"
+   ],
+   "summary": "Display progress as a bar with an appropriately interpreted value.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661527-progress-bar"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-066",
+   "name": "Progress Circle",
+   "domain": "layout",
+   "aliases": [
+    "Progress Circle"
+   ],
+   "summary": "Display progress or a measure as a circular indicator.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/9716625-progress-circle"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-067",
+   "name": "Steps bar",
+   "domain": "layout",
+   "aliases": [
+    "Steps bar"
+   ],
+   "summary": "Show steps and the current stage using a source supported in the current context.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/9753492-steps-bar"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-001",
+   "name": "Barcode Control",
+   "domain": "layout",
+   "aliases": [
+    "Barcode Control"
+   ],
+   "summary": "Generate a barcode from a fixed value or variable; choose the format and presentation separately from scanning.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/12380510-barcode-control"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-080",
+   "name": "QR Code",
+   "domain": "layout",
+   "aliases": [
+    "QR Code"
+   ],
+   "summary": "Generate and display a QR code for content or a link; scanning is a separate action.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661540-qr-code"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-081",
+   "name": "Comments (Available for Approval form and List form only)",
+   "domain": "layout",
+   "aliases": [
+    "Comments (Available for Approval form and List form only)",
+    "Comments"
+   ],
+   "summary": "Enable record-related comments in supported approval and list form contexts.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661542-comments-available-for-approval-form-and-list-form-only"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-082",
+   "name": "Custom Code Control",
+   "domain": "layout",
+   "aliases": [
+    "Custom Code Control"
+   ],
+   "summary": "Extend a page with the official Custom Code capability when the task explicitly requires that extension.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661548-custom-code-control"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-083",
+   "name": "Embed Control",
+   "domain": "layout",
+   "aliases": [
+    "Embed Control"
+   ],
+   "summary": "Embed external content subject to the source service's authentication and embedding restrictions.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661545-embed-control"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-084",
+   "name": "Document Embed",
+   "domain": "layout",
+   "aliases": [
+    "Document Embed"
+   ],
+   "summary": "Preview an accessible document within the page; preview and download permissions are separate concerns.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/11559986-document-embed"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-085",
+   "name": "Submit Button (Public form only)",
+   "domain": "layout",
+   "aliases": [
+    "Submit Button (Public form only)",
+    "Submit Button"
+   ],
+   "summary": "Provide the submission button and presentation for a public form.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661549-submit-button-public-form-only"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-068",
+   "name": "News",
+   "domain": "data-display",
+   "aliases": [
+    "News"
+   ],
+   "summary": "Present news or content records with configured fields, layout, and pagination.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661515-news"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-069",
+   "name": "Gallery",
+   "domain": "data-display",
+   "aliases": [
+    "Gallery"
+   ],
+   "summary": "Present images and record information in a gallery layout.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661517-gallery"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-070",
+   "name": "Data Table",
+   "domain": "data-display",
+   "aliases": [
+    "Data Table",
+    "record table",
+    "data grid"
+   ],
+   "summary": "Query and display records using configured columns, filters, search, sorting, pagination, and permitted actions.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661534-data-table"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-071",
+   "name": "Gantt Chart",
+   "domain": "data-display",
+   "aliases": [
+    "Gantt Chart"
+   ],
+   "summary": "Display scheduled activities using start and end dates; configure relationship fields for dependencies or parent tasks.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661537-gantt-chart"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-072",
+   "name": "Document Library",
+   "domain": "data-display",
+   "aliases": [
+    "Document Library"
+   ],
+   "summary": "Display a document library and expose file operations permitted for the user.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661538-document-library"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-073",
+   "name": "Collection",
+   "domain": "data-display",
+   "aliases": [
+    "Collection",
+    "repeater",
+    "record cards"
+   ],
+   "summary": "Repeat a custom item layout for source records and provide each item with its own data context.",
+   "considerations": "Design the repeated item layout before configuring its current-record actions. Check source-specific link behavior; not every report source supports the same item operations.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8734749-collection"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-074",
+   "name": "Kanban board",
+   "domain": "data-display",
+   "aliases": [
+    "Kanban board"
+   ],
+   "summary": "Group records into board columns and verify which editing operations the source and permissions support.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/9753483-kanban-board"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-075",
+   "name": "Dynamic Series Controls",
+   "domain": "data-display",
+   "aliases": [
+    "Dynamic Series Controls"
+   ],
+   "summary": "Use dynamic controls inside an appropriate record context to display that record's values.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8849963-dynamic-series-controls"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-076",
+   "name": "Dynamic Field",
+   "domain": "data-display",
+   "aliases": [
+    "Dynamic Field"
+   ],
+   "summary": "Display a selected field from the current collection record.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8904439-dynamic-field"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-077",
+   "name": "Dynamic User",
+   "domain": "data-display",
+   "aliases": [
+    "Dynamic User"
+   ],
+   "summary": "Display user information associated with the current collection record.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8904441-dynamic-user"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-078",
+   "name": "Dynamic Image",
+   "domain": "data-display",
+   "aliases": [
+    "Dynamic Image"
+   ],
+   "summary": "Display an image field from the current collection record.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8904445-dynamic-image"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-079",
+   "name": "Dynamic File",
+   "domain": "data-display",
+   "aliases": [
+    "Dynamic File"
+   ],
+   "summary": "Display attachments from the current collection record with appropriate access.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8904449-dynamic-file"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-086",
+   "name": "Horizontal timeline",
+   "domain": "data-display",
+   "aliases": [
+    "Horizontal timeline"
+   ],
+   "summary": "Display dated records on a horizontal timeline.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/9753557-horizontal-timeline"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-087",
+   "name": "Vertical timeline",
+   "domain": "data-display",
+   "aliases": [
+    "Vertical timeline"
+   ],
+   "summary": "Display dated records on a vertical timeline.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/9753558-vertical-timeline"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-089",
+   "name": "Pie Chart",
+   "domain": "data-display",
+   "aliases": [
+    "Pie Chart"
+   ],
+   "summary": "Compare category proportions using a category dimension and aggregated values.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661665-pie-chart"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-090",
+   "name": "Column Chart",
+   "domain": "data-display",
+   "aliases": [
+    "Column Chart"
+   ],
+   "summary": "Compare measures across categories using columns and supported series settings.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661654-column-chart"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-091",
+   "name": "Line Chart",
+   "domain": "data-display",
+   "aliases": [
+    "Line Chart"
+   ],
+   "summary": "Show a measure's trend across ordered dates or categories.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661652-line-chart"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-092",
+   "name": "Gauge Chart",
+   "domain": "data-display",
+   "aliases": [
+    "Gauge Chart"
+   ],
+   "summary": "Show a measure relative to a configured gauge scale.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661651-gauge-chart"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-093",
+   "name": "Funnel Chart",
+   "domain": "data-display",
+   "aliases": [
+    "Funnel Chart"
+   ],
+   "summary": "Display measures across ordered stages in a funnel.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661648-funnel-chart"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-094",
+   "name": "Color Block Heat map",
+   "domain": "data-display",
+   "aliases": [
+    "Color Block Heat map"
+   ],
+   "summary": "Represent a numeric distribution through colors across a matrix.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661646-color-block-heat-map"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-095",
+   "name": "Summary",
+   "domain": "data-display",
+   "aliases": [
+    "Summary"
+   ],
+   "summary": "Display a single aggregated measure, such as a count or sum, from a configured source.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661644-summary"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-096",
+   "name": "Pivot table",
+   "domain": "data-display",
+   "aliases": [
+    "Pivot table"
+   ],
+   "summary": "Aggregate measures across row and column dimensions in a pivot table.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661642-pivot-table"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-097",
+   "name": "Applicant Info",
+   "domain": "data-display",
+   "aliases": [
+    "Applicant Info"
+   ],
+   "summary": "Display system applicant information; distinguish the applicant from the current operator.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661668-applicant-info"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-098",
+   "name": "Action Panel",
+   "domain": "data-display",
+   "aliases": [
+    "Action Panel"
+   ],
+   "summary": "Provide native submission or task operations according to the form and task context.",
+   "considerations": "Use the native panel operations for task decisions. Changing a business Status field alone does not approve or reject a workflow task.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661673-action-panel"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-099",
+   "name": "Workflow History",
+   "domain": "data-display",
+   "aliases": [
+    "Workflow History"
+   ],
+   "summary": "Display workflow processing history, participants, timestamps, and operation information.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661674-workflow-history"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-100",
+   "name": "An Overview of Data Filter controls in Yeeflow",
+   "domain": "filters",
+   "aliases": [
+    "An Overview of Data Filter controls in Yeeflow"
+   ],
+   "summary": "Collect filter variables and reference them in data queries so that they actually affect the displayed records.",
+   "considerations": "A filter control supplies values. Reference those values in the target data source conditions; adding a filter to a page does not automatically connect every data display.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661677-an-overview-of-data-filter-controls-in-yeeflow"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-101",
+   "name": "Understanding Apply type in Yeeflow Data Filter Controls",
+   "domain": "filters",
+   "aliases": [
+    "Understanding Apply type in Yeeflow Data Filter Controls"
+   ],
+   "summary": "Choose between applying a filter immediately and applying it through an explicit Apply button.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661680-understanding-apply-type-in-yeeflow-data-filter-controls"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-102",
+   "name": "Search Filter",
+   "domain": "filters",
+   "aliases": [
+    "Search Filter"
+   ],
+   "summary": "Collect a text search condition and configure the supported minimum search length.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661685-search-filter"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-103",
+   "name": "Select Filter",
+   "domain": "filters",
+   "aliases": [
+    "Select Filter"
+   ],
+   "summary": "Provide a single-selection filter with configured choices and values.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661689-select-filter"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-104",
+   "name": "Checkbox Filter",
+   "domain": "filters",
+   "aliases": [
+    "Checkbox Filter"
+   ],
+   "summary": "Provide a multiple-selection filter using supported value types.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661690-checkbox-filter"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-105",
+   "name": "Radio Filter",
+   "domain": "filters",
+   "aliases": [
+    "Radio Filter"
+   ],
+   "summary": "Provide mutually exclusive filter choices rather than saving a business answer.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661693-radio-filter"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-106",
+   "name": "Range Filter",
+   "domain": "filters",
+   "aliases": [
+    "Range Filter"
+   ],
+   "summary": "Collect a continuous numeric range for data filtering.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8675250-range-filter"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-107",
+   "name": "Check Range",
+   "domain": "filters",
+   "aliases": [
+    "Check Range"
+   ],
+   "summary": "Filter records using predefined ranges with explicit boundaries.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8679220-check-range"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-108",
+   "name": "Date Filter",
+   "domain": "filters",
+   "aliases": [
+    "Date Filter"
+   ],
+   "summary": "Collect a date range for source filtering rather than field input.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661697-date-filter"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-109",
+   "name": "Relative Period",
+   "domain": "filters",
+   "aliases": [
+    "Relative Period"
+   ],
+   "summary": "Filter using a relative period such as a year, month, or week.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8675168-relative-period"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-110",
+   "name": "Apply Button",
+   "domain": "filters",
+   "aliases": [
+    "Apply Button"
+   ],
+   "summary": "Apply the associated filter values to the target data presentation.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661699-apply-button"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-111",
+   "name": "Remove Filters",
+   "domain": "filters",
+   "aliases": [
+    "Remove Filters"
+   ],
+   "summary": "Clear selected filters and restore the intended default query state.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661700-remove-filters"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-112",
+   "name": "Hierarchy filter",
+   "domain": "filters",
+   "aliases": [
+    "Hierarchy filter"
+   ],
+   "summary": "Filter through a supported hierarchy such as departments, metadata, or parent-child records.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/10288762-hierarchy-filter"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-113",
+   "name": "Sorting filter",
+   "domain": "filters",
+   "aliases": [
+    "Sorting filter"
+   ],
+   "summary": "Let users select a supported sorting rule for displayed data.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/10300083-sorting-filter"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-114",
+   "name": "Dynamic Display Rules",
+   "domain": "rules",
+   "aliases": [
+    "Dynamic Display Rules"
+   ],
+   "summary": "Control conditional visibility or editing behavior without substituting for data access permissions.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661732-dynamic-display-rules"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-115",
+   "name": "Dynamic Style",
+   "domain": "rules",
+   "aliases": [
+    "Dynamic Style"
+   ],
+   "summary": "Change presentation according to conditions; avoid communicating essential meaning through color alone.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8749943-dynamic-style"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-116",
+   "name": "Custom Validation",
+   "domain": "rules",
+   "aliases": [
+    "Custom Validation"
+   ],
+   "summary": "Define invalid conditions and actionable error messages for field validation.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661734-custom-validation"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-118",
+   "name": "Advanced Settings Tab",
+   "domain": "rules",
+   "aliases": [
+    "Advanced Settings Tab"
+   ],
+   "summary": "Configure supported dimensions, spacing, responsiveness, and layout-related advanced settings.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661745-advanced-settings-tab"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-119",
+   "name": "How to Use Z-Index in Designer",
+   "domain": "rules",
+   "aliases": [
+    "How to Use Z-Index in Designer"
+   ],
+   "summary": "Control the visual stacking of overlapping elements without changing business execution order.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661747-how-to-use-z-index-in-designer"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-120",
+   "name": "Custom CSS",
+   "domain": "rules",
+   "aliases": [
+    "Custom CSS"
+   ],
+   "summary": "Use the official Custom CSS capability for styling within the authorized scope.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661749-custom-css"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-121",
+   "name": "Assigning CSS ID and CSS Classes to a control",
+   "domain": "rules",
+   "aliases": [
+    "Assigning CSS ID and CSS Classes to a control"
+   ],
+   "summary": "Assign CSS IDs or classes for styling rather than treating them as field identifiers.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661753-assigning-css-id-and-css-classes-to-a-control"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-122",
+   "name": "CSS Grid fractional unit overview",
+   "domain": "rules",
+   "aliases": [
+    "CSS Grid fractional unit overview"
+   ],
+   "summary": "Use fractional grid units to distribute remaining space proportionally.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661754-css-grid-fractional-unit-overview"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-123",
+   "name": "Advanced Control Settings: Container Child",
+   "domain": "rules",
+   "aliases": [
+    "Advanced Control Settings: Container Child"
+   ],
+   "summary": "Configure a flex-container child's alignment, order, and size in conjunction with the parent layout.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661756-advanced-control-settings-container-child"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-124",
+   "name": "Advanced Control Settings: Grid Child",
+   "domain": "rules",
+   "aliases": [
+    "Advanced Control Settings: Grid Child"
+   ],
+   "summary": "Configure a grid child's position, span, and alignment within the parent grid.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661758-advanced-control-settings-grid-child"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-125",
+   "name": "Advanced Control Settings: Order",
+   "domain": "rules",
+   "aliases": [
+    "Advanced Control Settings: Order"
+   ],
+   "summary": "Change the visual order of flex children without changing data or workflow sequence.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661767-advanced-control-settings-order"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-126",
+   "name": "Advanced Control Settings: Size",
+   "domain": "rules",
+   "aliases": [
+    "Advanced Control Settings: Size"
+   ],
+   "summary": "Configure growth and shrinking in flex layouts while checking explicit width interactions.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661772-advanced-control-settings-size"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-136",
+   "name": "Understanding Position Settings in Yeeflow",
+   "domain": "rules",
+   "aliases": [
+    "Understanding Position Settings in Yeeflow"
+   ],
+   "summary": "Choose static, relative, absolute, fixed, or sticky positioning and check the relevant container behavior.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/10038389-understanding-position-settings-in-yeeflow"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-150",
+   "name": "Understand Expression Editor",
+   "domain": "rules",
+   "aliases": [
+    "Understand Expression Editor"
+   ],
+   "summary": "Build expressions using the variables, context, operators, and functions available in the current scenario.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661774-understand-expression-editor"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-151",
+   "name": "Using expression editor for data calculations",
+   "domain": "rules",
+   "aliases": [
+    "Using expression editor for data calculations"
+   ],
+   "summary": "Calculate or compose values with expressions while handling types, empty values, and precision.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661778-using-expression-editor-for-data-calculations"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-152",
+   "name": "Comparisons operators in Expression Editor",
+   "domain": "rules",
+   "aliases": [
+    "Comparisons operators in Expression Editor"
+   ],
+   "summary": "Use compatible types and explicit empty-value behavior when constructing comparison conditions.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661780-comparisons-operators-in-expression-editor"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-153",
+   "name": "Using yeeflow predefined functions in expression editor",
+   "domain": "rules",
+   "aliases": [
+    "Using yeeflow predefined functions in expression editor"
+   ],
+   "summary": "Choose predefined functions according to their documented scenarios, parameters, and return types.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661783-using-yeeflow-predefined-functions-in-expression-editor"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-117",
+   "name": "Form Actions",
+   "domain": "actions",
+   "aliases": [
+    "Form Actions",
+    "page action",
+    "form action"
+   ],
+   "summary": "Group page actions into ordered steps and bind them to supported page or control events.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661735-form-actions"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-127",
+   "name": "Collection actions -View Item",
+   "domain": "actions",
+   "aliases": [
+    "Collection actions -View Item"
+   ],
+   "summary": "Open a collection record in a read-only item view.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/10001877-collection-actions-view-item"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-128",
+   "name": "Collection actions",
+   "domain": "actions",
+   "aliases": [
+    "Collection actions"
+   ],
+   "summary": "Execute supported operations against the current or selected collection records.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/10021237-collection-actions"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-129",
+   "name": "Execution Condition of actions",
+   "domain": "actions",
+   "aliases": [
+    "Execution Condition of actions"
+   ],
+   "summary": "Evaluate a step's execution condition and separately decide whether to continue when it is not met.",
+   "considerations": "A condition not being met is different from an execution failure. Configure whether a failed condition should skip the step or stop the action.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/10021637-execution-condition-of-actions"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-130",
+   "name": "Collection actions -Edit item",
+   "domain": "actions",
+   "aliases": [
+    "Collection actions -Edit item"
+   ],
+   "summary": "Open the editing form for a collection record with the appropriate permissions.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/10020571-collection-actions-edit-item"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-131",
+   "name": "Collection actions -Delete item",
+   "domain": "actions",
+   "aliases": [
+    "Collection actions -Delete item"
+   ],
+   "summary": "Delete the intended collection record, with explicit scope and suitable confirmation.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/10026456-collection-actions-delete-item"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-132",
+   "name": "Collection actions- Update fields",
+   "domain": "actions",
+   "aliases": [
+    "Collection actions- Update fields"
+   ],
+   "summary": "Update selected fields on target collection records without replacing unrelated values.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/10020582-collection-actions-update-fields"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-133",
+   "name": "Collection actions -Trigger list workflows",
+   "domain": "actions",
+   "aliases": [
+    "Collection actions -Trigger list workflows"
+   ],
+   "summary": "Trigger a predefined list workflow for the intended collection records.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/10031195-collection-actions-trigger-list-workflows"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-134",
+   "name": "Set Variables Step",
+   "domain": "actions",
+   "aliases": [
+    "Set Variables Step",
+    "assign variable",
+    "set field value"
+   ],
+   "summary": "Assign constants or expression results to page variables or fields; assignment alone is not persistence.",
+   "considerations": "Assignment changes the current values; identify the separate submission, save, or data-write operation if persistence is required.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/10037096-set-variables-step"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-135",
+   "name": "Show confirm dialog step",
+   "domain": "actions",
+   "aliases": [
+    "Show confirm dialog step"
+   ],
+   "summary": "Ask a confirmation question and use the resulting value in subsequent decisions.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/10032045-show-confirm-dialog-step"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-137",
+   "name": "Submit Form step",
+   "domain": "actions",
+   "aliases": [
+    "Submit Form step"
+   ],
+   "summary": "Submit, save, or process a task in a supported form context; this step is not available in dashboards.",
+   "considerations": "The documented step applies to supported list, approval, and public forms, not dashboards. Use an appropriate open-form or start-workflow operation for a dashboard task.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/10038340-submit-form-step"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-138",
+   "name": "Start Another Action step",
+   "domain": "actions",
+   "aliases": [
+    "Start Another Action step"
+   ],
+   "summary": "Invoke another defined page action while checking context and avoiding circular invocation.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/10044167-start-another-action-step"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-139",
+   "name": "Execute custom code step",
+   "domain": "actions",
+   "aliases": [
+    "Execute custom code step"
+   ],
+   "summary": "Run an explicitly configured custom-script action when the task requires that official extension capability.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/10044572-execute-custom-code-step"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-140",
+   "name": "Using the Set Variables Step to Change the Value of the Status Field",
+   "domain": "actions",
+   "aliases": [
+    "Using the Set Variables Step to Change the Value of the Status Field"
+   ],
+   "summary": "Set a business Status field without assuming that the system workflow state changes with it.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/10037647-using-the-set-variables-step-to-change-the-value-of-the-status-field"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-141",
+   "name": "Set data list step",
+   "domain": "actions",
+   "aliases": [
+    "Set data list step",
+    "write list",
+    "update list",
+    "save record"
+   ],
+   "summary": "Add, conditionally update, or delete list records through a page action; define mappings and result handling.",
+   "considerations": "Specify add, update, or delete; target source; matching conditions; and field mappings. Define how later steps determine success using the supported configuration and verify it in the target environment.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/10052343-set-data-list-step"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-142",
+   "name": "Query data step",
+   "domain": "actions",
+   "aliases": [
+    "Query data step",
+    "query no match",
+    "empty query result",
+    "data query",
+    "query data"
+   ],
+   "summary": "Query a configured source using conditions, sorting, result mode, and compatible output mappings.",
+   "considerations": "Choose single or multiple results, filtering, sorting, paging, and output mappings. Define what the business needs for no matches or multiple matches, then confirm the current behavior rather than assuming automatic clearing or an all-pages count.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/10052954-query-data-step"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-143",
+   "name": "Open item form step",
+   "domain": "actions",
+   "aliases": [
+    "Open item form step"
+   ],
+   "summary": "Open an item form with the required operation mode, parameters, defaults, and presentation.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/10053152-open-item-form-step"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-144",
+   "name": "Open dashboard step",
+   "domain": "actions",
+   "aliases": [
+    "Open dashboard step"
+   ],
+   "summary": "Open a dashboard with query parameters and a supported opening mode.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/10053287-open-dashboard-step"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-145",
+   "name": "Start workflow step",
+   "domain": "actions",
+   "aliases": [
+    "Start workflow step"
+   ],
+   "summary": "Start an approval or list workflow from a page action and check the documented scope and execution requirements.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/10053313-start-workflow-step"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-146",
+   "name": "HTTP request step",
+   "domain": "actions",
+   "aliases": [
+    "HTTP request step"
+   ],
+   "summary": "Call an external HTTP endpoint through a page action with request, authentication, response, and failure settings.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/10053368-http-request-step"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-147",
+   "name": "Print page step (Form action)",
+   "domain": "actions",
+   "aliases": [
+    "Print page step (Form action)",
+    "Print page step"
+   ],
+   "summary": "Print applicable page content with the configured template and preview behavior.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/10255696-print-page-step-form-action"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-148",
+   "name": "AI Assistant step (Form Action)",
+   "domain": "actions",
+   "aliases": [
+    "AI Assistant step (Form Action)",
+    "AI Assistant step"
+   ],
+   "summary": "Call an AI assistant from a page action and map its output to suitable variables.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/13543937-ai-assistant-step-form-action"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G09-149",
+   "name": "Invoke Custom Service from a Form Action",
+   "domain": "actions",
+   "aliases": [
+    "Invoke Custom Service from a Form Action"
+   ],
+   "summary": "Invoke a published custom service from a form action using its declared inputs and outputs.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/16051244-invoke-custom-service-from-a-form-action"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G03-043",
+   "name": "NFC reader Action step",
+   "domain": "actions",
+   "aliases": [
+    "NFC reader Action step"
+   ],
+   "summary": "Read an NFC tag through a supported page action, device, and runtime container.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/12320146-nfc-reader-action-step"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G03-044",
+   "name": "Barcode scan Action step",
+   "domain": "actions",
+   "aliases": [
+    "Barcode scan Action step"
+   ],
+   "summary": "Scan a barcode or QR code through a supported page action and map the result.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/12331781-barcode-scan-action-step"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G03-001",
+   "name": "Understand approval form",
+   "domain": "workflows",
+   "aliases": [
+    "Understand approval form"
+   ],
+   "summary": "Combine submission forms, task forms, variables, and workflow processing in an approval form.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8653912-understand-approval-form"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G03-002",
+   "name": "Create a new approval form",
+   "domain": "workflows",
+   "aliases": [
+    "Create a new approval form"
+   ],
+   "summary": "Create an approval form with an appropriate name and identifier.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8656832-create-a-new-approval-form"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G03-003",
+   "name": "Edit Approval form Settings",
+   "domain": "workflows",
+   "aliases": [
+    "Edit Approval form Settings"
+   ],
+   "summary": "Configure approval-form management settings and submission or viewing access.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661477-edit-approval-form-settings"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G03-004",
+   "name": "Create Approval Forms and Workflows with AI Builder",
+   "domain": "workflows",
+   "aliases": [
+    "Create Approval Forms and Workflows with AI Builder"
+   ],
+   "summary": "Generate a draft form and workflow with AI Builder, then review their business meaning.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/13962174-create-approval-forms-and-workflows-with-ai-builder"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G03-005",
+   "name": "Overview of the approval form designer",
+   "domain": "workflows",
+   "aliases": [
+    "Overview of the approval form designer"
+   ],
+   "summary": "Distinguish submission, task, and print pages within the approval designer.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661487-overview-of-the-approval-form-designer"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G03-006",
+   "name": "Design the submission form",
+   "domain": "workflows",
+   "aliases": [
+    "Design the submission form"
+   ],
+   "summary": "Design the initial submission page and bind its field controls to variables.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661494-design-the-submission-form"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G03-007",
+   "name": "Understand task forms",
+   "domain": "workflows",
+   "aliases": [
+    "Understand task forms"
+   ],
+   "summary": "Use task forms for assignment or claim tasks and decide where forms can be reused.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661503-understand-task-forms"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G03-008",
+   "name": "Design task forms",
+   "domain": "workflows",
+   "aliases": [
+    "Design task forms"
+   ],
+   "summary": "Design or copy task forms, then associate them with the correct workflow tasks.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661508-design-task-forms"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G03-009",
+   "name": "Design print page",
+   "domain": "workflows",
+   "aliases": [
+    "Design print page"
+   ],
+   "summary": "Design a dedicated print page and associate it with a print entry point.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661516-design-print-page"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G03-010",
+   "name": "Using Components in the Form Designer",
+   "domain": "workflows",
+   "aliases": [
+    "Using Components in the Form Designer"
+   ],
+   "summary": "Reuse form components while respecting their global or application scope.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/11550003-using-components-in-the-form-designer"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G03-011",
+   "name": "Overview of the workflow designer",
+   "domain": "workflows",
+   "aliases": [
+    "Overview of the workflow designer"
+   ],
+   "summary": "Connect triggers, actions, and conditional paths in the workflow designer.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661536-overview-of-the-workflow-designer"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G03-012",
+   "name": "Start Action",
+   "domain": "workflows",
+   "aliases": [
+    "Start Action"
+   ],
+   "summary": "Configure workflow start settings, notifications, and supported recall or termination behavior.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661635-start-action"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G03-013",
+   "name": "Assignment Task Action",
+   "domain": "workflows",
+   "aliases": [
+    "Assignment Task Action"
+   ],
+   "summary": "Assign approval or completion tasks using the configured participants and sequential or parallel rules.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661647-assignment-task-action"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G03-014",
+   "name": "Add assignee with Assignee Editor",
+   "domain": "workflows",
+   "aliases": [
+    "Add assignee with Assignee Editor"
+   ],
+   "summary": "Choose assignees through users, managers, positions, groups, or compatible variables.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661658-add-assignee-with-assignee-editor"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G03-015",
+   "name": "Claim Task Action",
+   "domain": "workflows",
+   "aliases": [
+    "Claim Task Action"
+   ],
+   "summary": "Create a pool of tasks that eligible candidates can claim.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661701-claim-task-action"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G03-016",
+   "name": "Send Email Action",
+   "domain": "workflows",
+   "aliases": [
+    "Send Email Action"
+   ],
+   "summary": "Compose workflow emails with recipients, subject, body, and context variables.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661706-send-email-action"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G03-017",
+   "name": "Set Variable Action",
+   "domain": "workflows",
+   "aliases": [
+    "Set Variable Action"
+   ],
+   "summary": "Assign values to variables in the current or another supported approval form.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661710-set-variable-action"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G03-018",
+   "name": "Set Data List Action",
+   "domain": "workflows",
+   "aliases": [
+    "Set Data List Action",
+    "workflow write",
+    "set data list"
+   ],
+   "summary": "Add, update, or delete list data through a background workflow action with explicit target conditions.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661712-set-data-list-action"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G03-019",
+   "name": "Document Recognition Action",
+   "domain": "workflows",
+   "aliases": [
+    "Document Recognition Action"
+   ],
+   "summary": "Recognize document content through the configured AI connection and map the results.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/10259035-document-recognition-action"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G03-020",
+   "name": "Inclusive Gateway Action",
+   "domain": "workflows",
+   "aliases": [
+    "Inclusive Gateway Action"
+   ],
+   "summary": "Configure conditional branching and synchronization using an inclusive gateway.",
+   "considerations": "Use the documented gateway semantics when branches need synchronization. An ordinary connector must not be assumed to wait for every path.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661768-inclusive-gateway-action"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G03-021",
+   "name": "Query Data Action",
+   "domain": "workflows",
+   "aliases": [
+    "Query Data Action",
+    "workflow query",
+    "query data"
+   ],
+   "summary": "Query lists, document libraries, or supported reports and map single or multiple results in a workflow.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661775-query-data-action"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G03-022",
+   "name": "Start workflow Action",
+   "domain": "workflows",
+   "aliases": [
+    "Start workflow Action"
+   ],
+   "summary": "Start another approval or list workflow with the required identity and variable mappings.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/9120941-start-workflow-action"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G03-023",
+   "name": "Delay Action",
+   "domain": "workflows",
+   "aliases": [
+    "Delay Action"
+   ],
+   "summary": "Wait for a duration, date, or supported condition, subject to the documented settings.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661782-delay-action"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G03-024",
+   "name": "End with Rejection Action",
+   "domain": "workflows",
+   "aliases": [
+    "End with Rejection Action"
+   ],
+   "summary": "End a workflow as rejected and support permitted editing and resubmission; verify identifier behavior separately.",
+   "considerations": "Keep business references, form-record IDs, and workflow-instance IDs conceptually separate; confirm resubmission behavior for the actual form.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661788-end-with-rejection-action"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G03-025",
+   "name": "End Action",
+   "domain": "workflows",
+   "aliases": [
+    "End Action"
+   ],
+   "summary": "End a workflow path and configure whether the whole process and other active branches should end.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661796-end-action"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G03-026",
+   "name": "HTTP Request Action",
+   "domain": "workflows",
+   "aliases": [
+    "HTTP Request Action"
+   ],
+   "summary": "Call an HTTP endpoint from a background workflow with configured authentication and result mappings.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661803-http-request-action"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G03-027",
+   "name": "Adobe Sign action",
+   "domain": "workflows",
+   "aliases": [
+    "Adobe Sign action"
+   ],
+   "summary": "Send documents for Adobe Sign signing through the required external connection.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661806-adobe-sign-action"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G03-028",
+   "name": "Signal Event Action",
+   "domain": "workflows",
+   "aliases": [
+    "Signal Event Action"
+   ],
+   "summary": "Handle supported cancellation or recall signals and configure the related follow-up actions.",
+   "considerations": "Verify the signal types and downstream actions. If event ordering or state visibility matters, establish that behavior in the target environment.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661779-signal-event-action"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G03-029",
+   "name": "Generate document action",
+   "domain": "workflows",
+   "aliases": [
+    "Generate document action"
+   ],
+   "summary": "Generate a document by mapping variables into a configured template.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/10115021-generate-document-action"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G03-030",
+   "name": "How to create a word template",
+   "domain": "workflows",
+   "aliases": [
+    "How to create a word template"
+   ],
+   "summary": "Prepare a Word template with placeholders that the generation action can map.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/10115407-how-to-create-a-word-template"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G03-031",
+   "name": "How to save sub list values to word template",
+   "domain": "workflows",
+   "aliases": [
+    "How to save sub list values to word template"
+   ],
+   "summary": "Populate repeating table content in a Word template from sublist values.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/10110471-how-to-save-sub-list-values-to-word-template"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G03-032",
+   "name": "How to save workflow variables to word template",
+   "domain": "workflows",
+   "aliases": [
+    "How to save workflow variables to word template"
+   ],
+   "summary": "Map workflow variables into their corresponding Word-template placeholders.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/10110006-how-to-save-workflow-variables-to-word-template"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G03-033",
+   "name": "Convert to PDF Action",
+   "domain": "workflows",
+   "aliases": [
+    "Convert to PDF Action"
+   ],
+   "summary": "Convert a supported input document to PDF and save the output.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/10272507-convert-to-pdf-action"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G03-034",
+   "name": "Add Watermark Action",
+   "domain": "workflows",
+   "aliases": [
+    "Add Watermark Action"
+   ],
+   "summary": "Add a configured text or image watermark to a document.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/10278417-add-watermark-action"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G03-035",
+   "name": "DocuSign Action",
+   "domain": "workflows",
+   "aliases": [
+    "DocuSign Action"
+   ],
+   "summary": "Send documents for DocuSign signing and handle the configured result through an external connection.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/10345483-docusign-action"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G03-036",
+   "name": "Set Data List – Add Files to a Specific Folder in Document Library",
+   "domain": "workflows",
+   "aliases": [
+    "Set Data List – Add Files to a Specific Folder in Document Library"
+   ],
+   "summary": "Add files to a selected document-library folder using a static or dynamic folder value.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/11640477-set-data-list-add-files-to-a-specific-folder-in-document-library"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G03-037",
+   "name": "Approval Logs in Generate Document Action",
+   "domain": "workflows",
+   "aliases": [
+    "Approval Logs in Generate Document Action"
+   ],
+   "summary": "Include supported approval-log information in a generated document.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/11645700-approval-logs-in-generate-document-action"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G03-038",
+   "name": "Set Data List – Update Files in a Specific Folder in Document Library",
+   "domain": "workflows",
+   "aliases": [
+    "Set Data List – Update Files in a Specific Folder in Document Library"
+   ],
+   "summary": "Identify document-library files or folders with suitable conditions before updating them.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/11658949-set-data-list-update-files-in-a-specific-folder-in-document-library"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G03-039",
+   "name": "Set Data List – Delete Files from a Specific Folder in Document Library",
+   "domain": "workflows",
+   "aliases": [
+    "Set Data List – Delete Files from a Specific Folder in Document Library"
+   ],
+   "summary": "Delete only the intended files or folders in a document library using explicit conditions.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/11666305-set-data-list-delete-files-from-a-specific-folder-in-document-library"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G03-040",
+   "name": "Query Data – Filter by Folder Path in Document Library",
+   "domain": "workflows",
+   "aliases": [
+    "Query Data – Filter by Folder Path in Document Library"
+   ],
+   "summary": "Filter a document-library query by folder path or another supported field.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/11666595-query-data-filter-by-folder-path-in-document-library"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G03-041",
+   "name": "Connector Action",
+   "domain": "workflows",
+   "aliases": [
+    "Connector Action"
+   ],
+   "summary": "Merge arriving workflow paths without treating the connector as a synchronizing gateway or external integration.",
+   "considerations": "This is a workflow-path connector. It is not an external-system connection and should not be assumed to synchronize parallel arrivals.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/11937855-connector-action"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G03-042",
+   "name": "Loop Action",
+   "domain": "workflows",
+   "aliases": [
+    "Loop Action"
+   ],
+   "summary": "Repeat actions over records, multiple values, or a configured count with suitable exit conditions.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/12320109-loop-action"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G03-045",
+   "name": "Respond to AI Action(Workflow)",
+   "domain": "workflows",
+   "aliases": [
+    "Respond to AI Action(Workflow)",
+    "Respond to AI Action"
+   ],
+   "summary": "Return a workflow result to AI without assuming that returning a response ends the workflow.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/13138160-respond-to-ai-action-workflow"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G03-046",
+   "name": "AI Assistant action(Workflow Action)",
+   "domain": "workflows",
+   "aliases": [
+    "AI Assistant action(Workflow Action)",
+    "AI Assistant action"
+   ],
+   "summary": "Call an AI assistant or agent in a background workflow and map its output.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/13615733-ai-assistant-action-workflow-action"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G03-047",
+   "name": "PandaDoc Action",
+   "domain": "workflows",
+   "aliases": [
+    "PandaDoc Action"
+   ],
+   "summary": "Use a PandaDoc connection for the supported document-signing workflow.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/13695550-pandadoc-action"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G03-048",
+   "name": "Manage your requests",
+   "domain": "workflows",
+   "aliases": [
+    "Manage your requests"
+   ],
+   "summary": "View and manage submitted requests, distinguishing recall from termination.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661811-manage-your-requests"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G03-049",
+   "name": "Manage workflow pending tasks",
+   "domain": "workflows",
+   "aliases": [
+    "Manage workflow pending tasks"
+   ],
+   "summary": "View and process tasks assigned to the user.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661815-manage-workflow-pending-tasks"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G03-050",
+   "name": "Delegate your workflow tasks to other team members",
+   "domain": "workflows",
+   "aliases": [
+    "Delegate your workflow tasks to other team members"
+   ],
+   "summary": "Delegate workflow tasks to another user for the configured period and policy.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661817-delegate-your-workflow-tasks-to-other-team-members"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G05-001",
+   "name": "Introduce Data List",
+   "domain": "lists",
+   "aliases": [
+    "Introduce Data List"
+   ],
+   "summary": "Store structured business records in a data list.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661864-introduce-data-list"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G05-002",
+   "name": "Understand Data List",
+   "domain": "lists",
+   "aliases": [
+    "Understand Data List"
+   ],
+   "summary": "Organize fields, records, views, forms, and list settings.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661867-understand-data-list"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G05-003",
+   "name": "Create new data list",
+   "domain": "lists",
+   "aliases": [
+    "Create new data list"
+   ],
+   "summary": "Create a data list and define its fields while respecting system-field constraints.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661873-create-new-data-list"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G05-004",
+   "name": "Create a Data List with AI",
+   "domain": "lists",
+   "aliases": [
+    "Create a Data List with AI"
+   ],
+   "summary": "Generate a draft list structure with AI and review the resulting fields.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/13960773-create-a-data-list-with-ai"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G05-005",
+   "name": "Create and manage data fields",
+   "domain": "lists",
+   "aliases": [
+    "Create and manage data fields"
+   ],
+   "summary": "Create and manage fields with type-appropriate defaults, required settings, and uniqueness options.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661875-create-and-manage-data-fields"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G05-006",
+   "name": "Understand data encryption for fields",
+   "domain": "lists",
+   "aliases": [
+    "Understand data encryption for fields"
+   ],
+   "summary": "Understand field-encryption capabilities and their compatibility with other field settings.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661881-understand-data-encryption-for-fields"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G05-007",
+   "name": "Manage data encryption for fields",
+   "domain": "lists",
+   "aliases": [
+    "Manage data encryption for fields"
+   ],
+   "summary": "Enable or disable supported field encryption after checking existing use and references.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661883-manage-data-encryption-for-fields"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G05-008",
+   "name": "Create and configure a Lookup field in a Data List",
+   "domain": "lists",
+   "aliases": [
+    "Create and configure a Lookup field in a Data List"
+   ],
+   "summary": "Configure a list Lookup field with a related source and additional display or mapped fields.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8666234-create-and-configure-a-lookup-field-in-a-data-list"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G05-009",
+   "name": "Autonumber field type",
+   "domain": "lists",
+   "aliases": [
+    "Autonumber field type"
+   ],
+   "summary": "Configure automatic numbering with prefixes, suffixes, digit count, and start settings.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8878554-autonumber-field-type"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G05-010",
+   "name": "Sub list field (Data list)",
+   "domain": "lists",
+   "aliases": [
+    "Sub list field (Data list)",
+    "Sub list field"
+   ],
+   "summary": "Store nested detail rows in a data-list sublist and account for their different reporting grain.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/9403818-sub-list-field-data-list"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G05-011",
+   "name": "Create Data List Fields with AI",
+   "domain": "lists",
+   "aliases": [
+    "Create Data List Fields with AI"
+   ],
+   "summary": "Generate proposed data fields with AI and review their types and identifiers.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/13937145-create-data-list-fields-with-ai"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G05-012",
+   "name": "Adding a new item",
+   "domain": "lists",
+   "aliases": [
+    "Adding a new item"
+   ],
+   "summary": "Create a record through the relevant list form with appropriate edit access.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661885-adding-a-new-item"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G05-013",
+   "name": "Editing items",
+   "domain": "lists",
+   "aliases": [
+    "Editing items"
+   ],
+   "summary": "Edit an existing record through its list form and permissions.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661888-editing-items"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G05-014",
+   "name": "View an item",
+   "domain": "lists",
+   "aliases": [
+    "View an item"
+   ],
+   "summary": "View record details and the permitted related content or operations.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8669099-view-an-item"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G05-015",
+   "name": "Deleting items",
+   "domain": "lists",
+   "aliases": [
+    "Deleting items"
+   ],
+   "summary": "Delete a record only when deletion is the intended data operation.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661896-deleting-items"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G05-016",
+   "name": "Import Excel or CSV file to add and update data",
+   "domain": "lists",
+   "aliases": [
+    "Import Excel or CSV file to add and update data"
+   ],
+   "summary": "Import Excel or CSV data with explicit matching keys, operation mode, and field mappings.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661911-import-excel-or-csv-file-to-add-and-update-data"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G05-017",
+   "name": "Export data items to Excel file",
+   "domain": "lists",
+   "aliases": [
+    "Export data items to Excel file"
+   ],
+   "summary": "Export the intended records and configured fields while respecting access permissions.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661920-export-data-items-to-excel-file"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G05-018",
+   "name": "Search and filter data in data list",
+   "domain": "lists",
+   "aliases": [
+    "Search and filter data in data list"
+   ],
+   "summary": "Configure search and filters in the relevant view and verify each view separately.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661926-search-and-filter-data-in-data-list"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G05-019",
+   "name": "Understand Data views",
+   "domain": "lists",
+   "aliases": [
+    "Understand Data views"
+   ],
+   "summary": "Present the same list data through supported view types rather than creating another data store.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661930-understand-data-views"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G05-020",
+   "name": "Getting started with Yeeflow data views",
+   "domain": "lists",
+   "aliases": [
+    "Getting started with Yeeflow data views"
+   ],
+   "summary": "Choose views that define display, sorting, and filtering for the same underlying records.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661931-getting-started-with-yeeflow-data-views"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G05-021",
+   "name": "List View",
+   "domain": "lists",
+   "aliases": [
+    "List View"
+   ],
+   "summary": "Display records as configured columns in a list view.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8819617-list-view"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G05-022",
+   "name": "Gallery View",
+   "domain": "lists",
+   "aliases": [
+    "Gallery View"
+   ],
+   "summary": "Display records as cards, optionally with cover images, in a gallery view.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8829937-gallery-view"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G05-023",
+   "name": "Create custom list forms",
+   "domain": "lists",
+   "aliases": [
+    "Create custom list forms"
+   ],
+   "summary": "Configure separate new, edit, and view forms for list records.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661935-create-custom-list-forms"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G05-024",
+   "name": "Create list workflows",
+   "domain": "lists",
+   "aliases": [
+    "Create list workflows",
+    "list trigger",
+    "list workflow",
+    "automation"
+   ],
+   "summary": "Trigger list workflows using supported creation, change, field-change, or date conditions.",
+   "considerations": "Confirm the configured trigger, run identity, and fields changed by the workflow. Check retriggering, active-instance behavior, and recursion in the target environment when these affect the design.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661939-create-list-workflows"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G05-025",
+   "name": "Create custom notifications for data list",
+   "domain": "lists",
+   "aliases": [
+    "Create custom notifications for data list"
+   ],
+   "summary": "Configure notifications for supported record changes, recurring schedules, or date reminders.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661951-create-custom-notifications-for-data-list"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G05-026",
+   "name": "Enable versioning control",
+   "domain": "lists",
+   "aliases": [
+    "Enable versioning control"
+   ],
+   "summary": "Enable supported record versioning and check who can inspect historical versions.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661960-enable-versioning-control"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G05-027",
+   "name": "Manage permissions of a data list",
+   "domain": "lists",
+   "aliases": [
+    "Manage permissions of a data list"
+   ],
+   "summary": "Configure list and record-level viewing, editing, deletion, and related access.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661976-manage-permissions-of-a-data-list"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G05-028",
+   "name": "Overview of document library",
+   "domain": "lists",
+   "aliases": [
+    "Overview of document library"
+   ],
+   "summary": "Store and manage application files and folders in a document library.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8656955-overview-of-document-library"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G04-001",
+   "name": "Understanding Form Report",
+   "domain": "reports",
+   "aliases": [
+    "Understanding Form Report",
+    "form report",
+    "approval report"
+   ],
+   "summary": "Project approval-form values into a form report and check the row grain when including a sublist.",
+   "considerations": "Establish the report row grain before aggregation, particularly when selecting a sublist. Confirm refresh and resubmission behavior instead of assuming a fixed delay or record identity.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661821-understanding-form-report"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G04-002",
+   "name": "Create form reports",
+   "domain": "reports",
+   "aliases": [
+    "Create form reports"
+   ],
+   "summary": "Create a form report from the intended approval source and selected variables.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661825-create-form-reports"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G04-003",
+   "name": "Exporting data from a form report",
+   "domain": "reports",
+   "aliases": [
+    "Exporting data from a form report"
+   ],
+   "summary": "Export all or selected form-report records when the user has the required access.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661833-exporting-data-from-a-form-report"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G04-004",
+   "name": "Creating and utilizing data views in form reports",
+   "domain": "reports",
+   "aliases": [
+    "Creating and utilizing data views in form reports"
+   ],
+   "summary": "Configure report views for the intended display and filtering needs.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661835-creating-and-utilizing-data-views-in-form-reports"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G04-005",
+   "name": "Update fields of form report",
+   "domain": "reports",
+   "aliases": [
+    "Update fields of form report"
+   ],
+   "summary": "Update the fields exposed by a form report and review dependent consumers.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661837-update-fields-of-form-report"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G04-006",
+   "name": "Editing permissions of form reports",
+   "domain": "reports",
+   "aliases": [
+    "Editing permissions of form reports"
+   ],
+   "summary": "Configure permissions for accessing a form report.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661839-editing-permissions-of-form-reports"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G04-007",
+   "name": "Utilizing form reports effectively",
+   "domain": "reports",
+   "aliases": [
+    "Utilizing form reports effectively"
+   ],
+   "summary": "Use form reports for supported querying, analysis, and business presentation.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661844-utilizing-form-reports-effectively"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G04-008",
+   "name": "Customizing the fields for data filter and search in form reports",
+   "domain": "reports",
+   "aliases": [
+    "Customizing the fields for data filter and search in form reports"
+   ],
+   "summary": "Choose report fields that are available for filtering and searching.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661852-customizing-the-fields-for-data-filter-and-search-in-form-reports"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G04-009",
+   "name": "Moving a form report to another application",
+   "domain": "reports",
+   "aliases": [
+    "Moving a form report to another application"
+   ],
+   "summary": "Move a form report to another application and check its dependent references and permissions.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661856-moving-a-form-report-to-another-application"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G04-010",
+   "name": "Handling changes of approval form variables in form reports",
+   "domain": "reports",
+   "aliases": [
+    "Handling changes of approval form variables in form reports"
+   ],
+   "summary": "Review form-report fields after the source approval variables change.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661858-handling-changes-of-approval-form-variables-in-form-reports"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G04-011",
+   "name": "Utilizing form reports as a data source: A comprehensive guide",
+   "domain": "reports",
+   "aliases": [
+    "Utilizing form reports as a data source: A comprehensive guide"
+   ],
+   "summary": "Use a form report as a source for related selection, data presentation, or analysis with an appropriate freshness requirement.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8661860-utilizing-form-reports-as-a-data-source-a-comprehensive-guide"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G06-001",
+   "name": "Understanding the Data Report",
+   "domain": "reports",
+   "aliases": [
+    "Understanding the Data Report",
+    "data report",
+    "joined report"
+   ],
+   "summary": "Transform and combine sources through joins, appends, field operations, filtering, grouping, and deduplication in a Data Report.",
+   "considerations": "Specify join keys, row grain, aggregation, and refresh requirements before reusing the result. Do not treat a report as an immediate concurrency-control mechanism.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8656949-understanding-the-data-report"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G07-001",
+   "name": "Understand Dashboard",
+   "domain": "reports",
+   "aliases": [
+    "Understand Dashboard"
+   ],
+   "summary": "Combine controls, metrics, charts, filters, and interactions in a dashboard with explicit data sources.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8656944-understand-dashboard"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G08-001",
+   "name": "Understand service portal",
+   "domain": "portal",
+   "aliases": [
+    "Understand service portal"
+   ],
+   "summary": "Provide an external-user service portal with the intended access model and exposed components.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8656937-understand-service-portal"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G08-002",
+   "name": "Service Portal User Management",
+   "domain": "portal",
+   "aliases": [
+    "Service Portal User Management"
+   ],
+   "summary": "Manage service-portal users and their access.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8884771-service-portal-user-management"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G08-003",
+   "name": "How to invite users to your Service Portal",
+   "domain": "portal",
+   "aliases": [
+    "How to invite users to your Service Portal"
+   ],
+   "summary": "Invite users to a service portal using the supported invitation process.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8904520-how-to-invite-users-to-your-service-portal"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G08-004",
+   "name": "How to import users to your Service Portal",
+   "domain": "portal",
+   "aliases": [
+    "How to import users to your Service Portal"
+   ],
+   "summary": "Import portal users with reviewed field mappings and identity information.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8904629-how-to-import-users-to-your-service-portal"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G08-005",
+   "name": "Edit user information in Service Portal",
+   "domain": "portal",
+   "aliases": [
+    "Edit user information in Service Portal"
+   ],
+   "summary": "Edit portal-user information through the supported management settings.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8906187-edit-user-information-in-service-portal"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G02-001",
+   "name": "Understand Workspace",
+   "domain": "applications",
+   "aliases": [
+    "Understand Workspace"
+   ],
+   "summary": "Use a workspace to organize applications and their management scope.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8650077-understand-workspace"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G02-002",
+   "name": "Understand Application",
+   "domain": "applications",
+   "aliases": [
+    "Understand Application"
+   ],
+   "summary": "Combine business components and access settings within an application.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8656008-understand-application"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G02-003",
+   "name": "Move and duplicate applications",
+   "domain": "applications",
+   "aliases": [
+    "Move and duplicate applications"
+   ],
+   "summary": "Move or duplicate applications and verify which configuration and data are included.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8656189-move-and-duplicate-applications"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G02-004",
+   "name": "Export and import applications",
+   "domain": "applications",
+   "aliases": [
+    "Export and import applications"
+   ],
+   "summary": "Export and import application packages with separate attention to configuration and data options.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8656225-export-and-import-applications"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G02-005",
+   "name": "Create a new application",
+   "domain": "applications",
+   "aliases": [
+    "Create a new application"
+   ],
+   "summary": "Create an application in an authorized workspace from a template or a new design.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8662275-create-a-new-application"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G02-006",
+   "name": "Create new components from the new application resources",
+   "domain": "applications",
+   "aliases": [
+    "Create new components from the new application resources"
+   ],
+   "summary": "Create the required data, page, reporting, or automation resources within an application.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8656654-create-new-components-from-the-new-application-resources"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G02-007",
+   "name": "Understand the permissions of workspaces and applications",
+   "domain": "applications",
+   "aliases": [
+    "Understand the permissions of workspaces and applications"
+   ],
+   "summary": "Distinguish workspace permissions from application access and component permissions.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8656128-understand-the-permissions-of-workspaces-and-applications"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G02-008",
+   "name": "Customize Global and Application Styles",
+   "domain": "applications",
+   "aliases": [
+    "Customize Global and Application Styles"
+   ],
+   "summary": "Maintain shared fonts, colors, and control styles at the appropriate global or application scope.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/11392942-customize-global-and-application-styles"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G02-009",
+   "name": "Create a Scheduled Workflow with AI",
+   "domain": "applications",
+   "aliases": [
+    "Create a Scheduled Workflow with AI"
+   ],
+   "summary": "Generate a scheduled-workflow draft with AI, then review timing and actions.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/17563590-create-a-scheduled-workflow-with-ai"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G02-010",
+   "name": "Customize the appearance and global styles",
+   "domain": "applications",
+   "aliases": [
+    "Customize the appearance and global styles"
+   ],
+   "summary": "Configure application appearance and reuse supported global styles.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8656696-customize-the-appearance-and-global-styles"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G02-011",
+   "name": "Set the Navigation Menu Bar",
+   "domain": "applications",
+   "aliases": [
+    "Set the Navigation Menu Bar"
+   ],
+   "summary": "Configure the application's navigation entries and their intended targets.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/8656737-set-the-navigation-menu-bar"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G02-012",
+   "name": "Application users and access permissions",
+   "domain": "applications",
+   "aliases": [
+    "Application users and access permissions"
+   ],
+   "summary": "Grant application access to the intended users and roles.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/9144231-application-users-and-access-permissions"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G02-013",
+   "name": "User group (Application admin only)",
+   "domain": "applications",
+   "aliases": [
+    "User group (Application admin only)",
+    "User group"
+   ],
+   "summary": "Manage application user groups with the required administrative access.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/9263347-user-group-application-admin-only"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G02-014",
+   "name": "Application info management",
+   "domain": "applications",
+   "aliases": [
+    "Application info management"
+   ],
+   "summary": "Maintain application information and descriptive settings.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/9738542-application-info-management"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G02-015",
+   "name": "Version Management for Applications",
+   "domain": "applications",
+   "aliases": [
+    "Version Management for Applications"
+   ],
+   "summary": "Manage application versions and review changes before deployment.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/11703094-version-management-for-applications"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G02-016",
+   "name": "AI Agent",
+   "domain": "applications",
+   "aliases": [
+    "AI Agent"
+   ],
+   "summary": "Configure an AI agent with an explicit purpose, context, and available capabilities.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/12950379-ai-agent"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G02-017",
+   "name": "Knowledge Sources",
+   "domain": "applications",
+   "aliases": [
+    "Knowledge Sources"
+   ],
+   "summary": "Provide approved knowledge sources for AI retrieval.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/12981066-knowledge-sources"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G02-018",
+   "name": "Query Items Tool",
+   "domain": "applications",
+   "aliases": [
+    "Query Items Tool"
+   ],
+   "summary": "Let an AI tool query authorized list items with explicit source and filtering settings.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/13002386-query-items-tool"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G02-019",
+   "name": "Add an item to a list tool",
+   "domain": "applications",
+   "aliases": [
+    "Add an item to a list tool"
+   ],
+   "summary": "Let an AI tool add a record using defined fields and authorized access.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/13009782-add-an-item-to-a-list-tool"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G02-020",
+   "name": "Update an item by ID tool",
+   "domain": "applications",
+   "aliases": [
+    "Update an item by ID tool"
+   ],
+   "summary": "Let an AI tool update a specific record by its identifier.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/13009818-update-an-item-by-id-tool"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G02-021",
+   "name": "Delete an item tool",
+   "domain": "applications",
+   "aliases": [
+    "Delete an item tool"
+   ],
+   "summary": "Let an AI tool delete the intended record with explicit scope and authorization.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/13009989-delete-an-item-tool"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G02-022",
+   "name": "Start a workflow tool",
+   "domain": "applications",
+   "aliases": [
+    "Start a workflow tool"
+   ],
+   "summary": "Let an AI tool start a configured workflow with the required inputs.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/13010150-start-a-workflow-tool"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G02-023",
+   "name": "Run an agent tool",
+   "domain": "applications",
+   "aliases": [
+    "Run an agent tool"
+   ],
+   "summary": "Invoke another configured agent through a declared AI tool.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/13010382-run-an-agent-tool"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G02-024",
+   "name": "AI Agent Integration Guide",
+   "domain": "applications",
+   "aliases": [
+    "AI Agent Integration Guide"
+   ],
+   "summary": "Integrate an AI agent through its supported connection and invocation requirements.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/13068947-ai-agent-integration-guide"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G02-025",
+   "name": "Usage and Differences Between “Dynamically fill with AI” and “Custom value” in AI Agent Tool Inputs",
+   "domain": "applications",
+   "aliases": [
+    "Usage and Differences Between “Dynamically fill with AI” and “Custom value” in AI Agent Tool Inputs"
+   ],
+   "summary": "Distinguish AI-generated tool input values from explicitly configured custom values.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/13127109-usage-and-differences-between-dynamically-fill-with-ai-and-custom-value-in-ai-agent-tool-inputs"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G02-026",
+   "name": "Creating and Managing a Copilot",
+   "domain": "applications",
+   "aliases": [
+    "Creating and Managing a Copilot"
+   ],
+   "summary": "Create a Copilot and define its intended application assistance.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/13223781-creating-and-managing-a-copilot"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G02-027",
+   "name": "Using Copilot in an Application",
+   "domain": "applications",
+   "aliases": [
+    "Using Copilot in an Application"
+   ],
+   "summary": "Use an installed Copilot in the application context and permitted scope.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/13229548-using-copilot-in-an-application"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G02-028",
+   "name": "Managing Knowledge for Copilot",
+   "domain": "applications",
+   "aliases": [
+    "Managing Knowledge for Copilot"
+   ],
+   "summary": "Configure read-oriented Copilot knowledge separately from tools that perform operations.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/13234388-managing-knowledge-for-copilot"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G02-029",
+   "name": "Managing Tools for Copilot",
+   "domain": "applications",
+   "aliases": [
+    "Managing Tools for Copilot"
+   ],
+   "summary": "Manage the tools a Copilot can call, including their allowed operations.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/13238451-managing-tools-for-copilot"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G02-030",
+   "name": "Managing Copilot Installation in an Application",
+   "domain": "applications",
+   "aliases": [
+    "Managing Copilot Installation in an Application"
+   ],
+   "summary": "Install a Copilot in an application and configure who can access it.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/13238906-managing-copilot-installation-in-an-application"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G02-031",
+   "name": "Call HTTP Request tool",
+   "domain": "applications",
+   "aliases": [
+    "Call HTTP Request tool"
+   ],
+   "summary": "Call an HTTP service through an AI tool using the configured connection.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/14685993-call-http-request-tool"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G02-032",
+   "name": "Access application resources tool",
+   "domain": "applications",
+   "aliases": [
+    "Access application resources tool"
+   ],
+   "summary": "Expose only the intended application resources and operations to an AI tool.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/15256847-access-application-resources-tool"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G02-033",
+   "name": "Call REST API tool",
+   "domain": "applications",
+   "aliases": [
+    "Call REST API tool"
+   ],
+   "summary": "Define callable REST operations for AI through a supported OpenAPI-based tool.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/15284022-call-rest-api-tool"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G02-034",
+   "name": "Configure AI capabilities for Agent and Copilot",
+   "domain": "applications",
+   "aliases": [
+    "Configure AI capabilities for Agent and Copilot"
+   ],
+   "summary": "Configure supported agent and Copilot capabilities for the intended use.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/15420380-configure-ai-capabilities-for-agent-and-copilot"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G02-035",
+   "name": "Create and manage App Credentials",
+   "domain": "applications",
+   "aliases": [
+    "Create and manage App Credentials"
+   ],
+   "summary": "Create application-scoped credentials with the intended resource permissions.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/15928863-create-and-manage-app-credentials"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G02-036",
+   "name": "Create and Configure a Service Portal",
+   "domain": "applications",
+   "aliases": [
+    "Create and Configure a Service Portal"
+   ],
+   "summary": "Create a service portal with the required access model and components.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/15956977-create-and-configure-a-service-portal"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G02-037",
+   "name": "Invoke Custom Service as an AI Tool",
+   "domain": "applications",
+   "aliases": [
+    "Invoke Custom Service as an AI Tool"
+   ],
+   "summary": "Expose a published custom service as a declared AI tool.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/16061213-invoke-custom-service-as-an-ai-tool"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  },
+  {
+   "id": "G02-038",
+   "name": "Create a Dashboard with AI",
+   "domain": "applications",
+   "aliases": [
+    "Create a Dashboard with AI"
+   ],
+   "summary": "Generate a dashboard draft with AI, then review layout, controls, and sources.",
+   "source_urls": [
+    "https://support.yeeflow.com/en/articles/17563063-create-a-dashboard-with-ai"
+   ],
+   "evidence": "official_help_paraphrase",
+   "material_date": "2026-10-15"
+  }
+ ]
+}
