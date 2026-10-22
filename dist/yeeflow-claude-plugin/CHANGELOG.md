@@ -1,3 +1,9 @@
+# 1.19.0 — document workflow skills
+
+- Finalize release metadata after PR #12 merge and installed Codex RC verification: 31 enabled skills, three specialist resource reads, and 32 installed-payload planning tests passed.
+- Retain separate evidence boundaries for model conversations, desktop visuals, Claude installation and live OCR.
+- Final installation is rechecked before stable promotion.
+
 # 1.19.0-rc1 — document workflow skills candidate
 
 - Add Workflow Stage UI, Single-Attachment OCR Orchestrator, and Document Archive Lifecycle skills.

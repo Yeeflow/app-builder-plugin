@@ -6,13 +6,13 @@ Current repository: [Yeeflow/app-builder-plugin](https://github.com/Yeeflow/app-
 
 ## Version and packages
 
-The current Codex/OpenAI and Claude package version is **1.18.1**, with 28 Skills and the unified OAuth MCP connection. 1.18.0 added the Yeeflow Feature Configuration Guide skill and 1.18.1 fixes its helper under symlinked plugin caches; see the [1.18.0](docs/releases/yeeflow-app-builder-v1.18.0.md) and [1.18.1](docs/releases/yeeflow-app-builder-v1.18.1.md) release notes and the [1.17.0 release notes](docs/releases/yeeflow-app-builder-v1.17.0.md) for direct Form Action execution.
+The current Codex/OpenAI and Claude package version is **1.19.0**, with 31 Skills and the unified OAuth MCP connection. 1.18.0 added the Yeeflow Feature Configuration Guide skill and 1.18.1 fixes its helper under symlinked plugin caches; see the [1.18.0](docs/releases/yeeflow-app-builder-v1.18.0.md) and [1.18.1](docs/releases/yeeflow-app-builder-v1.18.1.md) release notes and the [1.17.0 release notes](docs/releases/yeeflow-app-builder-v1.17.0.md) for direct Form Action execution.
 
 | Host | Marketplace / plugin | Package on `main` and `stable` |
 | --- | --- | --- |
 | Codex App | `yeeflow` / `yeeflow-app-builder` | `dist/yeeflow-app-builder-plugin` |
 | ChatGPT Web | Host-specific registered Apps profile | Built from the shared OpenAI payload; see [build profiles](docs/standards/plugin-host-build-profiles.md) |
-| Claude | `yeeflow-claude` / `yeeflow` (1.18.1) | `dist/yeeflow-claude-plugin` |
+| Claude | `yeeflow-claude` / `yeeflow` (1.19.0) | `dist/yeeflow-claude-plugin` |
 
 The repository name is independent of the plugin identity. Codex identities remain unchanged; the Claude public-directory candidate uses `yeeflow` with display name Yeeflow. Publishing source changes to GitHub does not submit or update an OpenAI store listing or migrate existing installations.
 
@@ -33,7 +33,7 @@ Expected installed identity:
 ```text
 Marketplace: Yeeflow
 Plugin: Yeeflow
-Version: 1.18.1
+Version: 1.19.0
 ```
 
 The source above identifies the current repository; a Codex installation from this new private source has not yet been recorded. Existing installations keep their configured source until explicitly migrated. Do not remove a working installation solely because the repository URL changed.
@@ -41,7 +41,7 @@ The source above identifies the current repository; a Codex installation from th
 Verify metadata from a checkout of `stable`:
 
 ```sh
-node scripts/inspect-codex-plugin-cache-metadata.mjs --root . --expect-version 1.18.1
+node scripts/inspect-codex-plugin-cache-metadata.mjs --root . --expect-version 1.19.0
 ```
 
 ## ChatGPT Web package
@@ -70,7 +70,7 @@ Complete Yeeflow OAuth through the selected host's MCP connection. Each host aut
 3. Select or paste `https://github.com/Yeeflow/app-builder-plugin` and click **Sync**. This repository is private, so the connected GitHub account must have repository access.
 4. Use the repository URL without `#stable`. This web flow reads the default `main` branch; both `main` and `stable` contain the complete Claude package.
 5. After synchronization completes, open **Discover**, find **Yeeflow** from `app-builder-plugin`, and click **Add**.
-6. In **Yours**, open Yeeflow and confirm it is enabled and shows **1.18.1**, **28 skills**, and **1 connector** (`yeeflow_mcp`).
+6. In **Yours**, open Yeeflow and confirm it is enabled and shows **1.19.0**, **31 skills**, and **1 connector** (`yeeflow_mcp`).
 7. Open its connector and complete the Yeeflow OAuth connection if requested. Use the intended Yeeflow account; Claude and other hosts authenticate separately.
 
 ### Update an existing marketplace installation
@@ -188,6 +188,6 @@ Keep `main` as the default integration branch and `stable` as the validated inst
 
 For a new package version, rebuild and validate the affected host distributions, use RC tags when needed, and document installation acceptance before creating a final tag and GitHub Release. Preserve existing release tags. Store submissions, installed-source migration and live tenant runtime acceptance remain separate operations.
 
-## Document workflow candidate
+## Document workflow skills
 
-The 1.19.0-rc1 development candidate adds three document/workflow specialists and six existing skill enhancements (31 skills total). See the [candidate notes](docs/releases/yeeflow-app-builder-v1.19.0-rc1.md) for scope, local checks and pending installation acceptance. The validated `stable` installation remains separate from this development change.
+Version 1.19.0 adds three document/workflow specialists and six existing skill enhancements (31 skills total). See the [release notes](docs/releases/yeeflow-app-builder-v1.19.0.md) for scope and verification boundaries. Installed Codex RC discovery and resource reads passed; final installation is rechecked before stable promotion.
