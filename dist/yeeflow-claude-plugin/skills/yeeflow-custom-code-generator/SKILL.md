@@ -512,6 +512,12 @@ Prefer functional Custom Code modules, declared temporary-variable output/input 
 
 For Custom Code button clicks, guarded value changes, and custom collection row interactions, read the bundled Custom Code Generator reference `references/direct-form-action-execution.md` (resolve it from that skill's directory). Prefer the product-provided `CodeInContext.executeAction(action)` API on hosts exposing it. Generate the native action definition and declared variable bindings together; use real action IDs or unique names, serialize shared row context, await execution, and preserve readonly/confirmation and error handling. No arbitrary argument payload or business result is supported. Do not assume a custom row click establishes native Collection context or that a void variable setter has propagated. Replace hidden-button/CSS-ID triggering only where direct host support is confirmed. Validate real host behavior separately from offline helper tests.
 
+<!-- document-workflow-project-patterns:start -->
+## Guarded OCR rows and document watermark composition
+
+For OCR row orchestration, load `skills/yeeflow-attachment-ocr-orchestrator/SKILL.md`; do not hash/fetch/query while a file is uploading, substitute random attachment IDs for content hashes, or write stale asynchronous results into a changed row. For a requested repeated-page watermark, Custom Code may compose signatures, configured standard text and notes into one image; verify image availability, scaling, transparency, pagination and the target watermark action separately. This composition pattern does not prove document-conversion support for every file type. Keep project content and credentials out of reusable code. Use `docs/standards/document-workflow-project-patterns.md` for related UI/validation behavior.
+<!-- document-workflow-project-patterns:end -->
+
 <!-- plugin-resource-access -->
 ## Portable access to bundled resources
 

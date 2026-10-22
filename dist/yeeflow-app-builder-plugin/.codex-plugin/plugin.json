@@ -1,6 +1,6 @@
 {
   "name": "yeeflow-app-builder",
-  "version": "1.18.1",
+  "version": "1.19.0-rc1",
   "description": "Work with business data, manage tasks, and build apps in Yeeflow.",
   "keywords": [
     "yeeflow",
@@ -226,7 +226,10 @@
     "workflowtype-1",
     "live-workflow-materialization",
     "workflow-readback",
-    "workflow-create-update-replace"
+    "workflow-create-update-replace",
+    "workflow-stage-ui",
+    "attachment-ocr-cache",
+    "document-archive-lifecycle"
   ],
   "skills": "./skills/",
   "mcpServers": "./.mcp.json",

@@ -1,0 +1,30 @@
+---
+name: yeeflow-document-archive-lifecycle
+description: Design and repair Yeeflow document reuse, metadata updates, renewals and approval-time archive writeback across related applications. Use when attachments and recognized business fields must retain versions and traceable ownership.
+---
+
+# Document Archive Lifecycle
+
+Establish the target's identity and ownership model before mapping files: tenant/company, physical unit, lease period, source application, document type, archive version and original attachment are different identities. Read [reuse-and-writeback.md](references/reuse-and-writeback.md) for the evidence-backed mapping and version practices.
+
+## Plan reuse and updates
+
+- Build an explicit source → consumer → approval/writeback mapping for each document group. Include attachment type, business fields, source record, timestamps and current/version status. Reuse existing list fields and actual Service/list variable IDs.
+- Fetch the latest eligible record under the agreed identity, document type, access scope and validity/current policy. Define deterministic ordering and ties. “Latest created” alone is not always “latest approved”.
+- Retain original attachments and recognized/business fields together when loading a form row. Ask the user whether to update according to the workflow; do not automatically replace an existing document merely because it is older.
+- For the immutable-document policy used by this pattern, metadata-only edits update the existing record. Renew or attachment replacement creates a linked new version; the old attachment and record remain. A same-MD5 reupload can reuse OCR but still follows the new-version rule. Make this policy explicit rather than silently applying it to every unrelated project.
+- Activate a new current version at the agreed approval milestone. Define idempotency and predecessor handling so retries cannot duplicate archives or deactivate the wrong version. Do not claim concurrency or retry safety without tests.
+
+## Keep storage and UI proportional
+
+Complex Service JSON may hold backend snapshots without exposing every technical detail as business lists. Use standalone document records where per-file updates, recognition, search, history or archive reuse require them. Choose from the actual product capabilities and user requirement; do not universally replace one with the other.
+
+Organize details into business/document fields, recognized business information, source/version and a unified OCR diagnostics Grid. Hide empty optional groups as appropriate. Technical request IDs and raw OCR payloads are not business input fields. Keep View, Edit and renewal actions distinguishable.
+
+## Validate the closed loop
+
+Check file-typed mappings before serialization. A file-upload destination must receive a native compatible file value; wrapping an attachment in `JSONStringfy(...)` creates text and can fail archive execution. Preserve JSON serialization only where the destination is intentionally text/complex JSON.
+
+Verify an actual approved record's attachment and field writeback, source links and reuse by the next application. With no backend execution logs, isolate the smallest reproducible mapping and vary one factor at a time. Keep failed diagnostics and passing evidence distinct. Work on disposable authorized records and restore temporary setup data.
+
+`scripts/lib/document-workflow-patterns.mjs` includes file-mapping and version-operation planning checks; these do not execute writes. Use the native workflow/list generators for real payloads and retain their contracts.

@@ -285,3 +285,6 @@ packages/**/lib/
 
 # Local Claude screenshots and install artifacts
 /artifacts/claude/
+
+# Reviewed document-workflow distribution manifest
+!docs/standards/document-workflow-distribution.json

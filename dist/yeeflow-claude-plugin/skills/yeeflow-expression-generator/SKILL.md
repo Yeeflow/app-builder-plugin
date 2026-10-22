@@ -219,6 +219,12 @@ Use `docs/studies/data-list-custom-form-fields.md` when generating or validating
 Data List custom form temp variables are not workflow variables. They live in `Resource.tempVars[]` and may be referenced through aliases such as `__temp_var_*` / `var_*`. Validate that every list-field expression resolves to `Defs[]`, every temp variable expression resolves to `tempVars[]`, and every button/form action reference resolves before package handoff. Do not infer submit/save action expression behavior from approval-form actions until Data List custom-form exports or runtime tests prove it.
 <!-- data-list-custom-form-fields-learning:end -->
 
+<!-- document-workflow-project-patterns:start -->
+## Task context and document-state validation
+
+For workflow-stage display, load `skills/yeeflow-workflow-stage-ui/references/native-task-progress.md`. Native task-context tokens are not ordinary variables: bind existing node IDs and verify TaskID/Outcome semantics on the target. For document status conditions, use `docs/standards/document-workflow-project-patterns.md` (State-driven validation). Keep business status semantics configurable, preserve attachment/notes across status changes, and test that old validation errors clear. A required-name marker is presentation only; retain the underlying requirement and stable file type.
+<!-- document-workflow-project-patterns:end -->
+
 <!-- plugin-resource-access -->
 ## Portable access to bundled resources
 

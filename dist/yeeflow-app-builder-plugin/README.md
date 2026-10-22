@@ -187,3 +187,7 @@ Claude uses a separate builder and distribution. See [Claude build and installat
 Keep `main` as the default integration branch and `stable` as the validated installation channel. Start development from the latest `main` in a dedicated branch, push the reviewed changes, and merge through a PR into `main` after the required checks and acceptance. Promote `stable` by fast-forwarding it to the accepted `main` commit; do not publish unrelated changes directly to `stable`.
 
 For a new package version, rebuild and validate the affected host distributions, use RC tags when needed, and document installation acceptance before creating a final tag and GitHub Release. Preserve existing release tags. Store submissions, installed-source migration and live tenant runtime acceptance remain separate operations.
+
+## Document workflow candidate
+
+The 1.19.0-rc1 development candidate adds three document/workflow specialists and six existing skill enhancements (31 skills total). See the [candidate notes](docs/releases/yeeflow-app-builder-v1.19.0-rc1.md) for scope, local checks and pending installation acceptance. The validated `stable` installation remains separate from this development change.

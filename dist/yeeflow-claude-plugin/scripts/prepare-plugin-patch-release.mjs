@@ -12,7 +12,7 @@ const packageManifest = readJson("package.json");
 const pluginManifestPath = "dist/yeeflow-app-builder-plugin/.codex-plugin/plugin.json";
 const pluginManifest = readJson(pluginManifestPath);
 
-if (!/^\d+\.\d+\.\d+$/u.test(packageManifest.version || "")) {
+if (!/^\d+\.\d+\.\d+(?:-rc[1-9]\d*)?$/u.test(packageManifest.version || "")) {
   throw new Error("PLUGIN_PATCH_RELEASE_VERSION_INVALID");
 }
 
@@ -344,6 +344,11 @@ for (const file of ["SKILL.md", "agents/openai.yaml", "references/feature-catalo
 }
 mirrors.push(["docs/releases/yeeflow-app-builder-v1.18.0.md", "docs/releases/yeeflow-app-builder-v1.18.0.md"]);
 mirrors.push(["docs/releases/yeeflow-app-builder-v1.18.1.md", "docs/releases/yeeflow-app-builder-v1.18.1.md"]);
+
+// Document workflow specialists: explicit reviewed resources survive rebuilds.
+for (const entry of readJson("docs/standards/document-workflow-distribution.json").mirrors) {
+  mirrors.push([entry.source, entry.destination]);
+}
 
 for (const [sourcePath, destinationPath] of mirrors) {
   const destination = resolve(root, "dist/yeeflow-app-builder-plugin", destinationPath);

@@ -820,6 +820,12 @@ Use validateField/patchField from the product contract module for explicit field
 
 For Custom Code button clicks, guarded value changes, and custom collection row interactions, read the bundled Custom Code Generator reference `references/direct-form-action-execution.md` (resolve it from that skill's directory). Prefer the product-provided `CodeInContext.executeAction(action)` API on hosts exposing it. Generate the native action definition and declared variable bindings together; use real action IDs or unique names, serialize shared row context, await execution, and preserve readonly/confirmation and error handling. No arbitrary argument payload or business result is supported. Do not assume a custom row click establishes native Collection context or that a void variable setter has propagated. Replace hidden-button/CSS-ID triggering only where direct host support is confirmed. Validate real host behavior separately from offline helper tests.
 
+<!-- document-workflow-project-patterns:start -->
+## Document rule and archive list design
+
+Use `docs/standards/document-workflow-project-patterns.md` (Document rules and row schema) for category/subtype/content separation, explicit applicability and enabled choices, common detail-field identities and source order. Ordinary newest-first sorting is a project default, not a replacement for document rule order. Keep system fields available in configuration while hidden by default when requested. Inspect dependencies before retiring fields; marking tobeDeleted, hiding and permanent deletion are different operations. For original-file/version records, load `skills/yeeflow-document-archive-lifecycle/SKILL.md`.
+<!-- document-workflow-project-patterns:end -->
+
 <!-- plugin-resource-access -->
 ## Portable access to bundled resources
 
