@@ -91,6 +91,14 @@
     {
       "source": "skills/installed/yeeflow-runtime-test-orchestrator/SKILL.md",
       "destination": "skills/yeeflow-runtime-test-orchestrator/SKILL.md"
+    },
+    {
+      "source": "docs/releases/yeeflow-app-builder-v1.19.0.md",
+      "destination": "docs/releases/yeeflow-app-builder-v1.19.0.md"
+    },
+    {
+      "source": "docs/releases/yeeflow-app-builder-v1.19.0-install-smoke.md",
+      "destination": "docs/releases/yeeflow-app-builder-v1.19.0-install-smoke.md"
     }
   ]
 }

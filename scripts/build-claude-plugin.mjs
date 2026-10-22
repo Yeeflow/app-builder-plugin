@@ -69,7 +69,7 @@ Do not edit installed plugin caches or another host's skills. Put learning chang
     count++;
   }
   if (count !== 31) throw new Error("Expected 31 skills; review source inventory before release");
-  writeFileSync(join(stage, "CLAUDE-README.md"), "# Yeeflow for Claude\n\nVersion " + manifest.version + ". Testing candidate: installation, OAuth and live runtime acceptance require separate verification. See the source repository docs/claude-plugin.md.\n");
+  writeFileSync(join(stage, "CLAUDE-README.md"), "# Yeeflow for Claude\n\nVersion " + manifest.version + ". Installation, OAuth and live runtime acceptance require separate verification. See the source repository docs/claude-plugin.md.\n");
   writeFileSync(join(stage, "README.md"), readFileSync(resolve(root, "docs/claude-public-readme.md"), "utf8"));
   writeFileSync(join(stage, "LICENSE"), readFileSync(resolve(root, "docs/claude-plugin-LICENSE.txt"), "utf8"));
   const sharing = consolidateClaudeResources(stage);
