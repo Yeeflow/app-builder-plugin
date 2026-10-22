@@ -35,7 +35,7 @@ try {
     assert.equal(rebuilt.get(file), hash, "CLAUDE_DISTRIBUTION_STALE: " + file + "; rebuild and commit it");
   }
   const manifest = JSON.parse(readFileSync(resolve(out, ".claude-plugin/plugin.json")));
-  assert.equal(manifest.version, "1.18.1");
+  assert.equal(manifest.version, JSON.parse(readFileSync(resolve(root, "package.json"))).version);
   assert.equal(manifest.displayName, "Yeeflow");
   assert.equal(manifest.icon, "./assets/yeeflow-logo-only-blue.png");
   assert.equal(digest(resolve(out, manifest.icon)), digest(resolve(source, "assets/yeeflow-logo-only-blue.png")));
@@ -48,7 +48,7 @@ try {
   assert.equal(manifest.mcpServers, "./.mcp.json");
   assert.deepEqual(JSON.parse(readFileSync(resolve(out, ".mcp.json"))), { mcpServers: { yeeflow_mcp: { type: "http", url: "https://api.yeeflow.com/v1/mcp" } } });
   const skills = readdirSync(resolve(out, "skills")).filter(s => existsSync(resolve(out, "skills", s, "SKILL.md")));
-  assert.equal(skills.length, 28);
+  assert.equal(skills.length, 31);
   for (const skill of skills) {
     const body = readFileSync(resolve(out, "skills", skill, "SKILL.md"), "utf8");
     assert.match(body, /^---\nname:/);
@@ -95,5 +95,5 @@ try {
   const result = spawnSync(process.execPath, [resolve(out, "scripts/test-skill-entrypoint-compat.mjs")], { cwd: temp, encoding: "utf8" });
   assert.equal(result.status, 0, result.stdout + result.stderr);
   assert.match(result.stdout, /guardrail tests passed/);
-  console.log("CLAUDE_PLUGIN_PASS: root ZIP layout; committed payload freshness; 28 skills; shared resource parity; validator entrypoints; OpenAI files unchanged");
+  console.log("CLAUDE_PLUGIN_PASS: root ZIP layout; committed payload freshness; 31 skills; shared resource parity; validator entrypoints; OpenAI files unchanged");
 } finally { rmSync(temp, { recursive: true, force: true }); }

@@ -756,6 +756,12 @@ Use `docs/standards/dashboard-dataset-composition-standard.md` and the shared `s
 
 For Custom Code button clicks, guarded value changes, and custom collection row interactions, read the bundled Custom Code Generator reference `references/direct-form-action-execution.md` (resolve it from that skill's directory). Prefer the product-provided `CodeInContext.executeAction(action)` API on hosts exposing it. Generate the native action definition and declared variable bindings together; use real action IDs or unique names, serialize shared row context, await execution, and preserve readonly/confirmation and error handling. No arbitrary argument payload or business result is supported. Do not assume a custom row click establishes native Collection context or that a void variable setter has propagated. Replace hidden-button/CSS-ID triggering only where direct host support is confirmed. Validate real host behavior separately from offline helper tests.
 
+<!-- document-workflow-project-patterns:start -->
+## Permission-priority archives and incremental loading
+
+Use `docs/standards/document-workflow-project-patterns.md` (Data scope and loading) for confirmed highest-permission-first defaults, AM/group relation aggregation, fail-closed initialization, stale-result protection and permitted first-page loading. View filtering is not record-level authorization. Preserve search, details and file links while optimizing query dependencies. Measure comparable phases and correct full counts; variable-name shortening is not performance evidence.
+<!-- document-workflow-project-patterns:end -->
+
 <!-- plugin-resource-access -->
 ## Portable access to bundled resources
 

@@ -1,3 +1,10 @@
+# 1.19.0-rc1 — document workflow skills candidate
+
+- Add Workflow Stage UI, Single-Attachment OCR Orchestrator, and Document Archive Lifecycle skills.
+- Enhance six generators/test skills with reusable document workflow patterns; retain the 1.18.1 feature guide.
+- Add 32 local planning tests, explicit distribution mirrors, and 31-skill host checks.
+- Candidate only: hosted installation/discovery and third-party OCR integration are not established.
+
 ## 1.18.1 — 2026-10-22
 
 Fix the Feature Configuration Guide helper printing nothing when the plugin is mounted through a symlinked path (Claude's synced plugin cache). Add a direct-and-symlinked helper regression test to CI. 28 Skills; no content changes.

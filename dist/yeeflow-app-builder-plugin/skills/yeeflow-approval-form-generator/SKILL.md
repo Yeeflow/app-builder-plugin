@@ -730,6 +730,12 @@ For Workflow Sublist updates, use the explicit Workflow editor compatibility che
 
 For Custom Code button clicks, guarded value changes, and custom collection row interactions, read the bundled Custom Code Generator reference `references/direct-form-action-execution.md` (resolve it from that skill's directory). Prefer the product-provided `CodeInContext.executeAction(action)` API on hosts exposing it. Generate the native action definition and declared variable bindings together; use real action IDs or unique names, serialize shared row context, await execution, and preserve readonly/confirmation and error handling. No arbitrary argument payload or business result is supported. Do not assume a custom row click establishes native Collection context or that a void variable setter has propagated. Replace hidden-button/CSS-ID triggering only where direct host support is confirmed. Validate real host behavior separately from offline helper tests.
 
+<!-- document-workflow-project-patterns:start -->
+## Staged document forms and responsive density
+
+When configuring multi-department or document-heavy forms, use the target-specific practices in `docs/standards/document-workflow-project-patterns.md` (Form layout and density). Preserve accepted spacing and template exceptions; use nested Grids, independently controlled Toggle groups and suitable file cardinality. Verify upload-wrapper alignment and contained small-screen scrolling. For actual task-driven progress and phase visibility, load `skills/yeeflow-workflow-stage-ui/SKILL.md` rather than deriving stage completion from filled fields.
+<!-- document-workflow-project-patterns:end -->
+
 <!-- plugin-resource-access -->
 ## Portable access to bundled resources
 

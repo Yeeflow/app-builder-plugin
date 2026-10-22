@@ -28,3 +28,13 @@ Use `yeeflow-application-builder` when the task is about building a real Yeeflow
 The builder acts as the business solution architect. It studies the requirement, designs the app, chooses a safe v1 scope, coordinates the app/list/form/dashboard/expression generators, validates locally, runtime-tests when requested, documents the result, and outputs the final `.yap`.
 
 If the builder discovers an unproven Yeeflow capability that materially affects the app, pause that feature and route the learning portion through `yeeflow-feature-learning-orchestrator`.
+
+## Document and staged-workflow orchestration
+
+| User task | Primary specialist | Lower-level support when needed |
+| --- | --- | --- |
+| Real task progress, phases, task-specific Toggle defaults, editable demo separation | `yeeflow-workflow-stage-ui` | Approval Form, Expression, Runtime Test |
+| Single uploaded file OCR, MD5/type cache, automatic reuse, manual retry | `yeeflow-attachment-ocr-orchestrator` | Custom Code/Service, Data List, Expression, Runtime Test |
+| Latest document reuse, metadata edits vs renewal/reupload, approval archive writeback | `yeeflow-document-archive-lifecycle` | Data List, Approval Form, Dashboard, Runtime Test |
+
+These specialists support an authorized application change; they do not imply publication, OCR activation, broader access or data deletion. An ordinary styling edit still belongs to its existing generator. Load only the specialist and references needed for the actual request. See [project patterns](standards/document-workflow-project-patterns.md) for shared practices and proof boundaries.

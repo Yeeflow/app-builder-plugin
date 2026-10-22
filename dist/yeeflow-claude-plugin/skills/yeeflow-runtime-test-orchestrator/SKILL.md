@@ -483,6 +483,12 @@ Validation and proof boundaries:
 
 Use `docs/standards/dashboard-dataset-composition-standard.md` and the shared `scripts/lib/dashboard-dataset-composition.mjs` normalizer/validator for Dashboard generation and incremental repairs. The registered `dataset-caption-v1` content-card variant omits `section_title_area` only for a single caption-bearing Collection/Kanban with no independent outer description or action; preserve `content_card_wrapper > section_content_area` and the complete dataset template. This conditional rule overrides generic mandatory outer-title guidance. Keep grouping titles for multiple datasets and outer titles for captionless controls. Remove unused empty `kpi_cards_kpi_row` and empty ancestor modules, never a bound dataset merely because it has no records. Preserve Search before Add and all responsive template slots, filter/action dependencies and record bindings. Run `scripts/test-dashboard-dataset-composition.mjs` and final Dashboard/standalone gates. Updating a plugin is not a live application repair or runtime visual proof.
 
+<!-- document-workflow-project-patterns:start -->
+## Document and phase boundary evidence
+
+Use `docs/standards/document-workflow-project-patterns.md` (Runtime evidence) for distinct save/readback/publish/Preview/runtime/approval-writeback proof. Check actual assignees and keep test setup reversible within authorized scope. Include relevant phase, validation, cache and selection-change boundaries plus phone/tablet measurements. In archive failures, inspect native destination file types and isolate transformations: JSON serialization of a file is not a native file mapping. Report unavailable backend logs, untested role accounts, unconnected third-party OCR and preview-only nodes explicitly.
+<!-- document-workflow-project-patterns:end -->
+
 <!-- plugin-resource-access -->
 ## Portable access to bundled resources
 

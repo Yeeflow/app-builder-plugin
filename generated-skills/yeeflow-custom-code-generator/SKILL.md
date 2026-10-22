@@ -485,6 +485,12 @@ Do:
 
 For the v1.4 Dashboard Query Data temp-JSON pattern, prefer standard controls and `JSONStringfy` when plain text is enough. Collection and Data Table cannot directly consume the Query Data temp JSON payload. Only when a real business requirement needs custom tabular transformation/display, generate a `codein` control that reads the declared temp value with `context.getTempVar('<temp-id>')`, accepts either a JSON string or already-parsed array, validates the array shape, and renders explicit empty/error states. Keep React 15.6, Ant Design 2.13, and TypeScript compatibility. Treat Custom Code rendering as separate runtime proof from Query Data structural validation.
 
+<!-- document-workflow-project-patterns:start -->
+## Guarded OCR rows and document watermark composition
+
+For OCR row orchestration, load `skills/yeeflow-attachment-ocr-orchestrator/SKILL.md`; do not hash/fetch/query while a file is uploading, substitute random attachment IDs for content hashes, or write stale asynchronous results into a changed row. For a requested repeated-page watermark, Custom Code may compose signatures, configured standard text and notes into one image; verify image availability, scaling, transparency, pagination and the target watermark action separately. This composition pattern does not prove document-conversion support for every file type. Keep project content and credentials out of reusable code. Use `docs/standards/document-workflow-project-patterns.md` for related UI/validation behavior.
+<!-- document-workflow-project-patterns:end -->
+
 <!-- plugin-resource-access -->
 ## Portable access to bundled resources
 
