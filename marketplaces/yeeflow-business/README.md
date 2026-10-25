@@ -15,6 +15,6 @@ GitHub management preserves workspace sharing and policies. It does not connect 
 - First member retains two accounts; read-only round trip returned workspace counts 11, 20, 11 and matching first/last identities.
 - Second member independently returned their own authenticated profile and one workspace.
 - No business records were read or modified.
-- GitHub import, post-sync checks and stable promotion remain pending.
+- GitHub import completed at candidate commit 4fd0eee7, preserving the original plugin ID, Enabled/Available policies, all 31 Skills and all three member connections. Post-sync runtime checks and stable promotion are recorded separately.
 
 See https://learn.chatgpt.com/docs/enterprise/plugin-management for the supported migration mechanism.
