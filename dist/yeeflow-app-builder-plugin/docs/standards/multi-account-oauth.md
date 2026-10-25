@@ -1,10 +1,10 @@
 # Independent OAuth sign-in and multiple connected accounts
 
-GitHub/private-marketplace release candidate: `1.20.0-rc2`, based on stable `1.19.0`. Publishing this candidate and updating the local plugin are authorized. OpenAI store submission, review changes and production-server modifications remain outside this release.
+GitHub/repository release: `1.20.0`, finalized from `1.20.0-rc2` after the owner authorized formal publication and stable promotion. The previous stable payload was `1.19.0`; its latest historical final Git tag was `1.17.0`. OpenAI store submission, review changes and production-server modifications remain outside this release. Updating stable distributes the common payload and account-routing rules; it does not register an App for each user or add a multi-account UI to the tested direct-MCP host.
 
 ## User behavior and implementation
 
-Every user installs the same Yeeflow plugin in their own ChatGPT account and authorizes their own Yeeflow account. A user may connect additional accounts from plugin settings. The host stores OAuth grants and selects the relevant connection for each tool call. No user creates their own MCP server or provides an App ID. A shared integration is not a shared credential.
+Every user installs the same Yeeflow plugin in their own ChatGPT account and authorizes their own Yeeflow account. On a supported registered-App host, a user may connect additional accounts from plugin settings. The host stores OAuth grants and selects the relevant connection for each tool call. End-user distribution must not require users to create an MCP server or provide an App ID; private developer registration is a separate setup workflow. A shared integration is not a shared credential.
 
 Host layout matters. The tested local direct-MCP plugin did not expose Connect another account. A separate private registered App in the same Personal workspace did expose that entry and successfully retained both authorized accounts. Use the existing `chatgpt-web` profile with an accessible registered App for local/private multi-account tests; keep that private mapping outside the shared repository and public ZIPs. Creating the private test App is a developer setup step, not a setup requirement for end users. A successful test of this registered App does not establish that the default direct-MCP package offers the same account-management UI.
 
@@ -77,7 +77,7 @@ For a captured tool declaration/response, structural conformance alone cannot pr
 
 ## Scope of future public submission
 
-The generic Agent Plugins 1.0.0 MCP schema currently rejects a per-server `extensions` field, while OpenAI documents that field for authentication. This candidate retains the supported Codex compatibility format instead of claiming portable schema conformance. Platform ingestion of the OpenAI auth extension remains a separate pending host check.
+The generic Agent Plugins 1.0.0 MCP schema currently rejects a per-server `extensions` field, while OpenAI documents that field for authentication. This release retains the supported Codex compatibility format instead of claiming portable schema conformance. Platform ingestion of the OpenAI auth extension remains a separate pending host check.
 
 Current OpenAI guidance excludes ZIPs containing `apps` / `.app.json` or lifecycle hooks from public submission. The new profile produces the direct MCP compatibility format and leaves setup and OAuth grants to the platform. Before any later submission, verify current listing, reviewer account, test case, demo, domain verification and existing-review requirements. A local successful build is not portal ingestion, scan approval, publication or runtime acceptance. Do not alter the version currently under review to test this candidate.
 

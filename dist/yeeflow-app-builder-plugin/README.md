@@ -1,6 +1,6 @@
 # Yeeflow App Builder Plugin
 
-Release candidate **1.20.0-rc2** supports host-provided connection routing across all 31 skills. Two accounts were retained and passed separate, alternating and concurrent read-only identity checks through a private registered App in ChatGPT Personal. The default local direct-MCP layout did not expose the additional-account UI; local/private tests use the registered-App build profile. This is a GitHub/private-marketplace candidate; stable remains 1.19.0. See [implementation and verification limits](docs/standards/multi-account-oauth.md). No store submission is implied.
+Release **1.20.0** supports host-provided connection routing across all 31 skills and is distributed through this repository's `stable` branch. Each user authorizes their own Yeeflow connection. Two accounts passed separate, alternating and concurrent read-only identity checks through a private registered App in ChatGPT Personal. The default local direct-MCP layout did not expose the additional-account UI: updating this repository does not turn that layout into a registered App or add the tested private App to another user's account. See [release notes](docs/releases/yeeflow-app-builder-v1.20.0.md) and [verification limits](docs/standards/multi-account-oauth.md). This GitHub release does not publish or update a ChatGPT store listing.
 
 Work with business data, manage tasks, and build applications in Yeeflow through guided skills and the unified hosted MCP connection. This repository maintains separate packages for Codex, ChatGPT Web and Claude.
 
@@ -8,13 +8,13 @@ Current repository: [Yeeflow/app-builder-plugin](https://github.com/Yeeflow/app-
 
 ## Version and packages
 
-The Codex/OpenAI candidate version is **1.20.0-rc2**. The generated Claude mirror is synchronized at the same version to preserve shared-resource parity; Claude host installation and runtime are not accepted by this candidate. Both retain 31 Skills and the unified OAuth MCP connection. 1.18.0 added the Yeeflow Feature Configuration Guide skill and 1.18.1 fixes its helper under symlinked plugin caches; see the [1.18.0](docs/releases/yeeflow-app-builder-v1.18.0.md) and [1.18.1](docs/releases/yeeflow-app-builder-v1.18.1.md) release notes and the [1.17.0 release notes](docs/releases/yeeflow-app-builder-v1.17.0.md) for direct Form Action execution.
+The Codex/OpenAI release version is **1.20.0**. The generated Claude mirror is synchronized at the same version to preserve shared-resource parity; Claude host installation and multi-account runtime require separate acceptance. Both retain 31 Skills and the unified OAuth MCP connection. 1.18.0 added the Yeeflow Feature Configuration Guide skill and 1.18.1 fixes its helper under symlinked plugin caches; see the [1.18.0](docs/releases/yeeflow-app-builder-v1.18.0.md) and [1.18.1](docs/releases/yeeflow-app-builder-v1.18.1.md) release notes and the [1.17.0 release notes](docs/releases/yeeflow-app-builder-v1.17.0.md) for direct Form Action execution.
 
 | Host | Marketplace / plugin | Package on `main` and `stable` |
 | --- | --- | --- |
 | Codex App | `yeeflow` / `yeeflow-app-builder` | `dist/yeeflow-app-builder-plugin` |
 | ChatGPT Web | Host-specific registered Apps profile | Built from the shared OpenAI payload; see [build profiles](docs/standards/plugin-host-build-profiles.md) |
-| Claude | `yeeflow-claude` / `yeeflow` (1.19.0) | `dist/yeeflow-claude-plugin` |
+| Claude | `yeeflow-claude` / `yeeflow` (1.20.0) | `dist/yeeflow-claude-plugin` |
 
 The repository name is independent of the plugin identity. Codex identities remain unchanged; the Claude public-directory candidate uses `yeeflow` with display name Yeeflow. Publishing source changes to GitHub does not submit or update an OpenAI store listing or migrate existing installations.
 
@@ -35,15 +35,25 @@ Expected installed identity:
 ```text
 Marketplace: Yeeflow
 Plugin: Yeeflow
-Version: 1.19.0
+Version: 1.20.0
 ```
 
-The source above identifies the current repository; a Codex installation from this new private source has not yet been recorded. Existing installations keep their configured source until explicitly migrated. Do not remove a working installation solely because the repository URL changed.
+RC installations from this repository and the registered-App private test projection were verified before finalization. Existing installations keep their configured source/ref until updated; moving `stable` does not update a plugin pinned to an old release tag or to another repository.
+
+For an existing Codex installation using this repository's `stable` ref:
+
+```sh
+codex plugin marketplace upgrade yeeflow --json
+codex plugin add yeeflow-app-builder@yeeflow --json
+codex plugin list --marketplace yeeflow --json
+```
+
+Confirm the installed version is `1.20.0`, then start a new conversation or reload the host to use the updated skills. If the installation is pinned to an RC or old tag, change its marketplace Git ref to `stable` first. Users of a different repository or the ChatGPT store follow their own source's update process. Repository access and each user's own OAuth authorization are still required. See [upgrade details and host limits](docs/releases/yeeflow-app-builder-v1.20.0.md).
 
 Verify metadata from a checkout of `stable`:
 
 ```sh
-node scripts/inspect-codex-plugin-cache-metadata.mjs --root . --expect-version 1.19.0
+node scripts/inspect-codex-plugin-cache-metadata.mjs --root . --expect-version 1.20.0
 ```
 
 ## ChatGPT Web package
@@ -72,7 +82,7 @@ Complete Yeeflow OAuth through the selected host's MCP connection. Each host aut
 3. Select or paste `https://github.com/Yeeflow/app-builder-plugin` and click **Sync**. This repository is private, so the connected GitHub account must have repository access.
 4. Use the repository URL without `#stable`. This web flow reads the default `main` branch; both `main` and `stable` contain the complete Claude package.
 5. After synchronization completes, open **Discover**, find **Yeeflow** from `app-builder-plugin`, and click **Add**.
-6. In **Yours**, open Yeeflow and confirm it is enabled and shows **1.19.0**, **31 skills**, and **1 connector** (`yeeflow_mcp`).
+6. In **Yours**, open Yeeflow and confirm it is enabled and shows **1.20.0**, **31 skills**, and **1 connector** (`yeeflow_mcp`). Confirm host installation separately; this release's live multi-account checks used ChatGPT Personal.
 7. Open its connector and complete the Yeeflow OAuth connection if requested. Use the intended Yeeflow account; Claude and other hosts authenticate separately.
 
 ### Update an existing marketplace installation

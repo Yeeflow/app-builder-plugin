@@ -1,7 +1,7 @@
 {
   "name": "yeeflow",
   "displayName": "Yeeflow",
-  "version": "1.20.0-rc2",
+  "version": "1.20.0",
   "description": "Build and maintain Yeeflow business applications with guided skills and hosted MCP.",
   "license": "MIT",
   "author": {
