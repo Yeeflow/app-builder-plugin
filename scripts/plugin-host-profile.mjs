@@ -23,16 +23,20 @@ export function profileOptions(argv) {
     return argv[i+1];
   };
   const profile = take("--profile", "codex");
-  if (!["codex", "chatgpt-web"].includes(profile)) throw new Error("PLUGIN_PROFILE_INVALID");
+  if (!["codex", "chatgpt-web", "directory"].includes(profile)) throw new Error("PLUGIN_PROFILE_INVALID");
   const appsPath = take("--apps", null), name = take("--name", "yeeflow-app-builder"), displayName = take("--display-name", null);
   if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(name) || name.length > 64) throw new Error("PLUGIN_NAME_INVALID");
   if (profile === "codex" && (appsPath || argv.includes("--name") || displayName)) throw new Error("PLUGIN_WEB_OPTIONS_REQUIRE_WEB_PROFILE");
   if (profile === "chatgpt-web" && !appsPath) throw new Error("PLUGIN_WEB_APPS_REQUIRED");
-  return { profile, appsPath, name, displayName };
+  if (profile === "directory" && (appsPath || argv.includes("--name") || displayName)) throw new Error("PLUGIN_DIRECTORY_APP_OPTIONS_FORBIDDEN");
+  const version = take("--version", null);
+  if (version !== null && !/^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*)?$/.test(version)) throw new Error("PLUGIN_VERSION_INVALID");
+  return { profile, appsPath, name, displayName, version };
 }
 export function applyHostProfile(stageRoot, repoRoot, options, apps) {
   const manifestPath = resolve(stageRoot, ".codex-plugin/plugin.json");
   const manifest = JSON.parse(readFileSync(manifestPath, "utf8"));
+  if (options.version) manifest.version = options.version;
   // The canonical validator owns the complete shared dependency graph.
   copyFileSync(resolve(repoRoot, "skills/installed/yeeflow-application-generator/scripts/validate-yap-package.js"), resolve(stageRoot, "skills/yeeflow-application-generator/scripts/validate-yap-package.js"));
   copyFileSync(resolve(repoRoot, "scripts/test-skill-entrypoint-compat.mjs"), resolve(stageRoot, "scripts/test-skill-entrypoint-compat.mjs"));
@@ -60,6 +64,36 @@ export function applyHostProfile(stageRoot, repoRoot, options, apps) {
     if (options.displayName) manifest.interface.displayName = options.displayName;
     manifest.interface.longDescription = manifest.interface.longDescription.replace("in Codex", "in ChatGPT");
     writeFileSync(resolve(stageRoot, ".app.json"), JSON.stringify(apps, null, 2) + "\n");
+  }
+  if (options.profile === "directory") {
+    // The distributed package declares one integration. The host owns each user's
+    // OAuth grants and routes calls using the selected connection's credentials.
+    // Never bind the public package to a developer's registered private App.
+    for (const file of [".app.json", "mcp.json", "plugin.json", "hooks"]) {
+      rmSync(resolve(stageRoot, file), { recursive: true, force: true });
+    }
+    delete manifest.apps;
+    delete manifest.hooks;
+    if (manifest.extensions?.["com.openai"]) {
+      delete manifest.extensions["com.openai"].apps;
+      delete manifest.extensions["com.openai"].hooks;
+    }
+    manifest.mcpServers = "./.mcp.json";
+    manifest.interface.supportURL ||= "https://support.yeeflow.com/";
+    manifest.interface.longDescription += " Connect your own Yeeflow account through OAuth. You can connect additional accounts in plugin settings; each operation uses the selected account's permissions.";
+    // The directory accepts at most three starter prompts.
+    if (Array.isArray(manifest.interface.defaultPrompt)) manifest.interface.defaultPrompt = manifest.interface.defaultPrompt.slice(0, 3);
+    // Keep the supported Codex compatibility layout. The generic portable MCP
+    // schema does not yet model the documented OpenAI auth extension.
+    writeFileSync(resolve(stageRoot, ".mcp.json"), JSON.stringify({
+      mcpServers: {
+        yeeflow_mcp: {
+          type: "http",
+          url: "https://api.yeeflow.com/v1/mcp",
+          extensions: { "com.openai": { auth: { type: "oauth", client: { mode: "dcr" } } } },
+        },
+      },
+    }, null, 2) + "\n");
   }
   writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + "\n");
 }

@@ -1,6 +1,6 @@
 {
   "name": "yeeflow-app-builder",
-  "version": "1.19.0",
+  "version": "1.20.0-rc1",
   "description": "Work with business data, manage tasks, and build apps in Yeeflow.",
   "keywords": [
     "yeeflow",
