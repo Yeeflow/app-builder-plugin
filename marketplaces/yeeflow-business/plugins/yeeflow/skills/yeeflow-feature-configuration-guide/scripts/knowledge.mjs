@@ -14,7 +14,7 @@ const CATALOG = resolve(SKILL_ROOT, "references/feature-catalog.json");
 export const DOMAINS = ["designers", "fields", "layout", "data-display", "filters", "rules", "actions", "workflows", "lists", "reports", "portal", "applications"];
 
 export function normalize(value) {
-  return value.normalize("NFKC").toLowerCase().replace(/[^\p{L}\p{N}_㐀-鿿]/gu, "");
+  return value.normalize("NFKC").toLowerCase().replace(/[^\p{L}\p{N}_\u3400-\u9fff]/gu, "");
 }
 
 export function loadEntries(catalogPath = CATALOG) {

@@ -83,6 +83,10 @@ function materializeChoicePlan() {
     "| 1 | Leave Type | LeaveType | Choice | select | Annual Leave、Sick Leave、Personal Leave、Other（Planning Default） |",
     "| 2 | Usage Status | UsageStatus | Choice | select | Approved、Reversed |",
   ].join("\n"));
+  fs.appendFileSync(plan, "\n\n## 10. Custom Data List Forms Plan\n\n" +
+    ["Employee Leave Balances", "Leave Usage Statistics"].map((name, index) =>
+      `### 10.${index + 1} ${name}\n\n| Data List or Library | Custom Form | Form Usage | Selected Data List Form Layout Template |\n| --- | --- | --- | --- |\n| ${name} | ${name} New/Edit | New/Edit | data_list_form_layout_new_edit_v1_1 |\n| ${name} | ${name} View | View | data_list_form_layout_view_item_v1_1 |\n`
+    ).join("\n"));
   const result = spawnSync(process.execPath, [
     path.join(ROOT, "scripts/materialize-full-app-generated-final.mjs"),
     "--functional-spec", spec,

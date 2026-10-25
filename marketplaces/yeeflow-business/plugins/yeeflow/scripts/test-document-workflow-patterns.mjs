@@ -118,16 +118,16 @@ test('decision and correlation helpers leave attachments and notes unchanged', (
   planAttachmentOcr(input); mayApplyOcrResult(current, response); assert.deepEqual(input, before);
 });
 
-const semantics = { 'N/A': 'not-applicable', '√': 'provided', '缺': 'missing' };
+const semantics = { 'N/A': 'not-applicable', '√': 'provided', '\u7f3a': 'missing' };
 test('status change replaces obsolete validation errors without deleting data', () => {
   const input = { semantics, attachmentCount: 1, notes: '' }; const before = structuredClone(input);
-  assert.deepEqual(documentRequirements({ ...input, status: '缺' }).errors, ['reason-required']);
+  assert.deepEqual(documentRequirements({ ...input, status: '\u7f3a' }).errors, ['reason-required']);
   assert.deepEqual(documentRequirements({ ...input, status: 'N/A' }).errors, []);
   assert.deepEqual(input, before);
 });
 test('provided needs attachment, missing needs notes, unknown status is not silently valid', () => {
   assert.deepEqual(documentRequirements({ semantics, status: '√', attachmentCount: 0 }).errors, ['attachment-required']);
-  assert.deepEqual(documentRequirements({ semantics, status: '缺', notes: 'Pending original' }).errors, []);
+  assert.deepEqual(documentRequirements({ semantics, status: '\u7f3a', notes: 'Pending original' }).errors, []);
   assert.throws(() => documentRequirements({ semantics, status: 'unknown' }));
 });
 const archive = { versionPolicy: 'immutable-documents', recordId: 'archive-A', operation: 'edit-metadata' };

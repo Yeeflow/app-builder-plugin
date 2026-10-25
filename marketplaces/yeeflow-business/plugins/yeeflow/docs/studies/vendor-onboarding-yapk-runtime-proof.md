@@ -347,7 +347,7 @@ Recommended next manual test for YAP:
 
 After the V1.4 product-schema YAP still failed import, product team feedback identified a duplicated layout ID:
 
-- Feedback: `layout id 重复了, 7601000000000001063`
+- Feedback: `Duplicate layout ID: 7601000000000001063`
 - Meaning: `LayoutID` values must be unique for importer materialization.
 
 Root cause:
@@ -489,7 +489,7 @@ Recommended next manual test for YAP:
 
 After the V1.6 no-lookup candidate still failed application creation, product team clarified:
 
-- Feedback: `那个AppID 不需要生成，这个应该是固定的41。`
+- Feedback: `AppID must not be generated; it must remain the fixed value 41.`
 - Meaning: `AppID` should not be generated. It should remain fixed at `41`.
 
 Root cause:
@@ -555,7 +555,7 @@ Recommended next manual test for YAP:
 
 After the V1.7 no-lookup candidate still failed application creation, product team clarified:
 
-- Feedback: `这个ReplaceIds 要把所有生成id的收集到这里。FormKeys 是所有的流程Key`
+- Feedback: `ReplaceIds must collect all generated IDs. FormKeys must contain all workflow keys.`
 - Meaning: `ReplaceIds` must collect all generated IDs. `FormKeys` must contain all process/workflow keys.
 
 Root cause:
@@ -608,7 +608,7 @@ Recommended next manual test for YAP:
 
 After the V1.8 no-lookup candidate still failed application creation, product team identified another generated-ID mismatch:
 
-- Feedback: `ListSite_这里的Id没有换成 生成的应用id`
+- Feedback: `The ID in ListSite_ was not replaced with the generated application ID.`
 - Meaning: child `ListModel.CustomType` values such as `ListSite_<id>` must use the generated application/ListSet ID, not an old source ID.
 
 Root cause:

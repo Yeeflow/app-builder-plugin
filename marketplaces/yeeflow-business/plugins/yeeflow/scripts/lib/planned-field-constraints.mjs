@@ -5,8 +5,8 @@ export function planningIdentity(value) {
 
 export function plannedBoolean(value, label) {
   if (value === undefined || value === null || String(value).trim() === "") return undefined;
-  if (/^(true|yes|1|是)$/i.test(String(value).trim())) return true;
-  if (/^(false|no|0|否)$/i.test(String(value).trim())) return false;
+  if (/^(true|yes|1|\u662f)$/i.test(String(value).trim())) return true;
+  if (/^(false|no|0|\u5426)$/i.test(String(value).trim())) return false;
   throw new Error(`FIELD_PLAN_BOOLEAN_INVALID: ${label}`);
 }
 

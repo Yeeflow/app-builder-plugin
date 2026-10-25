@@ -1978,7 +1978,7 @@ function validateDecodedDef(def, options = {}) {
       for (const outgoing of asArray(shape.outgoing)) {
         const seq = seqById.get(refId(outgoing));
         const text = JSON.stringify((seq && seq.properties && seq.properties.conditioninfo) || []);
-        if (text.includes("Task outcome:Approved") || text.includes("已同意") || text.includes("Approved")) approved = true;
+        if (text.includes("Task outcome:Approved") || text.includes("\u5df2\u540c\u610f") || text.includes("Approved")) approved = true;
         if (text.includes("Task outcome:Rejected") || text.includes("Rejected")) rejected = true;
         if (text.includes("Task outcome:Completed") || text.includes("Completed")) completed = true;
       }
@@ -2030,9 +2030,9 @@ function validateDecodedDef(def, options = {}) {
     }
     function expectedTaskOutcome(text) {
       const value = String(text || "");
-      if (/\bapproved\b/i.test(value) || /已同意/.test(value)) return "Approved";
-      if (/\brejected\b/i.test(value) || /已拒绝/.test(value)) return "Rejected";
-      if (/\bcompleted\b/i.test(value) || /已完成/.test(value)) return "Completed";
+      if (/\bapproved\b/i.test(value) || /\u5df2\u540c\u610f/.test(value)) return "Approved";
+      if (/\brejected\b/i.test(value) || /\u5df2\u62d2\u7edd/.test(value)) return "Rejected";
+      if (/\bcompleted\b/i.test(value) || /\u5df2\u5b8c\u6210/.test(value)) return "Completed";
       return "";
     }
     function validateTaskOutcomeCondition(shape, condition, flowLabel, conditionIndex, p) {
@@ -2092,11 +2092,11 @@ function validateDecodedDef(def, options = {}) {
         }
         validateOperandWrapper(condition.left, "left", `${p}.left`);
         validateOperandWrapper(condition.right, "right", `${p}.right`);
-        const isApprovalOutcome = text.includes("&quot;type&quot;:&quot;task&quot;") || text.includes(":Outcome") || text.includes(":结果");
+        const isApprovalOutcome = text.includes("&quot;type&quot;:&quot;task&quot;") || text.includes(":Outcome") || text.includes(":\u7ed3\u679c");
         if (isApprovalOutcome) {
           validateTaskOutcomeCondition(shape, condition, flowLabel, conditionIndex, p);
-          if (!text.includes("Outcome") && !text.includes("结果")) addIssue(errors, "APPROVAL_CONDITION_MISSING_OUTCOME", "Approval outcome condition should include task Outcome reference", p);
-          if (!text.includes("Task outcome:Approved") && !text.includes("Task outcome:Rejected") && !text.includes("Task outcome:Completed") && !text.includes("任务结果:已同意")) {
+          if (!text.includes("Outcome") && !text.includes("\u7ed3\u679c")) addIssue(errors, "APPROVAL_CONDITION_MISSING_OUTCOME", "Approval outcome condition should include task Outcome reference", p);
+          if (!text.includes("Task outcome:Approved") && !text.includes("Task outcome:Rejected") && !text.includes("Task outcome:Completed") && !text.includes("\u4efb\u52a1\u7ed3\u679c:\u5df2\u540c\u610f")) {
             addIssue(errors, "APPROVAL_CONDITION_MISSING_RESULT", "Approval outcome condition should include Task outcome:Approved, Task outcome:Rejected, or Task outcome:Completed", p);
           }
         }

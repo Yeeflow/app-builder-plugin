@@ -1386,7 +1386,7 @@ function validateConditionArray(issues, value, pointer, code, severity, requireP
       return;
     }
     const text = JSON.stringify(condition);
-    const isTaskOutcome = /Outcome|Task outcome|任务结果|已同意|Rejected|Approved/.test(text);
+    const isTaskOutcome = /Outcome|Task outcome|\u4efb\u52a1\u7ed3\u679c|\u5df2\u540c\u610f|Rejected|Approved/.test(text);
     if (isTaskOutcome) return;
     const hasOp = !valueMissing(condition.op || condition.operator);
     const hasLeft = !valueMissing(condition.left || condition.field || condition.FieldName || condition.fieldName);

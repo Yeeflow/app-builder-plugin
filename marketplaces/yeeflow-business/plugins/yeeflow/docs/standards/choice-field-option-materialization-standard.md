@@ -9,7 +9,7 @@ This standard applies to generated Data List, Document Library, Approval Form, P
 - `Choice Values` represents an ordered enum, not one display sentence.
 - Each business option becomes one `Rules.choices[]` entry.
 - Plan display delimiters may be comma, semicolon, Chinese comma, ideographic comma, or line break.
-- Parenthetical planning notes such as `Planning Default` or `规划默认` are metadata and must be removed from runtime labels.
+- Parenthetical planning notes such as `Planning Default` or its localized equivalents are metadata and must be removed from runtime labels.
 - A default value belongs in the plan's `Default Value` column. It must not be encoded by appending a planning note to an option.
 
 ## Generated Runtime Contract

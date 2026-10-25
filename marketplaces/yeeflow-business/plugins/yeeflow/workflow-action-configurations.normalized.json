@@ -1022,7 +1022,7 @@
                   },
                   "title": {
                     "type": "string",
-                    "description": "Display title, may contain rich text.such as User:holly.zhang, Job position:111, Job position:111 By department B2C部门, User:<input type=\"button\" data=\"${...}\" expr=\"__\" tabindex=\"-1\" value=\"Workflow Variables:user14:Department\">"
+                    "description": "Display title, may contain rich text.such as User:holly.zhang, Job position:111, Job position:111 By department B2C department, User:<input type=\"button\" data=\"${...}\" expr=\"__\" tabindex=\"-1\" value=\"Workflow Variables:user14:Department\">"
                   }
                 },
                 "additionalProperties": false
@@ -1074,7 +1074,7 @@
           "valueType": "array",
           "required": false,
           "enumValues": [],
-          "description": "{\"description\":\"Defines the configuration for the Task assignee editor, supporting multiple selection methods and rich text\",\"type\":\"array\",\"items\":{\"items\":{\"type\":\"object\",\"required\":[\"type\",\"method\",\"title\",\"value\"],\"properties\":{\"type\":{\"type\":\"string\",\"enum\":[\"user\",\"position\"],\"description\":\"Selector type; 'user' indicates a user, 'position' indicates a position\"},\"method\":{\"type\":\"string\",\"enum\":[\"direct\",\"expression\",\"position\",\"positionorg\",\"positionorgexpr\",\"positionloc\",\"positionlocexpr\"],\"description\":\"type is user, method is direct or expression; type is position, method is position, positionorg, positionorgexpr, positionloc, or positionlocexpr\"},\"position\":{\"type\":\"string\",\"description\":\"Job position ID.(When type is position)\"},\"value\":{\"type\":\"string\",\"description\":\"Value (user ID, organization ID, position ID, or rich text)\"},\"title\":{\"type\":\"string\",\"description\":\"Display title, may contain rich text.such as User:holly.zhang, Job position:111, Job position:111 By department B2C部门, User:<input type=\\\"button\\\" data=\\\"${...}\\\" expr=\\\"__\\\" tabindex=\\\"-1\\\" value=\\\"Workflow Variables:user14:Department\\\">\"}},\"additionalProperties\":false}},\"minItems\":1}",
+          "description": "{\"description\":\"Defines the configuration for the Task assignee editor, supporting multiple selection methods and rich text\",\"type\":\"array\",\"items\":{\"items\":{\"type\":\"object\",\"required\":[\"type\",\"method\",\"title\",\"value\"],\"properties\":{\"type\":{\"type\":\"string\",\"enum\":[\"user\",\"position\"],\"description\":\"Selector type; 'user' indicates a user, 'position' indicates a position\"},\"method\":{\"type\":\"string\",\"enum\":[\"direct\",\"expression\",\"position\",\"positionorg\",\"positionorgexpr\",\"positionloc\",\"positionlocexpr\"],\"description\":\"type is user, method is direct or expression; type is position, method is position, positionorg, positionorgexpr, positionloc, or positionlocexpr\"},\"position\":{\"type\":\"string\",\"description\":\"Job position ID.(When type is position)\"},\"value\":{\"type\":\"string\",\"description\":\"Value (user ID, organization ID, position ID, or rich text)\"},\"title\":{\"type\":\"string\",\"description\":\"Display title, may contain rich text.such as User:holly.zhang, Job position:111, Job position:111 By department B2C department, User:<input type=\\\"button\\\" data=\\\"${...}\\\" expr=\\\"__\\\" tabindex=\\\"-1\\\" value=\\\"Workflow Variables:user14:Department\\\">\"}},\"additionalProperties\":false}},\"minItems\":1}",
           "nestedSchema": {
             "description": "Defines the configuration for the Task assignee editor, supporting multiple selection methods and rich text",
             "type": "array",
@@ -1119,7 +1119,7 @@
                   },
                   "title": {
                     "type": "string",
-                    "description": "Display title, may contain rich text.such as User:holly.zhang, Job position:111, Job position:111 By department B2C部门, User:<input type=\"button\" data=\"${...}\" expr=\"__\" tabindex=\"-1\" value=\"Workflow Variables:user14:Department\">"
+                    "description": "Display title, may contain rich text.such as User:holly.zhang, Job position:111, Job position:111 By department B2C department, User:<input type=\"button\" data=\"${...}\" expr=\"__\" tabindex=\"-1\" value=\"Workflow Variables:user14:Department\">"
                   }
                 },
                 "additionalProperties": false

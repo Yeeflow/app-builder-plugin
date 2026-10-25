@@ -4239,9 +4239,9 @@ function validateWorkflowOutcomeConditionShape(shape, report, context) {
   const sourceId = safeString(shape && shape.source && (shape.source.id || shape.source.resourceid));
   function expectedTaskOutcome(text) {
     const value = safeString(text);
-    if (/\bapproved\b/i.test(value) || /已同意/.test(value)) return "Approved";
-    if (/\brejected\b/i.test(value) || /已拒绝/.test(value)) return "Rejected";
-    if (/\bcompleted\b/i.test(value) || /已完成/.test(value)) return "Completed";
+    if (/\bapproved\b/i.test(value) || /\u5df2\u540c\u610f/.test(value)) return "Approved";
+    if (/\brejected\b/i.test(value) || /\u5df2\u62d2\u7edd/.test(value)) return "Rejected";
+    if (/\bcompleted\b/i.test(value) || /\u5df2\u5b8c\u6210/.test(value)) return "Completed";
     return "";
   }
   conditions.forEach((condition, conditionIndex) => {
@@ -4257,7 +4257,7 @@ function validateWorkflowOutcomeConditionShape(shape, report, context) {
       });
       return;
     }
-    const isTaskOutcome = text.includes("&quot;type&quot;:&quot;task&quot;") || text.includes(":Outcome") || text.includes(":结果");
+    const isTaskOutcome = text.includes("&quot;type&quot;:&quot;task&quot;") || text.includes(":Outcome") || text.includes(":\u7ed3\u679c");
     if (!isTaskOutcome) return;
     const expectedOutcome = expectedTaskOutcome(flowLabel) || expectedTaskOutcome(text);
     const leftText = typeof condition.left === "string" ? condition.left : JSON.stringify(condition.left || {});

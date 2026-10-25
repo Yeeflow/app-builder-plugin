@@ -130,14 +130,14 @@
             "FieldName",
             "InternalName"
           ],
-          "description": "Defs 不可为 null，可为空数组"
+          "description": "Defs must not be null; an empty array is allowed."
         },
         "Layouts": {
           "type": "array",
           "items": {
             "$ref": "#/$defs/ListLayoutModel"
           },
-          "description": "Layouts 不可为 null，可为空数组"
+          "description": "Layouts must not be null; an empty array is allowed."
         },
         "PublicForms": {
           "type": "array",
@@ -624,7 +624,7 @@
           "type": "string",
           "minLength": 1,
           "pattern": ".*\\{index\\}.*",
-          "description": "必须包含 {index}；支持 {date},{yyyy},{yy},{mm},{dd},{yymmdd},{mmdd},{index}"
+          "description": "Must contain {index}; supports {date}, {yyyy}, {yy}, {mm}, {dd}, {yymmdd}, {mmdd}, and {index}."
         },
         "StartIndex": {
           "type": "integer"
@@ -754,7 +754,7 @@
         },
         "Status": {
           "const": 1,
-          "description": "固定值 1"
+          "description": "Constant value: 1."
         },
         "IsItemPerm": {
           "type": "boolean"
@@ -830,7 +830,7 @@
         },
         "Flags": {
           "const": 1,
-          "description": "固定值 1"
+          "description": "Constant value: 1."
         },
         "CustomType": {
           "type": "string"
@@ -1827,7 +1827,7 @@
                       "properties": {
                         "approvalForms": {
                           "type": "integer",
-                          "description": "允许位: Submit(1), ReadTasks(16), ProcessTasks(32)",
+                          "description": "Allowed bits: Submit(1), ReadTasks(16), ProcessTasks(32)",
                           "x-permissionFlags": {
                             "Submit": 1,
                             "ReadTasks": 16,
@@ -1837,7 +1837,7 @@
                         },
                         "dataLists": {
                           "type": "integer",
-                          "description": "允许位: Submit(1), Edit(2), Delete(4), Read(8)",
+                          "description": "Allowed bits: Submit(1), Edit(2), Delete(4), Read(8)",
                           "x-permissionFlags": {
                             "Submit": 1,
                             "Edit": 2,
@@ -1848,7 +1848,7 @@
                         },
                         "documentLibraries": {
                           "type": "integer",
-                          "description": "允许位: Submit(1), Edit(2), Delete(4), Read(8)",
+                          "description": "Allowed bits: Submit(1), Edit(2), Delete(4), Read(8)",
                           "x-permissionFlags": {
                             "Submit": 1,
                             "Edit": 2,
@@ -1859,7 +1859,7 @@
                         },
                         "formReports": {
                           "type": "integer",
-                          "description": "仅允许 Read(8)",
+                          "description": "Only Read(8) is allowed.",
                           "x-permissionFlags": {
                             "Read": 8
                           },
@@ -1870,7 +1870,7 @@
                         },
                         "dataReports": {
                           "type": "integer",
-                          "description": "仅允许 Read(8)",
+                          "description": "Only Read(8) is allowed.",
                           "x-permissionFlags": {
                             "Read": 8
                           },
@@ -1881,7 +1881,7 @@
                         },
                         "aiAgents": {
                           "type": "integer",
-                          "description": "仅允许 Submit(1)",
+                          "description": "Only Submit(1) is allowed.",
                           "x-permissionFlags": {
                             "Submit": 1
                           },
@@ -2022,7 +2022,7 @@
           "x-contentSchema": {
             "$ref": "#/$defs/ListExportInfo"
           },
-          "description": "实际导出通常为字符串(JSON)；解析后结构为 ListExportInfo"
+          "description": "Exports usually contain a JSON string; the parsed structure is ListExportInfo."
         },
         "SimplePortal": {
           "$ref": "#/$defs/AppPortalSimple"

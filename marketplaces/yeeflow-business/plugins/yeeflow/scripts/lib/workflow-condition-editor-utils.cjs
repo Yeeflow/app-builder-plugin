@@ -126,7 +126,7 @@ function isTaskOutcomeSelector(token) {
   return token && (
     token.id === "Outcome" ||
     token.id === "TaskOutcome" ||
-    /Task outcome|任务结果|:Outcome\b|Instance:Outcome/.test(text)
+    /Task outcome|\u4efb\u52a1\u7ed3\u679c|:Outcome\b|Instance:Outcome/.test(text)
   );
 }
 
@@ -217,7 +217,7 @@ function extractVariableChoices(variable) {
 function analyzeFlowBranchConditions(flow) {
   const conditions = asArray(flow && flow.properties && flow.properties.conditioninfo);
   const text = JSON.stringify(conditions);
-  const hasTaskOutcome = /Task outcome|任务结果|&quot;type&quot;:&quot;task&quot;|:Outcome\b|Instance:Outcome/.test(text);
+  const hasTaskOutcome = /Task outcome|\u4efb\u52a1\u7ed3\u679c|&quot;type&quot;:&quot;task&quot;|:Outcome\b|Instance:Outcome/.test(text);
   const equalsByVariable = new Map();
   const notEqualsByVariable = new Map();
   const rows = flattenConditionRows(conditions);

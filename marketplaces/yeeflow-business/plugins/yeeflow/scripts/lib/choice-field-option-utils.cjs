@@ -1,4 +1,4 @@
-const PLANNING_ANNOTATION_RE = /\s*[（(]\s*(?:planning\s+default|recommended\s+default|user[-\s]+default(?:[-\s]+approved(?:[-\s]+for[-\s]+generation)?)?|规划默认|推荐默认|用户默认(?:已批准生成)?)\s*[)）]\s*$/i;
+const PLANNING_ANNOTATION_RE = /\s*[（(]\s*(?:planning\s+default|recommended\s+default|user[-\s]+default(?:[-\s]+approved(?:[-\s]+for[-\s]+generation)?)?|\u89c4\u5212\u9ed8\u8ba4|\u63a8\u8350\u9ed8\u8ba4|\u7528\u6237\u9ed8\u8ba4(?:\u5df2\u6279\u51c6\u751f\u6210)?)\s*[)）]\s*$/i;
 const CHOICE_DELIMITER_RE = /(?:\r?\n|[、,，;；])+/;
 
 function choiceValue(value) {
