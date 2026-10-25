@@ -1,0 +1,337 @@
+#!/usr/bin/env node
+
+import assert from "node:assert/strict";
+import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
+import { materializeFullAppGeneratedFinal } from "./materialize-full-app-generated-final.mjs";
+import { readDecodedYapk } from "./lib/yapk-decode-utils.mjs";
+import { validateDashboardGenerationHardGates } from "./validate-dashboard-generation-hard-gates.mjs";
+import { validateDashboardPageLayoutTemplate } from "./validate-dashboard-page-layout-template.mjs";
+import { runYapkFirstGenerationPreflight } from "./yapk-first-generation-preflight.mjs";
+
+const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), "service-tickets-regression-"));
+const specPath = path.join(tempDir, "functional-specification.md");
+const planPath = path.join(tempDir, "yeeflow-app-plan.md");
+const outDir = path.join(tempDir, "dist");
+const apiIdManifestPath = path.join(tempDir, "api-issued-ids.json");
+
+fs.writeFileSync(apiIdManifestPath, `${JSON.stringify({
+  ids: Array.from({ length: 1200 }, (_, index) => String(920000000000000000n + BigInt(index))),
+}, null, 2)}\n`);
+
+fs.writeFileSync(specPath, `# Functional Specification: Service Tickets Management
+
+Service desk ticket management with Tickets, Ticket Comments, and Ticket Attachments.
+`);
+
+fs.writeFileSync(planPath, `# Service Tickets Management - Yeeflow App Plan
+
+## 1. Plan Status
+Approved for generated-final validation.
+
+## 4. Data Lists and Document Libraries Plan
+
+### 4.1 Data List Schema Table
+
+| List | Field label | Internal field | Field type | Purpose |
+| --- | --- | --- | --- | --- |
+| Tickets | Title | Title | Text | Native title mirrors Subject |
+| Tickets | Ticket Number | Text1 | Text | Ticket identifier |
+| Tickets | Subject | Text2 | Text | Primary visible title |
+| Tickets | Requester | Text4 | identity-picker | Existing Yeeflow user |
+| Tickets | Category | Text3 | Text | Access, Hardware, Software |
+| Tickets | Priority | Text7 | Text | Low, Medium, High, Critical |
+| Tickets | Status | Text5 | Text | Open, In Progress, Resolved, Closed |
+| Tickets | Assigned Agent | Text8 | identity-picker | Existing Yeeflow user |
+| Tickets | Created Date | Datetime1 | DateTime | Created date |
+| Tickets | Due Date | Datetime2 | DateTime | SLA due date |
+| Tickets | Description | Text6 | TextArea | Ticket description |
+| Ticket Comments | Title | Title | Text | Comment title |
+| Ticket Comments | Ticket | Text2 | Lookup | Lookup to Tickets |
+| Ticket Comments | Comment | Text1 | TextArea | Comment text |
+| Ticket Comments | Commented By | Text4 | identity-picker | Existing Yeeflow user |
+| Ticket Comments | Comment Date | Datetime1 | DateTime | Comment date |
+| Ticket Attachments | Title | Title | Text | Attachment title |
+| Ticket Attachments | Ticket | Text2 | Lookup | Lookup to Tickets |
+| Ticket Attachments | File | Text3 | File | Uploaded file |
+| Ticket Attachments | Uploaded By | Text4 | identity-picker | Existing Yeeflow user |
+
+## 5. Approval Forms Plan
+Not planned.
+
+## 6. Form Reports Plan
+Not planned.
+
+## 10. Custom Data List Forms Plan
+| Data List | Form Name | Form Type | Selected Data List Form Layout Template | Open in |
+| --- | --- | --- | --- | --- |
+| Tickets | Tickets New/Edit Form | New/Edit | data_list_form_layout_new_edit_v1_1 | Pop-up window |
+| Tickets | Tickets View Item | View | data_list_form_layout_view_item_v1_1 | Pop-up window |
+| Ticket Comments | Ticket Comments New/Edit Form | New/Edit | data_list_form_layout_new_edit_v1_1 | Pop-up window |
+| Ticket Comments | Ticket Comments View Item | View | data_list_form_layout_view_item_v1_1 | Pop-up window |
+| Ticket Attachments | Ticket Attachments New/Edit Form | New/Edit | data_list_form_layout_new_edit_v1_1 | Pop-up window |
+| Ticket Attachments | Ticket Attachments View Item | View | data_list_form_layout_view_item_v1_1 | Pop-up window |
+
+#### Data List Form Layout Template Selection
+
+| Data List or Library | Custom Form | Form Usage | Selected Data List Form Layout Template | Open in |
+| --- | --- | --- | --- | --- |
+| Tickets | Tickets New/Edit Form | New/Edit | data_list_form_layout_new_edit_v1_1 | Pop-up window |
+| Tickets | Tickets View Item | View | data_list_form_layout_view_item_v1_1 | Pop-up window |
+| Ticket Comments | Ticket Comments New/Edit Form | New/Edit | data_list_form_layout_new_edit_v1_1 | Pop-up window |
+| Ticket Comments | Ticket Comments View Item | View | data_list_form_layout_view_item_v1_1 | Pop-up window |
+| Ticket Attachments | Ticket Attachments New/Edit Form | New/Edit | data_list_form_layout_new_edit_v1_1 | Pop-up window |
+| Ticket Attachments | Ticket Attachments View Item | View | data_list_form_layout_view_item_v1_1 | Pop-up window |
+
+#### Form Fields Layout Template Selection
+
+| Data List or Library | Custom Form | Field Group | Selected Form Fields Layout Template | PC/Laptop Columns | Tablet Columns | Mobile Columns | Full-Row Field Controls | Dynamic Display Grouping | Proof Boundary |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Tickets | Tickets New/Edit Form | Request details | data_list_form_fields_grid_v1_1 | 2 | 2 | 1 | Description | Not needed | generated-final validation |
+| Tickets | Tickets View Item | Ticket details | data_list_form_fields_grid_v1_1 | 2 | 2 | 1 | Description | Not needed | generated-final validation |
+| Ticket Comments | Ticket Comments New/Edit Form | Comment details | data_list_form_fields_grid_v1_1 | 2 | 2 | 1 | Comment | Not needed | generated-final validation |
+| Ticket Comments | Ticket Comments View Item | Comment details | data_list_form_fields_grid_v1_1 | 2 | 2 | 1 | Comment | Not needed | generated-final validation |
+| Ticket Attachments | Ticket Attachments New/Edit Form | Attachment details | data_list_form_fields_grid_v1_1 | 2 | 2 | 1 | File | Not needed | generated-final validation |
+| Ticket Attachments | Ticket Attachments View Item | Attachment details | data_list_form_fields_grid_v1_1 | 2 | 2 | 1 | File | Not needed | generated-final validation |
+
+## 13. Data List Views Plan
+Not planned.
+
+## 14. Dashboard Pages Plan
+### 14.1 Service Tickets Dashboard
+- Page name: Service Tickets Dashboard
+- Business purpose: IT support triage workbench with ticket list and selected ticket details.
+- Layout template: dashboard-page-layouts-two-panel-workspace
+- Dataset presentation: collection_control_grid_table
+
+#### Dashboard Sections
+
+| Section Order | Section Name | Business Purpose | Source Data List or Business Object | Required Fields or Metrics | Selected Yeeflow Control Type Category | Why This Control Type Is Appropriate | User Actions Needed | Proof Boundary or Deferred Note |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | Left ticket list | Show tickets for triage | Tickets | Subject, Requester, Priority, Status, Due Date | Collection | Repeated ticket queue | Select ticket, search, filter, add ticket, collapse panel | runtime-proof-required |
+| 2 | Right ticket detail | Show selected ticket details | Tickets | Ticket Number, Subject, Requester, Category, Priority, Status, Assigned Agent, Created Date, Due Date, Description | Dynamic fields | Current selected ticket context | Read selected ticket | runtime-proof-required |
+| 3 | Related comments and attachments | Show selected ticket activity | Ticket Comments, Ticket Attachments | Comment, Commented By, Comment Date, File, Uploaded By | Collection | Related activity display | Read related records | runtime-proof-required |
+
+#### Dashboard Filters
+
+| Filter Name | Source Data List | Filter Field | Applies-to Dashboard Sections | Selected Yeeflow Filter/Control Type If Known | Default Business Scope | Proof Boundary or Deferred Note |
+| --- | --- | --- | --- | --- | --- | --- |
+| Priority Level | Tickets | Priority / Text7 | Left ticket list | Data Filter | All priorities | runtime-proof-required |
+| Status | Tickets | Status / Text5 | Left ticket list | Data Filter | All statuses | runtime-proof-required |
+
+Explicit dashboard exclusions:
+
+Do not generate KPI Cards, empty business sections, right-header placeholder buttons, or loan-domain copy.
+
+#### Summary Metrics
+| Metric Name | Dashboard Page | Source Data List | Source Field(s) | Calculation Logic |
+| --- | --- | --- | --- | --- |
+| Open Tickets | Service Tickets Dashboard | Tickets | Status | Count open tickets |
+
+#### Record Display Control Selection
+| Dashboard Page | Dataset Region | Source List | Selected Collection Template | Selection Reason |
+| --- | --- | --- | --- | --- |
+| Service Tickets Dashboard | Ticket list | Tickets | collection_control_grid_table | Dense operational table for row/column scanning of ticket status, owner, priority, and due date fields. |
+
+## 15. Application Navigation Plan
+| Group | Item | Target Resource | Yeeflow Resource Type | Icon |
+| --- | --- | --- | --- | --- |
+| Workspace | Service Tickets Dashboard | Service Tickets Dashboard | Dashboard | fa-solid fa-ticket |
+| Workspace | Tickets | Tickets | Data list | fa-solid fa-list |
+`);
+
+const report = materializeFullAppGeneratedFinal({
+  functionalSpec: specPath,
+  appPlan: planPath,
+  outDir,
+  apiIdManifest: apiIdManifestPath,
+  tenantId: "920000000000099999",
+  cwd: tempDir,
+});
+
+assert.equal(report.status, "pass", JSON.stringify(report.findings || [], null, 2));
+const packagePath = report.outputs.package;
+const { decoded } = readDecodedYapk(packagePath);
+
+const tickets = decoded.Childs.find((child) => child.List.Title === "Tickets");
+assert.ok(tickets, "Tickets data list must materialize");
+const ticketFields = new Map(tickets.Fields.map((field) => [field.DisplayName, field]));
+assert.equal(ticketFields.get("Ticket Number")?.Type, "input", "Ticket Number is a Text identifier and must not be inferred as a numeric input.");
+assert.equal(ticketFields.get("Status")?.FieldName, "Text5", "Status field must preserve its planned field key");
+assert.equal(ticketFields.get("Status")?.Type, "select", "Status field must remain a selectable choice field");
+assert.match(ticketFields.get("Requester")?.FieldName || "", /^Text\d+$/, "Requester must materialize on a schema-safe Text-backed storage field");
+assert.equal(ticketFields.get("Requester")?.FieldType, "Text", "Requester must use canonical Text storage for identity-picker fields");
+assert.equal(ticketFields.get("Requester")?.Type, "identity-picker", "Requester must use identity-picker control type");
+assert.doesNotMatch(ticketFields.get("Requester")?.FieldName || "", /^User\d+$/, "Requester must not emit unsupported User* storage keys");
+assert.match(ticketFields.get("Assigned Agent")?.FieldName || "", /^Text\d+$/, "Assigned Agent must materialize on a schema-safe Text-backed storage field");
+assert.equal(ticketFields.get("Assigned Agent")?.FieldType, "Text", "Assigned Agent must use canonical Text storage for identity-picker fields");
+assert.equal(ticketFields.get("Assigned Agent")?.Type, "identity-picker", "Assigned Agent must use identity-picker control type");
+assert.doesNotMatch(ticketFields.get("Assigned Agent")?.FieldName || "", /^User\d+$/, "Assigned Agent must not emit unsupported User* storage keys");
+
+const comments = decoded.Childs.find((child) => child.List.Title === "Ticket Comments");
+const attachments = decoded.Childs.find((child) => child.List.Title === "Ticket Attachments");
+assert.ok(comments, "Ticket Comments data list must materialize");
+assert.ok(attachments, "Ticket Attachments data list must materialize");
+const commentFields = new Map(comments.Fields.map((field) => [field.DisplayName, field]));
+const attachmentFields = new Map(attachments.Fields.map((field) => [field.DisplayName, field]));
+const commentTicketLookupRules = JSON.parse(commentFields.get("Ticket")?.Rules || "{}");
+const attachmentTicketLookupRules = JSON.parse(attachmentFields.get("Ticket")?.Rules || "{}");
+assert.equal(commentFields.get("Ticket")?.Type, "lookup", "Ticket Comments lookup field must materialize as a lookup control");
+assert.equal(commentTicketLookupRules.listid, tickets.List.ListID, "Ticket Comments lookup must target the Tickets list");
+assert.equal(commentTicketLookupRules.listfield, "Title", "Ticket Comments lookup must use a runtime-resolvable display field");
+assert.equal(attachmentFields.get("Ticket")?.Type, "lookup", "Ticket Attachments lookup field must materialize as a lookup control");
+assert.equal(attachmentTicketLookupRules.listid, tickets.List.ListID, "Ticket Attachments lookup must target the Tickets list");
+assert.equal(attachmentTicketLookupRules.listfield, "Title", "Ticket Attachments lookup must use a runtime-resolvable display field");
+assert.match(commentFields.get("Commented By")?.FieldName || "", /^Text\d+$/, "Commented By must materialize on a schema-safe Text-backed storage field");
+assert.equal(commentFields.get("Commented By")?.FieldType, "Text", "Commented By must use canonical Text storage for identity-picker fields");
+assert.equal(commentFields.get("Commented By")?.Type, "identity-picker", "Commented By must use identity-picker control type");
+assert.doesNotMatch(commentFields.get("Commented By")?.FieldName || "", /^User\d+$/, "Commented By must not emit unsupported User* storage keys");
+assert.match(attachmentFields.get("Uploaded By")?.FieldName || "", /^Text\d+$/, "Uploaded By must materialize on a schema-safe Text-backed storage field");
+assert.equal(attachmentFields.get("Uploaded By")?.FieldType, "Text", "Uploaded By must use canonical Text storage for identity-picker fields");
+assert.equal(attachmentFields.get("Uploaded By")?.Type, "identity-picker", "Uploaded By must use identity-picker control type");
+assert.doesNotMatch(attachmentFields.get("Uploaded By")?.FieldName || "", /^User\d+$/, "Uploaded By must not emit unsupported User* storage keys");
+
+const pageTitles = decoded.Pages.map((page) => page.Title);
+assert.deepEqual(pageTitles, ["Service Tickets Dashboard"], "Summary Metrics must not materialize as an extra Dashboard page");
+const dashboardResource = JSON.parse(decoded.Pages[0].LayoutInResources[0].Resource);
+assert.equal(
+  dashboardResource.derivedFromDashboardPageLayoutTemplate,
+  "dashboard-page-layouts-two-panel-workspace",
+  "Service Tickets Dashboard must materialize the App Plan-selected two-panel workspace layout",
+);
+assert.ok(JSON.stringify(dashboardResource).includes("left_panel_data_items_wrapper"), "Two-panel workspace must include the left record-list panel");
+assert.ok(JSON.stringify(dashboardResource).includes("content_panel_current_item_wrapper"), "Two-panel workspace must include the selected-item detail panel");
+const leftCollection = findFirstByIdentity(dashboardResource, "left_panel_data_items_wrapper");
+assert.ok(leftCollection, "Two-panel workspace left collection must be present");
+assert.deepEqual(leftCollection.attrs?.data?.filter || [], [], "Left record-list collection must not apply unsafe empty select-filter conditions");
+const leftFilters = findAllByIdentity(dashboardResource, "left_panel_filter_control");
+const priorityFilter = leftFilters.find((filter) => /priority/i.test(`${filter.name || ""} ${filter.title || ""} ${filter.attrs?.lab?.value || ""}`));
+const statusFilter = leftFilters.find((filter) => /status/i.test(`${filter.name || ""} ${filter.title || ""} ${filter.attrs?.lab?.value || ""}`));
+assert.ok(priorityFilter, "Two-panel workspace must keep a Priority filter control when planned by the template");
+assert.ok(statusFilter, "Two-panel workspace must keep a Status filter control when planned by the template");
+assert.equal(priorityFilter.attrs?.data?.field, ticketFields.get("Priority")?.FieldName, "Priority filter must bind to the planned Priority field");
+assert.equal(priorityFilter.attrs?.display_f, ticketFields.get("Priority")?.FieldName, "Priority filter display field must match the planned Priority field");
+assert.equal(priorityFilter.attrs?.value_f, ticketFields.get("Priority")?.FieldName, "Priority filter value field must match the planned Priority field");
+assert.equal(priorityFilter.attrs?.optionSourceProven, true, "Priority filter must carry an export-proven option source contract");
+assert.deepEqual(priorityFilter.attrs?.["choice-options"] || [], ["Low", "Medium", "High", "Critical"], "Priority filter options must exactly match planned Priority values");
+assert.equal(statusFilter.attrs?.data?.field, ticketFields.get("Status")?.FieldName, "Status filter must bind to the planned Status field");
+assert.deepEqual(statusFilter.attrs?.["choice-options"] || [], ["Open", "In Progress", "Resolved", "Closed"], "Status filter options must exactly match planned Status values and must not include generic workflow states");
+
+const pageLayoutValidation = validateDashboardPageLayoutTemplate({ package: packagePath, appPlan: planPath });
+assert.equal(pageLayoutValidation.status, "pass", JSON.stringify(pageLayoutValidation.findings || [], null, 2));
+const dashboardHardGates = validateDashboardGenerationHardGates({ package: packagePath, plan: planPath });
+assert.equal(dashboardHardGates.status, "pass", JSON.stringify(dashboardHardGates.findings || [], null, 2));
+const firstGenerationPreflight = runYapkFirstGenerationPreflight(packagePath, {
+  cwd: tempDir,
+  plan: planPath,
+  idProvenance: report.outputs.idProvenance,
+});
+assert.equal(
+  firstGenerationPreflight.ok,
+  true,
+  JSON.stringify({
+    failedGate: firstGenerationPreflight.failedGate,
+    gates: firstGenerationPreflight.gates?.filter((gate) => !gate.ok),
+  }, null, 2),
+);
+
+const layoutsByList = new Map(decoded.Childs.map((child) => [child.List.Title, child.Layouts.filter((layout) => Number(layout.Type) === 1).map((layout) => layout.Title)]));
+assert.deepEqual(layoutsByList.get("Tickets"), ["Tickets New/Edit Form", "Tickets View Item"]);
+assert.deepEqual(layoutsByList.get("Ticket Comments"), ["Ticket Comments New/Edit Form", "Ticket Comments View Item"]);
+assert.deepEqual(layoutsByList.get("Ticket Attachments"), ["Ticket Attachments New/Edit Form", "Ticket Attachments View Item"]);
+
+const seedData = JSON.parse(fs.readFileSync(report.outputs.seedData, "utf8"));
+const ticketSeed = seedData.lists.find((list) => list.listTitle === "Tickets");
+const commentSeed = seedData.lists.find((list) => list.listTitle === "Ticket Comments");
+const attachmentSeed = seedData.lists.find((list) => list.listTitle === "Ticket Attachments");
+assert.ok(ticketSeed, "Seed artifact must include Tickets list instructions");
+assert.ok(commentSeed, "Seed artifact must include Ticket Comments list instructions");
+assert.ok(attachmentSeed, "Seed artifact must include Ticket Attachments list instructions");
+const requesterSeed = ticketSeed.rows[0][ticketFields.get("Requester").FieldName];
+const assignedAgentSeed = ticketSeed.rows[0][ticketFields.get("Assigned Agent").FieldName];
+const commentTicketLookupSeed = commentSeed.rows[0][commentFields.get("Ticket").FieldName];
+const attachmentTicketLookupSeed = attachmentSeed.rows[0][attachmentFields.get("Ticket").FieldName];
+const fileSeed = attachmentSeed.rows[0][attachmentFields.get("File").FieldName];
+assert.equal(requesterSeed?.seedValueType, "identity-picker", "identity-picker seed values must be structured live-user resolution placeholders, not plain strings");
+assert.equal(requesterSeed?.requiresLiveUserResolution, true, "identity-picker seed values must require live tenant user resolution");
+assert.equal(assignedAgentSeed?.seedValueType, "identity-picker", "Assigned Agent seed values must use the identity-picker seed contract");
+assert.equal(commentTicketLookupSeed?.seedValueType, "lookup", "Ticket Comments lookup seed values must be structured lookup resolution placeholders, not plain strings");
+assert.equal(commentTicketLookupSeed?.requiresLookupListDataIDResolution, true, "Ticket Comments lookup seed values must require target ListDataID resolution");
+assert.equal(commentTicketLookupSeed?.targetListId, tickets.List.ListID, "Ticket Comments lookup seed must point to the Tickets target list");
+assert.equal(commentTicketLookupSeed?.storedValueField, "ListDataID", "Lookup seed values must store the target record ListDataID");
+assert.equal(commentTicketLookupSeed?.mustNotUseDisplayTextAsStoredValue, true, "Lookup seed values must forbid display-title storage");
+assert.equal(attachmentTicketLookupSeed?.seedValueType, "lookup", "Ticket Attachments lookup seed values must use the lookup seed contract");
+assert.equal(attachmentTicketLookupSeed?.targetListId, tickets.List.ListID, "Ticket Attachments lookup seed must point to the Tickets target list");
+assert.equal(attachmentTicketLookupSeed?.storedValueField, "ListDataID", "Ticket Attachments lookup seed must store ListDataID");
+assert.equal(fileSeed?.seedValueType, "file-upload", "file-upload seed values must be structured file reference placeholders, not plain strings");
+assert.equal(fileSeed?.requiresFileUploadReference, true, "file-upload seed values must require a file upload reference before live write");
+assert.ok(
+  ticketSeed.fieldSeedRequirements.some((requirement) => requirement.displayName === "Requester" && requirement.requiresLiveUserResolution),
+  "Seed artifact must declare identity-picker live-user requirements",
+);
+assert.ok(
+  commentSeed.fieldSeedRequirements.some((requirement) => requirement.displayName === "Ticket" && requirement.requiresLookupListDataIDResolution && requirement.storedValueField === "ListDataID"),
+  "Seed artifact must declare lookup target ListDataID resolution requirements",
+);
+assert.ok(
+  attachmentSeed.fieldSeedRequirements.some((requirement) => requirement.displayName === "File" && requirement.requiresFileUploadReference),
+  "Seed artifact must declare file-upload reference requirements",
+);
+
+const decodedText = JSON.stringify(decoded);
+assert.doesNotMatch(decodedText, /\b(?:Office Asset|Active Loans|Active Loan Pipeline|current loan volume|return activity signal|Coordinator view of active loans|checkout status|return follow-up)\b/i, "Service Tickets package must not retain Office Asset/Loan template residue");
+assert.doesNotMatch(decodedText, /\b(?:event_portfolio_header_band|event_portfolio_pipeline_section|Asset Loan Operations Header Band)\b/i, "Service Tickets custom forms must not retain source-template metadata residue");
+assert.doesNotMatch(decodedText, /\b(?:summary_approved_budget|summary_registration_rate|summary_lead_follow_up|approved_budget_count|registration_rate_count|lead_follow_up_count)\b/i, "Generated KPI/Summary runtime identifiers must use business metric names, not source-template identifiers");
+
+console.log(JSON.stringify({
+  status: "pass",
+  cases: [
+    "planned Status field preserved",
+    "planned user/person fields preserved as Text-backed identity-picker controls",
+    "planned lookup fields resolve to their target list and display field",
+    "Summary Metrics not generated as Dashboard",
+    "two-panel Dashboard layout matches App Plan selection",
+    "left-panel Priority/Status filters use exact planned option sources",
+    "dashboard page-layout and hard-gate validators pass",
+    "generated-final first-generation preflight passes and blocks stale embedded Dashboard IDs before signing",
+    "custom forms assigned to correct host lists",
+    "seed artifacts use structured identity-picker, lookup, and file-upload contracts",
+    "template business residue absent",
+  ],
+}, null, 2));
+
+function findFirstByIdentity(node, identity) {
+  if (!node || typeof node !== "object") return null;
+  if (hasIdentity(node, identity)) return node;
+  for (const child of node.children || []) {
+    const found = findFirstByIdentity(child, identity);
+    if (found) return found;
+  }
+  return null;
+}
+
+function findAllByIdentity(node, identity) {
+  const matches = [];
+  const visit = (current) => {
+    if (!current || typeof current !== "object") return;
+    if (hasIdentity(current, identity)) matches.push(current);
+    for (const child of current.children || []) visit(child);
+  };
+  visit(node);
+  return matches;
+}
+
+function hasIdentity(node, identity) {
+  const values = [
+    node.id,
+    node.name,
+    node.label,
+    node.title,
+    node.nv_label,
+    node.nav_label,
+    node.attrs?.nv_label,
+    node.attrs?.nav_label,
+  ];
+  return values.some((value) => String(value || "") === identity);
+}
