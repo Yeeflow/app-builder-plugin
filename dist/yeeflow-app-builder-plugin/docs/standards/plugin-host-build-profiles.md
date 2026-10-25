@@ -8,7 +8,7 @@ The archive builder is the single packaging entrypoint for local and registered-
 node scripts/build-plugin-archive.mjs --profile codex --output /tmp/yeeflow-codex.zip
 ```
 
-The default remains `codex`, with the existing archive layout and direct `.mcp.json` configuration. Existing release consumers need no new arguments.
+The default remains `codex`, with the existing archive layout and direct `.mcp.json` configuration. Existing release consumers need no new arguments. This layout uses the host's native MCP OAuth connection; the tested host did not expose Connect another account for it. Upgrading a Git marketplace source does not register or distribute the private test App. Multi-account UI and routing were verified separately through the registered-App profile below.
 
 ## Private registered-App distribution (chatgpt-web)
 
@@ -36,7 +36,7 @@ ChatGPT's Add plugin upload creates an identity and rejects an existing name. Do
 
 ## Directory-compatible OAuth candidate
 
-Use this profile for the shared plugin installed independently by each user. It generates the supported `.codex-plugin/plugin.json` and `.mcp.json` compatibility layout, preserves the plugin identity and all 31 skills, declares the unified HTTPS MCP endpoint and OAuth with DCR, and excludes registered App references, compatibility autodiscovery files and hooks. The host owns each user's independent OAuth connections and routes calls to the selected account. There is no per-user configuration file, App ID, credential or shared login in the package.
+Use this profile to prepare the shared plugin for later authorized platform ingestion. It generates the supported `.codex-plugin/plugin.json` and `.mcp.json` compatibility layout, preserves the plugin identity and all 31 skills, declares the unified HTTPS MCP endpoint and OAuth with DCR, and excludes registered App references, compatibility autodiscovery files and hooks. The host owns authentication; additional-account availability depends on its supported connection-management flow. Native Git installation and platform ingestion are distinct paths. There is no per-user configuration file, App ID, credential or shared login in the package.
 
 ```sh
 node scripts/build-plugin-archive.mjs --tracked-only --profile directory \

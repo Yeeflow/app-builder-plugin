@@ -330,7 +330,7 @@ mirrors.push(["skills/installed/yeeflow-feature-learning-orchestrator/SKILL.md",
 for (const entry of readJson("docs/standards/native-collection-density-distribution.json").mirrors) mirrors.push([entry.source, entry.destination]);
 mirrors.push(["docs/releases/yeeflow-app-builder-v1.16.0.md", "docs/releases/yeeflow-app-builder-v1.16.0.md"]);
 
-for (const file of ["docs/standards/plugin-resource-access.md", "docs/standards/plugin-host-build-profiles.md", "docs/standards/multi-account-oauth.md", "docs/releases/yeeflow-app-builder-v1.20.0-rc1.md", "docs/releases/yeeflow-app-builder-v1.20.0-rc2.md", "scripts/test-skill-entrypoint-compat.mjs", "docs/releases/yeeflow-app-builder-v1.16.1.md"]) mirrors.push([file, file]);
+for (const file of ["docs/standards/plugin-resource-access.md", "docs/standards/plugin-host-build-profiles.md", "docs/standards/multi-account-oauth.md", "docs/releases/yeeflow-app-builder-v1.20.0-rc1.md", "docs/releases/yeeflow-app-builder-v1.20.0-rc2.md", "docs/releases/yeeflow-app-builder-v1.20.0.md", "scripts/test-skill-entrypoint-compat.mjs", "docs/releases/yeeflow-app-builder-v1.16.1.md"]) mirrors.push([file, file]);
 
 // Direct Form Action support must survive subsequent distribution rebuilds.
 for (const file of ["references/direct-form-action-execution.md", "references/yeeflow-custom-code-standard.md", "examples/form-action-dispatch.mjs", "scripts/test-form-action-dispatch.mjs"]) {

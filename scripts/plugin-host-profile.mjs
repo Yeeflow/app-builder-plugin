@@ -80,7 +80,7 @@ export function applyHostProfile(stageRoot, repoRoot, options, apps) {
     }
     manifest.mcpServers = "./.mcp.json";
     manifest.interface.supportURL ||= "https://support.yeeflow.com/";
-    manifest.interface.longDescription += " Connect your own Yeeflow account through OAuth. You can connect additional accounts in plugin settings; each operation uses the selected account's permissions.";
+    manifest.interface.longDescription += " Connect your own Yeeflow account through OAuth. Additional-account management depends on the host's supported connection flow; each operation uses the selected account's permissions.";
     // The directory accepts at most three starter prompts.
     if (Array.isArray(manifest.interface.defaultPrompt)) manifest.interface.defaultPrompt = manifest.interface.defaultPrompt.slice(0, 3);
     // Keep the supported Codex compatibility layout. The generic portable MCP
