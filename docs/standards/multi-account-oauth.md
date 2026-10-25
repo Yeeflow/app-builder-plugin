@@ -1,10 +1,14 @@
 # Independent OAuth sign-in and multiple connected accounts
 
-GitHub/private-marketplace release candidate: `1.20.0-rc1`, based on stable `1.19.0`. Publishing this candidate and updating the local plugin are authorized. OpenAI store submission, review changes and production-server modifications remain outside this release.
+GitHub/private-marketplace release candidate: `1.20.0-rc2`, based on stable `1.19.0`. Publishing this candidate and updating the local plugin are authorized. OpenAI store submission, review changes and production-server modifications remain outside this release.
 
 ## User behavior and implementation
 
 Every user installs the same Yeeflow plugin in their own ChatGPT account and authorizes their own Yeeflow account. A user may connect additional accounts from plugin settings. The host stores OAuth grants and selects the relevant connection for each tool call. No user creates their own MCP server or provides an App ID. A shared integration is not a shared credential.
+
+Host layout matters. The tested local direct-MCP plugin did not expose Connect another account. A separate private registered App in the same Personal workspace did expose that entry and successfully retained both authorized accounts. Use the existing `chatgpt-web` profile with an accessible registered App for local/private multi-account tests; keep that private mapping outside the shared repository and public ZIPs. Creating the private test App is a developer setup step, not a setup requirement for end users. A successful test of this registered App does not establish that the default direct-MCP package offers the same account-management UI.
+
+For a registered App, OpenAI can inject a required `link_id` into each exposed tool schema and list the available connections alongside it. Pass exactly the listed link for the requested account; the host selects that OAuth grant before calling Yeeflow. Do not invent a selector, forward `link_id` to upstream Yeeflow arguments, or use a profile ID/email in place of a link. The upstream profile input remains an empty object even when the host wrapper requires `link_id`.
 
 The new `directory` build profile in `scripts/plugin-host-profile.mjs` produces the supported `.codex-plugin/plugin.json` and `.mcp.json` compatibility layout. It declares exactly one unified HTTPS MCP server, the compatibility `http` transport, and `extensions.com.openai.auth` with `type: oauth` and `client.mode: dcr`. OAuth endpoints are discovered; there are no guessed endpoint overrides, hardcoded accounts, bearer headers, client secrets or registered private App references. DCR is a client-registration choice, not a multi-account feature switch. Existing `codex` and private `chatgpt-web` profiles remain available.
 
@@ -36,7 +40,7 @@ OpenAI supports connecting multiple accounts without a profile tool. A declared 
 The designated profile tool must:
 
 - Declare `_meta["openai/profile"]: true`, an empty-object input schema, a profile `outputSchema`, OAuth protection and read-only annotations.
-- Resolve the profile exclusively from validated request credentials; return exactly one authenticated profile. Never accept a model-supplied account/user selector.
+- Resolve the profile exclusively from validated request credentials; return exactly one authenticated profile. Never accept a model-supplied account/user selector in the upstream schema. Host-injected connection routing happens before the upstream request and is not such a selector.
 - Return top-level `{id, name?, email?, nickname?}` in `structuredContent` and the same serialized JSON in text content. `id` must be a nonempty opaque string; optional fields are strings and unavailable values are omitted. No extra response-envelope fields belong inside the profile object.
 - Keep the same ID across refresh, reconnect, scope changes and display metadata changes. Independently connectable profiles need different IDs, never reassigned after deletion. Do not use email or an ID generated anew per session.
 - Reflect Yeeflow's actual organization/authorization model. If organization-specific profiles can be connected independently, assign persistent opaque IDs for those profiles without encoding names or organizational relationships in the ID.
@@ -44,22 +48,30 @@ The designated profile tool must:
 
 ## Runtime acceptance matrix
 
-All rows below require hosted sign-in and are **pending** until executed with appropriately authorized test accounts. The local candidate does not create those accounts, store their credentials or change production permissions.
+The following observations were made on 2026-10-25 using two authorized accounts in one ChatGPT Personal workspace, a separately registered private App, and its local private plugin projection. No credentials or private identity/connection IDs are included in this record.
 
-| Scenario | Expected observation |
+- Both accounts remain visible in Connected accounts with different labels.
+- Twelve registered-App profile calls passed: initial calls for both accounts, four alternating calls, and six concurrent calls. Each returned the intended account's stable identity; the two identities differ.
+- Fresh `workspace_list` reads using each host-provided link succeeded and returned 20 and 11 rows respectively. Both responses reported TotalCount=0, so these counts do not establish complete pagination.
+- The local registered-App test projection installed with 31 skills and 1,898 byte-matching files. This establishes installation and available registered-App tools; it does not prove an independent model conversation or every business workflow.
+- Browser sign-in initially reused the first SSO identity. Explicit logout and second-account enterprise login were required before authorizing the second grant; the first connected grant remained available.
+
+Remaining acceptance cases are separate from those observations. The plugin does not create test accounts, store credentials or change production permissions.
+
+| Scenario | Observed status |
 | --- | --- |
-| Two ChatGPT users install independently | Each authorizes their own Yeeflow identity; one user's session never changes the other's results |
-| One user connects accounts A and B | Two independently usable OAuth connections with distinguishable profile labels |
-| Select B after authorizing A | Login/authorization UI permits selecting B rather than silently binding A again |
-| Read each account's workspace/app data | Correct identity and permissions per call; resources rediscovered after switching |
-| Ambiguous account/organization request | Clarify before accessing identity-dependent business data |
-| Refresh/reconnect/change display metadata | Same profile ID; labels may change |
-| Separate organizations for one user, if supported | Correct profile identity under the actual server authorization model |
-| A denied while B has access | Denied request stays denied; no silent retry using B |
-| Disconnect/revoke A | A fails or requests reauthorization while B remains independent |
-| Concurrent users and alternating account calls | No identity, tenant, session or cache crossover |
-| Explicit cross-account comparison | Read only selected authorized connections and label each result's source |
-| Confirmed test write and readback | Same account, organization and resource for confirmation, execution and verification |
+| Two ChatGPT users install independently | Pending; current run used one ChatGPT Personal workspace |
+| One user connects accounts A and B | Passed for the private registered App; both grants retained |
+| Select B after authorizing A | Passed after explicit browser identity selection; automatic SSO alone reused A |
+| Read each account's workspace/app data | Workspace discovery passed; application/resource workflows pending |
+| Ambiguous account/organization request | Rules distributed; independent conversation acceptance pending |
+| Refresh/reconnect/change display metadata | Pending lifecycle stability checks |
+| Separate organizations for one user, if supported | Two different profiles observed; broader organization switching pending |
+| A denied while B has access | Pending negative permission test; no silent fallback is permitted |
+| Disconnect/revoke A | Pending; neither test grant was revoked |
+| Concurrent users and alternating account calls | Concurrent and alternating calls for two links passed; separate-user isolation pending |
+| Explicit cross-account comparison | Authorized profile/workspace reads labelled by connection; broader comparison pending |
+| Confirmed test write and readback | Pending; no business data was written |
 
 For a captured tool declaration/response, structural conformance alone cannot prove stable IDs or isolation. Reconnect, permission-denial and concurrent identity scenarios must exercise the service.
 

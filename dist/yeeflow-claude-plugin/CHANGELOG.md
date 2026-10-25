@@ -1,3 +1,7 @@
+# 1.20.0-rc2 — registered-App connection routing
+
+Allow exact host-provided `link_id` values in exposed tool wrappers while prohibiting invented selectors and upstream credential/account overrides. Distinguish the upstream empty profile schema from host routing fields. Record two-account Personal registered-App read-only acceptance and the missing additional-account UI in the direct-MCP layout. Keep private App mappings out of public artifacts. See [release notes](docs/releases/yeeflow-app-builder-v1.20.0-rc2.md).
+
 # 1.19.0 — document workflow skills
 
 ## 1.20.0-rc1
