@@ -6,11 +6,12 @@ import { execFileSync } from "node:child_process";
 import { dirname, resolve, relative } from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { profileOptions, validateApps, applyHostProfile } from "./plugin-host-profile.mjs";
+import { profileOptions, validateApps, validateManagedApp, applyHostProfile } from "./plugin-host-profile.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const options = profileOptions(process.argv.slice(2));
 const apps = options.appsPath ? validateApps(JSON.parse(readFileSync(resolve(options.appsPath), "utf8"))) : null;
+if (options.profile === "managed-marketplace") validateManagedApp(apps, JSON.parse(readFileSync(resolve(options.appMetadataPath), "utf8")));
 const archiveFolder = options.profile === "chatgpt-web" ? options.name : "yeeflow-app-builder-plugin";
 const CORE_DISTRIBUTION_COMPATIBILITY_VERSION = "1.0.0";
 const index = process.argv.indexOf("--output");
@@ -57,3 +58,4 @@ try {
 }
 if (!existsSync(outputPath)) throw new Error("CORE_DISTRIBUTION_ARTIFACT_MISSING");
 console.log(`PLUGIN_ARCHIVE_BUILT ${outputPath} trackedOnly=${trackedOnly} profile=${options.profile}`);
+if (options.profile === "managed-marketplace") console.log("MANAGED_APP_CANDIDATE_ONLY: distribution metadata is not cross-user installation or single-entry UI acceptance; stable promotion remains pending those checks.");

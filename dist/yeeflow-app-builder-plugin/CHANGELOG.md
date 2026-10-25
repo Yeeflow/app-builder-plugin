@@ -1,3 +1,7 @@
+# 1.20.1 — prepare single-entry registered-App packaging
+
+Add the publisher-only managed-marketplace build profile: preserve the existing Yeeflow identity and all 31 skills, require one registered App, remove direct MCP discovery, and reject private/test or unavailable App dependencies. The shipped stable payload retains its direct-MCP transport. This patch does not complete hosted multi-account UI or OpenAI publication. See [release notes](docs/releases/yeeflow-app-builder-v1.20.1.md).
+
 # 1.20.0 — independent OAuth and host-managed account routing
 
 Finalize RC2 for the repository's stable channel after local installation and registered-App two-account read-only checks. Preserve existing plugin identity, direct MCP transport and all 31 skills. Clarify that Git/stable upgrades update the local payload; multi-account management requires a supported registered-App host, and private test grants are not distributed. Store submission and the version under review remain unchanged. See [release notes and update steps](docs/releases/yeeflow-app-builder-v1.20.0.md).

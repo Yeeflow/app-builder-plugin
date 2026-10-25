@@ -5,11 +5,28 @@ import {resolve,dirname,relative} from 'node:path';
 import {tmpdir} from 'node:os';
 import {fileURLToPath} from 'node:url';
 import {execFileSync,spawnSync} from 'node:child_process';
-import {validateApps,profileOptions,services} from './plugin-host-profile.mjs';
+import {validateApps,validateManagedApp,profileOptions,services} from './plugin-host-profile.mjs';
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'..');
 const temp=mkdtempSync(resolve(tmpdir(),'yeeflow-host-profiles-'));
 const apps={apps:Object.fromEntries(services.map((key,i)=>[key,{id:`asdk_app_fixture${i}`}]))};
 assert.deepEqual(validateApps(apps),apps);
+const metadata={apps:[{id:apps.apps.yeeflow.id,name:'Yeeflow',distributionChannel:'ECOSYSTEM_DIRECTORY'}],missingAppIds:[]};
+const managedApps=validateManagedApp(apps,metadata);
+assert.equal(managedApps.apps.yeeflow.required,true);
+assert.throws(()=>validateManagedApp(apps,{apps:[]}),/NOT_FOUND/);
+for(const channel of [null,'INDIVIDUAL','PRIVATE','WORKSPACE','ORGANIZATION','unknown']) {
+ const bad=structuredClone(metadata);bad.apps[0].distributionChannel=channel;
+ assert.throws(()=>validateManagedApp(apps,bad),/DISTRIBUTION_UNSUITABLE/);
+}
+for(const label of ['Yeeflow Multi-account RC Test','Private validation','Yeeflow RC']) {
+ const bad=structuredClone(metadata);bad.apps[0].name=label;
+ assert.throws(()=>validateManagedApp(apps,bad),/TEST_DEPENDENCY/);
+}
+assert.throws(()=>profileOptions(['--profile','managed-marketplace','--apps','x']),/INPUTS_REQUIRED/);
+assert.throws(()=>profileOptions(['--profile','managed-marketplace','--apps','x','--app-metadata','y','--name','other']),/IDENTITY_OVERRIDE/);
+assert.throws(()=>profileOptions(['--profile','directory','--app-metadata','x']),/METADATA_REQUIRES/);
+const optional=structuredClone(apps);optional.apps.yeeflow.required=false;
+assert.throws(()=>validateApps(optional),/APP_ID_INVALID/);
 for(const id of ['plugin_asdk_app_bad','asdk_app_','asdk_app_/bad','asdk_app_bad.value']) {
  const bad=structuredClone(apps);bad.apps.yeeflow.id=id;assert.throws(()=>validateApps(bad),/PLUGIN_APP_ID_INVALID/);
 }
@@ -30,11 +47,12 @@ assert.equal(profileOptions(['--profile','directory','--version','1.20.0-local.1
 function files(dir){return readdirSync(dir,{withFileTypes:true}).flatMap(e=>e.isDirectory()?files(resolve(dir,e.name)):[resolve(dir,e.name)]);}
 try {
  const mapping=resolve(temp,'apps.json');writeFileSync(mapping,JSON.stringify(apps));
+ const metadataFile=resolve(temp,'app-read.json');writeFileSync(metadataFile,JSON.stringify(metadata));
  const folders={};
  const originalManifest=readFileSync(resolve(root,'dist/yeeflow-app-builder-plugin/.codex-plugin/plugin.json'),'utf8');
- for(const profile of ['codex','chatgpt-web','directory']) {
+ for(const profile of ['codex','chatgpt-web','managed-marketplace','directory']) {
   const archive=resolve(temp,`${profile}.zip`),out=resolve(temp,profile);mkdirSync(out);
-  execFileSync(process.execPath,[resolve(root,'scripts/build-plugin-archive.mjs'),'--tracked-only','--profile',profile,'--version','1.20.0-local.1','--output',archive,...(profile==='chatgpt-web'?['--apps',mapping,'--name','yeeflow-app-builder-web-review','--display-name','Yeeflow App Builder — Web Review']:[])],{cwd:temp,stdio:'pipe'});
+  execFileSync(process.execPath,[resolve(root,'scripts/build-plugin-archive.mjs'),'--tracked-only','--profile',profile,'--version','1.20.0-local.1','--output',archive,...(profile==='chatgpt-web'?['--apps',mapping,'--name','yeeflow-app-builder-web-review','--display-name','Yeeflow App Builder — Web Review']:profile==='managed-marketplace'?['--apps',mapping,'--app-metadata',metadataFile]:[])],{cwd:temp,stdio:'pipe'});
   execFileSync('unzip',['-q',archive,'-d',out]);
   const dir=resolve(out,profile==='chatgpt-web'?'yeeflow-app-builder-web-review':'yeeflow-app-builder-plugin');folders[profile]=dir;
   const manifest=JSON.parse(readFileSync(resolve(dir,'.codex-plugin/plugin.json')));
@@ -51,6 +69,12 @@ try {
   }
   if(profile==='codex') {assert.equal(manifest.mcpServers,'./.mcp.json');assert.ok(existsSync(resolve(dir,'.mcp.json')));}
   else if(profile==='chatgpt-web') {assert.equal(manifest.name,'yeeflow-app-builder-web-review');assert.equal(manifest.apps,'./.app.json');assert.equal(manifest.mcpServers,undefined);assert.ok(!existsSync(resolve(dir,'.mcp.json')));assert.ok(!existsSync(resolve(dir,'mcp.json')));assert.deepEqual(JSON.parse(readFileSync(resolve(dir,'.app.json'))),apps);}
+  else if(profile==='managed-marketplace') {
+   assert.equal(manifest.name,'yeeflow-app-builder');assert.equal(manifest.interface.displayName,'Yeeflow');
+   assert.equal(manifest.apps,'./.app.json');assert.equal(manifest.mcpServers,undefined);
+   assert.ok(!existsSync(resolve(dir,'.mcp.json')));assert.ok(!existsSync(resolve(dir,'mcp.json')));
+   assert.deepEqual(JSON.parse(readFileSync(resolve(dir,'.app.json'))),managedApps);
+  }
   else {
    assert.equal(manifest.name,'yeeflow-app-builder');
    assert.equal(manifest.apps,undefined);
@@ -78,6 +102,13 @@ try {
   const rel=relative(codex,file);if(['.codex-plugin/plugin.json','plugin.json','.mcp.json','mcp.json','.app.json'].includes(rel))continue;
   assert.deepEqual(readFileSync(resolve(web,rel)),readFileSync(file),`host payload drift: ${rel}`);
   assert.deepEqual(readFileSync(resolve(folders.directory,rel)),readFileSync(file),`directory payload drift: ${rel}`);
+  assert.deepEqual(readFileSync(resolve(folders['managed-marketplace'],rel)),readFileSync(file),`managed payload drift: ${rel}`);
  }
- console.log('PLUGIN_HOST_PROFILES_PASS: 3 archives; 31 skills each; shared payload parity; archived entrypoint regressions; OAuth/DCR; invalid mappings rejected; source version preserved');
+ // Rejected inputs must not leave an installable artifact behind.
+ const rejected=resolve(temp,'private.zip');
+ const privateMetadata=structuredClone(metadata);privateMetadata.apps[0].distributionChannel='INDIVIDUAL';
+ writeFileSync(metadataFile,JSON.stringify(privateMetadata));
+ const failure=spawnSync(process.execPath,[resolve(root,'scripts/build-plugin-archive.mjs'),'--tracked-only','--profile','managed-marketplace','--apps',mapping,'--app-metadata',metadataFile,'--output',rejected],{encoding:'utf8'});
+ assert.notEqual(failure.status,0);assert.match(failure.stderr,/DISTRIBUTION_UNSUITABLE/);assert.ok(!existsSync(rejected));
+ console.log('PLUGIN_HOST_PROFILES_PASS: 4 archives; 31 skills each; shared payload parity; archived entrypoint regressions; managed identity and required App; private App rejected; source version preserved');
 }finally{rmSync(temp,{recursive:true,force:true});}
