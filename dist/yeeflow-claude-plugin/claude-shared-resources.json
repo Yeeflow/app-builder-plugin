@@ -55,8 +55,8 @@
   },
   "rewrites": {
     "skills/yeeflow-application-generator/SKILL.md": {
-      "beforeSha256": "cc85be763c70628cd2dc8a2cf9f9707430e81db935bf5f0d7855671e29f6ffb1",
-      "afterSha256": "749baed91898468275c15f31f97d84dcd551a60154202d8c7a903fefc73b093e"
+      "beforeSha256": "2c3773e4d7e1a2861a6ddc6892cc06c887625188866c2c8f77e563361aab76e0",
+      "afterSha256": "1fbbffe76e1ba013e50d6bf4c5b1f3450d50c395ea5accc15fcde45ce4d18d25"
     },
     "skills/yeeflow-application-generator/scripts/workflow-action-config-validator.js": {
       "beforeSha256": "6f5a48c1fd7f01f094ad36b6a22d345d72613cf359fc7b74f71bfbb690d4f957",
@@ -67,16 +67,16 @@
       "afterSha256": "a16e227571ed570cad82a4a86db8fbe7e13dd0266db03226af8492e86c673fa2"
     },
     "skills/yeeflow-approval-form-generator/SKILL.md": {
-      "beforeSha256": "ec782caf3ed3c10e09a4e4aaa8bb0f66a98d6a3af544b5ebac6bdc00977f4b4d",
-      "afterSha256": "ddc7d2ae3df8c605fcd9b40a0b501022b5b730483aac14adda80446254fc4baf"
+      "beforeSha256": "f1bd43f584161d0671582abfbe6ffac51ab5868ff59ee52b46d58bf7164a1693",
+      "afterSha256": "ef35ff7846bfa0f200393d3c3561c390787df2f9fc051205b86e32b0a6877aa0"
     },
     "skills/yeeflow-approval-form-generator/scripts/yeeflow-expression-utils.js": {
       "beforeSha256": "137f826169af2db90df2dacc60dc80c87b36b91047c1a2ac26770f68f83ab923",
       "afterSha256": "a16e227571ed570cad82a4a86db8fbe7e13dd0266db03226af8492e86c673fa2"
     },
     "skills/yeeflow-expression-generator/SKILL.md": {
-      "beforeSha256": "9ceae1cfc90f634d12054aceb761ef757267d0aeecc9e0829fc62f46ca22a263",
-      "afterSha256": "ce420236bcbe105e75aea35345fd935611023059d856d266b103ed1d41f5cef7"
+      "beforeSha256": "ea484bf33a5239307ead94088174ad98e2d527cab8dcb3ed7d53b8f208574956",
+      "afterSha256": "f4450fe104ef20a6c3c259b2170ef8396ddaf88e21ca083f699325d8e49490dc"
     },
     "skills/yeeflow-expression-generator/references/expression-editor-ui-contexts.md": {
       "beforeSha256": "3e948d91c766d4479eda5919b794e5ce5e052a94066caa92f5effcaa78a982e1",

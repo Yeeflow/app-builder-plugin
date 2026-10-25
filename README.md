@@ -1,12 +1,14 @@
 # Yeeflow App Builder Plugin
 
+Release candidate **1.20.0-rc1** adds a `directory` build profile with independent OAuth sign-in, multiple connected accounts and shared account-selection rules across all 31 skills. This is a GitHub/private-marketplace release candidate; stable remains 1.19.0 pending installation acceptance. See [implementation and verification](docs/standards/multi-account-oauth.md). No hosted acceptance or store submission is implied.
+
 Work with business data, manage tasks, and build applications in Yeeflow through guided skills and the unified hosted MCP connection. This repository maintains separate packages for Codex, ChatGPT Web and Claude.
 
 Current repository: [Yeeflow/app-builder-plugin](https://github.com/Yeeflow/app-builder-plugin). It is private; repository-based installation requires access to this repository. The default **`main` branch** contains the complete Codex and Claude marketplace sources. **`stable`** follows the validated release commit for branch-pinned installations. Claude support first entered `stable` through [PR #1](https://github.com/Yeeflow/app-builder-plugin/pull/1) and has now been reconciled into `main`.
 
 ## Version and packages
 
-The current Codex/OpenAI and Claude package version is **1.19.0**, with 31 Skills and the unified OAuth MCP connection. 1.18.0 added the Yeeflow Feature Configuration Guide skill and 1.18.1 fixes its helper under symlinked plugin caches; see the [1.18.0](docs/releases/yeeflow-app-builder-v1.18.0.md) and [1.18.1](docs/releases/yeeflow-app-builder-v1.18.1.md) release notes and the [1.17.0 release notes](docs/releases/yeeflow-app-builder-v1.17.0.md) for direct Form Action execution.
+The Codex/OpenAI candidate version is **1.20.0-rc1**. The generated Claude mirror is synchronized at the same version to preserve shared-resource parity; Claude host installation and runtime are not accepted by this candidate. Both retain 31 Skills and the unified OAuth MCP connection. 1.18.0 added the Yeeflow Feature Configuration Guide skill and 1.18.1 fixes its helper under symlinked plugin caches; see the [1.18.0](docs/releases/yeeflow-app-builder-v1.18.0.md) and [1.18.1](docs/releases/yeeflow-app-builder-v1.18.1.md) release notes and the [1.17.0 release notes](docs/releases/yeeflow-app-builder-v1.17.0.md) for direct Form Action execution.
 
 | Host | Marketplace / plugin | Package on `main` and `stable` |
 | --- | --- | --- |

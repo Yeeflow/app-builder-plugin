@@ -1,5 +1,9 @@
 # 1.19.0 — document workflow skills
 
+## 1.20.0-rc1
+
+Add an OAuth/DCR directory build profile and independent-account selection rules across all 31 skills. Preserve existing transports and resources. GitHub/private-marketplace prerelease only; hosted multi-account acceptance and public directory review remain separate. See [release notes](docs/releases/yeeflow-app-builder-v1.20.0-rc1.md).
+
 - Finalize release metadata after PR #12 merge and installed Codex RC verification: 31 enabled skills, three specialist resource reads, and 32 installed-payload planning tests passed.
 - Retain separate evidence boundaries for model conversations, desktop visuals, Claude installation and live OCR.
 - Final installation is rechecked before stable promotion.

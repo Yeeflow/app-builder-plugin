@@ -1,6 +1,6 @@
 {
   "name": "yeeflow-app-builder-core-incubation",
-  "version": "1.19.0",
+  "version": "1.20.0-rc1",
   "private": true,
   "packageManager": "pnpm@11.9.0",
   "scripts": {
@@ -254,7 +254,8 @@
     "test:claude-plugin": "node scripts/test-claude-plugin.mjs",
     "test:feature-configuration-guide": "node scripts/test-feature-configuration-guide.mjs",
     "test:document-workflow-patterns": "node --test scripts/test-document-workflow-patterns.mjs",
-    "test:document-workflow-distribution": "node scripts/test-document-workflow-distribution.mjs"
+    "test:document-workflow-distribution": "node scripts/test-document-workflow-distribution.mjs",
+    "build:plugin:directory": "node scripts/build-plugin-archive.mjs --profile directory"
   },
   "devDependencies": {
     "typescript": "5.7.3"
