@@ -1,0 +1,24 @@
+{
+  "topic": "yeeflow-application-delivery-workflow",
+  "rule": "oauth-and-workspace-selection-delivery-decision",
+  "envPresenceOnly": true,
+  "variables": [
+    "oauthToken",
+    "selectedFlowcraftWorkspace",
+    "YEEFLOW_WORKSPACE_ID_ignored_for_package_writes"
+  ],
+  "decisions": [
+    {
+      "condition": "OAuth missing",
+      "nextStep": "ask current user to sign in through the Yeeflow plugin login flow"
+    },
+    {
+      "condition": "OAuth present and target workspace missing",
+      "nextStep": "generate YAPK for manual install"
+    },
+    {
+      "condition": "OAuth present and target workspace selected",
+      "nextStep": "ask user whether to auto-install"
+    }
+  ]
+}

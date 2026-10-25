@@ -1,0 +1,252 @@
+# Dashboard Dataset Presentation Golden Reference Standard
+
+Dashboard pages often need to present Data List, Form Report, Document Library, or workflow/report datasets. When a Dashboard dataset region uses a `collection` control, generation must choose one approved dataset presentation reference from `docs/reference/dashboard-dataset-presentation-golden-references.json`.
+
+This standard keeps business planning separate from low-level Yeeflow payload generation:
+
+- Functional Specification describes the business dataset need: users, records, fields, filters, search, sorting/grouping, batch operations, actions, mobile support, and runtime proof needs.
+- App Plan maps each Dashboard dataset region to exactly one approved presentation reference ID and explains why by using the registry's `whenToUse`, `whenNotToUse`, `requiredBusinessSignals`, and `suitableSourceResourceTypes` guidance.
+- Resource generation copies/adapts the selected export-proven template and binds it to real app resources.
+- Validators reject simplified, invented, or partially recreated Collection layouts before signing.
+- Generated-final validation compares each App Plan Dashboard dataset region to the generated Dashboard package. The selected Collection presentation reference is an implementation contract for that exact page/region, not advisory prose.
+
+## Approved References
+
+| Reference ID | Use For |
+| --- | --- |
+| `collection_control_responsive_card_grid` | Card-style record browsing. |
+| `collection_control_responsive` | Native responsive Collection: table on computer/laptop/tablet and cards on mobile. |
+| `collection_control_responsive_multiple_select` | Native responsive Collection with checkbox selection, selected count, page-level batch actions, and table/card presentation. |
+| `collection_control_card_with_multiselect_toolbar` | Card-style records with selected state and bulk toolbar. |
+| `Event Pipeline Grid-Table` | High-fidelity primary Dashboard operations/pipeline/work-queue table based on the Event Portfolio Golden Reference. |
+
+No other Dashboard Collection presentation pattern is generated-final eligible unless explicitly marked `export-learning-required` and blocked from signing/install.
+
+## App Plan Requirements
+
+Every Dashboard dataset region that plans to use Collection must declare:
+
+| Column | Required Meaning |
+| --- | --- |
+| Dashboard Page | Page title. |
+| Dataset Region | Business region name. |
+| Source Resource | Data List, Form Report, Document Library, or other approved source. |
+| Business Purpose | Why this dataset is visible on the Dashboard. |
+| Display Fields | Ordered business fields to display in the Collection. This is required for `collection_control_responsive` and `collection_control_responsive_multiple_select`; it determines the native Table view column count, titles, and bindings, and the mobile Card view must use the same source-field plan. |
+| Filters/Search | Business filters or search needs. |
+| Actions | Row, bulk, or region actions. |
+| Selected Collection Presentation Reference | One approved reference ID. |
+| Selection Rationale | Why the reference matches the business need. |
+
+App Plan must not include generated IDs, `ListID`, `LayoutID`, `PageID`, `actionTypeCode`, raw JSON property paths, fake placeholder IDs, or low-level payload properties.
+
+Validator scope rule: this gate parses canonical Dashboard record-display / dataset-presentation tables only. It must not treat prose, negative guardrails, Form Report explanations, validation command lists, identity tables, or other non-dataset rows as Dashboard dataset regions. App Plans must not need workaround text such as `no dashboard dataset` to avoid false positives.
+
+## Selection Rules
+
+- Choose `collection_control_responsive_card_grid` for browsing records as cards.
+- Choose `collection_control_responsive` for operational record lists, including dense row/column scanning, with native sortable table columns on computer/laptop/tablet and card presentation on mobile.
+- Choose `collection_control_responsive_multiple_select` when the same operational dataset needs native table/card responsiveness plus multi-row selection, selected count, and page-level batch actions. Clone the complete page dependency graph together with the Collection subtree.
+- Choose `collection_control_card_with_multiselect_toolbar` when card records need multi-select bulk actions.
+- Choose `Event Pipeline Grid-Table` for the primary high-fidelity Dashboard work queue, pipeline, or portfolio table.
+- Free-text search/fulltext filtering is a behavior on an approved Collection template, not a separate approved Collection template ID. Use the responsive table/card, responsive multiselect, responsive card grid, card multiselect, or Event Pipeline reference according to the business presentation pattern, then map any needed search filter/fulltext binding inside that selected template's editable toolbar/filter region.
+- Do not choose a template just because it is visually attractive. The selected template must match the business signals: card browsing, dense row/column scanning, free-text search, multiselect/bulk operation, or high-fidelity primary operations table.
+- If more than one reference seems possible, the App Plan must pick exactly one for that dataset region and state why the other options were not chosen at business level. Do not defer the choice to resource generation.
+- Template IDs must be parsed as exact tokens. `collection_control_grid_table` migrates to `collection_control_responsive`, and `collection_control_grid_table_with_multiselect` migrates to `collection_control_responsive_multiple_select` with a deprecation warning. Other retired IDs such as `collection_control_grid_table_with_search` fail as unknown.
+
+## Responsive Card Grid Template
+
+## Responsive Table/Card Collection Template
+
+`collection_control_responsive` is backed by `docs/reference/collection-control-responsive.template.json`, captured from Projects Center_1 Dashboard page `Collection_control_grid_table (new)`. Clone the complete `grid_table_col_wrapper` subtree and preserve the Collection's native `tablecols`, `header`, `body`, `table`, `pagination`, and `list-display-preference: "default"` settings. This native setting is the export/configuration-proven responsive mechanism: computer, laptop, and tablet use Table view; mobile uses Card view.
+
+The golden reference fixes only the native responsive structure and style; it does not prescribe its sample columns, field labels, or field count. Materialization must take the ordered `Display Fields` from the selected Dashboard dataset row, resolve every field against that Collection's actual source schema, clone a compatible native column shape per selected field, and remove all unused sample columns. It must fail when the plan omits a responsive Collection field selection or names an unavailable field; it must never cycle through template fields or reuse a business field merely to fill a template column. Only the title/operation regions, native table-column labels/sorting fields, and both table and Card view item controls may be mapped to the target schema. Keep every table column's title, boolean `sortingEnabled`, and item-template content aligned. `grid_table_col_body.children` is mandatory Card view content, not optional spacer markup: map it to the same target list fields, retain user fields as `dynamic-user`, and remove a source progress region only when the target has no numeric progress field. Preserve mobile Full width for `grid_table_col_operations` and `op_normal` through `attrs.style.widthtype = [null, "2", "2"]`. Map user fields with `dynamic-user`, map progress only to real numeric progress fields, and retain edit/delete actions only when the source is writable; Delete requires the confirmation flow. Do not transplant a Card `control_display` rule whose `controlId` is outside the Card item subtree: it is source-page state, and a target-specific rule may be regenerated only after its controls and choice values are verified. When the Card item-operation container is retained, preserve `grid_table_col_item_operations.attrs.common.zidx = [null, null, null, 2]` so its mobile clicks take precedence over whole-row clicks, and preserve `grid_table_col_item_op_menu.attrs.settings.position = [null, null, null, "bottomRight"]` for the mobile Button right popup placement. Do not add a Flex Grid header or `grid_col_item` row. Generated-package behavior still requires desktop/tablet/mobile runtime verification before it is claimed as runtime proof.
+
+## Responsive Card Grid Template
+
+`collection_control_responsive_card_grid` is backed by the full export-shaped template artifact at `docs/reference/collection-control-responsive-card-grid.template.json`. The source is Company Overview v1.4, Dashboard page `Collection_control_responsive_card_grid`, component root `collection_control_responsive_card_wrapper`.
+
+Generation must copy `collection_control_responsive_card_wrapper` and all descendants as the component root. It is not enough to create a generic card Collection, ad hoc responsive card grid, or simplified repeated card.
+
+Only these regions are editable:
+
+- `card_col_title_wrapper`
+- `op_normal`
+- `card_col_item`
+- `card_col_item_multi_select`
+- `grid_table_col_item_op_menu`
+
+Everything else is locked by default and must strictly preserve the template's existing control settings, style, layout, spacing, and typography. `card_col_body` remains the Collection root and must preserve its responsive layout, pagination, filter/fulltext shape, and action host while remapping source IDs to the target app.
+
+Recommended editable behavior:
+
+- `card_col_title_wrapper` may change the `card_col_title` Text value to a business title derived from the selected Collection data source.
+- `op_normal` may add/delete normal-mode controls, but should retain the Search filter and Add item button when the selected Data List or Document Library source supports those actions. Search title/placeholder and Add item button text may be changed, but every button must keep a valid action binding.
+- `card_col_item` maps repeated card content to fields from the selected source resource. User fields use `dynamic-user`; image fields use `dynamic-image`; file or attachment fields use `dynamic-file`; all other fields use `dynamic-field`.
+- Every `dynamic-user` inside `card_col_item` must keep `attrs.item_style.pd = [null, { top: "--sp--s0", right: "--sp--s0", bottom: "--sp--s0", left: "--sp--s0" }]`.
+- Do not emit `dynamic-image` if the selected data source has no image field.
+- `card_col_item` should include one subject-style Dynamic field based on the source `Survey Program name` role and preserve its Large/Semi bold visual role when a title/subject field exists.
+- `card_col_item_multi_select` contains `grid_table_col_item_op_menu` for single-record operations such as Edit or Delete. This region may be omitted when no item operations are needed.
+- Every `grid_table_col_item_op_menu` operation button must bind to a valid Collection action. Edit/Delete buttons require matching Collection actions. Delete requires the template delete-confirmation temp variable and conditional delete continuation before `setdatalist remove`.
+- Every Button/action_button inside `grid_table_col_item_op_menu` must keep `attrs.button.normal.bg = "rgba(255, 255, 255, 0)"`, including any additional business operation buttons generated under that menu.
+- If the region is display-only, `card_col_caption` and its descendants may be omitted.
+- If the source is a Form Report or Data Report, `card_col_caption`, `card_col_item_multi_select`, and item operation controls should not be emitted because report datasets are view-only.
+
+## Historical Retired Base Grid-Table Template
+
+`collection_control_grid_table` is backed by the full export-shaped template artifact at `docs/reference/collection-control-grid-table.template.json`. The source is Projects Center_1 v1.7, Dashboard page `Collection_control_grid_table`, component root `grid_table_col_wrapper`. It is retained for historical inspection and migration compatibility only; it must not be selected for a new Dashboard dataset. Migrate its intent to `collection_control_responsive`.
+
+Generation must copy `grid_table_col_wrapper` and all descendants as the component root. It is not enough to create a generic header grid plus Collection body that merely resembles a table.
+
+Only these regions are editable:
+
+- `grid_table_col_title_wrapper`
+- `op_normal`
+- `grid_table_col_header`
+- `grid_col_item`
+- `grid_table_col_item_operations`
+
+Everything else is locked by default and must strictly preserve the template's existing control settings, style, layout, spacing, and typography. `grid_table_col_body` remains the Collection root and must preserve its Collection action host, filter/search host, pagination shape, and runtime binding shape while remapping source IDs to the target app.
+
+Recommended editable behavior:
+
+- `grid_table_col_title_wrapper` may change the `grid_table_col_title` Text value to a business title derived from the selected Collection data source.
+- When `grid_table_col_caption` contains `grid_table_col_title`, the title Text control must keep `attrs.heads.ty = [null, "l-medium"]` (Large medium). Business generation may change only the title value, not this typography token.
+- `op_normal` may add/delete controls, but should retain the Search filter and Add item button when the selected Data List or Document Library source supports those actions. Search placeholder and Add item button text may be changed, but every button must keep a valid action binding.
+- `grid_table_col_header` maps visible column labels to the selected source resource. `grid_col_item` maps repeated row content to fields from the same source resource.
+- User fields use `dynamic-user`; image fields use `dynamic-image`; file or attachment fields use `dynamic-file`; all other fields use `dynamic-field`.
+- Every `dynamic-user` inside `grid_col_item` must keep `attrs.item_style.pd = [null, { top: "--sp--s0", right: "--sp--s0", bottom: "--sp--s0", left: "--sp--s0" }]`.
+- `grid_table_col_header` and `grid_col_item` must always have the same column count, column widths, and compatible grid properties after business mapping. The actual number of columns and whether a progress control is used depends on business fields; six columns and progress bars are not mandatory.
+- The desktop grid track definition (`attrs.columns["1"].list`) on both `grid_table_col_header` and `grid_col_item` must be pruned to the same count as their actual `children[]` cells. If schema cleanup removes invalid field/progress columns and leaves only three visible cells, both grids must have exactly three desktop column tracks. Leaving the template's original six tracks creates blank visible columns and must fail generation.
+- `Progress bar` and `progress-circle` controls are optional semantic controls, not default status-column decorations. Generate them only when the App Plan declares a progress/completion/capacity/utilization/score/rate metric and the selected Collection source list has a real numeric/decimal/percent field for that metric. If the source list has only status/choice/text fields, render those values as `dynamic-field`/status text or badge-style content instead.
+- Do not keep source-template progress bindings such as `Decimal2`, `Completion percentage`, or `Collection item:Completion percentage` unless the target Collection source schema actually contains that internal field and the field is numeric. A visible column named `Status` must not contain a progress control unless the corresponding source field is a real numeric progress field.
+- Header Text controls inside `grid_table_col_header_title_column` and `grid_table_col_header_column` must describe the corresponding field/content rendered in the matching `grid_col_item` column.
+- `grid_table_col_header` must not contain duplicate visible column labels after business mapping. When a source template has both a progress-status column and a text-status column, remove the progress column unless it is backed by a real progress metric; otherwise rename the remaining columns to the real business fields such as `Employment Status` and `Onboarding Status`.
+- `grid_table_col_item_operations` is optional and may contain per-item actions such as Edit or Delete through `grid_table_col_item_op_menu`, but every action control must bind to a valid action. If retained, it must preserve `attrs.common.zidx = [null, 2]` so its buttons stay above a whole-row click target. Edit/Delete buttons require matching Collection actions. Delete requires the template delete-confirmation temp variable and conditional delete continuation before `setdatalist remove`.
+- Every Button/action_button inside `grid_table_col_item_op_menu` must keep `attrs.button.normal.bg = "rgba(255, 255, 255, 0)"`, including newly generated business operation buttons.
+- If the region is display-only, `grid_table_col_caption` and its descendants may be omitted when no title/toolbar/actions are needed.
+- If the source is a Form Report or Data Report, `grid_table_col_caption`, `grid_table_col_item_operations`, and operation controls should not be emitted because report datasets are view-only.
+
+## Card Multiselect Toolbar Template
+
+`collection_control_card_with_multiselect_toolbar` is backed by the full export-shaped template artifact at `docs/reference/collection-control-card-with-multiselect-toolbar.template.json`. Generation must copy `card_with_multiselect_toolbar_wrapper` and all descendants as the component root. It is not enough to create a generic card Collection, add checkbox icons, or add a separate toolbar.
+
+Only these regions are editable:
+
+- `card_col_title_wrapper`
+- `op_normal`
+- `op_multipleselected`
+- `card_col_item`
+- `card_col_item_operations`
+
+Everything else is locked by default. `card_col_item_multi_select` must remain unchanged, including its checked/unchecked icon controls and selection/action wiring. The Collection root `attrs.actions[]`, selected item/count temp variables, page-level `actions`, `formAction`, `filterVars`, and filter dependencies are part of the template contract and must be copied or intentionally remapped through generator-safe logic.
+
+Recommended editable behavior:
+
+- `op_normal` should retain the Search filter and Add item button unless a validated business rule removes one of them. Search placeholder text and Add button text may be changed.
+- `op_multipleselected` should retain a Delete selected items action. `btn_set_items` is optional, and additional batch buttons may be added only when each button has a valid action binding.
+- `card_col_item` maps item content to fields from the selected source resource. User fields use `dynamic-user`; image fields use `dynamic-image`; file or attachment fields use `dynamic-file`; all other fields use `dynamic-field`.
+- Every `dynamic-user` inside `card_col_item` must keep zero item padding on all four sides via `attrs.item_style.pd`.
+- `card_col_item` should include one subject-style Dynamic field based on the source `Survey Program name` control and preserve its Large/Semi bold visual role.
+- `card_col_item_operations` is optional and may contain per-item actions such as Edit or Delete, but every action control must bind to a valid action.
+
+## Generation Rules
+
+- Dashboard Page Layouts v1.1 is the page shell. All approved Dashboard Collection presentation references are component-level dataset regions that must be placed inside the `section_content_area` of an approved v1.1 content card wrapper: `content_card_wrapper`, `content_card_60_wrapper`, or `content_card_40_wrapper`.
+- Approved Collection and KPI modules are source-of-truth artifacts, not visual suggestions. Generation must materialize them by cloning the approved export-shaped template subtree, then replacing only the allowed business slots. Do not use local helper functions to rebuild a "similar" grid, card, toolbar, KPI row, checkbox cell, or filter from scratch.
+- Do not place Collection presentation templates directly under page root, `Main`, root `Content`, `page_title_section`, header/title areas, structural layout wrappers, or a copied source-app page shell.
+- Do not copy the source application page shell for any Collection reference. Event Portfolio, Projects Center, Project Tasks, and card-grid source exports are proof sources only; they are not generated page shells for another app.
+- Do not copy source-example business fields, labels, data sources, IDs, ListID, LayoutID, PageID, or domain text. Replace them with current-app business fields and generated IDs during resource generation.
+- Source-template placeholders are allowed only inside the stored reference templates. Generated-final Dashboard resources must not contain `{{...}}` tokens anywhere in Collection `attrs.data`, `attrs.actions`, action `steps`, button bindings, page-level dependencies, list references, filter/search values, or open/edit/detail layout references. This includes `{{ListSetID}}`, `{{ListID}}`, `{{DetailLayoutID}}`, `{{layout}}`, `{{LayoutID}}`, `{{layoutId}}`, `{{PageID}}`, `{{pageId}}`, `{{sourceLongId}}`, and helper placeholders such as `{{search}}`. Replace them with target app/list/layout IDs and expression-token filter values, or remove the related action/control when the App Plan does not support it.
+- Dashboard select-filter option-source filters must not use current-item placeholders. Do not generate literal `{{ListDataID}}` in `select-filter.attrs.data.filter[].value`; use `filter: []` when no proven option-source filter is required, or a real Yeeflow expression object only when a validated runtime option-source filter is intentionally required.
+- Page-level `select-filter` variables must not be consumed by Collection `attrs.data.filter[]` conditions with `op`/`operator = "9"` until an export-proven empty-value bypass contract exists. Live runtime evidence showed that an empty select-filter variable combined with an `In` condition can clear the initial Collection and render `No data` even when static `filterBindings[]` checks pass. Prefer proven `search-filter` / `attrs.data.fulltext[]` linkage or visible unfiltered Collections until runtime proof establishes the select-filter empty-state contract.
+- Template selection is only the first step. The generator must adapt every visible Collection title, column header, card subject, item field, toolbar button, batch action, row/card action, filter placeholder, and empty-state text to the current App Plan. Source-template labels such as `All tasks - Multiple select`, `Active Survey Programs`, Event/Survey/Project-specific terms in unrelated apps, or generic labels such as `Grid`, `Container`, `Text`, and `Placeholder` are generated-final blockers.
+- Every visible Collection field must map to an App Plan field for that dashboard dataset region. Every visible action must map to an App Plan action or be removed. Destructive multiselect actions are allowed only when the App Plan explicitly declares the action and its safe business scope.
+- Every generated Collection must resolve its data source to the generated Data List schema before signing readiness. `attrs.data.sort[]` is required and must use a real internal field from that list; copied labels such as `Primary order`, source-app order fields, deleted fields, or display-only labels are not valid sort bindings.
+- Collection search/fulltext bindings must also resolve against the same selected data source. `attrs.data.fulltext[].fields[]` must contain real internal field names from the generated list, not copied source-template names.
+- Generated `search-filter` controls must serialize `attrs.placeholder` as primitive runtime input text, for example `"Search Loan Transactions"`. Do not keep export/helper wrapper objects such as `{ "value": "Search Loan Transactions" }`, and do not spread a string into numeric object keys. Browsers render object-shaped placeholders as `[object Object]`, so object placeholders are generated-final blockers even when the Collection template and fulltext linkage are otherwise valid.
+- Every Dynamic control inside a Collection item template must bind to one real field from the selected Collection data source and must expose the binding on all runtime/designer surfaces the Yeeflow runtime can consume: `attrs["obj-f"]`, `attrs.data.field`, `attrs.field`, and top-level `field`. These surfaces must agree after normalization.
+- User/identity fields must render with `dynamic-user` and must also carry `attrs.user.field`. Image fields use `dynamic-image`, file/attachment fields use `dynamic-file`, and all other display fields use `dynamic-field`. Rendering a user field as `dynamic-field`, or leaving any Dynamic control with a single template-era binding surface, is a generated-final blocker because records can appear blank or lose field context at runtime.
+- The schema-bound rule applies recursively to the entire Collection item subtree, not only to `dynamic-*` controls. Any expression token with `exprType: "variable_ctx"` and `ctx: "__ctx_coll"` must reference a real internal field from the selected Collection source list, except for approved current-record system IDs such as `ListDataID`. This includes heading variables, Progress bar `attrs.bar.per`, Data table/card title variables, action payloads, filter objects, and any copied template expression.
+- After cloning a Collection golden reference, run template residue cleanup before signing readiness: remove or rewrite source-template field names, column labels, fulltext fields, sort fields, filter fields, Progress bar expressions, and sample expression names. Generated-final resources must fail if a cloned item template still references a field that the target Data List schema does not contain.
+- Every generated Collection `dynamic-user` must also preserve the zero item-padding style contract: `attrs.item_style.pd` must set top/right/bottom/left to `--sp--s0`.
+- If a generated Collection includes `grid_table_col_item_op_menu`, every inner Button/action_button normal state must use transparent background: `attrs.button.normal.bg = "rgba(255, 255, 255, 0)"`.
+- If a generated Collection includes `grid_table_col_caption > grid_table_col_title`, the title must use Large medium typography: `attrs.heads.ty = [null, "l-medium"]`.
+- Generated Dashboard Collection controls must carry or inherit approved template provenance through a clear field such as `datasetPresentationTemplateId`, `datasetPresentationReferenceId`, `derivedFromDatasetPresentationTemplate`, or the approved Golden Reference region identity.
+- For App Plan-declared Dashboard dataset regions, the generated Collection root must carry explicit template provenance. Ancestor-only inference is not enough for plan-to-package conformance because it can hide template collapse.
+- Generation must dispatch each Dashboard dataset region by the App Plan's selected template ID. Do not route all Dashboard Collections through `Event Pipeline Grid-Table`, generic grid-table, card fallback, or any other single default builder unless that exact template was selected for that exact region.
+- Do not create generic repeated cards, fake grid tables, simplified Data table lookalikes, or ad hoc Collection item templates.
+- Grid-table references must preserve the approved template wrapper, header `flex_grid`, Collection body, repeated item `flex_grid`, matching columns, mobile item-grid behavior, and valid source list bindings.
+- Grid-table-specific validation applies only to grid-table references: `collection_control_grid_table`, `collection_control_grid_table_with_multiselect`, and `Event Pipeline Grid-Table`. It must not be applied to card references such as `collection_control_card_with_multiselect_toolbar` or `collection_control_responsive_card_grid`.
+- Row/card detail open metadata is required only when the selected template or App Plan declares row/card open behavior. If no open behavior is planned, generation must emit explicit no-open metadata instead of leaving unresolved links or placeholder layout IDs.
+- Row/card edit or open actions that depend on a custom detail layout must be rewritten to the selected source list's concrete Type `1` layout. If no concrete detail layout exists, remove the edit/open action and any button that points to it instead of leaving an empty, default, or placeholder layout reference.
+- Multiselect references must preserve selected state, selected count, checkbox icons, bulk toolbar/actions, `ListDataID`, and `__ctx_coll` current-item context.
+- `collection_control_card_with_multiselect_toolbar` must preserve the full `card_with_multiselect_toolbar_wrapper` subtree, all non-editable style/layout/typography properties, page-level dependencies, Collection root actions, and the locked `card_col_item_multi_select` control.
+- `collection_control_grid_table_with_multiselect` must preserve the full `grid_table_col_multiselect_wrapper` subtree, all non-editable style/layout/typography properties, page-level dependencies, Collection root actions, the locked `grid_table_col_item_select` control, and matched `grid_table_col_header` / `grid_col_item` column definitions. The wrapper, caption, and content containers must remain full width in all Designer-relevant width layers: `width = "full"`, `attrs.style.widthtype = [null, "1"]`, and `attrs.common.positioning.widthtype = [null, "1"]`.
+- `collection_control_grid_table_with_multiselect` must preserve its export-proven leading-column geometry after any field pruning: desktop header and item tracks start with `[46px, 2fr]`. The `46px` track belongs only to the dedicated `grid_table_col_header_select` / `grid_table_col_item_select` cells; the following `2fr` track belongs to `grid_table_col_header_title_column` / `grid_table_col_item_title_column`. A checkbox-only first cell emitted as `2fr` is a hard failure even when header and item track arrays match.
+- `collection_control_grid_table_with_multiselect` must preserve the real Collection control as the runtime dataset root. The generated Collection root must retain the template identity `grid_table_col_body` through `id`, `name`, `label`, `nav_label`, `nv_label`, or an approved provenance field. It is not valid to materialize only the inner `grid_col_item`, `flex_grid`, checkbox column, or visual wrapper and lose the selectable Collection root.
+- `collection_control_grid_table_with_multiselect` locked spacing values must be cloned from the source template and must not be overwritten by normalizers. At minimum, preserve gap settings for `grid_table_col_multiselect_wrapper`, `grid_table_col_caption`, `grid_table_col_content`, `op_normal`, `op_multipleselected`, `selected_items_amount_wrapper`, and `multiple_operations_wrapper`.
+- `collection_control_grid_table_with_multiselect` must replace source-domain text such as `All tasks`, `Search tasks`, `Add Task`, `Mark as completed`, `Assignee`, `Completion (%)`, and `Progress bar` with current-app business labels, placeholders, fields, and actions. Keeping Projects/Tasks wording in a non-task app is a generated-final blocker.
+- `grid_table_col_item_select` is locked and must keep a valid select/toggle action binding that resolves to a preserved Collection or page action. Static checkbox icons without action wiring do not satisfy the template.
+- Search/filter conditions in grid-table multiselect Collections must preserve Designer-compatible filter expression shape only for runtime-proven filter types. Search filters should use `search-filter` plus `attrs.data.fulltext[]`. Page-level select-filter to Collection `op`/`operator = "9"` runtime conditions are signing-blocked until the empty-value bypass contract is proven.
+- KPI regions must clone `kpi_cards_kpi_row` and card copies based on `event_portfolio_kpi_planned_events`. Helper-created cards such as `ops_kpi_*`, loose Containers that merely resemble KPI cards, or static cards without approved KPI row provenance are not generated-final eligible. Live KPI cards still require Summary runtime metadata and visible value binding proof from the Summary/KPI gates.
+- Multiselect source template artifacts must themselves pass fidelity lint before they can be used for generation. Every Text control in `collection-control-card-with-multiselect-toolbar.template.json` and `collection-control-grid-table-with-multiselect.template.json` must preserve `attrs.heads.ty` and plain-string `attrs.heads.color`; missing typography/color metadata in the reference file is a release blocker, not something for the generator to infer.
+- `collection_control_grid_table_with_multiselect` must keep the wrapper gap contract required by grid-table validators: `grid_table_col_multiselect_wrapper.attrs.container.gap = 0` and `attrs.style.gap = [null, 0]`. Its Collection detail-open contract must use `attrs.data.link = "{{DetailLayoutID}}"` in the source artifact, and generation must replace that placeholder with a concrete Type `1` custom detail layout for the selected source list plus `attrs.data.opentype = "slide"` and `attrs.data.modalsize = 2`. `link: "default"`, empty links, or unresolved placeholders are generated-final blockers.
+- Search references must preserve `search-filter` or equivalent search control plus Collection `attrs.data.fulltext[]` linkage.
+- Event Pipeline Grid-Table must preserve the reference subtree inside Dashboard Page Layouts v1.1 slots and replace Marketing Event fields with app-specific fields. The same slot-only/component-only rule applies to every approved Collection presentation reference.
+
+## Grid-Table Multiselect Template
+
+`collection_control_grid_table_with_multiselect` is backed by the full export-shaped template artifact at `docs/reference/collection-control-grid-table-with-multiselect.template.json`. The source is Projects Center_1 v1.6, Dashboard page `All Tasks - multiple select`, component root `grid_table_col_multiselect_wrapper`. Projects Center / Project Tasks is the export-proven source reference only; the template can be selected for any Dashboard dataset that needs dense table scanning plus multi-row selection and batch operations.
+
+Generation must copy `grid_table_col_multiselect_wrapper` and all descendants as the component root. It is not enough to create a generic grid-table Collection, add a checkbox column, or add a separate toolbar.
+
+When cloning any approved Dashboard Collection template, the generator must recursively re-instantiate template-internal UUID-like values and keep repeated references consistent inside that single cloned subtree. Do not let UUIDs from the source template repeat across Dashboard pages, repeated sections, controls, actions, or style references. Runtime list/layout IDs and approved semantic IDs must still be replaced by the target app's resolved IDs, not random UUIDs.
+
+Only these regions are editable:
+
+- `grid_table_col_title_wrapper`
+- `op_normal`
+- `op_multipleselected`
+- `grid_table_col_header`
+- `grid_col_item`
+
+Everything else is locked by default. `grid_table_col_item_select` must remain unchanged, including its checked/unchecked icon controls and selection/action wiring. The Collection root `attrs.actions[]`, selected item/count temp variables, page-level `actions`, `formAction`, `filterVars`, and filter dependencies are part of the template contract and must be copied or intentionally remapped through generator-safe logic.
+
+Recommended editable behavior:
+
+- `op_normal` should retain the Search filter and Add item button unless a validated business rule removes one of them. Search placeholder text and Add button text may be changed.
+- `op_multipleselected` should retain a Delete selected items action. `btn_set_items` is optional, and additional batch buttons may be added only when each button has a valid action binding.
+- `grid_table_col_header` maps visible column labels to the selected source resource. `grid_col_item` maps repeated row content to fields from the same source resource.
+- User fields use `dynamic-user`; image fields use `dynamic-image`; file or attachment fields use `dynamic-file`; all other fields use `dynamic-field`.
+- `grid_table_col_header` and `grid_col_item` must always have the same column count, column widths, and compatible grid properties after business mapping.
+
+## Validation
+
+Run `scripts/validate-dashboard-dataset-presentation-golden-references.mjs` for:
+
+- registry quality
+- source template fidelity for card/grid multiselect artifacts, including Text metadata, grid wrapper gap, and grid detail-open placeholder contract
+- App Plan selected reference IDs
+- generated package Collection template provenance
+- generated package Collection structural conformance
+- generated package absence of unresolved `{{...}}` template placeholders in Dashboard resources and Collection action contracts
+- generated package absence of literal `{{ListDataID}}` in Dashboard select-filter option-source filters
+- generated package absence of unproven page-level select-filter variables consumed by Collection `op`/`operator = "9"` runtime conditions
+- generated package Collection data source resolution, real `attrs.data.sort[]` / Primary order fields, real fulltext fields, and complete Dynamic control field binding surfaces
+- generated package Dynamic control type compatibility with the selected source field type, including `dynamic-user` for user/identity fields
+- generated package Collection `dynamic-user` zero item padding, `grid_table_col_item_op_menu` transparent button backgrounds, and `grid_table_col_caption > grid_table_col_title` Large medium typography
+- App Plan-to-package region-level template conformance when both `--app-plan` and `--package` are provided
+- grid-table multiselect full-width, locked spacing, source-text replacement, row-select action wiring, and Designer-compatible filter condition shape
+- grid-table multiselect preservation of the real `grid_table_col_body` Collection root identity
+- KPI wrapper materialization from approved KPI row/card modules instead of helper-created lookalikes
+
+This gate is included in first-generation YAPK preflight and dashboard hard gates. A package that fails this gate is not eligible for signing, install/import, upgrade, runtime proof, or handoff.
+
+When an App Plan is available, generated-final packages must fail if:
+
+- a template selected in the App Plan is not materialized in the generated package (`DASH_DATASET_APP_PLAN_TEMPLATE_NOT_MATERIALIZED`)
+- a generated Dashboard Collection region uses a different template than the App Plan selected (`DASH_DATASET_REGION_TEMPLATE_MISMATCH`)
+- multiple planned templates collapse to one effective generated template (`DASH_DATASET_TEMPLATE_DIVERSITY_COLLAPSED`)
+- a planned Dashboard Collection region has no generated Collection region (`DASH_DATASET_COLLECTION_REGION_MISSING`)
+- a matched generated Collection region lacks explicit Collection-root template provenance (`DASH_DATASET_COLLECTION_EXPLICIT_PROVENANCE_MISSING`)

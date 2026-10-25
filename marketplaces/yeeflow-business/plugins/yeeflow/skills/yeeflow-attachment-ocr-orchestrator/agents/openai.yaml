@@ -1,0 +1,4 @@
+interface:
+  display_name: "Yeeflow Single-Attachment OCR"
+  short_description: "Guard uploads, reuse content caches and retry recognition"
+  default_prompt: "Use $yeeflow-attachment-ocr-orchestrator to implement upload-complete OCR with MD5 and document-type reuse."
