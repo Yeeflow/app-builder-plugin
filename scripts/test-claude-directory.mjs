@@ -8,7 +8,7 @@ import { tmpdir } from "node:os";
 import { dirname, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { spawnSync } from "node:child_process";
-import { MAINTAINER_SKILLS, DIRECTORY_LIMITS } from "./claude-directory-profile.mjs";
+import { MAINTAINER_SKILLS, DIRECTORY_LIMITS, LEAN_SKILLS } from "./claude-directory-profile.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const files = dir => readdirSync(dir, { withFileTypes: true }).flatMap(e => e.isDirectory() ? files(join(dir, e.name)) : [join(dir, e.name)]);
@@ -100,7 +100,30 @@ try {
   if (preexisting.length) console.warn("CLAUDE_DIRECTORY_PREEXISTING_LOAD_FAILURES " + JSON.stringify(preexisting));
   assert.deepEqual(failures, [], "scripts failed to load");
 
-  console.log("CLAUDE_DIRECTORY_TEST_PASSED " + JSON.stringify({ files: all.length, skills: skills.length, deduped: report.dedupe.removedFiles, collections: report.collect.collections, bundles: report.bundle.bundles, filesOver256KiB: report.after.oversized.length }));
+  // Lean edition: only the connector-oriented skills, small enough for interactive validation.
+  const lean = join(temp, "lean");
+  const leanReport = join(temp, "lean-report.json");
+  const leanRun = spawnSync(process.execPath, [join(root, "scripts/build-claude-directory.mjs"), "--output", lean, "--report", leanReport, "--edition", "lean"], { cwd: root, encoding: "utf8" });
+  assert.equal(leanRun.status, 0, leanRun.stdout + leanRun.stderr);
+  const leanFiles = files(lean).map(f => relative(lean, f).split("\\").join("/"));
+  const leanSkills = readdirSync(join(lean, "skills")).filter(s => existsSync(join(lean, "skills", s, "SKILL.md"))).sort();
+  assert.deepEqual(leanSkills, [...LEAN_SKILLS].sort());
+  const leanBytes = leanFiles.reduce((n, f) => n + statSync(join(lean, f)).size, 0);
+  assert.ok(leanBytes < 2 * 1024 * 1024, `lean edition is ${leanBytes} bytes; keep it under 2 MiB for interactive validation`);
+  for (const s of leanSkills) {
+    const body = readFileSync(join(lean, "skills", s, "SKILL.md"), "utf8");
+    for (const m of body.matchAll(/\(((?:\.\.?\/)*[A-Za-z0-9_\/-]+\.md)(?:#([\w-]+))?\)/g)) {
+      const target = join(lean, "skills", s, m[1]);
+      assert.ok(existsSync(target), `${s}: link target missing ${m[1]}`);
+      if (m[2] && /collection-\d+\.md$/.test(m[1])) assert.ok(readFileSync(target, "utf8").includes(`<a id="${m[2]}"></a>`), `${s}: anchor missing ${m[0]}`);
+    }
+  }
+  const leanSearch = spawnSync(process.execPath, [join(lean, "skills/yeeflow-feature-configuration-guide/scripts/knowledge.mjs"), "search", "Lookup List", "--limit", "1"], { cwd: temp, encoding: "utf8" });
+  assert.equal(JSON.parse(leanSearch.stdout).results.length, 1, "lean helper search");
+  assert.match(readFileSync(join(lean, "README.md"), "utf8"), /directory edition/i);
+  assert.ok(!existsSync(join(lean, "CLAUDE-README.md")));
+
+  console.log("CLAUDE_DIRECTORY_TEST_PASSED " + JSON.stringify({ files: all.length, skills: skills.length, deduped: report.dedupe.removedFiles, collections: report.collect.collections, bundles: report.bundle.bundles, filesOver256KiB: report.after.oversized.length, leanFiles: leanFiles.length, leanBytes }));
 } finally {
   rmSync(temp, { recursive: true, force: true });
 }

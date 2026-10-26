@@ -55,3 +55,15 @@ The directory follows the public repository's default branch. After a push it sc
 - Pre-existing issue, not introduced here: `tools/generators/generate-sub-list-dynamic-actions-runtime-proof.mjs` and `tools/generators/generate-vendor-onboarding-yapk-schema-v2.mjs` import `./scripts/...` relative to `tools/generators/` and fail to load in both builds.
 
 Installation, OAuth and live Yeeflow runtime behaviour still need a separate smoke test after publishing.
+
+## Lean edition
+
+`npm run build:claude-directory -- --output <dir> --edition lean` builds a much smaller directory payload for when interactive portal validation times out on the full build. On 2026-10-26, 2.6 MB validated and 8.4 MB timed out.
+
+- Ships the 14 connector-oriented skills listed in `LEAN_SKILLS` in `scripts/claude-directory-profile.mjs`: the Feature Configuration Guide, the MCP incremental application builder, the workflow stage UI, OCR and document archive skills, data reports, knowledge sources, and the AI Agent/Copilot skills. With their dependencies this comes to about 0.45 MB.
+- The generator/validator stack is left out: package generation, layout templates, golden references and local validators. Every one of those skills needs 10–17 MB of shared data and scripts.
+- If a kept skill's dependency footprint exceeds `LEAN_BUDGET_BYTES` (400 KiB), the build changes its links into that stack into "full Yeeflow plugin only" mentions. The surrounding rules stay, and an edition note goes after the front matter. Today this applies only to the incremental builder's dashboard paragraphs.
+- Kept skills that mention a specialist that isn't shipped get a note pointing to the full plugin.
+- The README is replaced with a short directory-edition README that links the published connector and the full plugin.
+
+Source skills and the marketplace/Codex payloads are never modified. `npm run test:claude-directory` builds both editions and checks the lean skill list, its size, its links and anchors, and the helper.

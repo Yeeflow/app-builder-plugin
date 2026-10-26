@@ -461,6 +461,99 @@ export function rewriteRelativeTokens(body, rel, mapFn) {
 
 function anchorOf(f) { return posix.basename(f, ".md").toLowerCase().replace(/[^a-z0-9-]+/g, "-"); }
 
+// ---------- lean edition ----------
+// Skills that work through the live connector without the bundled generator/validator stack.
+export const LEAN_SKILLS = [
+  "yeeflow-feature-configuration-guide",
+  "yeeflow-mcp-incremental-application-builder",
+  "yeeflow-workflow-stage-ui",
+  "yeeflow-attachment-ocr-orchestrator",
+  "yeeflow-document-archive-lifecycle",
+  "yeeflow-data-report-generator",
+  "yeeflow-knowledge-source-operator",
+  "yeeflow-agent-prompt-designer",
+  "yeeflow-copilot-instruction-designer",
+  "yeeflow-ai-agent-template-builder",
+  "yeeflow-copilot-template-builder",
+  "yeeflow-agent-import-export-operator",
+  "yeeflow-copilot-import-export-operator",
+  "yeeflow-ai-agent-ui-operator",
+];
+export const LEAN_BUDGET_BYTES = 400 * 1024; // per-skill dependency budget in the lean edition
+export const FULL_PLUGIN_URL = "https://github.com/Yeeflow/app-builder-plugin";
+// Shared paths that belong to the generator/validator stack, not the lean edition.
+const HEAVY_SHARED = /^(?:scripts|core|schemas|tools|docs\/(?:standards|reference|templates|studies|training|releases))\//;
+
+/** Every file reachable from the given seeds (same rules as the closure step), without deleting anything. */
+export function referenceClosure(root, seeds) {
+  const index = buildIndex(root);
+  const keep = new Set(seeds.filter(s => index.fileSet.has(s)));
+  const queue = [...keep];
+  while (queue.length) {
+    const rel = queue.pop();
+    if (!TEXT.test(rel) || IMAGE.test(rel)) continue;
+    const body = read(root, rel);
+    const refs = textRefs(index, rel, body);
+    if (CODE.test(rel)) for (const s of codeSpecifiers(index.fileSet, rel, body)) if (s.target) refs.add(s.target);
+    for (const r of refs) if (!keep.has(r)) { keep.add(r); queue.push(r); }
+  }
+  return keep;
+}
+
+const skillFiles = (root, skill) => walk(root).filter(f => f.startsWith(`skills/${skill}/`));
+const bytesOf = (root, files) => [...files].reduce((n, f) => n + statSync(join(root, f)).size, 0);
+
+/**
+ * Keep only LEAN_SKILLS. In a kept skill whose dependency footprint exceeds the budget,
+ * turn links to the heavy shared stack into "full Yeeflow plugin only" mentions, keeping
+ * the surrounding rules, and add a short edition note. Source skills are never modified.
+ */
+export function applyLeanEdition(root, report) {
+  const present = readdirSync(join(root, "skills")).filter(s => existsSync(join(root, "skills", s, "SKILL.md")));
+  const missing = LEAN_SKILLS.filter(s => !present.includes(s));
+  if (missing.length) throw new Error("LEAN_SKILL_MISSING: " + missing.join(", "));
+  const dropped = present.filter(s => !LEAN_SKILLS.includes(s));
+  for (const s of dropped) rmSync(join(root, "skills", s), { recursive: true });
+  const rewritten = {};
+  const index = buildIndex(root);
+  for (const skill of LEAN_SKILLS) {
+    const before = bytesOf(root, referenceClosure(root, skillFiles(root, skill)));
+    if (before <= LEAN_BUDGET_BYTES) continue;
+    const file = `skills/${skill}/SKILL.md`;
+    let body = read(root, file);
+    const replaced = new Set();
+    body = body.replace(/`((?:<plugin-root>\/)?[A-Za-z0-9_@.\/-]+?)(#[\w-]+)?`/g, (m, path, frag) => {
+      const p = path.replace(/^<plugin-root>\//, "");
+      const target = index.fileSet.has(p) ? p : null;
+      if (!target || !HEAVY_SHARED.test(target)) return m;
+      replaced.add(target);
+      // Name without extension: still recognizable, but no longer resolves to a bundled file.
+      return "`" + posix.basename(p).replace(/\.[a-z0-9]+$/i, "") + "` (full Yeeflow plugin only)";
+    });
+    const note = `> **Directory edition:** dashboard layout templates, golden references and local package validators are bundled only in the full Yeeflow plugin (${FULL_PLUGIN_URL}). In this edition, build through the live MCP contracts (component and resource contracts, read-back after each save) and tell the user which template or validator checks were not run.\n\n`;
+    body = body.replace(/^(---\n[\s\S]*?\n---\n)/, `$1\n${note}`);
+    writeFileSync(join(root, file), body);
+    const after = bytesOf(root, referenceClosure(root, skillFiles(root, skill)));
+    rewritten[skill] = { replacedLinks: [...replaced].sort(), bytesBefore: before, bytesAfter: after };
+    if (after > LEAN_BUDGET_BYTES) throw new Error(`LEAN_BUDGET_EXCEEDED: ${skill} still needs ${after} bytes`);
+  }
+  // Skills that point at specialists absent from this edition get one clarifying note.
+  const absentMentions = {};
+  for (const skill of LEAN_SKILLS) {
+    const file = `skills/${skill}/SKILL.md`;
+    const body = read(root, file);
+    const mentioned = dropped.filter(d => new RegExp("(?<![\\w-])" + escapeRe(d) + "(?![\\w-])").test(body));
+    if (!mentioned.length) continue;
+    absentMentions[skill] = mentioned;
+    const note = `> **Directory edition:** ${mentioned.map(m => "`" + m + "`").join(", ")} ${mentioned.length > 1 ? "are" : "is"} part of the full Yeeflow plugin (${FULL_PLUGIN_URL}) and not installed with this edition. When a task needs ${mentioned.length > 1 ? "one of them" : "it"}, continue with the live MCP tools and this skill's guidance, or tell the user that the full plugin provides that specialist.\n\n`;
+    const withNote = body.match(/^---\n[\s\S]*?\n---\n\n> \*\*Directory edition:\*\*/)
+      ? body.replace(/^(---\n[\s\S]*?\n---\n\n> \*\*Directory edition:\*\*[^\n]*\n\n)/, `$1${note}`)
+      : body.replace(/^(---\n[\s\S]*?\n---\n)/, `$1\n${note}`);
+    writeFileSync(join(root, file), withNote);
+  }
+  report.lean = { skills: LEAN_SKILLS.length, droppedSkills: dropped, rewritten, absentMentions, budgetBytes: LEAN_BUDGET_BYTES };
+}
+
 // ---------- 4. closure ----------
 function closure(root, report, seedsExtra) {
   const index = buildIndex(root);
@@ -522,9 +615,13 @@ export function unresolvedImportSet(root) {
   return out;
 }
 
-export function applyDirectoryProfile(root, { dropSkills = MAINTAINER_SKILLS, extraSeeds = [] } = {}) {
-  const report = { schemaVersion: 1, profile: "claude-directory", before: { files: walk(root).length } };
+export function applyDirectoryProfile(root, { dropSkills = MAINTAINER_SKILLS, extraSeeds = [], edition = "full" } = {}) {
+  const report = { schemaVersion: 1, profile: "claude-directory", edition, before: { files: walk(root).length } };
   const baseline = unresolvedImportSet(root);
+  if (edition === "lean") {
+    applyLeanEdition(root, report);
+    dropSkills = dropSkills.filter(s => existsSync(join(root, "skills", s)));
+  } else if (edition !== "full") throw new Error("Unknown edition: " + edition);
   prune(root, report, dropSkills);
   dedupe(root, report);
   bundleStudies(root, report);
