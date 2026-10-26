@@ -35,6 +35,12 @@ const manifestPath = join(output, ".claude-plugin/plugin.json");
 const manifest = JSON.parse(readFileSync(manifestPath, "utf8"));
 if (manifest.name !== "yeeflow") throw new Error("Unexpected plugin name: " + manifest.name);
 manifest.repository = DIRECTORY_REPOSITORY;
+// Listing links the directory reads from plugin.json (otherwise it guesses from README text).
+Object.assign(manifest, {
+  documentationUrl: "https://support.yeeflow.com/en/articles/16391707-connect-yeeflow-mcp-servers-to-your-ai-tool",
+  supportUrl: "https://support.yeeflow.com/en/",
+  termsOfServiceUrl: "https://www.yeeflow.com/terms",
+});
 writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + "\n");
 
 const report = applyDirectoryProfile(output, { edition });

@@ -39,6 +39,7 @@ try {
   assert.equal(manifest.name, "yeeflow");
   assert.equal(manifest.repository, "https://github.com/Yeeflow/yeeflow-claude-plugin");
   assert.equal(manifest.license, "MIT");
+  for (const k of ["documentationUrl", "supportUrl", "termsOfServiceUrl", "privacyPolicyUrl"]) assert.match(manifest[k] || "", /^https:\/\//, k);
   assert.ok(existsSync(join(out, "LICENSE")) && existsSync(join(out, "README.md")));
   assert.ok(existsSync(join(out, manifest.icon)));
   const market = JSON.parse(readFileSync(join(out, ".claude-plugin/marketplace.json"), "utf8"));
