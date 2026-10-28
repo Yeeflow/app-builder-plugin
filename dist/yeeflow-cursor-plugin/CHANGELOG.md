@@ -1,3 +1,7 @@
+# 1.20.2 — expression validator parity and cited references
+
+Align every copy of the shared expression validator (list-valued variables were still rejected by the application-generator, approval-form-generator and `scripts/` copies) and stop warning on correctly formed `dateDiff` units and `datePicker` flags. Ship two references that bundled skills cite but no package included. Grok Bot/Cursor skill guidance links to the source-repository publishing guide. All 31 skills, plugin identities and the direct-MCP transport are unchanged. See [release notes](docs/releases/yeeflow-app-builder-v1.20.2.md).
+
 # 1.20.1 — prepare single-entry registered-App packaging
 
 Add the publisher-only managed-marketplace build profile: preserve the existing Yeeflow identity and all 31 skills, require one registered App, remove direct MCP discovery, and reject private/test or unavailable App dependencies. The shipped stable payload retains its direct-MCP transport. This patch does not complete hosted multi-account UI or OpenAI publication. See [release notes](docs/releases/yeeflow-app-builder-v1.20.1.md).
