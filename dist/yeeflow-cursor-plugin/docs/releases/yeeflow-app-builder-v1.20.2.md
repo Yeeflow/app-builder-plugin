@@ -2,7 +2,7 @@
 
 Validator and packaging patch for all host packages (Codex, Claude, Grok Bot/Cursor). Previous version: 1.20.1. New version: 1.20.2. Plugin identities, all 31 skills, the unified OAuth MCP connection and the direct-MCP transport are unchanged. No business service, OAuth grant or store listing is changed.
 
-Status: **release candidate**. The final release requires the install smoke tests below to pass and be recorded here.
+Status: **1.20.2 release**. Host install evidence and remaining gaps are recorded below.
 
 ## Changed bundled skills
 
@@ -24,13 +24,13 @@ Status: **release candidate**. The final release requires the install smoke test
 
 Not verified: Designer and live runtime behaviour of `dateDiff` and list-valued expressions; full live business workflows.
 
-## Install smoke (to complete before the final release)
+## Install smoke
 
-| Host | Smoke | Result |
-|---|---|---|
-| Codex (private repository marketplace) | Install `yeeflow-app-builder` from the RC ref, confirm 1.20.2 and 31 skills, OAuth, `workspace_list` | Pending |
-| Cursor (local plugin) | Copy the RC ZIP contents to `~/.cursor/plugins/local/yeeflow`, confirm 1.20.2, 31 skills, plugin OAuth, `workspace_list`, expression-generator validation of a 4-parameter `dateDiff` without the primitive-param warning | Pending |
-| Claude (repository marketplace) | Sync, confirm 1.20.2 and 31 skills | Pending |
+- **Cursor:** Local 1.20.2 install loaded 31 skills and the plugin MCP; authenticated `current_user_get` and `workspace_list` succeeded. The installed expression validator accepted a four-parameter `dateDiff` without the primitive-parameter warning. Both newly bundled references were present.
+- **Claude:** A privately uploaded 1.20.2 package was enabled and showed 31 skills and one connector. Repository marketplace sync and OAuth calls through this candidate were not verified.
+- **Codex:** A local isolated marketplace installation was enabled as 1.20.2 and contained 31 skills. The existing marketplace name prevented a separate Git-ref installation; OAuth and live calls through the candidate were not verified. The temporary test installation was removed afterward.
+
+Designer and live runtime behavior remain unverified. The Grok Bot marketplace plugin installation was not tested.
 
 ## Known limitations
 
