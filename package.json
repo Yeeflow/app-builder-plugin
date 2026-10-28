@@ -252,6 +252,8 @@
     "test:unified-mcp": "node scripts/test-unified-mcp-migration.mjs",
     "build:claude-plugin": "node scripts/build-claude-plugin.mjs",
     "test:claude-plugin": "node scripts/test-claude-plugin.mjs",
+    "build:cursor-plugin": "node scripts/build-cursor-plugin.mjs",
+    "test:cursor-plugin": "node scripts/test-cursor-plugin.mjs",
     "test:feature-configuration-guide": "node scripts/test-feature-configuration-guide.mjs",
     "test:document-workflow-patterns": "node --test scripts/test-document-workflow-patterns.mjs",
     "test:document-workflow-distribution": "node scripts/test-document-workflow-distribution.mjs",

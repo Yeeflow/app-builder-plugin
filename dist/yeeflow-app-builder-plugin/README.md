@@ -15,6 +15,7 @@ The Codex/OpenAI release version is **1.20.1**. The generated Claude mirror is s
 | Codex App | `yeeflow` / `yeeflow-app-builder` | `dist/yeeflow-app-builder-plugin` |
 | ChatGPT Web | Host-specific registered Apps profile | Built from the shared OpenAI payload; see [build profiles](docs/standards/plugin-host-build-profiles.md) |
 | Claude | `yeeflow-claude` / `yeeflow` (1.20.1) | `dist/yeeflow-claude-plugin` |
+| Grok Bot and Cursor | `yeeflow-cursor` / `yeeflow` (1.20.1) | `dist/yeeflow-cursor-plugin` |
 
 The repository name is independent of the plugin identity. Codex identities remain unchanged; the Claude public-directory candidate uses `yeeflow` with display name Yeeflow. Publishing source changes to GitHub does not submit or update an OpenAI store listing or migrate existing installations.
 
@@ -113,6 +114,10 @@ On 2026-10-10, Chrome in the Renger / Yeeflow organization synchronized marketpl
 
 The package contains the official blue Yeeflow mark and declares `icon`. However, this Git marketplace importer reported that `icon` and `privacyPolicyUrl` were unrecognized and stripped them. The installed plugin therefore still displayed the default code glyph. These are [directory listing fields](https://code.claude.com/docs/en/plugins-reference#directory-listing-fields); their declaration does not prove support in every importer. Logo display in the public directory requires separate verification. The service privacy policy remains available at https://www.yeeflow.com/privacy.
 
+## Install in Grok Bot and Cursor
+
+Grok Bot uses Cursor's plugin system, so one Cursor-format package serves both. Until the marketplace listing is approved, add `https://github.com/Yeeflow/app-builder-plugin` as a Cursor team marketplace (or under **Customize** in the Cursor app), install **Yeeflow**, then in Grok Bot open **Connect apps**, choose **Authenticate** and sign in to Yeeflow. See [Grok Bot and Cursor build, testing and submission](docs/cursor-plugin.md).
+
 ## Collection generation rules
 
 - Plan native Column width after binding actual fields and placing the Collection: give titles and narratives more space, keep choices and operations compact, and preserve readable widths in narrow cards.
@@ -192,7 +197,7 @@ Changing an installation source, publishing a GitHub Release and updating a stor
 
 The OpenAI archive builder supports Codex (direct MCP) and ChatGPT Web (registered Apps), retaining all 27 Skills and shared references. See [build profiles and verification](docs/standards/plugin-host-build-profiles.md). Run `npm run test:plugin-host-profiles` before releasing either package.
 
-Claude uses a separate builder and distribution. See [Claude build and installation testing](https://github.com/Yeeflow/app-builder-plugin/blob/stable/docs/claude-plugin.md). Shared Skill or MCP changes require validation for the affected hosts. GitHub package checks do not publish either package to a store.
+Claude uses a separate builder and distribution. See [Claude build and installation testing](https://github.com/Yeeflow/app-builder-plugin/blob/stable/docs/claude-plugin.md). Grok Bot and Cursor use a third builder and distribution; see [docs/cursor-plugin.md](docs/cursor-plugin.md) and run `npm run test:cursor-plugin`. Shared Skill or MCP changes require validation for the affected hosts. GitHub package checks do not publish either package to a store.
 
 ## Development and release branches
 

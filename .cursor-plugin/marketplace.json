@@ -1,0 +1,17 @@
+{
+  "name": "yeeflow-cursor",
+  "owner": {
+    "name": "Yeeflow",
+    "email": "support@yeeflow.com"
+  },
+  "metadata": {
+    "description": "Yeeflow guided application building for Grok Bot and Cursor."
+  },
+  "plugins": [
+    {
+      "name": "yeeflow",
+      "source": "dist/yeeflow-cursor-plugin",
+      "description": "Build Yeeflow applications with guided skills and hosted MCP."
+    }
+  ]
+}
