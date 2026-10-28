@@ -4,7 +4,13 @@ Plugin: `yeeflow` · Version: 1.20.1 · Publisher: Yeeflow (support@yeeflow.com)
 Components: 31 skills, 1 remote MCP server (`yeeflow_mcp`, `https://api.yeeflow.com/v1/mcp`, Streamable HTTP, OAuth).
 The plugin bundles no credentials, no hooks and no local MCP server.
 
-> Publisher checklist before submitting: create the reviewer account and sample data in section 1, replace every `[ ]` placeholder, and send the password through the channel the reviewer asks for. Never commit it here.
+> Publisher checklist before submitting: choose the reviewer account option in section 1, replace every `[ ]` placeholder, and send any password through the channel the reviewer asks for. Never commit it here. Include the "Publisher testing so far" paragraph below, kept in line with [the validation record](grok-bot-cursor-validation-2026-10-28.md).
+
+**Publisher testing so far (include in the submission):**
+
+```text
+Publisher testing before listing: The released 1.20.1 package was installed as a Cursor local plugin. Cursor loaded the plugin, 31 skills and its own yeeflow_mcp connection; plugin OAuth completed; current_user_get, get_profile and workspace_list succeeded through the plugin connection; skills were invoked in safe dry-run mode (no live writes). In Grok Bot, the same MCP server was connected as a custom MCP server with OAuth and read calls succeeded. We could not install the unlisted plugin in Grok Bot from an individual account, so Grok Bot plugin installation and skill loading are untested by us. Full live business workflows were not run.
+```
 
 ---
 
@@ -13,7 +19,7 @@ The plugin bundles no credentials, no hooks and no local MCP server.
 ```text
 Yeeflow is a low-code business application platform. The plugin adds 31 skills and one hosted MCP server (https://api.yeeflow.com/v1/mcp, OAuth; no API key).
 
-Test account: a dedicated reviewer account in a sandbox tenant: [REVIEWER EMAIL]. Password: [PROVIDED SEPARATELY]. The account can only reach the "Grok Review Sandbox" workspace.
+Option A test account: a dedicated reviewer account in a sandbox tenant: [REVIEWER EMAIL]. Password: [PROVIDED SEPARATELY]. The account can only reach the "Grok Review Sandbox" workspace. For a reviewer-created trial instead, use the separate Option B instructions below.
 
 1. Install the Yeeflow plugin, choose Authenticate, sign in with the reviewer account and approve access.
 2. New chat: "Use Yeeflow to show my current user profile." Expect the reviewer's name and email.
@@ -24,6 +30,22 @@ Test account: a dedicated reviewer account in a sandbox tenant: [REVIEWER EMAIL]
 7. Optional write test: "Create a data list called Review Test in the sandbox workspace." The bot should describe the change and ask for confirmation before writing.
 
 All writes require explicit user confirmation. Support: support@yeeflow.com.
+```
+
+**Option B short version (reviewer-created trial):**
+
+```text
+Yeeflow is a low-code business application platform. The plugin adds 31 skills and one hosted MCP server (https://api.yeeflow.com/v1/mcp, OAuth; no API key).
+
+Create a free Yeeflow trial at https://www.yeeflow.com, verify your email, and finish creating an organization. The trial starts without sample data; see https://support.yeeflow.com/en/articles/8656028-signing-up-for-new-yeeflow-account.
+
+1. Install the Yeeflow plugin, choose Authenticate, sign in with the trial account and approve access.
+2. In a new chat, ask: "Use Yeeflow to show my current user profile." Expect your account name and email.
+3. Ask: "Use Yeeflow to list my workspaces." Expect the workspaces available to the trial account.
+4. Ask: "Use the Yeeflow application builder skill to plan a simple visitor registration app. Do not create anything yet." Expect a plan with no write tool calls.
+5. Ask: "Which Yeeflow control should I use for a dependent dropdown, and how do I configure it?" Expect an answer based on Yeeflow Help Center references.
+
+If testing writes, obtain the account owner's explicit confirmation first; permissions and available operations depend on the trial account. Support: support@yeeflow.com.
 ```
 
 ---
@@ -40,6 +62,8 @@ All writes require explicit user confirmation. Support: support@yeeflow.com.
 | Workspace | `Grok Review Sandbox` (the only workspace this account can see) |
 | Sample data | Application `Asset Management (Sample)` with a few records and one approval form |
 | Account scope | Workspace member in the sandbox only. No admin rights, no production data. |
+
+**Option B (no publisher-provided account):** reviewers create a free Yeeflow organization at https://www.yeeflow.com ("Get Started"; see [Signing up for a new Yeeflow account](https://support.yeeflow.com/en/articles/8656028-signing-up-for-new-yeeflow-account)). There is no sample data, so skip 3.3–3.4 and 4.4, and use an available workspace in 3.2. Section 5 is optional and depends on the trial account's permissions; substitute that workspace name and obtain confirmation before writing.
 
 ### 2. Install and connect
 
