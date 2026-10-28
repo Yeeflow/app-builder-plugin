@@ -19,7 +19,7 @@ Publisher testing before listing: The released 1.20.1 package was installed as a
 ```text
 Yeeflow is a low-code business application platform. The plugin adds 31 skills and one hosted MCP server (https://api.yeeflow.com/v1/mcp, OAuth; no API key).
 
-Test account: a dedicated reviewer account in a sandbox tenant: [REVIEWER EMAIL]. Password: [PROVIDED SEPARATELY]. The account can only reach the "Grok Review Sandbox" workspace.
+Option A test account: a dedicated reviewer account in a sandbox tenant: [REVIEWER EMAIL]. Password: [PROVIDED SEPARATELY]. The account can only reach the "Grok Review Sandbox" workspace. For a reviewer-created trial instead, use the separate Option B instructions below.
 
 1. Install the Yeeflow plugin, choose Authenticate, sign in with the reviewer account and approve access.
 2. New chat: "Use Yeeflow to show my current user profile." Expect the reviewer's name and email.
@@ -30,6 +30,22 @@ Test account: a dedicated reviewer account in a sandbox tenant: [REVIEWER EMAIL]
 7. Optional write test: "Create a data list called Review Test in the sandbox workspace." The bot should describe the change and ask for confirmation before writing.
 
 All writes require explicit user confirmation. Support: support@yeeflow.com.
+```
+
+**Option B short version (reviewer-created trial):**
+
+```text
+Yeeflow is a low-code business application platform. The plugin adds 31 skills and one hosted MCP server (https://api.yeeflow.com/v1/mcp, OAuth; no API key).
+
+Create a free Yeeflow trial at https://www.yeeflow.com, verify your email, and finish creating an organization. The trial starts without sample data; see https://support.yeeflow.com/en/articles/8656028-signing-up-for-new-yeeflow-account.
+
+1. Install the Yeeflow plugin, choose Authenticate, sign in with the trial account and approve access.
+2. In a new chat, ask: "Use Yeeflow to show my current user profile." Expect your account name and email.
+3. Ask: "Use Yeeflow to list my workspaces." Expect the workspaces available to the trial account.
+4. Ask: "Use the Yeeflow application builder skill to plan a simple visitor registration app. Do not create anything yet." Expect a plan with no write tool calls.
+5. Ask: "Which Yeeflow control should I use for a dependent dropdown, and how do I configure it?" Expect an answer based on Yeeflow Help Center references.
+
+If testing writes, obtain the account owner's explicit confirmation first; permissions and available operations depend on the trial account. Support: support@yeeflow.com.
 ```
 
 ---
@@ -47,7 +63,7 @@ All writes require explicit user confirmation. Support: support@yeeflow.com.
 | Sample data | Application `Asset Management (Sample)` with a few records and one approval form |
 | Account scope | Workspace member in the sandbox only. No admin rights, no production data. |
 
-**Option B (no publisher-provided account):** reviewers create a free Yeeflow organization at https://www.yeeflow.com ("Get Started"; the Free plan starts with a one-month trial and needs no credit card; see [Signing up for a new Yeeflow account](https://support.yeeflow.com/en/articles/8656028-signing-up-for-new-yeeflow-account)). There is no sample data, so skip 3.3–3.4 and 4.4, use the default workspace in 3.2, and run section 5 in that workspace.
+**Option B (no publisher-provided account):** reviewers create a free Yeeflow organization at https://www.yeeflow.com ("Get Started"; see [Signing up for a new Yeeflow account](https://support.yeeflow.com/en/articles/8656028-signing-up-for-new-yeeflow-account)). There is no sample data, so skip 3.3–3.4 and 4.4, and use an available workspace in 3.2. Section 5 is optional and depends on the trial account's permissions; substitute that workspace name and obtain confirmation before writing.
 
 ### 2. Install and connect
 

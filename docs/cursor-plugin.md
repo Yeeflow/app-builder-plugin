@@ -35,11 +35,11 @@ Status of each path for the 1.20.1 release, as of 2026-10-28. "Verified" means o
 | Path | Status |
 |---|---|
 | **Cursor local plugin**: unzip the release ZIP (check its SHA-256) and copy the folder to `~/.cursor/plugins/local/yeeflow`, then reload Cursor. Copy, do not symlink. Enterprise admins can turn off local plugins. | **Verified in Cursor.** The plugin, 31 skills and its own `yeeflow_mcp` connection loaded; OAuth and read calls passed. |
-| Same local install, then Grok Bot | **Does not sync.** Grok Bot **Your plugins** did not show the plugin afterwards. Grok Bot runs in the cloud and keeps no plugin data on the Mac. |
+| Same local install, then Grok Bot | **Not observed to sync.** Grok Bot **Your plugins** did not show the plugin after this local install. |
 | **Cursor personal marketplace**: Customize → Plugins → Browse Marketplace → Add Marketplace → Import from GitHub | **Not verified.** Open Cursor bug [cursor/plugins#452](https://github.com/cursor/plugins/issues/452): the import finds 0 plugins with no error. One vendor reports success after linking GitHub under Cursor dashboard → Integrations. Not tried by Yeeflow yet. |
 | **Cursor team marketplace** (Teams/Enterprise): Dashboard → Plugins & MCPs → Add Marketplace → Import from Repo | **Not verified.** Documented by Cursor. Grok Bot is documented to follow the team's connector policy; the docs do not say whether team-marketplace skills appear in Grok Bot. Requires a Teams or Enterprise plan. |
 | **Grok Bot development connection**: custom MCP server plus skills the Bot loads itself | **MCP part verified** (OAuth, read calls). Skills not yet loaded by Grok Bot. This is not a plugin install; see below. |
-| Grok Bot marketplace (Connect apps → search) | Only after the listing is approved. |
+| Grok Bot marketplace (Connect apps → search) | The public listing is not available until approved. Private distribution paths remain unverified. |
 
 ### Grok Bot development connection (pre-listing in-app test)
 
@@ -52,7 +52,7 @@ This tests Yeeflow's MCP and skills inside Grok Bot without the plugin package. 
 5. Tell the Bot: `The Yeeflow plugin root is /workspace/yeeflow-plugin. Use my yeeflow-application-builder skill ...`. On desktop, name the skill in the message; the `/` menu may not open skills.
 6. Run the reviewer cases and record time, skill used, MCP tools actually called, and any writes.
 
-Private skills hold the `SKILL.md` text; the bundled scripts and references come from the unzipped release in step 2.
+This procedure has not yet been tested with Yeeflow in Grok Bot. Verify that saved private skills can resolve the bundled scripts and references from the unzipped release in step 2; do not assume the files are available to the skill at runtime.
 
 ## Publish to the marketplace
 
@@ -71,7 +71,7 @@ Submit at https://x.ai/bot/marketplace/submit-a-plugin. One listing covers Grok 
 
 Submitting accepts the Cursor Marketplace Publisher Terms (Anysphere) on Yeeflow's behalf, so a person authorized to do that must submit the form. Every listing is reviewed before it appears.
 
-The form also requires ticking "I've tested this plugin locally and in-app and confirmed it works as expected". Tick it only when the evidence supports it, and state the boundary in Testing Instructions: the Cursor local-plugin test is a real plugin install; the Grok Bot test before listing can only be a development connection (custom MCP plus skills), because an individual Grok Bot account has no verified way to install an unlisted plugin. Do not describe MCP-only results as plugin or skill validation.
+The form also requires ticking "I've tested this plugin locally and in-app and confirmed it works as expected". Tick it only when the evidence supports the exact attestation, and state the test boundary in Testing Instructions: the Cursor local-plugin test is a real plugin install; a Grok Bot development connection (custom MCP plus private skills) is not a plugin install. Whether that development test satisfies the attestation is unverified; ask the marketplace reviewer if needed. Do not describe MCP-only results as plugin or skill validation.
 
 ## Host limits
 

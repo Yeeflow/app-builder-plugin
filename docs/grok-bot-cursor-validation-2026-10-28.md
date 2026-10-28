@@ -50,7 +50,7 @@ Limits:
 | Skill invocation (`yeeflow-application-builder`) | "No such skill"; no skill host-loaded |
 | Offline checks the Bot ran on its cloud computer | Not plugin or skill invocation evidence |
 
-Local Mac state: `~/.grokbot` holds only `computer-use`; Grok Bot's plugin list is server-side. `~/.cursor/plugins` holds `cache` and `local` and no imported marketplace.
+At the time of the check, the local `~/.grokbot` directory held only `computer-use`, and Grok Bot's installed-plugin UI did not show the Cursor local plugin. `~/.cursor/plugins` held `cache` and `local` and no imported marketplace. These observations do not establish a general synchronization rule.
 
 ## Not yet tested
 
