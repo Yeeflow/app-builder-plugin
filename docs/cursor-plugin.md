@@ -45,6 +45,8 @@ Status of each path for the 1.20.1 release, as of 2026-10-28. "Verified" means o
 
 This tests Yeeflow's MCP and skills inside Grok Bot without the plugin package. It is how other publishers test before listing. Report it as a development connection, not as a plugin install.
 
+**Use the step-by-step [test kit](grok-bot-dev-test-kit.md).** It replaces step 3 below with a small loader skill, because several released skills are 140–220 KB and a private skill saved through chat may not keep them byte-identical. The outline below is kept for reference.
+
 1. In a Grok Bot chat: `Add a custom MCP server called yeeflow_mcp at https://api.yeeflow.com/v1/mcp`. Approve the card and complete Yeeflow OAuth with a test account.
 2. Ask the Bot to download `yeeflow-cursor-plugin-1.20.1.zip` and its `.sha256` from the [1.20.1 release](https://github.com/Yeeflow/app-builder-plugin/releases/tag/yeeflow-cursor-plugin-v1.20.1), verify the checksum, and unzip it to `/workspace/yeeflow-plugin`.
 3. Save representative skills as private skills from raw URLs pinned to the release tag, for example `Save this as one of your skills: https://raw.githubusercontent.com/Yeeflow/app-builder-plugin/yeeflow-cursor-plugin-v1.20.1/dist/yeeflow-cursor-plugin/skills/yeeflow-application-builder/SKILL.md`. Suggested set: application-builder, feature-configuration-guide, expression-generator, data-list-generator, mcp-incremental-application-builder.
