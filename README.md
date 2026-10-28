@@ -20,7 +20,7 @@ The repository name is independent of the plugin identity. Codex identities rema
 
 ## Install in Codex App
 
-For a new repository-based installation with access to the private repository:
+For a new repository-based installation from the public repository:
 
 ```text
 Source: https://github.com/Yeeflow/app-builder-plugin.git
@@ -79,7 +79,7 @@ Complete Yeeflow OAuth through the selected host's MCP connection. Each host aut
 
 1. Sign in to Claude and select the intended account or organization (for example, your Yeeflow Team).
 2. Open **Customize → Plugins → Add → Add marketplace**.
-3. Select or paste `https://github.com/Yeeflow/app-builder-plugin` and click **Sync**. This repository is private, so the connected GitHub account must have repository access.
+3. Select or paste `https://github.com/Yeeflow/app-builder-plugin` and click **Sync**. This repository is public, so no GitHub repository access is required.
 4. Use the repository URL without `#stable`. This web flow reads the default `main` branch; both `main` and `stable` contain the complete Claude package.
 5. After synchronization completes, open **Discover**, find **Yeeflow** from `app-builder-plugin`, and click **Add**.
 6. In **Yours**, open Yeeflow and confirm it is enabled and shows **1.20.1**, **31 skills**, and **1 connector** (`yeeflow_mcp`). Confirm host installation separately; this release's live multi-account checks used ChatGPT Personal.

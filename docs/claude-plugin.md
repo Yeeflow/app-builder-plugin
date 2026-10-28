@@ -8,7 +8,7 @@ Claude 1.17.0 has passed the recorded package, repository installation and web u
 
 1. Sign in to Claude and select the intended account or organization (for example, your Yeeflow Team).
 2. Open **Customize → Plugins → Add → Add marketplace**.
-3. Select or paste `https://github.com/Yeeflow/app-builder-plugin` and click **Sync**. This repository is private, so the connected GitHub account must have repository access.
+3. Select or paste `https://github.com/Yeeflow/app-builder-plugin` and click **Sync**. This repository is public, so no GitHub repository access is required.
 4. Use the repository URL without `#stable`. This web flow reads the default `main` branch; both `main` and `stable` contain the complete Claude package.
 5. After synchronization completes, open **Discover**, find **Yeeflow** from `app-builder-plugin`, and click **Add**.
 6. In **Yours**, open Yeeflow and confirm it is enabled and shows **1.18.1**, **28 skills**, and **1 connector** (`yeeflow_mcp`).
@@ -80,7 +80,7 @@ A write/runtime test requires an explicitly selected disposable workspace and au
 
 `.claude-plugin/marketplace.json` points only to `dist/yeeflow-claude-plugin`. Existing Codex marketplace and OpenAI build profiles retain their own paths. Commit the generated Claude directory with the source changes; ZIP artifacts remain ignored.
 
-The organization development repository is now `Yeeflow/app-builder-plugin`; it is private. Access to this source requires the appropriate repository authorization. The earlier remote install smoke test used the original repository before it was locked; web marketplace installation from the new private repository was verified on 2026-10-10 for Yeeflow 1.17.2. Claude Code installation requires separate verification. The adaptation was merged into `stable` through [PR #1](https://github.com/Yeeflow/app-builder-plugin/pull/1) on 2026-10-10 (merge commit `68974a1c25fa777848b37f447a4f252b8a0f5835`). The complete support is now reconciled into the default `main` branch, and `stable` is promoted by fast-forward to the same validated commit. Both branches contain the marketplace and its referenced plugin directory.
+The organization development repository is now `Yeeflow/app-builder-plugin`; it is now public, and no repository authorization is required to read or install it. The earlier remote install smoke test used the original repository before it was locked; web marketplace installation from the new repository (then private) was verified on 2026-10-10 for Yeeflow 1.17.2. Claude Code installation requires separate verification. The adaptation was merged into `stable` through [PR #1](https://github.com/Yeeflow/app-builder-plugin/pull/1) on 2026-10-10 (merge commit `68974a1c25fa777848b37f447a4f252b8a0f5835`). The complete support is now reconciled into the default `main` branch, and `stable` is promoted by fast-forward to the same validated commit. Both branches contain the marketplace and its referenced plugin directory.
 
 For Claude Code clients that support authenticated private GitHub marketplaces, the branch-pinned source is:
 
