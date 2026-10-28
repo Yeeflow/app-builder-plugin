@@ -30,15 +30,15 @@ Commit the regenerated `dist/yeeflow-cursor-plugin/`. CI fails with `CURSOR_DIST
 
 ## Install for testing (before marketplace listing)
 
-Status of each path for the 1.20.1 release, as of 2026-10-28. "Verified" means observed in the host by Yeeflow; see [the validation record](grok-bot-cursor-validation-2026-10-28.md).
+Status of each path as of 2026-10-28; the release each result came from is stated. "Verified" means observed in the host by Yeeflow; see the [1.20.2 release notes](releases/yeeflow-app-builder-v1.20.2.md#install-smoke) and the 1.20.1 records ([Cursor and setup](grok-bot-cursor-validation-2026-10-28.md), [Grok Bot development connection](grok-bot-dev-connection-validation-2026-10-28.md)).
 
 | Path | Status |
 |---|---|
-| **Cursor local plugin**: unzip the release ZIP (check its SHA-256) and copy the folder to `~/.cursor/plugins/local/yeeflow`, then reload Cursor. Copy, do not symlink. Enterprise admins can turn off local plugins. | **Verified in Cursor.** The plugin, 31 skills and its own `yeeflow_mcp` connection loaded; OAuth and read calls passed. |
-| Same local install, then Grok Bot | **Not observed to sync.** Grok Bot **Your plugins** did not show the plugin after this local install. |
+| **Cursor local plugin**: unzip the release ZIP (check its SHA-256) and copy the folder to `~/.cursor/plugins/local/yeeflow`, then reload Cursor. Copy, do not symlink. Enterprise admins can turn off local plugins. | **Verified in Cursor (1.20.1 and 1.20.2).** The plugin, 31 skills and its own `yeeflow_mcp` connection loaded; authenticated read calls passed. On 1.20.2 the installed expression validator accepted a correct four-parameter `dateDiff` without the primitive-parameter warning. |
+| Same local install, then Grok Bot | **Not observed to sync (1.20.1).** Grok Bot **Your plugins** did not show the plugin after this local install. Not re-checked on 1.20.2. |
 | **Cursor personal marketplace**: Customize → Plugins → Browse Marketplace → Add Marketplace → Import from GitHub | **Not verified.** Open Cursor bug [cursor/plugins#452](https://github.com/cursor/plugins/issues/452): the import finds 0 plugins with no error. One vendor reports success after linking GitHub under Cursor dashboard → Integrations. Not tried by Yeeflow yet. |
 | **Cursor team marketplace** (Teams/Enterprise): Dashboard → Plugins & MCPs → Add Marketplace → Import from Repo | **Not verified.** Documented by Cursor. Grok Bot is documented to follow the team's connector policy; the docs do not say whether team-marketplace skills appear in Grok Bot. Requires a Teams or Enterprise plan. |
-| **Grok Bot development connection**: custom MCP server plus released skills read through a private loader skill | **Ran 2026-10-28** ([results](grok-bot-dev-connection-validation-2026-10-28.md)): OAuth reads, released skill loading, bundled scripts and a declined write passed in limited form. Direct private-skill registration was not byte-identical and carries no bundled files. This is not a plugin install. |
+| **Grok Bot development connection**: custom MCP server plus released skills read through a private loader skill | **Ran 2026-10-28 on 1.20.1** ([results](grok-bot-dev-connection-validation-2026-10-28.md)); not yet run on 1.20.2: OAuth reads, released skill loading, bundled scripts and a declined write passed in limited form. Direct private-skill registration was not byte-identical and carries no bundled files. This is not a plugin install. |
 | Grok Bot marketplace (Connect apps → search) | The public listing is not available until approved. Private distribution paths remain unverified. |
 
 ### Grok Bot development connection (pre-listing in-app test)
@@ -48,13 +48,13 @@ This tests Yeeflow's MCP and skills inside Grok Bot without the plugin package. 
 **Use the step-by-step [test kit](grok-bot-dev-test-kit.md).** It replaces step 3 below with a small loader skill, because several released skills are 140–220 KB and a private skill saved through chat may not keep them byte-identical. The outline below is kept for reference.
 
 1. In a Grok Bot chat: `Add a custom MCP server called yeeflow_mcp at https://api.yeeflow.com/v1/mcp`. Approve the card and complete Yeeflow OAuth with a test account.
-2. Ask the Bot to download `yeeflow-cursor-plugin-1.20.1.zip` and its `.sha256` from the [1.20.1 release](https://github.com/Yeeflow/app-builder-plugin/releases/tag/yeeflow-cursor-plugin-v1.20.1), verify the checksum, and unzip it to `/workspace/yeeflow-plugin`.
-3. Save representative skills as private skills from raw URLs pinned to the release tag, for example `Save this as one of your skills: https://raw.githubusercontent.com/Yeeflow/app-builder-plugin/yeeflow-cursor-plugin-v1.20.1/dist/yeeflow-cursor-plugin/skills/yeeflow-application-builder/SKILL.md`. Suggested set: application-builder, feature-configuration-guide, expression-generator, data-list-generator, mcp-incremental-application-builder.
+2. Ask the Bot to download `yeeflow-cursor-plugin-1.20.2.zip` and its `.sha256` from the [1.20.2 release](https://github.com/Yeeflow/app-builder-plugin/releases/tag/yeeflow-cursor-plugin-v1.20.2), verify the checksum, and unzip it to `/workspace/yeeflow-plugin-1.20.2`.
+3. Save representative skills as private skills from raw URLs pinned to the release tag, for example `Save this as one of your skills: https://raw.githubusercontent.com/Yeeflow/app-builder-plugin/yeeflow-cursor-plugin-v1.20.2/dist/yeeflow-cursor-plugin/skills/yeeflow-application-builder/SKILL.md`. Suggested set: application-builder, feature-configuration-guide, expression-generator, data-list-generator, mcp-incremental-application-builder.
 4. Check **Connect apps → Your plugins → Manage plugins and skills → Private skills**, then start a new conversation.
-5. Tell the Bot: `The Yeeflow plugin root is /workspace/yeeflow-plugin. Use my yeeflow-application-builder skill ...`. On desktop, name the skill in the message; the `/` menu may not open skills.
+5. Tell the Bot: `The Yeeflow plugin root is /workspace/yeeflow-plugin-1.20.2. Use my yeeflow-application-builder skill ...`. On desktop, name the skill in the message; the `/` menu may not open skills.
 6. Run the reviewer cases and record time, skill used, MCP tools actually called, and any writes.
 
-This procedure has not yet been tested with Yeeflow in Grok Bot. Verify that saved private skills can resolve the bundled scripts and references from the unzipped release in step 2; do not assume the files are available to the skill at runtime.
+On 1.20.1, step 3 (direct private-skill registration) stored a reformatted `SKILL.md` without bundled scripts or references, so those skills could not resolve their files; the loader in the test kit read the released files and ran bundled scripts. Use the test kit.
 
 ## Publish to the marketplace
 
