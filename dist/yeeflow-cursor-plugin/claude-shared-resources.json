@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "method": "ordinary shared files; no blobs, symlinks or materialization",
+  "aliases": {
+    "skills/yeeflow-application-generator/scripts/control-configurations.normalized.json": {
+      "canonical": "control-configurations.normalized.json",
+      "sha256": "80b7d2a27953092241a83001d4b6d81b1d329a373adfb85b1f20076710eeeee8",
+      "bytes": 516020
+    },
+    "skills/yeeflow-application-generator/scripts/field-configurations.normalized.json": {
+      "canonical": "field-configurations.normalized.json",
+      "sha256": "3858145366d0f09de5b0a0c12f692c6daf3df51b016e814b3a76b073ef88bd21",
+      "bytes": 69624
+    },
+    "skills/yeeflow-application-generator/scripts/yeeflow-expression-functions.normalized.json": {
+      "canonical": "yeeflow-expression-functions.normalized.json",
+      "sha256": "21a13d15aa0d0ebcc0dffdd5f5b6d9f81791d387399af1f55f88c9097cae26fa",
+      "bytes": 113840
+    },
+    "skills/yeeflow-approval-form-generator/scripts/yeeflow-expression-functions.normalized.json": {
+      "canonical": "yeeflow-expression-functions.normalized.json",
+      "sha256": "21a13d15aa0d0ebcc0dffdd5f5b6d9f81791d387399af1f55f88c9097cae26fa",
+      "bytes": 113840
+    },
+    "skills/yeeflow-expression-generator/references/yeeflow-expression-functions.normalized.json": {
+      "canonical": "yeeflow-expression-functions.normalized.json",
+      "sha256": "21a13d15aa0d0ebcc0dffdd5f5b6d9f81791d387399af1f55f88c9097cae26fa",
+      "bytes": 113840
+    },
+    "skills/yeeflow-application-generator/scripts/yeeflow-expression-operators.normalized.json": {
+      "canonical": "yeeflow-expression-operators.normalized.json",
+      "sha256": "31fc642c192990b10a2f253d86bb3a3e712a5b96c1fca0c6aae4ddaa72a909d2",
+      "bytes": 1919
+    },
+    "skills/yeeflow-approval-form-generator/scripts/yeeflow-expression-operators.normalized.json": {
+      "canonical": "yeeflow-expression-operators.normalized.json",
+      "sha256": "31fc642c192990b10a2f253d86bb3a3e712a5b96c1fca0c6aae4ddaa72a909d2",
+      "bytes": 1919
+    },
+    "skills/yeeflow-expression-generator/references/yeeflow-expression-operators.normalized.json": {
+      "canonical": "yeeflow-expression-operators.normalized.json",
+      "sha256": "31fc642c192990b10a2f253d86bb3a3e712a5b96c1fca0c6aae4ddaa72a909d2",
+      "bytes": 1919
+    },
+    "skills/yeeflow-expression-generator/references/yeeflow-expression-function-knowledge-base.normalized.json": {
+      "canonical": "yeeflow-expression-function-knowledge-base.normalized.json",
+      "sha256": "fe82916c8c9f64db067965c016b32b29ed30479dd58997c4a322ea3b6eccdd93",
+      "bytes": 113462
+    },
+    "skills/yeeflow-application-generator/scripts/workflow-action-configurations.normalized.json": {
+      "canonical": "scripts/workflow-action-configurations.normalized.json",
+      "sha256": "d493224390f2c03612d37d1ce9262401f0479b8aaf4ab2a7e2709b0f09e4ffef",
+      "bytes": 367647
+    }
+  },
+  "rewrites": {
+    "skills/yeeflow-application-generator/SKILL.md": {
+      "beforeSha256": "f229a2c40dd39067984a27ddc542d333f2ef527fb8b7bcf49290343c5bf559d5",
+      "afterSha256": "ab86192c2eea01bd800b94597b6cbddf287da845a8368729649cb194915f2be2"
+    },
+    "skills/yeeflow-application-generator/scripts/workflow-action-config-validator.js": {
+      "beforeSha256": "6f5a48c1fd7f01f094ad36b6a22d345d72613cf359fc7b74f71bfbb690d4f957",
+      "afterSha256": "3e65e769e05b8028d922126ca098f95345ed434b26ed48f0f13abbee455923e2"
+    },
+    "skills/yeeflow-application-generator/scripts/yeeflow-expression-utils.js": {
+      "beforeSha256": "137f826169af2db90df2dacc60dc80c87b36b91047c1a2ac26770f68f83ab923",
+      "afterSha256": "a16e227571ed570cad82a4a86db8fbe7e13dd0266db03226af8492e86c673fa2"
+    },
+    "skills/yeeflow-approval-form-generator/SKILL.md": {
+      "beforeSha256": "ea3b7e0a41aa9913a0a3a8bea76a5376104e4912bd18d9a965675ff42bde089d",
+      "afterSha256": "694ad17dcb3cb1701164983f3f8c13607e282a772f9943ff2174edea45f942e8"
+    },
+    "skills/yeeflow-approval-form-generator/scripts/yeeflow-expression-utils.js": {
+      "beforeSha256": "137f826169af2db90df2dacc60dc80c87b36b91047c1a2ac26770f68f83ab923",
+      "afterSha256": "a16e227571ed570cad82a4a86db8fbe7e13dd0266db03226af8492e86c673fa2"
+    },
+    "skills/yeeflow-expression-generator/SKILL.md": {
+      "beforeSha256": "32a27ea369f348086d565e8a25b7feb7bef4d65f1dcf4a8b8c9faaa3c07445cd",
+      "afterSha256": "2c1c868657c50862c0206541b3811b5ec08c14c49c1eee8129227080dbd69297"
+    },
+    "skills/yeeflow-expression-generator/references/expression-editor-ui-contexts.md": {
+      "beforeSha256": "3e948d91c766d4479eda5919b794e5ce5e052a94066caa92f5effcaa78a982e1",
+      "afterSha256": "057fbd21b0e8d57ec6813b6b0e26ffb7c04b63ecdef63fe63e23b94a1da083bd"
+    },
+    "skills/yeeflow-expression-generator/references/expression-function-reference.md": {
+      "beforeSha256": "6be2dcc2befb5e64480d8bccaaed98b237f49f3a038366c754691f9646d61414",
+      "afterSha256": "2a14e5a53617943507ed81e2fac8e00e8b15daf51f52817d0b5ba8ef3d2c93e1"
+    },
+    "skills/yeeflow-expression-generator/references/expression-recipes.md": {
+      "beforeSha256": "0bb49d49927204e73ace0b2fa1ff899e74bf49f3ad26a134f486437e8d587967",
+      "afterSha256": "b8104e313ad19a940caae76e2ab107e2e4b9ba38a2ef0a45a7b13554bd5d3505"
+    },
+    "skills/yeeflow-expression-generator/references/yeeflow-expression-utils.js": {
+      "beforeSha256": "e73a9cb200c55b0df49db997228cda424a5ce9328fec089ac15fc61505520daf",
+      "afterSha256": "f8ffe3eed4c80e18f7aecf403f7c81ef2150166f4815d8027298523410d04fce"
+    }
+  },
+  "removedFiles": 10,
+  "savedBytes": 1414030
+}

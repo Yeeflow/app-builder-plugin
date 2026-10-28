@@ -1,0 +1,125 @@
+# Full-App Generation Entrypoint Standard
+
+This standard prevents clean-room application generation tests from confusing validators, delivery helpers, runtime-proof demos, or sample-specific generators with the plugin's full-application generation capability.
+
+## Entrypoint Registry
+
+The plugin must ship `docs/reference/full-app-generation-entrypoints.json`. The registry declares supported full-app generation entrypoints and explicitly identifies non-full-app helper scripts.
+
+Valid full-app generation entrypoints must:
+
+- accept the primary Markdown contracts `functional-specification.md` and `yeeflow-app-plan.md`;
+- default new application delivery to `.yapk` unless the user explicitly requests `.yap`;
+- declare required planning gates and generated-final package gates;
+- declare `bundledPath` when the source checkout path and installed plugin payload path differ;
+- declare `callable: true` and an `invocationContract` that names either the Codex skill orchestration entrypoint or the node CLI materialization entrypoint, repeats the required inputs, and requires continuation after planning gates pass;
+- produce generated-final package artifacts before signing/install/runtime proof is claimed;
+- be clearly distinguished from proof/demo, delivery-decision, package API, and sample-specific helpers.
+
+## Skill-Orchestrated Generation
+
+The current full-app generation entrypoints are skill-orchestrated:
+
+- `skill:yeeflow-application-builder`
+- `skill:yeeflow-application-generator`
+
+These are valid plugin capabilities even though they are not standalone one-command CLIs. A clean-room validation run must inspect the registry before declaring that the plugin has no full-app generation path.
+
+When the registry reports a callable Codex skill entrypoint and the Functional Specification, App Plan, business-default approval, traceability, and generation-readiness gates all pass, the run must continue into skill-orchestrated generated-final package creation. Do not hard-stop solely because there is no standalone CLI. Hard-stop only for real blockers such as unapproved business defaults, missing OAuth/workspace access required for API-issued IDs, failed generated-final validators, or an explicit user request for planning-only output.
+
+The `invocationContract.planningPassContinuation` field is the machine-readable handoff from planning validation to package generation. It must say that planning-pass runs continue toward a generated-final `.yapk` through the registered skill entrypoint and must explicitly forbid stopping solely because no standalone CLI exists.
+
+## Standalone Materialization CLI
+
+The plugin must also expose a callable node CLI materializer:
+
+```sh
+node scripts/materialize-full-app-generated-final.mjs \
+  --functional-spec functional-specification.md \
+  --app-plan yeeflow-app-plan.md \
+  --out-dir dist \
+  --api-id-manifest api-issued-ids.json \
+  --json
+```
+
+This CLI is the concrete package-artifact handoff for clean-room tests and automation only when it can materialize the approved App Plan resource graph. It consumes approved Markdown planning contracts and an API-issued ID manifest, then emits:
+
+- generated-final `.yapk`;
+- decoded resource JSON;
+- ID provenance report;
+- generation report.
+
+The materializer is not a signing, install/import, upgrade, seed-data, Version Management, or browser/runtime proof tool. It must stop before those stages and its report must say so. Plugin regression tests may use an explicit fixture-ID mode, but fixture-ID output is not signing/install eligible and must never be reported as live Yeeflow ID provenance.
+
+Fixture-ID mode must still exercise realistic generated-final resource graphs. When `--allow-fixture-api-ids-for-tests` is used, the materializer must allocate enough synthetic API-shaped numeric string IDs for the actual App Plan resource demand instead of using a tiny fixed ID set that only works for trivial schema-smoke plans. Fixture IDs must remain clearly marked as regression-only, `signingEligible: false`, `materializerSigningEligible: false`, and not live Yeeflow ID provenance.
+
+The materializer must also be honest about implementation coverage. For nontrivial App Plans that declare data lists, approval forms, reports, custom forms, dashboards, and navigation groups, the standalone materializer must emit a minimal generated-final resource graph rather than a placeholder package. The output must include the planned `Childs[]`, `Forms[]`, `FormNewReports[]`, dashboard `Pages[]`, custom list layouts, and grouped `ListSet.LayoutView` navigation needed for generated-final resource-completeness validation. It must keep `signingEligible: false`, `materializerSigningEligible: false`, `preflightEligibleForSigning: null`, and `signingReadinessSource: "not-run"` because standalone materialization does not run the final generated-final preflight stage.
+
+After materialization, `scripts/yapk-first-generation-preflight.mjs` is the signing-readiness handoff. When all generated-final gates pass, its JSON result must include `preflightEligibleForSigning: true`, `signingReadinessSource: "yapk-first-generation-preflight"`, and a `signingReadiness` object whose status is `preflight-pass`. When any gate fails, it must include `preflightEligibleForSigning: false` and the failing gate. Do not reinterpret the materializer's static `signingEligible: false` as a package-quality failure after preflight has passed; use the preflight readiness fields for the next signing stage decision.
+
+Generated-final preflight must also run live-install readiness checks before signing. The materializer must emit one root identity only: `wrapper.ListID` must equal decoded `ListSet.ListID`, and every Type `103` Dashboard page must point to that decoded root. Template-cloned Dashboard resources must re-instantiate UUID-shaped control IDs per page/resource while preserving semantic template container IDs such as `Main`, `Content`, `section_content_area`, and approved template wrapper IDs. Fresh-ID remap and ID provenance must include IDs nested inside dashboard `LayoutInResources[].Resource` JSON strings and encoded approval `DefResource` Brotli payloads. API install/import `apiStatus: 0` is submitted/accepted only; final success requires Version Management evidence for the exact submitted `PackageId` with status `Succeed`. A failed Version Management row blocks fresh-install retry with the same failed `PackageId` / `ListSetID` family.
+
+Minimal resource-graph output must be internally valid before it is handed to signing readiness. The materializer must preserve API-issued IDs as strings and must not pass them through JavaScript `Number`, because 16+ digit Yeeflow IDs lose precision and can collapse into duplicate resource IDs. Its ID provenance manifest must use actual decoded JSON paths, not logical helper aliases.
+
+For supported generated-final output, the materializer must also emit:
+
+- runtime-shaped navigation group metadata with API-issued group IDs, `AppID`, `ListSetID`, icons, and supported child targets;
+- data-list default views with `Ext1.Url = default`, visible `layout[]` columns, `query[]` fields, and required system query fields;
+- approval `DefResource` as `base64("::brotli::" + Brotli(JSON))` with page registrations, request/task form metadata, workflow graph nodes, task URL, actions, variables, and approved/rejected paths;
+- dashboard resources with export-style wrapper keys, `Ext2.src`, `LayoutInResources[0].ID/RefId = LayoutID`, canonical Dashboard Page Layouts v1.1 Content padding, Summary `exts`, `ReportIds`, and `save_var` runtime model metadata.
+
+The materializer must consume the approved App Plan deeply enough for generated-final preflight to exercise the real application contract. For every generated data list, emit the planned business fields, normalize generated package field storage names to the YAPK-supported `Text`, `Bit`, `Decimal`, and `Datetime` field families by `FieldIndex`, and keep the user-facing business display names. Choice-like fields must write runtime-visible `Rules.choices` and aligned `Rules.color_choices`, not legacy option paths. For every generated business Data List or Document Library, create and assign Type `1` custom forms for New Item, Edit Item, and View Item through the host list display settings; do not use the built-in `default` layout. Attach each Type `1` layout to the host list declared in the App Plan instead of placing all custom forms under the first list, and clone the selected Data List Form Layouts v1.1 template from `docs/reference/data-list-form-layout-templates.json`: `data_list_form_layout_new_edit_v1_1` for New/Edit forms, `data_list_form_layout_view_item_v1_1` for standard View forms, and `data_list_form_layout_workbench` for full-page Workbench View forms. System/support lists may skip this only with an explicit App Plan exemption and generated package policy marker. Generated custom forms must preserve the template shell, root background, root zero padding, `main > content`, section modules, and allowed business slots; business fields/actions/related data may be inserted only inside those slots. For every planned Approval form, clone the selected Approval Form Layouts v1.1 template from `docs/reference/approval-form-layout-templates.json`: `approval_form_layout_submission_v1_1` for the single submission page and `approval_form_layout_task_v1_1` for every task page. Generated Approval form pages must preserve hidden form-title CSS, root background, root zero padding, `main > content`, content custom width 1280, page title section, section modules, and locked `action_panel_flow_history_wrapper` with Action panel plus workflow history controls; Approval form business content may be inserted only inside `page_title_content`, `Operations`, `section_content_area`, or `section_title_header`, and Approval forms must not contain Data Analytics/chart/pivot/Summary/KPI controls. Data list workflow task forms and Schedule workflow task forms must use the same `approval_form_layout_task_v1_1` template and preserve the same root shell, locked action/history wrapper, allowed business slots, readonly-by-default task-field guidance, and Data Analytics prohibition as Approval form task pages. Data List Form field grids and approved Collection components must be placed inside the `section_content_area` of `content_card_wrapper`, `content_card_60_wrapper`, or `content_card_40_wrapper` when used in Dashboard, Data List Form Layouts v1.1, or Approval Form Layouts v1.1 shells. Every retained `section_content_area` in Dashboard, Workbench Dashboard, Data List Form, and Approval Form golden-reference shells must preserve `attrs.style.gap = [null, "--sp--s200"]`; `--sp--s0` is an obsolete slot gap and must fail generated-final preflight. Dashboard materialization must not emit page-level `select-filter` variables consumed by Collection `attrs.data.filter[]` conditions with `op`/`operator = "9"` until an export-proven empty-value bypass contract exists. Live runtime evidence showed that this static shape can pass validator linkage but clear all Collection rows on first load when the filter variable is empty. Until the bypass contract is proven, prefer proven `search-filter` / `attrs.data.fulltext[]` linkage or visible unfiltered Collections, while preserving filter layout rules for any generated page-level filters. Generated `search-filter` controls must keep `attrs.placeholder` as primitive runtime input text; object-shaped values such as `{ "value": "Search ..." }` are forbidden because the browser renders them as `[object Object]`. Whenever any Dashboard, custom Data List form, Approval submission page, Approval task page, Data list workflow task form, or Schedule workflow task form contains two or more page-level Data Filter controls, the materializer must copy `dashboard_standard_filter_group` from `docs/reference/data-filter-standard-filter-group.template.json` and map the child filters inside it. The wrapper must remain the standard `flex_grid` with 4 desktop/laptop columns, 2 tablet columns, 1 mobile column, one auto row, 16px row/column gaps, and `displayLabel = [null,false]`; loose sibling filters, invented filter rows, or simplified `columns.count/type/minmax` Grid definitions are not signing-ready. Dashboard Collections must replace detail-layout placeholders with concrete Type `1` layout IDs that belong to the Collection source list, preserve grid-table wrapper gap contracts on the Collection parent container, carry explicit dataset region/template provenance, and write Designer-recognized filter condition shapes only for runtime-proven filter types.
+
+Dashboard-only upgrades of an existing complete application must be emitted as full upgrade packages, not sparse Dashboard-only packages. The package must preserve Data Lists, Forms, DataReports, Groups, Tags, Metadatas, Agents, Connections, Knowledges, Themes, Components, PortalInfo, root identity, and non-target pages unless explicitly declared in scope. Installed Form reports have a special live-upgrade boundary: unchanged installed `FormNewReports[]` entries may be omitted from a Dashboard-only upgrade payload when reports are not in scope, because carrying them can be interpreted as duplicate report creation by Version Management. This omission is not a report deletion claim; report preservation still requires Version Management `Succeed` and post-upgrade resource/runtime proof. If a Form report is new or intentionally changed, it must be declared in scope and pass report new/update-safe proof. Scope proof must include a non-Dashboard unchanged diff artifact before signing readiness, and runtime proof must confirm Data Lists and Forms were not deleted.
+
+Approved Data Analytics templates may be used on Dashboard Page Layouts v1.1 and Data List Form View Item Layouts v1.1 only. They may be placed in `content_card_wrapper`, `2_columns_section`, `3_columns_section`, or `2_columns_60/40_section`; they remain forbidden on Approval forms and Data List New/Edit forms. The materializer must clone the selected analytics template subtree and preserve locked style, layout, typography, runtime `ReportIds[]`, and `Resource.exts[]` contracts before signing readiness.
+
+Upgrade APIs are submission boundaries, not final proof. `upgrade-check` and `upgrade-apply` `apiStatus: 0` mean accepted/submitted only; final upgrade success requires an exact Version Management row for the submitted `PackageId` with status `Succeed`. Failed rows must capture sanitized View error log text. Dashboard upgrade runtime proof must then open the affected Dashboard pages and show business rows, no `No data`, no `[object Object]`, Search filter behavior when generated, Collection binding to real Data Lists, and preservation of non-Dashboard resources.
+
+Dashboard KPI materialization must clone the approved KPI card structure but rebind every visible dynamic KPI value to a page-local Summary/temp variable contract. A generated business Dashboard must not retain source-template variables such as `__temp_event_portfolio_approved_budget`, `__temp_event_portfolio_registration_rate`, or `__temp_event_portfolio_lead_follow_up`. For each visible KPI value that uses `attrs.headc.title.variable` or an equivalent dynamic text binding, the referenced variable must be declared in the same page resource `tempVars`, backed by a real hidden Summary control, listed in `ReportIds`, and represented in `Resource.exts`. Missing page-local declarations, undeclared KPI variable references, or Event Portfolio source-template variable residue are generated-final blockers before signing readiness.
+
+Dashboard Summary controls that back KPI values must live inside a dedicated hidden host container, not directly in visible content regions. The hidden host must serialize `attrs.common.hide = [null, true, true, true]`, `attrs.style.direction = [null, "row"]`, `attrs.style.widthtype = [null, "1"]`, explicit `gap`, `align_items`, and `justify_content`, and a false display rule such as `attrs.display.rule = "1 == 0"`. Because Summary controls are still business controls, the hidden host must be nested inside an approved KPI business slot copied from the selected Dashboard page layout (`event_portfolio_kpi_planned_events`, `event_portfolio_kpi_approved_budget`, `event_portfolio_kpi_registration_rate`, `event_portfolio_kpi_lead_follow_up`, or `kpi_card_wrapper`). The materializer must not append `*_kpi_data_host` directly under root `Content`, `content_panel`, or other structural containers, because that invents a layout module outside the golden reference. Summary count controls that use the native record identifier must treat `ListDataID` as a runtime system field and must include designer-shaped field metadata on `attrs.data.field`, `attrs.data.fieldObject`, `attrs.data.fieldInfo`, `attrs.field`, `attrs.fieldObject`, and `attrs.fieldInfo`. Generated-final preflight must run `scripts/inspect-dashboard-summary-control-contract.mjs` so packages cannot proceed to signing readiness with missing Summary hidden hosts or unresolved Summary field metadata.
+
+Form report resources belong in `FormNewReports[]`. Runtime navigation must not emit unsupported Type `106` children; report navigation entries must resolve through a supported dashboard, approval form, or data-list target while the report resource remains present in `FormNewReports[]`.
+
+If a future App Plan declares resource categories that the standalone materializer still cannot generate, it must fail closed with `FULL_APP_MATERIALIZATION_RESOURCE_GRAPH_NOT_IMPLEMENTED`. It must not emit a placeholder `.yapk`, must not return `status: pass`, and must not set `signingEligible: true` for a package that has not materialized the App Plan resource graph and passed generated-final hard gates.
+
+When used, the `FULL_APP_MATERIALIZATION_RESOURCE_GRAPH_NOT_IMPLEMENTED` finding must be actionable. It must include:
+
+- exact planned resource counts by category;
+- parsed planned resource names by category;
+- a `missingResourceGraph[]` list that maps each planned category to its required generated-final output surface;
+- `packageEmitted: false`;
+- `signingEligible: false`.
+- `materializerSigningEligible: false`.
+- `preflightEligibleForSigning: null`.
+- `signingReadinessSource: "not-run"`.
+
+The materializer's App Plan resource-demand parser must count only resource-level declarations. Field tables, dashboard section tables, metric rows, filter rows, item-template rows, validator command text, and explanatory prose must not inflate resource counts. If a section uses resource headings, those headings are authoritative for that resource category. Table fallback counting is allowed only for canonical resource-name headers such as `List Name`, `Form Report Name`, `Form Name`, `Dashboard Page Name`, or navigation `Group`.
+
+The registry must validate from both layouts used by this repository:
+
+- source checkout layout: `skills/installed/<skill-name>/SKILL.md`
+- installed plugin payload layout: `skills/<skill-name>/SKILL.md`
+- source and installed script layout: `scripts/materialize-full-app-generated-final.mjs`
+
+## Non-Full-App Helpers
+
+The following must not be reported as generic full-app generators:
+
+- `scripts/yeeflow-application-delivery-workflow.mjs`, which only decides delivery flow;
+- `scripts/yeeflow-package-api-automation.mjs`, which requires an existing package;
+- `generate-*-runtime-proof.mjs`, which creates focused proof/demo artifacts;
+- sample-specific generators such as `tools/generators/generate-vendor-onboarding-yapk-schema-v2.mjs`.
+
+## Validation
+
+Run:
+
+```sh
+node scripts/inspect-full-app-generation-entrypoints.mjs
+```
+
+The inspector must pass before a plugin-only clean-room generation report claims that no generation entrypoint exists. If a user or test specifically requires a standalone CLI, report that the installed plugin exposes skill-orchestrated generation entrypoints rather than inventing or misclassifying a helper script.
+
+If the inspector passes and generation still stops immediately after planning, classify the concrete blocker. If API-issued IDs are unavailable, hard-stop with an ID-source error rather than claiming that no materialization entrypoint exists. If the standalone materializer is present and the App Plan only uses supported first-generation resource categories, it must continue into minimal resource-graph package creation and then generated-final preflight. If unsupported resource categories remain, hard-stop with `FULL_APP_MATERIALIZATION_RESOURCE_GRAPH_NOT_IMPLEMENTED` and route the run to the skill-orchestrated generator or a follow-up resource-graph implementation task.

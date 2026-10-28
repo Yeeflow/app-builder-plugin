@@ -283,6 +283,12 @@ packages/**/lib/
 !dist/yeeflow-claude-plugin/
 !dist/yeeflow-claude-plugin/**
 
+# Separate Cursor / Grok Bot distribution
+!.cursor-plugin/
+!.cursor-plugin/marketplace.json
+!dist/yeeflow-cursor-plugin/
+!dist/yeeflow-cursor-plugin/**
+
 # Local Claude screenshots and install artifacts
 /artifacts/claude/
 

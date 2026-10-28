@@ -1,0 +1,24 @@
+{
+  "name": "yeeflow",
+  "version": "1.20.1",
+  "description": "Build and maintain Yeeflow business applications, records, tasks and workflows with guided skills and Yeeflow's hosted MCP connection.",
+  "author": {
+    "name": "Yeeflow",
+    "email": "support@yeeflow.com"
+  },
+  "homepage": "https://www.yeeflow.com",
+  "repository": "https://github.com/Yeeflow/app-builder-plugin",
+  "license": "MIT",
+  "keywords": [
+    "yeeflow",
+    "low-code",
+    "business-applications",
+    "workflow",
+    "approvals",
+    "ai-agents",
+    "automation"
+  ],
+  "logo": "assets/yeeflow-logo-plate.png",
+  "skills": "./skills/",
+  "mcpServers": "./mcp.json"
+}

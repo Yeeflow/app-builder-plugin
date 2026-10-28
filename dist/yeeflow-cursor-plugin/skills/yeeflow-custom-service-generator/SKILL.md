@@ -1,0 +1,303 @@
+---
+name: yeeflow-custom-service-generator
+description: generate, inspect, validate, document, and debug Yeeflow Custom Service scripts exported as .ycs. Use when the user asks for backend Custom Service code, Node.js 22 service logic, .ycs analysis, service parameter/output configuration, or Custom Service skill/training.
+---
+
+## Grok Bot and Cursor host requirements
+
+Resolve this plugin root from the loaded skill path (<plugin-root>/skills/<skill-name>/SKILL.md), or CURSOR_PLUGIN_ROOT when provided. If the skill path is not a readable filesystem path, locate .cursor-plugin/plugin.json under the host's plugin directories, verify its name is yeeflow and its version matches the installed plugin, and resolve resources from that root. Do not use another installed version or another host's cache. If multiple roots match, stop and report ambiguity.
+
+Use only the discovered tools of this plugin's yeeflow_mcp connection. Authenticate through the host's plugin OAuth flow (Grok Bot: Connect apps, Yeeflow, Authenticate). Never ask the user to paste passwords, tokens or API keys into chat. Do not fall back to direct REST calls, API keys or retired MCP endpoints.
+
+Run bundled validators with the Node runtime available on the host computer or terminal. If Node or the plugin files are unavailable, report that validation did not run and continue supported MCP work; never claim unexecuted validation passed. Use browser tools only when available and authorized; API acceptance, readback, designer rendering and runtime proof are separate.
+
+Confirm the target workspace and application, and get explicit user approval, before any create, update, import or delete. Do not edit installed plugin caches. Maintainer references describing Codex, OpenAI or Claude publishing are for those platforms; Cursor and Grok Bot publishing uses docs/cursor-plugin.md and scripts/build-cursor-plugin.mjs in the source repository.
+
+
+
+# Yeeflow Custom Service Generator
+
+## Overview
+
+Yeeflow Custom Service is a backend code surface that runs in a sandboxed Node.js 22 style environment.
+
+It is distinct from existing custom-code surfaces:
+
+| Surface | Host | Required entrypoint |
+| --- | --- | --- |
+| Custom Code control | Page/form control tree | `render(context, fieldsValues, readonly)` |
+| Form Action Custom Code step | Form action step | `execute(context, fieldsValues)` |
+| Custom Service | Backend service sandbox / `.ycs` export | `main({ connections, params, modules })` |
+
+Use this skill for Custom Service generation and `.ycs` study. Use `yeeflow-custom-code-generator` for Custom Code controls and Form Action Custom Code steps.
+
+## Required References
+
+Before generating or validating Custom Service code, read:
+
+- `../../docs/standards/custom-service-nodejs22-runtime-standard.md`
+- `../../docs/reference/custom-service-ycs-examples.normalized.json`
+- `../../docs/reference/custom-service-invocation-examples.normalized.json`
+
+For feature-learning or plugin-training work, also read:
+
+- `../../docs/training/custom-service-nodejs22-ycs-training-report.md`
+
+For full application planning or generation work, also read:
+
+- `../../docs/standards/custom-capability-app-plan-planning-standard.md`
+
+Custom Service is an advanced capability and must be planned in the standard App Plan under `Custom Code and Custom Service Planning` before generation. The App Plan must explain why native Yeeflow controls, expressions, form actions, workflow actions, Summary/Data Analytics, data-list operations, or Custom Code are insufficient; which service is needed; where it is invoked; the required connection variables, input variables, output variables, host bindings, queue/waiting UX, downstream actions, security/privacy notes, native fallback, and runtime proof. Do not add Custom Service or `invokeservice` / `InvokeCode` invocation steps as unplanned shortcuts during package generation.
+
+## Supported Modes
+
+### A. Generate Custom Service Code
+
+Given a backend service requirement:
+
+- generate a complete Custom Service script using `export async function main({ connections, params, modules }: ServiceContext)`;
+- define the intended `DraftConfig` with `params`, `connections`, and `outputs`;
+- add connection variables in `DraftConfig.connections[]` when the service integrates with a third-party system;
+- validate inputs before use;
+- validate required connections before use;
+- return output keys matching the configured outputs;
+- use `modules.yeeSDKClient` for Yeeflow data/file operations;
+- use `connections[connectionId]` for authorized external calls;
+- state proof boundaries when invocation or SDK behavior is not proven.
+
+### B. Inspect Existing `.ycs`
+
+Given an exported `.ycs`:
+
+- parse top-level `Name`, `Description`, `ImplType`, `DraftCode`, `DraftConfig`, and `ExtData`;
+- parse `DraftConfig` as a JSON string;
+- list params, connections, outputs, SDK calls, file handling, external calls, and return keys;
+- identify connection variable IDs, connection types, and where `connections?.<id>` is consumed in code;
+- identify security hazards and unproven SDK shapes;
+- produce a practical user guide or training summary.
+
+### C. Debug Custom Service Code
+
+When a service fails:
+
+- check first for missing `main`;
+- check malformed `DraftConfig`;
+- check output keys not matching configured outputs;
+- check unsafe direct access to `params`;
+- check forbidden Node built-ins or globals;
+- check hardcoded credentials or private/internal URLs;
+- check guessed SDK calls or unhandled response shapes;
+- return corrected service code quickly.
+
+### D. Plan Or Generate Custom Service Invocation
+
+When asked to configure a form action or workflow action that invokes Custom Service:
+
+- use `type: "invokeservice"` for form action steps on approval forms, data list custom forms, and dashboard pages;
+- use workflow node `stencil.id: "InvokeCode"` for workflow actions;
+- set `serviceId` from the selected Custom Service resource;
+- map required service connection variables through `properties.connections[]` on workflow nodes when invoking from workflow actions;
+- copy the Custom Service parameter IDs and output IDs exactly from its `DraftConfig`;
+- bind values according to the host surface, not by parameter name alone;
+- avoid generating invocation bindings for a host surface that lacks the target variable or field.
+
+Host binding rules:
+
+| Host | Input binding | Output binding |
+| --- | --- | --- |
+| Approval submission/task form action | `value.value.prefix = "__variables_"` | `prefix = "__variables_"` |
+| Approval/Data list/Scheduled workflow action | `properties.params[].value = { type: 1, value: { exprType: "variable", ... } }` | `prefix = "__variables_"` |
+| Custom data list form action | `value.value.prefix = "__list_"` for data-list fields, or `__temp_` for temp variables | `prefix = "__temp_"` for temp variables |
+| Dashboard form action | `value.value.prefix = "__temp_"` | `prefix = "__temp_"` |
+
+Dashboard pages do not have data-list field variables; use temp variables for Dashboard Custom Service invocation unless a future export proves another surface.
+
+Data list workflow invocation can also bind current item fields with `exprType: "list_field"` and static string values with `type: 2` token arrays. If the Custom Service returns an external-system ID, write it to a workflow variable first and then use a downstream Set Data List / `ContentList` workflow action to update the current item field.
+
+If no Custom Service is needed, the App Plan should say `Not planned`; placeholder rows such as `Not planned`, `N/A`, `None`, or `Not applicable` must not materialize into service resources, action steps, workflow nodes, variables, navigation items, or package artifacts.
+
+## Core Rules
+
+- The primary entrypoint is `main`.
+- If code is empty or missing `main`, initialize:
+
+```ts
+export async function main({ connections, params, modules }: ServiceContext) {
+  return {};
+}
+```
+
+- Put primary business logic in `main` or helpers called by `main`.
+- Do not generate `render(...)` for Custom Service.
+- Do not generate `execute(...)` for Custom Service.
+- Return an object whose keys match `DraftConfig.outputs[].id`.
+- Validate every required `params` value before using it.
+- Validate every required `connections` value before using it.
+- Use optional chaining for nested values.
+- Throw clear `Error` messages when blocked.
+- Preserve 19-digit Yeeflow IDs as strings.
+- Treat Custom Service invocation as a server-side queued call. If the user needs immediate client-side calculation or UI reaction, recommend a Custom Code control or a Form Action Execute custom code step instead.
+
+## DraftConfig Rules
+
+The `.ycs` export stores `DraftConfig` as a JSON string:
+
+```json
+{
+  "params": [],
+  "connections": [],
+  "outputs": []
+}
+```
+
+Observed `.ycs` parameter/output types include:
+
+- `text`
+- `file`
+- `number`
+
+Product-supported input/output variable categories include Text, Number, Boolean, Date/Time, File, Image, and Rich text. Preserve the export/UI type name used by the Custom Service configuration.
+
+Connection variables are not ordinary params or outputs. Declare them in `connections`:
+
+```json
+{
+  "id": "sharePointConnection",
+  "type": "http",
+  "desc": "SharePoint OAuth connection used to authenticate and access the specified SharePoint site and list."
+}
+```
+
+Product runtime type definitions may mention `string`, `number`, and `variable`. For `.ycs` export/config generation, prefer the export/UI type names that match the service configuration being produced.
+
+## Security Rules
+
+Never generate:
+
+- hardcoded credentials, API keys, bearer tokens, passwords, or client secrets;
+- `require(...)`;
+- Node standard-library imports such as `fs`, `path`, or `crypto`;
+- `process`, `global`, `__dirname`, or `__filename`;
+- `setTimeout` or `setInterval` unless explicitly provided by `ServiceContext`;
+- hardcoded private/internal network targets such as `localhost`, `127.0.0.1`, `::1`, `169.254.169.254`, RFC1918 private ranges, `.local`, or `.internal`.
+
+For authorized HTTP calls:
+
+```ts
+const conn = connections?.["CONNECTION_ID_FROM_PLAN"];
+if (!conn) throw new Error("Required connection missing.");
+const response = await modules.fetch(url, { method: "GET", connection: conn });
+```
+
+## Yeeflow SDK Rules
+
+Use `modules.yeeSDKClient` for system interactions. Do not guess SDK mutation methods.
+
+Export-backed examples include:
+
+- `modules.yeeSDKClient.files.getContent(fileId)`
+- `modules.yeeSDKClient.files.upload({ fileName, file })`
+- `modules.yeeSDKClient.lists.getFields(listId)`
+- `modules.yeeSDKClient.lists.createItemsBatch({ listId, items })`
+- `modules.yeeSDKClient.lists.queryItems({ listId, fields, filters, sorts, pageIndex, pageSize })`
+- `modules.fetch(url, { method, headers, body, connection })` for third-party OAuth/HTTP integration through a configured connection.
+
+If a required SDK call is not proven, use `getYeeSDKAPIDetails` when available or mark the implementation as requiring SDK confirmation.
+
+## File Handling Rules
+
+File parameters may be a single object or an array. Standard file object shape:
+
+```json
+{ "id": "file-id", "name": "file-name.pdf", "fileSize": 1024 }
+```
+
+Read file content:
+
+```ts
+const fileValue = params?.myFile;
+const fileId = Array.isArray(fileValue) ? fileValue[0]?.id : fileValue?.id;
+if (!fileId) throw new Error("File parameter is missing.");
+const fileResp = await modules.yeeSDKClient.files.getContent(fileId);
+const fileBuffer = fileResp?.data;
+```
+
+Create a file output:
+
+```ts
+const uploadResp = await modules.yeeSDKClient.files.upload({ fileName, file });
+return { generatedFile: uploadResp?.data };
+```
+
+## Output Modes
+
+### Code-only
+
+Use when the user asks for a script to paste/test. Return:
+
+1. short assumptions if needed;
+2. one complete Custom Service code block;
+3. optional DraftConfig JSON when useful.
+
+### Code + `.ycs` config
+
+Use when the user asks for a complete service definition. Return:
+
+- service name;
+- description;
+- DraftConfig JSON;
+- full DraftCode.
+
+For an independently importable file, write those values to a service-definition JSON and run the formal builder:
+
+```bash
+node scripts/build-ycs.js service-definition.json output.ycs
+node scripts/validate-ycs.js output.ycs
+```
+
+The builder converts `DraftConfig` to the required JSON string, validates before writing, writes a temporary file, rereads and byte-compares it, validates again, and commits the final `.ycs` only after success. Supply `--issued-ids issued-ids.json` when the service contains long Yeeflow resource IDs. Do not treat code-only output as a completed `.ycs` artifact.
+
+### Guide-only
+
+Use when documenting an existing `.ycs`. Describe observed behavior, configuration, parameters, outputs, SDK calls, and proof boundaries.
+
+## Proof Boundary
+
+Current Custom Service knowledge is:
+
+- product-spec-backed for runtime context and sandbox rules;
+- export-proven for `.ycs` top-level shape and DraftConfig layout;
+- export-proven for Submission form Form Action `invokeservice`, Approval workflow `InvokeCode`, and custom data list form Form Action `invokeservice` invocation shapes;
+- export-proven for Data list workflow `InvokeCode` invocation with `properties.connections[]`, list-field/static params, workflow-variable output, and downstream Set Data List update;
+- export-proven for Scheduled Workflow `InvokeCode` invocation that passes a List workflow variable into a Custom Service and stores a text output in a workflow variable (`Approval form workflow sample-V1.6.yapk`);
+- product/user-understanding-backed for Task form and Dashboard invocation surfaces that share the same known form-action/workflow-action shapes;
+- validator-backed when focused gates pass.
+
+AI Agent or Copilot invocation is future work and must not be claimed as runtime-proven yet.
+
+<!-- plugin-resource-access -->
+## Portable access to bundled resources
+
+Resolve this plugin's root from the current host-provided skill location: a skill is under `<plugin-root>/skills/<skill-name>`. Never hardcode a developer checkout, a macOS home directory, a Linux cache path, or a particular plugin version.
+
+Use the skill-resource reader for files within the selected skill subtree. Shared references such as `docs/reference/...`, root validators and `core/...` are relative to the plugin root, not the current working directory. When the resource reader cannot read outside the skill subtree, read the existing shared file through the host's filesystem tools at its resolved plugin-root path. A resource-interface error alone does not prove the bundled file is missing. If no filesystem reader is available, report that access limitation; do not invent reference contents.
+
+Resolve scripts relative to the mounted plugin and run with the host's available Node runtime. The application-generator validator entrypoint delegates to the root validator so shared dependencies resolve from the same package, including when launched from a temporary directory. Do not install dependencies or call remote write tools merely to read a template. Keep skill reads, script validation, live MCP reads, and business runtime acceptance as separate evidence.
+
+## Unified Yeeflow MCP connection
+
+Use the single `yeeflow_mcp` connection definition at `https://api.yeeflow.com/v1/mcp` for all live Yeeflow work. App Builder, Operations, Admin and Service Portal are capability domains within this connection, not separate servers or logins. Each account can use an independently authorized host connection to this same definition. Discover the current host-exposed tool names and schemas; do not invent namespace prefixes or assume tool contracts stayed identical after migration.
+
+A single OAuth connection does not grant additional permissions. Operations serves business users; application structure/settings and resource creation require the appropriate application-administrator rights. Organization administration and Service Portal capabilities retain their own permission and context checks. Editor/Visitor access is not application-administrator access. On authentication failure reconnect this unified endpoint through the host; on permission denial stop the denied action without falling back to a former endpoint or another identity. Keep existing confirmation, readback, pagination, RowVersion and data-minimization rules.
+
+## Independent sign-in and multiple connected accounts
+
+On ChatGPT/OpenAI hosts, each user installs the same plugin and authorizes their own Yeeflow account through the host's OAuth connection flow. The host stores and selects independent connections, including additional accounts connected from plugin settings. Do not ask users to create an MCP server, supply an App ID, paste credentials, or configure local tokens. Do not implement custom account selectors, local profiles, environment variables or shared credentials. When the host-exposed tool schema declares a connection-routing parameter such as `link_id`, use only an exact connection value from the host-provided account list for the requested identity. This parameter selects a host-managed OAuth grant; it is not a Yeeflow business argument or a credential. Never invent routing fields or connection values, or forward account selectors to the upstream MCP server. Other hosts must follow their own supported connector/account-management flow; do not assume they expose OpenAI multi-account settings.
+
+Before any account-dependent read or write, use the connection that matches the user's requested account and organization. If several connected accounts could match and the intended identity is ambiguous, ask the user to select the account and organization before accessing their business data. Do not guess from an email address alone, assume the most recently used account, or silently use every connection. If the host does not expose the requested connection or cannot route to it, preserve the operation and ask the user to select or connect that account in plugin settings; do not invent an account selector argument.
+
+When the host exposes an authenticated profile tool, discover its actual name and schema. The upstream designated profile tool declares `_meta["openai/profile"]: true`, accepts an empty object and returns the profile represented by the selected connection's credentials. The host may add a connection-routing field to its exposed wrapper; follow that actual schema while keeping the upstream profile call free of account selectors. Use its stable opaque `id` to distinguish profiles and its optional display fields for labels. Do not treat email, nickname or display name as a stable identity. A profile tool helps identification; it does not enable multi-account access or grant permissions. Do not invent a profile tool or bypass host routing when it is unavailable.
+
+After switching connections or organizations, call `workspace_list` again and rediscover the target application/resources and permissions. Scope all reused IDs, RowVersion values, cached results and permission conclusions to the selected connection and organization; never carry them across identities. Bind write confirmation and readback to that same account, organization, target and action. If identity changes after confirmation, obtain confirmation for the new target before writing.
+
+On authentication failure, reconnect only the affected connection. On permission denial, stop the denied operation; never retry it using another connected account. Read multiple accounts only when the user explicitly requests that scope, and label each result by its account and organization. Do not include credentials, access tokens or private profile IDs in user-facing results or generated artifacts.
