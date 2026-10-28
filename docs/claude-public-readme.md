@@ -6,13 +6,13 @@ Yeeflow helps Claude work with business applications, records, tasks and workflo
 
 Use a Yeeflow account with permission for the selected workspace and operation. Connect Yeeflow through Claude's connector OAuth flow. The declared MCP endpoint is https://api.yeeflow.com/v1/mcp. Do not paste passwords, tokens, cookies or API keys into chat. Authentication does not expand your Yeeflow permissions.
 
-After installing the plugin, enable it and connect its Yeeflow connector in Customize. Start a new conversation to test the installed version. For a private repository marketplace, your GitHub account also needs access to that repository.
+After installing the plugin, enable it and connect its Yeeflow connector in Customize. Start a new conversation to test the installed version. The repository is public; no GitHub repository access is required.
 
 ### Claude web and desktop: add the marketplace
 
 1. Sign in to Claude and select the intended account or organization (for example, your Yeeflow Team).
 2. Open **Customize → Plugins → Add → Add marketplace**.
-3. Select or paste `https://github.com/Yeeflow/app-builder-plugin` and click **Sync**. This repository is private, so the connected GitHub account must have repository access.
+3. Select or paste `https://github.com/Yeeflow/app-builder-plugin` and click **Sync**. This repository is public, so no GitHub repository access is required.
 4. Use the repository URL without `#stable`. This web flow reads the default `main` branch; both `main` and `stable` contain the complete Claude package.
 5. After synchronization completes, open **Discover**, find **Yeeflow** from `app-builder-plugin`, and click **Add**.
 6. In **Yours**, open Yeeflow and confirm it is enabled and its version and skill count match the selected release. Candidate version 1.20.0-rc1 includes **31 skills** and **1 connector** (`yeeflow_mcp`). Confirm the installed ref matches the accepted release.
