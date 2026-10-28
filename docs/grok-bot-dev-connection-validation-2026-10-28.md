@@ -40,5 +40,5 @@ Status: **Released skills ran in Grok Bot through a private loader skill and a c
 ## Not tested
 
 - Grok Bot plugin installation (only possible after listing, or through a private distribution path not yet verified).
-- The other 26 skills in Grok Bot; full live business workflows; any approved write.
+- The remaining skills in Grok Bot; full live business workflows; any approved write.
 - A dedicated reviewer account.
