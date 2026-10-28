@@ -82,6 +82,13 @@ try {
     assert.ok(!body.includes("CLAUDE_PLUGIN_ROOT"), skill);
     assert.ok(!body.includes("~/.codex/skills"), skill);
     assert.ok(!body.includes("/Users/"), skill);
+    assert.ok(!body.includes("uses docs/cursor-plugin.md and scripts/build-cursor-plugin.mjs"), skill + ": guidance names source-only paths");
+  }
+
+  // Shared references cited by bundled skills must ship in the package (1.20.2).
+  for (const rel of ["docs/yeeflow-system-configuration-schema-specifications.md", "docs/studies/normalized/yap-export-shaped-application/reference-shape.normalized.json"]) {
+    assert.ok(existsSync(resolve(out, rel)), "missing cited reference: " + rel);
+    assert.equal(digest(resolve(out, rel)), digest(resolve(root, rel)), "cited reference drift: " + rel);
   }
 
   const marketplace = JSON.parse(readFileSync(resolve(root, ".cursor-plugin/marketplace.json"), "utf8"));

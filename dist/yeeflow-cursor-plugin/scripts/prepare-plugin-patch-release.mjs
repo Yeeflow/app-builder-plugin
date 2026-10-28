@@ -345,6 +345,9 @@ for (const file of ["SKILL.md", "agents/openai.yaml", "references/feature-catalo
 mirrors.push(["docs/releases/yeeflow-app-builder-v1.18.0.md", "docs/releases/yeeflow-app-builder-v1.18.0.md"]);
 mirrors.push(["docs/releases/yeeflow-app-builder-v1.18.1.md", "docs/releases/yeeflow-app-builder-v1.18.1.md"]);
 
+// 1.20.2: shared references cited by bundled skills but previously missing from every package.
+for (const file of ["docs/yeeflow-system-configuration-schema-specifications.md", "docs/studies/normalized/yap-export-shaped-application/reference-shape.normalized.json", "docs/releases/yeeflow-app-builder-v1.20.2.md"]) mirrors.push([file, file]);
+
 // Document workflow specialists: explicit reviewed resources survive rebuilds.
 for (const entry of readJson("docs/standards/document-workflow-distribution.json").mirrors) {
   mirrors.push([entry.source, entry.destination]);

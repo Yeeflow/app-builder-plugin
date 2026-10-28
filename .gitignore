@@ -101,6 +101,10 @@ yeeflow-data-list-generator/
 !dist/yeeflow-app-builder-plugin/fixtures/
 !dist/yeeflow-app-builder-plugin/fixtures/knowledge-source-bindings/
 !dist/yeeflow-app-builder-plugin/fixtures/knowledge-source-bindings/*.json
+!dist/yeeflow-app-builder-plugin/docs/studies/
+!dist/yeeflow-app-builder-plugin/docs/studies/normalized/
+!dist/yeeflow-app-builder-plugin/docs/studies/normalized/yap-export-shaped-application/
+!dist/yeeflow-app-builder-plugin/docs/studies/normalized/yap-export-shaped-application/reference-shape.normalized.json
 !docs/architecture/yeeflow-app-builder-core-migration-state.json
 !docs/reference/tab-control-workspace.template.json
 !docs/reference/gantt-control-linked-activity.template.json
