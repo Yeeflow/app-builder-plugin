@@ -115,7 +115,7 @@ function validateVariableToken(token, context = {}) {
   }
   if (token.exprType !== "variable") issue(issues, "error", "EXPRESSION_VARIABLE_BAD_EXPRTYPE", "Variable token exprType must be variable.", `${tokenPath}.exprType`);
   if (token.type !== "expr") issue(issues, "error", "EXPRESSION_VARIABLE_BAD_TYPE", "Variable token type must be expr.", `${tokenPath}.type`);
-  if (!VARIABLE_VALUE_TYPES.has(token.valueType)) issue(issues, "error", "EXPRESSION_VARIABLE_BAD_VALUETYPE", "Variable token valueType must be number, text, date, boolean, string, or user.", `${tokenPath}.valueType`, { valueType: token.valueType });
+  if (!VARIABLE_VALUE_TYPES.has(token.valueType) && token.valueType !== "list") issue(issues, "error", "EXPRESSION_VARIABLE_BAD_VALUETYPE", "Variable token valueType must be number, text, date, boolean, string, user, or list.", `${tokenPath}.valueType`, { valueType: token.valueType });
   const extra = Object.keys(token).filter((key) => !required.includes(key));
   if (extra.length) issue(issues, "warning", "EXPRESSION_VARIABLE_EXTRA_PROPERTIES", "Training reference says variable tokens should not include extra properties.", tokenPath, { properties: extra });
   return issues;
@@ -176,11 +176,23 @@ function validateFunctionToken(token, context = {}) {
       param.forEach((child, childIndex) => validateExpressionToken(child, { references, issues, path: `${tokenPath}.params[${index}][${childIndex}]` }));
     } else if (isObject(param)) {
       validateExpressionToken(param, { references, issues, path: `${tokenPath}.params[${index}]` });
-    } else {
+    } else if (!isReferenceBackedPrimitiveParam(token.func, index, param)) {
       issue(issues, "warning", "EXPRESSION_FUNCTION_PRIMITIVE_PARAM", "Function param is a primitive value. Keep only when export-backed for this function.", `${tokenPath}.params[${index}]`, { func: token.func, valueType: typeof param });
     }
   });
   return issues;
+}
+
+// Params whose primitive form is backed by the function knowledge base callFormat
+// (dateDiff: [[], [], "year", []]; datePicker: [[], true]). Other primitives still warn.
+const REFERENCE_BACKED_PRIMITIVE_PARAMS = {
+  dateDiff: { 2: value => typeof value === "string" && ["year", "month", "day", "hour", "minute", "second"].includes(value) },
+  datePicker: { 1: value => typeof value === "boolean" },
+};
+
+function isReferenceBackedPrimitiveParam(func, index, value) {
+  const accepts = REFERENCE_BACKED_PRIMITIVE_PARAMS[func] && REFERENCE_BACKED_PRIMITIVE_PARAMS[func][index];
+  return Boolean(accepts && accepts(value));
 }
 
 function validateDateDiffParams(token, context = {}) {

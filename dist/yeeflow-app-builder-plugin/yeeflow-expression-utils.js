@@ -176,11 +176,23 @@ function validateFunctionToken(token, context = {}) {
       param.forEach((child, childIndex) => validateExpressionToken(child, { references, issues, path: `${tokenPath}.params[${index}][${childIndex}]` }));
     } else if (isObject(param)) {
       validateExpressionToken(param, { references, issues, path: `${tokenPath}.params[${index}]` });
-    } else {
+    } else if (!isReferenceBackedPrimitiveParam(token.func, index, param)) {
       issue(issues, "warning", "EXPRESSION_FUNCTION_PRIMITIVE_PARAM", "Function param is a primitive value. Keep only when export-backed for this function.", `${tokenPath}.params[${index}]`, { func: token.func, valueType: typeof param });
     }
   });
   return issues;
+}
+
+// Params whose primitive form is backed by the function knowledge base callFormat
+// (dateDiff: [[], [], "year", []]; datePicker: [[], true]). Other primitives still warn.
+const REFERENCE_BACKED_PRIMITIVE_PARAMS = {
+  dateDiff: { 2: value => typeof value === "string" && ["year", "month", "day", "hour", "minute", "second"].includes(value) },
+  datePicker: { 1: value => typeof value === "boolean" },
+};
+
+function isReferenceBackedPrimitiveParam(func, index, value) {
+  const accepts = REFERENCE_BACKED_PRIMITIVE_PARAMS[func] && REFERENCE_BACKED_PRIMITIVE_PARAMS[func][index];
+  return Boolean(accepts && accepts(value));
 }
 
 function validateDateDiffParams(token, context = {}) {
