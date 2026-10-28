@@ -38,7 +38,7 @@ Status of each path for the 1.20.1 release, as of 2026-10-28. "Verified" means o
 | Same local install, then Grok Bot | **Not observed to sync.** Grok Bot **Your plugins** did not show the plugin after this local install. |
 | **Cursor personal marketplace**: Customize → Plugins → Browse Marketplace → Add Marketplace → Import from GitHub | **Not verified.** Open Cursor bug [cursor/plugins#452](https://github.com/cursor/plugins/issues/452): the import finds 0 plugins with no error. One vendor reports success after linking GitHub under Cursor dashboard → Integrations. Not tried by Yeeflow yet. |
 | **Cursor team marketplace** (Teams/Enterprise): Dashboard → Plugins & MCPs → Add Marketplace → Import from Repo | **Not verified.** Documented by Cursor. Grok Bot is documented to follow the team's connector policy; the docs do not say whether team-marketplace skills appear in Grok Bot. Requires a Teams or Enterprise plan. |
-| **Grok Bot development connection**: custom MCP server plus skills the Bot loads itself | **MCP part verified** (OAuth, read calls). Skills not yet loaded by Grok Bot. This is not a plugin install; see below. |
+| **Grok Bot development connection**: custom MCP server plus released skills read through a private loader skill | **Ran 2026-10-28** ([results](grok-bot-dev-connection-validation-2026-10-28.md)): OAuth reads, released skill loading, bundled scripts and a declined write passed in limited form. Direct private-skill registration was not byte-identical and carries no bundled files. This is not a plugin install. |
 | Grok Bot marketplace (Connect apps → search) | The public listing is not available until approved. Private distribution paths remain unverified. |
 
 ### Grok Bot development connection (pre-listing in-app test)

@@ -4,12 +4,12 @@ Plugin: `yeeflow` · Version: 1.20.1 · Publisher: Yeeflow (support@yeeflow.com)
 Components: 31 skills, 1 remote MCP server (`yeeflow_mcp`, `https://api.yeeflow.com/v1/mcp`, Streamable HTTP, OAuth).
 The plugin bundles no credentials, no hooks and no local MCP server.
 
-> Publisher checklist before submitting: choose the reviewer account option in section 1, replace every `[ ]` placeholder, and send any password through the channel the reviewer asks for. Never commit it here. Include the "Publisher testing so far" paragraph below, kept in line with [the validation record](grok-bot-cursor-validation-2026-10-28.md).
+> Publisher checklist before submitting: choose the reviewer account option in section 1, replace every `[ ]` placeholder, and send any password through the channel the reviewer asks for. Never commit it here. Include the "Publisher testing so far" paragraph below, kept in line with the validation records ([Cursor and setup](grok-bot-cursor-validation-2026-10-28.md), [Grok Bot development connection](grok-bot-dev-connection-validation-2026-10-28.md)).
 
 **Publisher testing so far (include in the submission):**
 
 ```text
-Publisher testing before listing: The released 1.20.1 package was installed as a Cursor local plugin. Cursor loaded the plugin, 31 skills and its own yeeflow_mcp connection; plugin OAuth completed; current_user_get, get_profile and workspace_list succeeded through the plugin connection; skills were invoked in safe dry-run mode (no live writes). In Grok Bot, the same MCP server was connected as a custom MCP server with OAuth and read calls succeeded. We could not install the unlisted plugin in Grok Bot from an individual account, so Grok Bot plugin installation and skill loading are untested by us. Full live business workflows were not run.
+Publisher testing before listing: The released 1.20.1 package was installed as a Cursor local plugin. Cursor loaded the plugin, 31 skills and its own yeeflow_mcp connection; plugin OAuth completed; current_user_get, get_profile and workspace_list succeeded through the plugin connection; skills were invoked in safe dry-run mode (no live writes). We could not install the unlisted plugin in Grok Bot from an individual account. Instead we ran a Grok Bot development connection: the same MCP server as a custom MCP server (OAuth and read calls succeeded) plus the checksum-verified released skill files read through a private loader skill. In that setup the application builder produced a plan without writes, the feature configuration guide ran its bundled helper, the expression validator ran, and a requested write paused for confirmation and was declined. Grok Bot plugin installation, the remaining skills and full live business workflows are untested by us.
 ```
 
 ---
