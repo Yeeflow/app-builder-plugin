@@ -258,7 +258,9 @@
     "test:feature-configuration-guide": "node scripts/test-feature-configuration-guide.mjs",
     "test:document-workflow-patterns": "node --test scripts/test-document-workflow-patterns.mjs",
     "test:document-workflow-distribution": "node scripts/test-document-workflow-distribution.mjs",
-    "build:plugin:directory": "node scripts/build-plugin-archive.mjs --profile directory"
+    "build:plugin:directory": "node scripts/build-plugin-archive.mjs --profile directory",
+    "build:claude-directory": "node scripts/build-claude-directory.mjs",
+    "test:claude-directory": "node scripts/test-claude-directory.mjs"
   },
   "devDependencies": {
     "typescript": "5.7.3"
