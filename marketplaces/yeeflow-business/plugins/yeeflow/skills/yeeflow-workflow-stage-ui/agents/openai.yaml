@@ -1,0 +1,4 @@
+interface:
+  display_name: "Yeeflow Workflow Stage UI"
+  short_description: "Actual task progress and phase-specific form sections"
+  default_prompt: "Use $yeeflow-workflow-stage-ui to bind native progress and task section defaults to my existing workflow."

@@ -1,0 +1,3070 @@
+{
+  "source": "expression training data generator_2.txt",
+  "version": "2026-05-15",
+  "purpose": "Rich function knowledge base for generation guidance. The first-pass normalized functions file remains the validator source of truth for allowed runtime function names and parameter ranges.",
+  "summary": {
+    "functionEntries": 54,
+    "baselineFunctionCount": 55,
+    "categories": [
+      "array",
+      "conversion",
+      "date",
+      "logic",
+      "math",
+      "object",
+      "string",
+      "system",
+      "validation"
+    ],
+    "missingFromKnowledgeBase": [
+      "strIndex"
+    ],
+    "presentInKnowledgeBaseButMissingFromBaseline": []
+  },
+  "functions": {
+    "UniqueID": {
+      "name": "UniqueID",
+      "category": "system",
+      "bilingualDescription": "Generate a unique id. Typically used to create unique identifiers for records, such as order numbers, user IDs, etc.",
+      "callFormat": {
+        "type": "func",
+        "func": "UniqueID",
+        "params": []
+      },
+      "parameters": [],
+      "returnType": "string",
+      "examples": [
+        {
+          "description": "Generate a unique ID",
+          "expression": "UniqueID()"
+        }
+      ],
+      "businessScenarios": [
+        "Generate order number",
+        "Create user ID",
+        "Unique identifier generation"
+      ],
+      "keywords": [
+        "unique ID",
+        "generate ID",
+        "unique identifier"
+      ],
+      "generationNotes": [
+        "Use the exact function name shown in name. Convert example expression strings into Yeeflow JSON token arrays before generation."
+      ],
+      "safetyNotes": [],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ]
+    },
+    "abs": {
+      "name": "abs",
+      "category": "math",
+      "bilingualDescription": "Returns the absolute value of the parameter. If the parameter is negative, returns its positive value; if positive or zero, returns the original value.",
+      "callFormat": {
+        "type": "func",
+        "func": "abs",
+        "params": [
+          []
+        ]
+      },
+      "parameters": [
+        {
+          "index": 0,
+          "name": "number",
+          "type": "number",
+          "description": "The number for which to calculate the absolute value, can be integer or decimal"
+        }
+      ],
+      "returnType": "number",
+      "examples": [
+        {
+          "description": "Calculate the absolute value of -5",
+          "expression": "abs(-5)"
+        }
+      ],
+      "businessScenarios": [
+        "Calculate amount difference",
+        "Get distance absolute value",
+        "Statistical fluctuation range"
+      ],
+      "keywords": [
+        "absolute value",
+        "abs",
+        "positive value",
+        "magnitude"
+      ],
+      "generationNotes": [
+        "Use the exact function name shown in name. Convert example expression strings into Yeeflow JSON token arrays before generation."
+      ],
+      "safetyNotes": [],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ]
+    },
+    "arrayAverage": {
+      "name": "arrayAverage",
+      "category": "array",
+      "bilingualDescription": "Calculate the average value of an array. If array elements are objects, use column parameter to specify the property for calculation. Empty values are excluded from calculation.",
+      "callFormat": {
+        "type": "func",
+        "func": "arrayAverage",
+        "params": [
+          [],
+          [],
+          [],
+          []
+        ]
+      },
+      "parameters": [
+        {
+          "index": 0,
+          "name": "list",
+          "type": "array",
+          "description": "Array variable containing elements to calculate average"
+        },
+        {
+          "index": 1,
+          "name": "column",
+          "type": "string",
+          "description": "Optional, property name in object array for calculation"
+        },
+        {
+          "index": 2,
+          "name": "filterColumn",
+          "type": "string",
+          "description": "Optional, filter column name in object array"
+        },
+        {
+          "index": 3,
+          "name": "filterValue",
+          "type": "any",
+          "description": "Optional, only objects with filterColumn property equal to this value are included"
+        }
+      ],
+      "returnType": "number",
+      "examples": [
+        {
+          "description": "Calculate average score of students, only for math subject",
+          "expression": "arrayAverage(scores, 'score', 'subject', 'Mathematics')"
+        }
+      ],
+      "businessScenarios": [
+        "Calculate average score",
+        "Statistical average sales",
+        "Calculate average response time"
+      ],
+      "keywords": [
+        "array average",
+        "average",
+        "average calculation",
+        "mean"
+      ],
+      "generationNotes": [
+        "Use the exact function name shown in name. Convert example expression strings into Yeeflow JSON token arrays before generation."
+      ],
+      "safetyNotes": [],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ]
+    },
+    "arrayConcat": {
+      "name": "arrayConcat",
+      "category": "array",
+      "bilingualDescription": "Returns a new array containing all elements of the two given arrays. Used to merge multiple arrays.",
+      "callFormat": {
+        "type": "func",
+        "func": "arrayConcat",
+        "params": [
+          [],
+          []
+        ]
+      },
+      "parameters": [
+        {
+          "index": 0,
+          "name": "arr1",
+          "type": "array",
+          "description": "First array, its elements will appear at the front of the new array"
+        },
+        {
+          "index": 1,
+          "name": "arr2",
+          "type": "array",
+          "description": "Second array, its elements will appear at the end of the new array"
+        }
+      ],
+      "returnType": "array",
+      "examples": [
+        {
+          "description": "Merge two student list arrays",
+          "expression": "arrayConcat(class1Students, class2Students)"
+        }
+      ],
+      "businessScenarios": [
+        "Merge order lists",
+        "Concatenate multiple department employee lists",
+        "Combine product categories"
+      ],
+      "keywords": [
+        "array concat",
+        "concatenate arrays",
+        "array join"
+      ],
+      "generationNotes": [
+        "Use the exact function name shown in name. Convert example expression strings into Yeeflow JSON token arrays before generation."
+      ],
+      "safetyNotes": [],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ]
+    },
+    "arrayCount": {
+      "name": "arrayCount",
+      "category": "array",
+      "bilingualDescription": "Count items in an array. If array elements are objects, use column parameter to specify the property for calculation. Empty values are excluded from counting.",
+      "callFormat": {
+        "type": "func",
+        "func": "arrayCount",
+        "params": [
+          [],
+          [],
+          [],
+          []
+        ]
+      },
+      "parameters": [
+        {
+          "index": 0,
+          "name": "list",
+          "type": "array",
+          "description": "Array variable containing elements to count"
+        },
+        {
+          "index": 1,
+          "name": "column",
+          "type": "string",
+          "description": "Optional, property name in object array for counting"
+        },
+        {
+          "index": 2,
+          "name": "filterColumn",
+          "type": "string",
+          "description": "Optional, filter column name in object array"
+        },
+        {
+          "index": 3,
+          "name": "filterValue",
+          "type": "any",
+          "description": "Optional, only objects with filterColumn property equal to this value are counted"
+        }
+      ],
+      "returnType": "number",
+      "examples": [
+        {
+          "description": "Count number of students with math score greater than 60",
+          "expression": "arrayCount(students, 'score', 'subject', 'Mathematics')"
+        }
+      ],
+      "businessScenarios": [
+        "Count order quantity",
+        "Calculate number of employees",
+        "Count product types"
+      ],
+      "keywords": [
+        "array count",
+        "element count",
+        "count items"
+      ],
+      "generationNotes": [
+        "Use the exact function name shown in name. Convert example expression strings into Yeeflow JSON token arrays before generation."
+      ],
+      "safetyNotes": [],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ]
+    },
+    "arrayIndex": {
+      "name": "arrayIndex",
+      "category": "array",
+      "bilingualDescription": "Locate the position of a value in array, return index if found, otherwise -1. Used to determine if an element exists in the array.",
+      "callFormat": {
+        "type": "func",
+        "func": "arrayIndex",
+        "params": [
+          [],
+          []
+        ]
+      },
+      "parameters": [
+        {
+          "index": 0,
+          "name": "array",
+          "type": "array",
+          "description": "Array expression to search in"
+        },
+        {
+          "index": 1,
+          "name": "value",
+          "type": "any",
+          "description": "Value expression to lookup"
+        }
+      ],
+      "returnType": "number",
+      "examples": [
+        {
+          "description": "Find position of 'Alex Smith' in student array",
+          "expression": "arrayIndex(students, 'Alex Smith')"
+        }
+      ],
+      "businessScenarios": [
+        "Find product position in list",
+        "Check if username exists",
+        "Locate order index"
+      ],
+      "keywords": [
+        "array index",
+        "find position",
+        "element search"
+      ],
+      "generationNotes": [
+        "Use the exact function name shown in name. Convert example expression strings into Yeeflow JSON token arrays before generation."
+      ],
+      "safetyNotes": [],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ]
+    },
+    "arrayMax": {
+      "name": "arrayMax",
+      "category": "array",
+      "bilingualDescription": "Calculate the max value of an array. If array elements are objects, use column parameter to specify the property for calculation. Empty values are excluded from calculation.",
+      "callFormat": {
+        "type": "func",
+        "func": "arrayMax",
+        "params": [
+          [],
+          [],
+          [],
+          []
+        ]
+      },
+      "parameters": [
+        {
+          "index": 0,
+          "name": "list",
+          "type": "array",
+          "description": "Array variable containing elements to find maximum value"
+        },
+        {
+          "index": 1,
+          "name": "column",
+          "type": "string",
+          "description": "Optional, property name in object array for finding maximum value"
+        },
+        {
+          "index": 2,
+          "name": "filterColumn",
+          "type": "string",
+          "description": "Optional, filter column name in object array"
+        },
+        {
+          "index": 3,
+          "name": "filterValue",
+          "type": "any",
+          "description": "Optional, only objects with filterColumn property equal to this value are included"
+        }
+      ],
+      "returnType": "number",
+      "examples": [
+        {
+          "description": "Find highest score in student array, only for math subject",
+          "expression": "arrayMax(scores, 'score', 'subject', 'Mathematics')"
+        }
+      ],
+      "businessScenarios": [
+        "Find highest sales amount",
+        "Find maximum age",
+        "Calculate maximum temperature"
+      ],
+      "keywords": [
+        "array max",
+        "maximum element",
+        "maximum value"
+      ],
+      "generationNotes": [
+        "Use the exact function name shown in name. Convert example expression strings into Yeeflow JSON token arrays before generation."
+      ],
+      "safetyNotes": [],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ]
+    },
+    "arrayMin": {
+      "name": "arrayMin",
+      "category": "array",
+      "bilingualDescription": "Calculate the min value of an array. If array elements are objects, use column parameter to specify the property for calculation. Empty values are excluded from calculation.",
+      "callFormat": {
+        "type": "func",
+        "func": "arrayMin",
+        "params": [
+          [],
+          [],
+          [],
+          []
+        ]
+      },
+      "parameters": [
+        {
+          "index": 0,
+          "name": "list",
+          "type": "array",
+          "description": "Array variable containing elements to find minimum value"
+        },
+        {
+          "index": 1,
+          "name": "column",
+          "type": "string",
+          "description": "Optional, property name in object array for finding minimum value"
+        },
+        {
+          "index": 2,
+          "name": "filterColumn",
+          "type": "string",
+          "description": "Optional, filter column name in object array"
+        },
+        {
+          "index": 3,
+          "name": "filterValue",
+          "type": "any",
+          "description": "Optional, only objects with filterColumn property equal to this value are included"
+        }
+      ],
+      "returnType": "number",
+      "examples": [
+        {
+          "description": "Find lowest score in student array, only for math subject",
+          "expression": "arrayMin(scores, 'score', 'subject', 'Mathematics')"
+        }
+      ],
+      "businessScenarios": [
+        "Find lowest price",
+        "Find minimum age",
+        "Calculate minimum temperature"
+      ],
+      "keywords": [
+        "array min",
+        "minimum element",
+        "minimum value"
+      ],
+      "generationNotes": [
+        "Use the exact function name shown in name. Convert example expression strings into Yeeflow JSON token arrays before generation."
+      ],
+      "safetyNotes": [],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ]
+    },
+    "arraySum": {
+      "name": "arraySum",
+      "category": "array",
+      "bilingualDescription": "Sum the values in an array. If array elements are objects, use column parameter to specify the property to sum. Empty values are excluded from calculation.",
+      "callFormat": {
+        "type": "func",
+        "func": "arraySum",
+        "params": [
+          [],
+          [],
+          [],
+          []
+        ]
+      },
+      "parameters": [
+        {
+          "index": 0,
+          "name": "list",
+          "type": "array",
+          "description": "Array variable containing elements to sum"
+        },
+        {
+          "index": 1,
+          "name": "column",
+          "type": "string",
+          "description": "Optional, property name in object array to sum"
+        },
+        {
+          "index": 2,
+          "name": "filterColumn",
+          "type": "string",
+          "description": "Optional, filter column name in object array"
+        },
+        {
+          "index": 3,
+          "name": "filterValue",
+          "type": "any",
+          "description": "Optional, only objects with filterColumn property equal to this value are included"
+        }
+      ],
+      "returnType": "number",
+      "examples": [
+        {
+          "description": "Calculate sum of all math scores in student array",
+          "expression": "arraySum(scores, 'score', 'subject', 'Mathematics')"
+        }
+      ],
+      "businessScenarios": [
+        "Calculate total sales amount",
+        "Count total number of people",
+        "Sum calculation"
+      ],
+      "keywords": [
+        "array sum",
+        "total sum",
+        "summation"
+      ],
+      "generationNotes": [
+        "Use the exact function name shown in name. Convert example expression strings into Yeeflow JSON token arrays before generation."
+      ],
+      "safetyNotes": [],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ]
+    },
+    "ceil": {
+      "name": "ceil",
+      "category": "math",
+      "bilingualDescription": "Returns the smallest integer value not less than the parameter, i.e., rounds up. Commonly used for calculating complete unit quantities.",
+      "callFormat": {
+        "type": "func",
+        "func": "ceil",
+        "params": [
+          []
+        ]
+      },
+      "parameters": [
+        {
+          "index": 0,
+          "name": "number",
+          "type": "number",
+          "description": "The number to round up"
+        }
+      ],
+      "returnType": "integer",
+      "examples": [
+        {
+          "description": "Calculate the result of rounding 3.2 up",
+          "expression": "ceil(3.2)"
+        }
+      ],
+      "businessScenarios": [
+        "Calculate minimum packaging quantity",
+        "Determine minimum required resources",
+        "Round up calculation"
+      ],
+      "keywords": [
+        "ceil",
+        "ceiling",
+        "round up"
+      ],
+      "generationNotes": [
+        "Use the exact function name shown in name. Convert example expression strings into Yeeflow JSON token arrays before generation."
+      ],
+      "safetyNotes": [],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ]
+    },
+    "concat": {
+      "name": "concat",
+      "category": "string",
+      "bilingualDescription": "Concatenates multiple strings into a single string. Can concatenate any number of arguments, commonly used for concatenating names, addresses, generating complete descriptions, etc.",
+      "callFormat": {
+        "type": "func",
+        "func": "concat",
+        "params": [
+          [],
+          [],
+          [],
+          []
+        ]
+      },
+      "parameters": [
+        {
+          "index": 0,
+          "name": "s1",
+          "type": "string",
+          "description": "First string to concatenate"
+        },
+        {
+          "index": 1,
+          "name": "s2",
+          "type": "string",
+          "description": "Optional, second string to concatenate"
+        },
+        {
+          "index": 2,
+          "name": "s3",
+          "type": "string",
+          "description": "Optional, third string to concatenate"
+        },
+        {
+          "index": 3,
+          "name": "s4",
+          "type": "string",
+          "description": "Optional, fourth string to concatenate"
+        }
+      ],
+      "returnType": "string",
+      "examples": [
+        {
+          "description": "Concatenate last name and first name into full name",
+          "expression": "concat('Smith', 'Alex')"
+        }
+      ],
+      "businessScenarios": [
+        "Concatenate customer full name",
+        "Generate complete address",
+        "Combine product code and name"
+      ],
+      "keywords": [
+        "string concatenation",
+        "concatenate",
+        "join"
+      ],
+      "generationNotes": [
+        "Use the exact function name shown in name. Convert example expression strings into Yeeflow JSON token arrays before generation."
+      ],
+      "safetyNotes": [],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ]
+    },
+    "currentUser": {
+      "name": "currentUser",
+      "category": "system",
+      "bilingualDescription": "Returns ID of current user. Used to get current logged-in user's identity, commonly used for permission control and personalized display.",
+      "callFormat": {
+        "type": "func",
+        "func": "currentUser",
+        "params": []
+      },
+      "parameters": [],
+      "returnType": "string",
+      "examples": [
+        {
+          "description": "Get current user's ID",
+          "expression": "currentUser()"
+        }
+      ],
+      "businessScenarios": [
+        "Record operating user",
+        "Permission verification",
+        "Personalized display"
+      ],
+      "keywords": [
+        "current user",
+        "user ID",
+        "logged-in user"
+      ],
+      "generationNotes": [
+        "Use the exact function name shown in name. Convert example expression strings into Yeeflow JSON token arrays before generation."
+      ],
+      "safetyNotes": [],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ]
+    },
+    "date": {
+      "name": "date",
+      "category": "date",
+      "bilingualDescription": "Create a system-formatted date string based on year, month, day, hour, minute, and second parameters. Can create specific date and time.",
+      "callFormat": {
+        "type": "func",
+        "func": "date",
+        "params": [
+          [],
+          [],
+          [],
+          [],
+          [],
+          []
+        ]
+      },
+      "parameters": [
+        {
+          "index": 0,
+          "name": "year",
+          "type": "number",
+          "description": "Year, four-digit number"
+        },
+        {
+          "index": 1,
+          "name": "month",
+          "type": "number",
+          "description": "Month, 1-12"
+        },
+        {
+          "index": 2,
+          "name": "day",
+          "type": "number",
+          "description": "Day, 1-31"
+        },
+        {
+          "index": 3,
+          "name": "hour",
+          "type": "number",
+          "description": "Optional, hour, 0-23"
+        },
+        {
+          "index": 4,
+          "name": "minute",
+          "type": "number",
+          "description": "Optional, minute, 0-59"
+        },
+        {
+          "index": 5,
+          "name": "second",
+          "type": "number",
+          "description": "Optional, second, 0-59"
+        }
+      ],
+      "returnType": "date",
+      "examples": [
+        {
+          "description": "Create date for January 1, 2024 at 12:30",
+          "expression": "date(2024, 1, 1, 12, 30, 0)"
+        }
+      ],
+      "businessScenarios": [
+        "Create specific date",
+        "Generate birth date",
+        "Set deadline time"
+      ],
+      "keywords": [
+        "create date",
+        "date construction",
+        "date generation"
+      ],
+      "generationNotes": [
+        "Use the exact function name shown in name. Convert example expression strings into Yeeflow JSON token arrays before generation."
+      ],
+      "safetyNotes": [],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ]
+    },
+    "dateAdd": {
+      "name": "dateAdd",
+      "category": "date",
+      "bilingualDescription": "Add or subtract the specified time interval from the date. Can add year, month, day, hour, minute, second units, commonly used to calculate future or past dates.",
+      "callFormat": {
+        "type": "func",
+        "func": "dateAdd",
+        "params": [
+          [],
+          [],
+          []
+        ]
+      },
+      "parameters": [
+        {
+          "index": 0,
+          "name": "date",
+          "type": "date/string",
+          "description": "Original time or time expression"
+        },
+        {
+          "index": 1,
+          "name": "type",
+          "type": "string",
+          "description": "Time interval type to add, including year, month, day, hour, minute, second"
+        },
+        {
+          "index": 2,
+          "name": "addedValue",
+          "type": "number",
+          "description": "Value to add to original time, can be positive (future) or negative (past)"
+        }
+      ],
+      "returnType": "date",
+      "examples": [
+        {
+          "description": "Calculate date 3 days before current time",
+          "expression": "dateAdd(now(), 'day', -3)"
+        }
+      ],
+      "businessScenarios": [
+        "Calculate due date",
+        "Schedule meeting time",
+        "Calculate project deadline"
+      ],
+      "keywords": [
+        "date add/subtract",
+        "time calculation",
+        "date offset"
+      ],
+      "generationNotes": [
+        "Use the exact function name shown in name. Convert example expression strings into Yeeflow JSON token arrays before generation."
+      ],
+      "safetyNotes": [],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ]
+    },
+    "dateDiff": {
+      "name": "dateDiff",
+      "category": "date",
+      "bilingualDescription": "Calculate the number of time intervals between two dates. Can specify units like year, month, day, hour, minute, second. Returns negative number if first date is later than second date.",
+      "callFormat": {
+        "type": "func",
+        "func": "dateDiff",
+        "params": [
+          [],
+          [],
+          "year",
+          []
+        ]
+      },
+      "parameters": [
+        {
+          "index": 0,
+          "name": "date1",
+          "type": "date/string",
+          "description": "First date or time expression"
+        },
+        {
+          "index": 1,
+          "name": "date2",
+          "type": "date/string",
+          "description": "Second date or time expression for comparison"
+        },
+        {
+          "index": 2,
+          "name": "type",
+          "type": "string",
+          "description": "Time interval type, including year, month, day, hour, minute, second"
+        },
+        {
+          "index": 3,
+          "name": "precise",
+          "type": "boolean",
+          "description": "Optional, if true returns floating point number, otherwise returns integer (rounded down)"
+        }
+      ],
+      "returnType": "number",
+      "examples": [
+        {
+          "description": "Calculate day difference between current time and January 1, 2024",
+          "expression": "dateDiff(now(), '2024-01-01', 'day', true)"
+        }
+      ],
+      "businessScenarios": [
+        "Calculate age/work years",
+        "Statistical order processing time",
+        "Calculate project duration"
+      ],
+      "keywords": [
+        "date difference",
+        "time interval",
+        "date comparison"
+      ],
+      "generationNotes": [
+        "Use the exact function name shown in name. Convert example expression strings into Yeeflow JSON token arrays before generation.",
+        "For generated token arrays, pass the date unit parameter as a raw lowercase string such as \"year\" or \"day\". Do not wrap it as [{type:\"str\",value:\"Year\"}], which renders as formcraft.formula.datetype.[object Object]."
+      ],
+      "safetyNotes": [],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ]
+    },
+    "dateFormat": {
+      "name": "dateFormat",
+      "category": "date",
+      "bilingualDescription": "Format the given date/time according to specified format. Supports various format symbols, such as YYYY for four-digit year, MM for month, etc.",
+      "callFormat": {
+        "type": "func",
+        "func": "dateFormat",
+        "params": [
+          [],
+          []
+        ]
+      },
+      "parameters": [
+        {
+          "index": 0,
+          "name": "date",
+          "type": "date/string",
+          "description": "Date/time string or expression"
+        },
+        {
+          "index": 1,
+          "name": "format",
+          "type": "string",
+          "description": "Format string, e.g., 'YYYY-MM-DD HH:mm:ss'"
+        }
+      ],
+      "returnType": "string",
+      "examples": [
+        {
+          "description": "Format current time as '2024-01-01 12:30:00'",
+          "expression": "dateFormat(now(), 'YYYY-MM-DD HH:mm:ss')"
+        }
+      ],
+      "businessScenarios": [
+        "Date display formatting",
+        "Generate report timestamp",
+        "Export data date format"
+      ],
+      "keywords": [
+        "date formatting",
+        "time formatting",
+        "format conversion"
+      ],
+      "generationNotes": [
+        "Use the exact function name shown in name. Convert example expression strings into Yeeflow JSON token arrays before generation."
+      ],
+      "safetyNotes": [],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ]
+    },
+    "datePart": {
+      "name": "datePart",
+      "category": "date",
+      "bilingualDescription": "Extract specified part from date, such as year, month, day, hour, minute, second, etc. Used to get specific components of a date.",
+      "callFormat": {
+        "type": "func",
+        "func": "datePart",
+        "params": [
+          [],
+          []
+        ]
+      },
+      "parameters": [
+        {
+          "index": 0,
+          "name": "date",
+          "type": "date/string",
+          "description": "Original date or date expression"
+        },
+        {
+          "index": 1,
+          "name": "type",
+          "type": "string",
+          "description": "Date part to extract, including year, quarter, month, dayofweek, day, hour, minute, second"
+        }
+      ],
+      "returnType": "number",
+      "examples": [
+        {
+          "description": "Get month of current date",
+          "expression": "datePart(now(), 'month')"
+        }
+      ],
+      "businessScenarios": [
+        "Extract birth year",
+        "Get order month",
+        "Analyze time period"
+      ],
+      "keywords": [
+        "date part",
+        "extract date",
+        "get year/month/day"
+      ],
+      "generationNotes": [
+        "Use the exact function name shown in name. Convert example expression strings into Yeeflow JSON token arrays before generation."
+      ],
+      "safetyNotes": [],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ]
+    },
+    "datePicker": {
+      "name": "datePicker",
+      "category": "date",
+      "bilingualDescription": "Select the date and time. Can specify default selected date and whether to show time through parameters.",
+      "callFormat": {
+        "type": "func",
+        "func": "datePicker",
+        "params": [
+          [],
+          true
+        ]
+      },
+      "parameters": [
+        {
+          "index": 0,
+          "name": "date",
+          "type": "date/string",
+          "description": "Date to select, can be date string or expression"
+        },
+        {
+          "index": 1,
+          "name": "showTime",
+          "type": "boolean",
+          "description": "Whether to show time selection, true shows, false does not show"
+        }
+      ],
+      "returnType": "date",
+      "examples": [
+        {
+          "description": "Select date and show time",
+          "expression": "datePicker('2024-01-01', true)"
+        }
+      ],
+      "businessScenarios": [
+        "Date picker",
+        "Appointment time selection",
+        "Deadline setting"
+      ],
+      "keywords": [
+        "date picker",
+        "time selection",
+        "datetime picker"
+      ],
+      "generationNotes": [
+        "Use the exact function name shown in name. Convert example expression strings into Yeeflow JSON token arrays before generation."
+      ],
+      "safetyNotes": [
+        "callFormat contains a primitive placeholder; generate primitive params only when export-backed for the target context."
+      ],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ]
+    },
+    "day": {
+      "name": "day",
+      "category": "date",
+      "bilingualDescription": "Returns the day of the month for the specified date (1-31). Used to extract the day part of a date.",
+      "callFormat": {
+        "type": "func",
+        "func": "day",
+        "params": [
+          []
+        ]
+      },
+      "parameters": [
+        {
+          "index": 0,
+          "name": "date",
+          "type": "date/string",
+          "description": "Date expression to extract day from"
+        }
+      ],
+      "returnType": "number",
+      "examples": [
+        {
+          "description": "Get which day of the month is the current date",
+          "expression": "day(now())"
+        }
+      ],
+      "businessScenarios": [
+        "Calculate billing date",
+        "Statistical daily data",
+        "Date analysis"
+      ],
+      "keywords": [
+        "day",
+        "day number",
+        "date extraction"
+      ],
+      "generationNotes": [
+        "Use the exact function name shown in name. Convert example expression strings into Yeeflow JSON token arrays before generation."
+      ],
+      "safetyNotes": [],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ]
+    },
+    "fixed": {
+      "name": "fixed",
+      "category": "math",
+      "bilingualDescription": "Truncate number to specified decimal places. If digit is 0, result has no decimal point or fractional part. Digit can be negative to cause specified digits left of decimal point to become zero.",
+      "callFormat": {
+        "type": "func",
+        "func": "fixed",
+        "params": [
+          [],
+          []
+        ]
+      },
+      "parameters": [
+        {
+          "index": 0,
+          "name": "number",
+          "type": "number",
+          "description": "The number to truncate"
+        },
+        {
+          "index": 1,
+          "name": "digit",
+          "type": "number",
+          "description": "Number of decimal places to keep, can be positive, 0, or negative"
+        }
+      ],
+      "returnType": "number",
+      "examples": [
+        {
+          "description": "Truncate 3.14159 to two decimal places",
+          "expression": "fixed(3.14159, 2)"
+        }
+      ],
+      "businessScenarios": [
+        "Amount formatting",
+        "Data precision control",
+        "Report numerical processing"
+      ],
+      "keywords": [
+        "truncate decimal",
+        "keep decimal places",
+        "number formatting"
+      ],
+      "generationNotes": [
+        "Use the exact function name shown in name. Convert example expression strings into Yeeflow JSON token arrays before generation."
+      ],
+      "safetyNotes": [],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ]
+    },
+    "floor": {
+      "name": "floor",
+      "category": "math",
+      "bilingualDescription": "Returns the largest integer value not greater than the parameter, i.e., rounds down. Commonly used to calculate complete unit quantities or remove decimal parts.",
+      "callFormat": {
+        "type": "func",
+        "func": "floor",
+        "params": [
+          []
+        ]
+      },
+      "parameters": [
+        {
+          "index": 0,
+          "name": "number",
+          "type": "number",
+          "description": "The number to round down"
+        }
+      ],
+      "returnType": "integer",
+      "examples": [
+        {
+          "description": "Calculate the result of rounding 3.9 down",
+          "expression": "floor(3.9)"
+        }
+      ],
+      "businessScenarios": [
+        "Calculate complete packaging quantity",
+        "Determine maximum available resources",
+        "Round down calculation"
+      ],
+      "keywords": [
+        "floor",
+        "floor function",
+        "round down"
+      ],
+      "generationNotes": [
+        "Use the exact function name shown in name. Convert example expression strings into Yeeflow JSON token arrays before generation."
+      ],
+      "safetyNotes": [],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ]
+    },
+    "formatNumber": {
+      "name": "formatNumber",
+      "category": "string",
+      "bilingualDescription": "Format a number and return a string. Can specify number of decimal places and whether to show thousand separator.",
+      "callFormat": {
+        "type": "func",
+        "func": "formatNumber",
+        "params": [
+          [],
+          [],
+          []
+        ]
+      },
+      "parameters": [
+        {
+          "index": 0,
+          "name": "expression",
+          "type": "number",
+          "description": "Numeric expression, the number to format"
+        },
+        {
+          "index": 1,
+          "name": "digit",
+          "type": "number",
+          "description": "Number of decimal places to keep"
+        },
+        {
+          "index": 2,
+          "name": "thousandths",
+          "type": "boolean/number",
+          "description": "Whether to show thousand separator, 1 for true, 0 for false"
+        }
+      ],
+      "returnType": "string",
+      "examples": [
+        {
+          "description": "Format 1234567.89 as string with thousand separator and two decimal places",
+          "expression": "formatNumber(1234567.89, 2, 1)"
+        }
+      ],
+      "businessScenarios": [
+        "Amount formatting display",
+        "Report number formatting",
+        "Data export formatting"
+      ],
+      "keywords": [
+        "number formatting",
+        "thousand separator",
+        "format number"
+      ],
+      "generationNotes": [
+        "Use the exact function name shown in name. Convert example expression strings into Yeeflow JSON token arrays before generation."
+      ],
+      "safetyNotes": [],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ]
+    },
+    "getAttr": {
+      "name": "getAttr",
+      "category": "object",
+      "bilingualDescription": "Gets the value at path of object. If the resolved value is undefined, the defaultValue is returned. Used for safely accessing nested object properties.",
+      "callFormat": {
+        "type": "func",
+        "func": "getAttr",
+        "params": [
+          [],
+          [],
+          []
+        ]
+      },
+      "parameters": [
+        {
+          "index": 0,
+          "name": "object",
+          "type": "object",
+          "description": "The object to query"
+        },
+        {
+          "index": 1,
+          "name": "path",
+          "type": "string",
+          "description": "The path of the property to get, e.g., 'user.address.city'"
+        },
+        {
+          "index": 2,
+          "name": "defaultValue",
+          "type": "any",
+          "description": "Optional, default value returned when path doesn't exist"
+        }
+      ],
+      "returnType": "any",
+      "examples": [
+        {
+          "description": "Get city property of address in user object, return 'Unknown' if doesn't exist",
+          "expression": "getAttr(user, 'address.city', 'Unknown')"
+        }
+      ],
+      "businessScenarios": [
+        "Safe access to object properties",
+        "Get configuration items",
+        "Process nested data"
+      ],
+      "keywords": [
+        "get attribute",
+        "object path",
+        "safe access"
+      ],
+      "generationNotes": [
+        "Use the exact function name shown in name. Convert example expression strings into Yeeflow JSON token arrays before generation."
+      ],
+      "safetyNotes": [],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ]
+    },
+    "hour": {
+      "name": "hour",
+      "category": "date",
+      "bilingualDescription": "Returns the hour for the specified time (0-23). Used to extract hour information from time.",
+      "callFormat": {
+        "type": "func",
+        "func": "hour",
+        "params": [
+          []
+        ]
+      },
+      "parameters": [
+        {
+          "index": 0,
+          "name": "time",
+          "type": "date/string",
+          "description": "Time expression to extract hour from"
+        }
+      ],
+      "returnType": "number",
+      "examples": [
+        {
+          "description": "Get hour of current time",
+          "expression": "hour(now())"
+        }
+      ],
+      "businessScenarios": [
+        "Analyze time period",
+        "Statistical hourly data",
+        "Time analysis"
+      ],
+      "keywords": [
+        "hour",
+        "time extraction",
+        "get hour"
+      ],
+      "generationNotes": [
+        "Use the exact function name shown in name. Convert example expression strings into Yeeflow JSON token arrays before generation."
+      ],
+      "safetyNotes": [],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ]
+    },
+    "iif": {
+      "name": "iif",
+      "category": "logic",
+      "bilingualDescription": "Returns one of two values depending on a condition evaluation. If condition is true returns first value, otherwise returns second value. Similar to if-else statement.",
+      "callFormat": {
+        "type": "func",
+        "func": "iif",
+        "params": [
+          [],
+          [],
+          []
+        ]
+      },
+      "parameters": [
+        {
+          "index": 0,
+          "name": "condition",
+          "type": "boolean",
+          "description": "Logical expression, condition to evaluate, result is true or false"
+        },
+        {
+          "index": 1,
+          "name": "then",
+          "type": "any",
+          "description": "Value returned when condition is true"
+        },
+        {
+          "index": 2,
+          "name": "else",
+          "type": "any",
+          "description": "Value returned when condition is false"
+        }
+      ],
+      "returnType": "any",
+      "examples": [
+        {
+          "description": "If score is greater than or equal to 60 return 'Pass', otherwise return 'Fail'",
+          "expression": "iif(score >= 60, 'Pass', 'Fail')"
+        }
+      ],
+      "businessScenarios": [
+        "Determine grade based on score",
+        "Determine customer level based on amount",
+        "Conditional discount calculation"
+      ],
+      "keywords": [
+        "conditional judgment",
+        "if else",
+        "ternary operation",
+        "iif"
+      ],
+      "generationNotes": [
+        "Use the exact function name shown in name. Convert example expression strings into Yeeflow JSON token arrays before generation."
+      ],
+      "safetyNotes": [],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ]
+    },
+    "isFalse": {
+      "name": "isFalse",
+      "category": "logic",
+      "bilingualDescription": "Determines if an expression is false. Returns true in following cases: null, 0, empty string, string 'false', string 'False', boolean false, otherwise returns false.",
+      "callFormat": {
+        "type": "func",
+        "func": "isFalse",
+        "params": [
+          []
+        ]
+      },
+      "parameters": [
+        {
+          "index": 0,
+          "name": "parameter",
+          "type": "any",
+          "description": "The expression to evaluate"
+        }
+      ],
+      "returnType": "boolean",
+      "examples": [
+        {
+          "description": "Determine if variable value is false",
+          "expression": "isFalse(value)"
+        }
+      ],
+      "businessScenarios": [
+        "Validate form input",
+        "Check switch status",
+        "Determine if condition is met"
+      ],
+      "keywords": [
+        "is false",
+        "false value judgment",
+        "boolean judgment"
+      ],
+      "generationNotes": [
+        "Use the exact function name shown in name. Convert example expression strings into Yeeflow JSON token arrays before generation."
+      ],
+      "safetyNotes": [],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ]
+    },
+    "isNullOrEmpty": {
+      "name": "isNullOrEmpty",
+      "category": "validation",
+      "bilingualDescription": "Checks if expression is NULL or empty string. Returns true if null or empty string, otherwise returns false. Used to verify if input is valid.",
+      "callFormat": {
+        "type": "func",
+        "func": "isNullOrEmpty",
+        "params": [
+          []
+        ]
+      },
+      "parameters": [
+        {
+          "index": 0,
+          "name": "checkExpression",
+          "type": "any",
+          "description": "The expression to be checked"
+        }
+      ],
+      "returnType": "boolean",
+      "examples": [
+        {
+          "description": "Check if username is empty or null",
+          "expression": "isNullOrEmpty(username)"
+        }
+      ],
+      "businessScenarios": [
+        "Form validation",
+        "Required field check",
+        "Data integrity validation"
+      ],
+      "keywords": [
+        "null check",
+        "empty string",
+        "validate input"
+      ],
+      "generationNotes": [
+        "Use the exact function name shown in name. Convert example expression strings into Yeeflow JSON token arrays before generation."
+      ],
+      "safetyNotes": [],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ]
+    },
+    "isTrue": {
+      "name": "isTrue",
+      "category": "logic",
+      "bilingualDescription": "Determines if an expression is true. Returns false in following cases: null, 0, empty string, string 'false', string 'False', boolean false, otherwise returns true.",
+      "callFormat": {
+        "type": "func",
+        "func": "isTrue",
+        "params": [
+          []
+        ]
+      },
+      "parameters": [
+        {
+          "index": 0,
+          "name": "parameter",
+          "type": "any",
+          "description": "The expression to evaluate"
+        }
+      ],
+      "returnType": "boolean",
+      "examples": [
+        {
+          "description": "Determine if variable value is true",
+          "expression": "isTrue(value)"
+        }
+      ],
+      "businessScenarios": [
+        "Validate form input",
+        "Check switch status",
+        "Determine if condition is met"
+      ],
+      "keywords": [
+        "is true",
+        "true value judgment",
+        "boolean judgment"
+      ],
+      "generationNotes": [
+        "Use the exact function name shown in name. Convert example expression strings into Yeeflow JSON token arrays before generation."
+      ],
+      "safetyNotes": [],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ]
+    },
+    "join": {
+      "name": "join",
+      "category": "string",
+      "bilingualDescription": "Returns a string by combining all the elements in the array with either commas or a specified separator string. If no separator is provided, commas are used.",
+      "callFormat": {
+        "type": "func",
+        "func": "join",
+        "params": [
+          [],
+          []
+        ]
+      },
+      "parameters": [
+        {
+          "index": 0,
+          "name": "array",
+          "type": "array",
+          "description": "Array variable containing elements to join"
+        },
+        {
+          "index": 1,
+          "name": "separator",
+          "type": "string",
+          "description": "Optional, separator, default is comma"
+        }
+      ],
+      "returnType": "string",
+      "examples": [
+        {
+          "description": "Join array ['apple','banana','orange'] with comma into string",
+          "expression": "join(fruits, ', ')"
+        }
+      ],
+      "businessScenarios": [
+        "Generate tag string",
+        "Concatenate options",
+        "Export CSV data"
+      ],
+      "keywords": [
+        "array join",
+        "join strings",
+        "join array"
+      ],
+      "generationNotes": [
+        "Use the exact function name shown in name. Convert example expression strings into Yeeflow JSON token arrays before generation."
+      ],
+      "safetyNotes": [],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ]
+    },
+    "left": {
+      "name": "left",
+      "category": "string",
+      "bilingualDescription": "Returns the leftmost specified number of characters from the string. Used to extract prefix part of string.",
+      "callFormat": {
+        "type": "func",
+        "func": "left",
+        "params": [
+          [],
+          []
+        ]
+      },
+      "parameters": [
+        {
+          "index": 0,
+          "name": "str",
+          "type": "string",
+          "description": "Original string"
+        },
+        {
+          "index": 1,
+          "name": "len",
+          "type": "number",
+          "description": "Number of characters to extract"
+        }
+      ],
+      "returnType": "string",
+      "examples": [
+        {
+          "description": "Extract first 5 characters from string 'Hello World'",
+          "expression": "left('Hello World', 5)"
+        }
+      ],
+      "businessScenarios": [
+        "Extract first letter of name",
+        "Extract product code prefix",
+        "Get string prefix"
+      ],
+      "keywords": [
+        "left extract",
+        "left characters",
+        "string extraction"
+      ],
+      "generationNotes": [
+        "Use the exact function name shown in name. Convert example expression strings into Yeeflow JSON token arrays before generation."
+      ],
+      "safetyNotes": [],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ]
+    },
+    "len": {
+      "name": "len",
+      "category": "string",
+      "bilingualDescription": "Returns the length of the value. If value is array, returns number of elements; if other type, returns number of characters. Used to get string length or array size.",
+      "callFormat": {
+        "type": "func",
+        "func": "len",
+        "params": [
+          []
+        ]
+      },
+      "parameters": [
+        {
+          "index": 0,
+          "name": "checkExpression",
+          "type": "any",
+          "description": "Expression to check length, can be array, string or other type"
+        }
+      ],
+      "returnType": "number",
+      "examples": [
+        {
+          "description": "Get length of string 'Hello'",
+          "expression": "len('Hello')"
+        }
+      ],
+      "businessScenarios": [
+        "Validate input length",
+        "Count array elements",
+        "Check string length"
+      ],
+      "keywords": [
+        "length",
+        "character count",
+        "array size"
+      ],
+      "generationNotes": [
+        "Use the exact function name shown in name. Convert example expression strings into Yeeflow JSON token arrays before generation."
+      ],
+      "safetyNotes": [],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ]
+    },
+    "log": {
+      "name": "log",
+      "category": "math",
+      "bilingualDescription": "Calculate logarithm. If called with one parameter, returns natural logarithm (base e). If called with two parameters, returns logarithm of second parameter to base of first parameter.",
+      "callFormat": {
+        "type": "func",
+        "func": "log",
+        "params": [
+          [],
+          []
+        ]
+      },
+      "parameters": [
+        {
+          "index": 0,
+          "name": "n1",
+          "type": "number",
+          "description": "If one parameter, number to calculate natural logarithm; if two parameters, base of logarithm"
+        },
+        {
+          "index": 1,
+          "name": "n2",
+          "type": "number",
+          "description": "Optional, number to calculate logarithm of"
+        }
+      ],
+      "returnType": "number",
+      "examples": [
+        {
+          "description": "Calculate logarithm of 100 to base 10",
+          "expression": "log(10, 100)"
+        }
+      ],
+      "businessScenarios": [
+        "Scientific calculation",
+        "Data analysis",
+        "Financial calculation"
+      ],
+      "keywords": [
+        "logarithm",
+        "natural logarithm",
+        "log"
+      ],
+      "generationNotes": [
+        "Use the exact function name shown in name. Convert example expression strings into Yeeflow JSON token arrays before generation."
+      ],
+      "safetyNotes": [],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ]
+    },
+    "lower": {
+      "name": "lower",
+      "category": "string",
+      "bilingualDescription": "Converts uppercase character data to lowercase. Used to unify string case format.",
+      "callFormat": {
+        "type": "func",
+        "func": "lower",
+        "params": [
+          []
+        ]
+      },
+      "parameters": [
+        {
+          "index": 0,
+          "name": "expression",
+          "type": "string",
+          "description": "String expression to convert to lowercase"
+        }
+      ],
+      "returnType": "string",
+      "examples": [
+        {
+          "description": "Convert string 'Hello World' to lowercase",
+          "expression": "lower('Hello World')"
+        }
+      ],
+      "businessScenarios": [
+        "Unify username format",
+        "Standardize input",
+        "Case conversion"
+      ],
+      "keywords": [
+        "lowercase conversion",
+        "convert to lowercase",
+        "case"
+      ],
+      "generationNotes": [
+        "Use the exact function name shown in name. Convert example expression strings into Yeeflow JSON token arrays before generation."
+      ],
+      "safetyNotes": [],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ]
+    },
+    "max": {
+      "name": "max",
+      "category": "math",
+      "bilingualDescription": "Returns the maximum value in the input parameters. Can compare multiple numbers and find the maximum value.",
+      "callFormat": {
+        "type": "func",
+        "func": "max",
+        "params": [
+          [],
+          [],
+          [],
+          []
+        ]
+      },
+      "parameters": [
+        {
+          "index": 0,
+          "name": "numbers",
+          "type": "number...",
+          "description": "Numbers to compare, can pass 2 to 4 parameters"
+        }
+      ],
+      "returnType": "number",
+      "examples": [
+        {
+          "description": "Find maximum value among 3, 7, 2, 9",
+          "expression": "max(3, 7, 2, 9)"
+        }
+      ],
+      "businessScenarios": [
+        "Find highest score",
+        "Compare multiple prices",
+        "Get maximum value"
+      ],
+      "keywords": [
+        "maximum",
+        "maximum number",
+        "compare numbers"
+      ],
+      "generationNotes": [
+        "Use the exact function name shown in name. Convert example expression strings into Yeeflow JSON token arrays before generation."
+      ],
+      "safetyNotes": [],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ]
+    },
+    "min": {
+      "name": "min",
+      "category": "math",
+      "bilingualDescription": "Returns the minimum value in the input parameters. Can compare multiple numbers and find the minimum value.",
+      "callFormat": {
+        "type": "func",
+        "func": "min",
+        "params": [
+          [],
+          [],
+          [],
+          []
+        ]
+      },
+      "parameters": [
+        {
+          "index": 0,
+          "name": "numbers",
+          "type": "number...",
+          "description": "Numbers to compare, can pass 2 to 4 parameters"
+        }
+      ],
+      "returnType": "number",
+      "examples": [
+        {
+          "description": "Find minimum value among 3, 7, 2, 9",
+          "expression": "min(3, 7, 2, 9)"
+        }
+      ],
+      "businessScenarios": [
+        "Find lowest score",
+        "Compare multiple prices",
+        "Get minimum value"
+      ],
+      "keywords": [
+        "minimum",
+        "minimum number",
+        "compare numbers"
+      ],
+      "generationNotes": [
+        "Use the exact function name shown in name. Convert example expression strings into Yeeflow JSON token arrays before generation."
+      ],
+      "safetyNotes": [],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ]
+    },
+    "minute": {
+      "name": "minute",
+      "category": "date",
+      "bilingualDescription": "Returns the minute for the specified time (0-59). Used to extract minute information from time.",
+      "callFormat": {
+        "type": "func",
+        "func": "minute",
+        "params": [
+          []
+        ]
+      },
+      "parameters": [
+        {
+          "index": 0,
+          "name": "time",
+          "type": "date/string",
+          "description": "Time expression to extract minute from"
+        }
+      ],
+      "returnType": "number",
+      "examples": [
+        {
+          "description": "Get minute of current time",
+          "expression": "minute(now())"
+        }
+      ],
+      "businessScenarios": [
+        "Analyze time period",
+        "Statistical minute data",
+        "Time analysis"
+      ],
+      "keywords": [
+        "minute",
+        "time extraction",
+        "get minute"
+      ],
+      "generationNotes": [
+        "Use the exact function name shown in name. Convert example expression strings into Yeeflow JSON token arrays before generation."
+      ],
+      "safetyNotes": [],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ]
+    },
+    "month": {
+      "name": "month",
+      "category": "date",
+      "bilingualDescription": "Returns the month for the specified date (1-12). Used to extract month information from date.",
+      "callFormat": {
+        "type": "func",
+        "func": "month",
+        "params": [
+          []
+        ]
+      },
+      "parameters": [
+        {
+          "index": 0,
+          "name": "date",
+          "type": "date/string",
+          "description": "Date expression to extract month from"
+        }
+      ],
+      "returnType": "number",
+      "examples": [
+        {
+          "description": "Get month of current date",
+          "expression": "month(now())"
+        }
+      ],
+      "businessScenarios": [
+        "Monthly statistics",
+        "Birth month",
+        "Seasonal analysis"
+      ],
+      "keywords": [
+        "month",
+        "date extraction",
+        "get month"
+      ],
+      "generationNotes": [
+        "Use the exact function name shown in name. Convert example expression strings into Yeeflow JSON token arrays before generation."
+      ],
+      "safetyNotes": [],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ]
+    },
+    "now": {
+      "name": "now",
+      "category": "date",
+      "bilingualDescription": "Returns the current date and time. Commonly used for recording timestamps, calculating time differences related to current time, etc.",
+      "callFormat": {
+        "type": "func",
+        "func": "now",
+        "params": []
+      },
+      "parameters": [],
+      "returnType": "date",
+      "examples": [
+        {
+          "description": "Get current system date and time",
+          "expression": "now()"
+        }
+      ],
+      "businessScenarios": [
+        "Record creation time",
+        "Calculate due time",
+        "Timestamp generation"
+      ],
+      "keywords": [
+        "current time",
+        "now",
+        "current date"
+      ],
+      "generationNotes": [
+        "Use the exact function name shown in name. Convert example expression strings into Yeeflow JSON token arrays before generation."
+      ],
+      "safetyNotes": [],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ]
+    },
+    "number": {
+      "name": "number",
+      "category": "conversion",
+      "bilingualDescription": "Converts input value to a number. If input is null or invalid, returns 0. Used to convert string or other types to number.",
+      "callFormat": {
+        "type": "func",
+        "func": "number",
+        "params": [
+          []
+        ]
+      },
+      "parameters": [
+        {
+          "index": 0,
+          "name": "X",
+          "type": "any",
+          "description": "The value to convert to number"
+        }
+      ],
+      "returnType": "number",
+      "examples": [
+        {
+          "description": "Convert string '123' to number 123",
+          "expression": "number('123')"
+        }
+      ],
+      "businessScenarios": [
+        "String to number conversion",
+        "Data type conversion",
+        "Input value standardization"
+      ],
+      "keywords": [
+        "convert to number",
+        "number conversion",
+        "type conversion"
+      ],
+      "generationNotes": [
+        "Use the exact function name shown in name. Convert example expression strings into Yeeflow JSON token arrays before generation."
+      ],
+      "safetyNotes": [],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ]
+    },
+    "pow": {
+      "name": "pow",
+      "category": "math",
+      "bilingualDescription": "Returns the value of X raised to the power of Y. Used to calculate exponentiation, such as square, cube, etc.",
+      "callFormat": {
+        "type": "func",
+        "func": "pow",
+        "params": [
+          [],
+          []
+        ]
+      },
+      "parameters": [
+        {
+          "index": 0,
+          "name": "X",
+          "type": "number",
+          "description": "Base number"
+        },
+        {
+          "index": 1,
+          "name": "Y",
+          "type": "number",
+          "description": "Exponent"
+        }
+      ],
+      "returnType": "number",
+      "examples": [
+        {
+          "description": "Calculate 2 to the power of 3",
+          "expression": "pow(2, 3)"
+        }
+      ],
+      "businessScenarios": [
+        "Calculate area",
+        "Compound interest calculation",
+        "Scientific calculation"
+      ],
+      "keywords": [
+        "power operation",
+        "exponent",
+        "power"
+      ],
+      "generationNotes": [
+        "Use the exact function name shown in name. Convert example expression strings into Yeeflow JSON token arrays before generation."
+      ],
+      "safetyNotes": [],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ]
+    },
+    "rand": {
+      "name": "rand",
+      "category": "math",
+      "bilingualDescription": "Returns a random floating-point value in the range 0 <= v < 1.0. Used to generate random numbers, such as for lottery, random sorting, etc.",
+      "callFormat": {
+        "type": "func",
+        "func": "rand",
+        "params": []
+      },
+      "parameters": [],
+      "returnType": "number",
+      "examples": [
+        {
+          "description": "Generate a random number between 0 and 1",
+          "expression": "rand()"
+        }
+      ],
+      "businessScenarios": [
+        "Random draw",
+        "Generate test data",
+        "Random sorting"
+      ],
+      "keywords": [
+        "random number",
+        "rand",
+        "random generation"
+      ],
+      "generationNotes": [
+        "Use the exact function name shown in name. Convert example expression strings into Yeeflow JSON token arrays before generation."
+      ],
+      "safetyNotes": [],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ]
+    },
+    "removeDuplicates": {
+      "name": "removeDuplicates",
+      "category": "array",
+      "bilingualDescription": "Remove all duplicates from a given array and return a new array containing unique elements. If elements in the array are objects, they will be converted to JSON strings for comparison.",
+      "callFormat": {
+        "type": "func",
+        "func": "removeDuplicates",
+        "params": [
+          []
+        ]
+      },
+      "parameters": [
+        {
+          "index": 0,
+          "name": "arr",
+          "type": "array",
+          "description": "Original array from which to remove duplicates"
+        }
+      ],
+      "returnType": "array",
+      "examples": [
+        {
+          "description": "Remove duplicates from array [1, 2, 2, 3, 3, 3]",
+          "expression": "removeDuplicates([1, 2, 2, 3, 3, 3])"
+        }
+      ],
+      "businessScenarios": [
+        "Deduplicate user list",
+        "Clean duplicate data",
+        "Get unique values"
+      ],
+      "keywords": [
+        "deduplicate",
+        "remove duplicates",
+        "unique array"
+      ],
+      "generationNotes": [
+        "Use the exact function name shown in name. Convert example expression strings into Yeeflow JSON token arrays before generation."
+      ],
+      "safetyNotes": [],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ]
+    },
+    "repeat": {
+      "name": "repeat",
+      "category": "string",
+      "bilingualDescription": "Returns a string consisting of the specified string repeated specified number of times. If count is less than 1, returns an empty string.",
+      "callFormat": {
+        "type": "func",
+        "func": "repeat",
+        "params": [
+          [],
+          []
+        ]
+      },
+      "parameters": [
+        {
+          "index": 0,
+          "name": "str",
+          "type": "string",
+          "description": "The string to repeat"
+        },
+        {
+          "index": 1,
+          "name": "count",
+          "type": "number",
+          "description": "Number of times to repeat"
+        }
+      ],
+      "returnType": "string",
+      "examples": [
+        {
+          "description": "Repeat string 'abc' 3 times",
+          "expression": "repeat('abc', 3)"
+        }
+      ],
+      "businessScenarios": [
+        "Generate separator line",
+        "Create test data",
+        "String repetition"
+      ],
+      "keywords": [
+        "repeat string",
+        "string repetition",
+        "repeat"
+      ],
+      "generationNotes": [
+        "Use the exact function name shown in name. Convert example expression strings into Yeeflow JSON token arrays before generation."
+      ],
+      "safetyNotes": [],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ]
+    },
+    "replace": {
+      "name": "replace",
+      "category": "string",
+      "bilingualDescription": "Replacing first/all/last occurrence of a specified string value with another string value. Can replace first occurrence, last occurrence, or all occurrences of pattern.",
+      "callFormat": {
+        "type": "func",
+        "func": "replace",
+        "params": [
+          [],
+          [],
+          [],
+          []
+        ]
+      },
+      "parameters": [
+        {
+          "index": 0,
+          "name": "expression",
+          "type": "string",
+          "description": "The string expression to be searched"
+        },
+        {
+          "index": 1,
+          "name": "pattern",
+          "type": "string",
+          "description": "The substring to be found"
+        },
+        {
+          "index": 2,
+          "name": "replacement",
+          "type": "string",
+          "description": "The replacement string"
+        },
+        {
+          "index": 3,
+          "name": "type",
+          "type": "number",
+          "description": "Replacement type: 0 for first, 1 for all, 2 for last"
+        }
+      ],
+      "returnType": "string",
+      "examples": [
+        {
+          "description": "Replace all 'l' with 'L' in string 'hello world'",
+          "expression": "replace('hello world', 'l', 'L', 1)"
+        }
+      ],
+      "businessScenarios": [
+        "Text replacement",
+        "Template filling",
+        "Data cleaning"
+      ],
+      "keywords": [
+        "replace",
+        "string replacement",
+        "text replacement"
+      ],
+      "generationNotes": [
+        "Use the exact function name shown in name. Convert example expression strings into Yeeflow JSON token arrays before generation."
+      ],
+      "safetyNotes": [],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ]
+    },
+    "right": {
+      "name": "right",
+      "category": "string",
+      "bilingualDescription": "Returns the rightmost specified number of characters from the string. Used to extract suffix part of string.",
+      "callFormat": {
+        "type": "func",
+        "func": "right",
+        "params": [
+          [],
+          []
+        ]
+      },
+      "parameters": [
+        {
+          "index": 0,
+          "name": "str",
+          "type": "string",
+          "description": "Original string"
+        },
+        {
+          "index": 1,
+          "name": "len",
+          "type": "number",
+          "description": "Number of characters to extract"
+        }
+      ],
+      "returnType": "string",
+      "examples": [
+        {
+          "description": "Extract last 5 characters from string 'Hello World'",
+          "expression": "right('Hello World', 5)"
+        }
+      ],
+      "businessScenarios": [
+        "Extract file extension",
+        "Get last few digits of ID card",
+        "Extract string suffix"
+      ],
+      "keywords": [
+        "right extract",
+        "right characters",
+        "string extraction"
+      ],
+      "generationNotes": [
+        "Use the exact function name shown in name. Convert example expression strings into Yeeflow JSON token arrays before generation."
+      ],
+      "safetyNotes": [],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ]
+    },
+    "round": {
+      "name": "round",
+      "category": "math",
+      "bilingualDescription": "Rounds a value to the nearest integer or to the specified number of fractional digits. Used for numerical precision control.",
+      "callFormat": {
+        "type": "func",
+        "func": "round",
+        "params": [
+          [],
+          []
+        ]
+      },
+      "parameters": [
+        {
+          "index": 0,
+          "name": "number",
+          "type": "number",
+          "description": "The number expression to be processed"
+        },
+        {
+          "index": 1,
+          "name": "digits",
+          "type": "number",
+          "description": "Optional, number of fractional digits to keep, default is 0"
+        }
+      ],
+      "returnType": "number",
+      "examples": [
+        {
+          "description": "Round 3.14159 to two decimal places",
+          "expression": "round(3.14159, 2)"
+        }
+      ],
+      "businessScenarios": [
+        "Amount calculation",
+        "Data precision control",
+        "Report numerical processing"
+      ],
+      "keywords": [
+        "round",
+        "rounding",
+        "rounding"
+      ],
+      "generationNotes": [
+        "Use the exact function name shown in name. Convert example expression strings into Yeeflow JSON token arrays before generation."
+      ],
+      "safetyNotes": [],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ]
+    },
+    "second": {
+      "name": "second",
+      "category": "date",
+      "bilingualDescription": "Returns the second for the specified time (0-59). Used to extract second information from time.",
+      "callFormat": {
+        "type": "func",
+        "func": "second",
+        "params": [
+          []
+        ]
+      },
+      "parameters": [
+        {
+          "index": 0,
+          "name": "time",
+          "type": "date/string",
+          "description": "Time expression to extract second from"
+        }
+      ],
+      "returnType": "number",
+      "examples": [
+        {
+          "description": "Get second of current time",
+          "expression": "second(now())"
+        }
+      ],
+      "businessScenarios": [
+        "Timing",
+        "Precise time analysis",
+        "Second-level statistics"
+      ],
+      "keywords": [
+        "second",
+        "time extraction",
+        "get second"
+      ],
+      "generationNotes": [
+        "Use the exact function name shown in name. Convert example expression strings into Yeeflow JSON token arrays before generation."
+      ],
+      "safetyNotes": [],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ]
+    },
+    "split": {
+      "name": "split",
+      "category": "string",
+      "bilingualDescription": "Splits a string into an array of substrings based on a specified delimiter. Used to parse string data.",
+      "callFormat": {
+        "type": "func",
+        "func": "split",
+        "params": [
+          [],
+          []
+        ]
+      },
+      "parameters": [
+        {
+          "index": 0,
+          "name": "string",
+          "type": "string",
+          "description": "The string variable to split"
+        },
+        {
+          "index": 1,
+          "name": "separator",
+          "type": "string",
+          "description": "A string that separates the substrings"
+        }
+      ],
+      "returnType": "array",
+      "examples": [
+        {
+          "description": "Split string 'apple,banana,orange' into array with comma",
+          "expression": "split('apple,banana,orange', ',')"
+        }
+      ],
+      "businessScenarios": [
+        "Parse CSV data",
+        "Split path",
+        "String parsing"
+      ],
+      "keywords": [
+        "split string",
+        "string splitting",
+        "split"
+      ],
+      "generationNotes": [
+        "Use the exact function name shown in name. Convert example expression strings into Yeeflow JSON token arrays before generation."
+      ],
+      "safetyNotes": [],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ]
+    },
+    "subString": {
+      "name": "subString",
+      "category": "string",
+      "bilingualDescription": "Extract part of string, or text. Can specify start position and length, used to extract part of a string.",
+      "callFormat": {
+        "type": "func",
+        "func": "subString",
+        "params": [
+          [],
+          [],
+          []
+        ]
+      },
+      "parameters": [
+        {
+          "index": 0,
+          "name": "expression",
+          "type": "string",
+          "description": "A string, or text expression"
+        },
+        {
+          "index": 1,
+          "name": "start",
+          "type": "number",
+          "description": "Integer expression that specifies where the returned characters start. If less than 1, starts at first character."
+        },
+        {
+          "index": 2,
+          "name": "length",
+          "type": "number",
+          "description": "Positive integer expression that specifies how many characters will be returned. If negative, returns empty string."
+        }
+      ],
+      "returnType": "string",
+      "examples": [
+        {
+          "description": "Extract 5 characters starting from 6th character in string 'Hello World'",
+          "expression": "subString('Hello World', 6, 5)"
+        }
+      ],
+      "businessScenarios": [
+        "Extract part of text",
+        "Truncate string",
+        "Get substring"
+      ],
+      "keywords": [
+        "substring",
+        "string extraction",
+        "extract substring"
+      ],
+      "generationNotes": [
+        "Use the exact function name shown in name. Convert example expression strings into Yeeflow JSON token arrays before generation."
+      ],
+      "safetyNotes": [],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ]
+    },
+    "text": {
+      "name": "text",
+      "category": "conversion",
+      "bilingualDescription": "Converts input value to a string value. Used to convert number, date or other types to string format.",
+      "callFormat": {
+        "type": "func",
+        "func": "text",
+        "params": [
+          []
+        ]
+      },
+      "parameters": [
+        {
+          "index": 0,
+          "name": "X",
+          "type": "any",
+          "description": "The value to convert to string"
+        }
+      ],
+      "returnType": "string",
+      "examples": [
+        {
+          "description": "Convert number 123 to string '123'",
+          "expression": "text(123)"
+        }
+      ],
+      "businessScenarios": [
+        "Number to string conversion",
+        "Data type conversion",
+        "Generate text"
+      ],
+      "keywords": [
+        "convert to string",
+        "text conversion",
+        "string conversion"
+      ],
+      "generationNotes": [
+        "Use the exact function name shown in name. Convert example expression strings into Yeeflow JSON token arrays before generation."
+      ],
+      "safetyNotes": [],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ]
+    },
+    "trim": {
+      "name": "trim",
+      "category": "string",
+      "bilingualDescription": "Removes whitespace from both ends of a string. Includes spaces, tabs, newlines, etc., used to clean user input.",
+      "callFormat": {
+        "type": "func",
+        "func": "trim",
+        "params": [
+          []
+        ]
+      },
+      "parameters": [
+        {
+          "index": 0,
+          "name": "string",
+          "type": "string",
+          "description": "The string to process"
+        }
+      ],
+      "returnType": "string",
+      "examples": [
+        {
+          "description": "Remove spaces from both ends of string '  Hello World  '",
+          "expression": "trim('  Hello World  ')"
+        }
+      ],
+      "businessScenarios": [
+        "Clean user input",
+        "Data standardization",
+        "Remove spaces"
+      ],
+      "keywords": [
+        "trim spaces",
+        "trim string",
+        "trim"
+      ],
+      "generationNotes": [
+        "Use the exact function name shown in name. Convert example expression strings into Yeeflow JSON token arrays before generation."
+      ],
+      "safetyNotes": [],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ]
+    },
+    "upper": {
+      "name": "upper",
+      "category": "string",
+      "bilingualDescription": "Converts lowercase character data to uppercase. Used to unify string case format.",
+      "callFormat": {
+        "type": "func",
+        "func": "upper",
+        "params": [
+          []
+        ]
+      },
+      "parameters": [
+        {
+          "index": 0,
+          "name": "expression",
+          "type": "string",
+          "description": "String expression to convert to uppercase"
+        }
+      ],
+      "returnType": "string",
+      "examples": [
+        {
+          "description": "Convert string 'Hello World' to uppercase",
+          "expression": "upper('Hello World')"
+        }
+      ],
+      "businessScenarios": [
+        "Unify username format",
+        "Standardize input",
+        "Case conversion"
+      ],
+      "keywords": [
+        "uppercase conversion",
+        "convert to uppercase",
+        "uppercase"
+      ],
+      "generationNotes": [
+        "Use the exact function name shown in name. Convert example expression strings into Yeeflow JSON token arrays before generation."
+      ],
+      "safetyNotes": [],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ]
+    },
+    "weekNum": {
+      "name": "weekNum",
+      "category": "date",
+      "bilingualDescription": "Returns the week number of a specific date. Can use European week numbering system (ISO 8601) or US week numbering system.",
+      "callFormat": {
+        "type": "func",
+        "func": "weekNum",
+        "params": [
+          [],
+          []
+        ]
+      },
+      "parameters": [
+        {
+          "index": 0,
+          "name": "date",
+          "type": "date/string",
+          "description": "The expression of the date"
+        },
+        {
+          "index": 1,
+          "name": "useISO",
+          "type": "boolean",
+          "description": "Optional boolean value. If true, use European week numbering system (ISO 8601). 1 stands for true, 0 stands for false."
+        }
+      ],
+      "returnType": "number",
+      "examples": [
+        {
+          "description": "Get week number of current date in the year (using ISO standard)",
+          "expression": "weekNum(now(), 1)"
+        }
+      ],
+      "businessScenarios": [
+        "Weekly report statistics",
+        "Schedule planning",
+        "Time analysis"
+      ],
+      "keywords": [
+        "week number",
+        "week count",
+        "get week number"
+      ],
+      "generationNotes": [
+        "Use the exact function name shown in name. Convert example expression strings into Yeeflow JSON token arrays before generation."
+      ],
+      "safetyNotes": [],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ]
+    },
+    "year": {
+      "name": "year",
+      "category": "date",
+      "bilingualDescription": "Returns the year for the specified date (four-digit number). Used to extract year information from date.",
+      "callFormat": {
+        "type": "func",
+        "func": "year",
+        "params": [
+          []
+        ]
+      },
+      "parameters": [
+        {
+          "index": 0,
+          "name": "date",
+          "type": "date/string",
+          "description": "Date expression to extract year from"
+        }
+      ],
+      "returnType": "number",
+      "examples": [
+        {
+          "description": "Get year of current date",
+          "expression": "year(now())"
+        }
+      ],
+      "businessScenarios": [
+        "Yearly statistics",
+        "Birth year",
+        "Annual analysis"
+      ],
+      "keywords": [
+        "year",
+        "date extraction",
+        "get year"
+      ],
+      "generationNotes": [
+        "Use the exact function name shown in name. Convert example expression strings into Yeeflow JSON token arrays before generation."
+      ],
+      "safetyNotes": [],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ]
+    },
+    "getUserAttr": {
+      "name": "getUserAttr",
+      "category": "user/profile",
+      "bilingualDescription": "Read an attribute from a user value or the current user context.",
+      "callFormat": {
+        "type": "func",
+        "func": "getUserAttr",
+        "params": [
+          [],
+          {},
+          []
+        ]
+      },
+      "parameters": [
+        {
+          "index": 0,
+          "name": "userOrContext",
+          "type": "user/application expression",
+          "description": "User variable, nested user expression, or Context:Current User token."
+        },
+        {
+          "index": 1,
+          "name": "attribute",
+          "type": "attribute descriptor object",
+          "description": "Export-backed object such as { key: \"Email\", label: \"Email\" }."
+        },
+        {
+          "index": 2,
+          "name": "defaultValue",
+          "type": "expression token array",
+          "description": "Fallback token array, commonly [{ type: \"str\", value: \"N/A\" }] or [] for blank fallback."
+        }
+      ],
+      "returnType": "text",
+      "examples": [
+        {
+          "description": "Current user email",
+          "expression": "getUserAttr(Context:Current User, Email, N/A)"
+        },
+        {
+          "description": "Current user manager name",
+          "expression": "getUserAttr(getUserAttr(Context:Current User, Line Manager, N/A), Name, N/A)"
+        }
+      ],
+      "businessScenarios": [
+        "Show current requester profile fields",
+        "Pre-fill user profile summary",
+        "Persist readable requester metadata after workflow approval"
+      ],
+      "keywords": [
+        "current user",
+        "profile",
+        "requester",
+        "manager",
+        "email",
+        "employee number",
+        "job title"
+      ],
+      "observedAttributes": [
+        "Name_CN",
+        "SPAccount",
+        "DepartmentID",
+        "LineManager",
+        "EmployeeNo",
+        "Email",
+        "IsAdmin",
+        "Photo",
+        "JobTitle",
+        "JobGrade",
+        "OfficeAddress",
+        "Phone",
+        "Mobile",
+        "Telephone",
+        "Remark",
+        "LocationID",
+        "LastLoginTime",
+        "ServiceStartDate",
+        "LatestHireDate",
+        "Created",
+        "CreatedBy"
+      ],
+      "generationNotes": [
+        "Use the exact exported attribute descriptor object shape for the second parameter. Prefer Context:Current User token for current-login-user profile display."
+      ],
+      "safetyNotes": [
+        "Export-backed for display Text controls. Persistence through calculated variables needs generated runtime proof."
+      ],
+      "sourceReferences": [
+        "Expression Runtime Test v1 Patch.yap:user-profile-expression-export"
+      ]
+    },
+    "getOrgAttr": {
+      "name": "getOrgAttr",
+      "category": "user/profile",
+      "bilingualDescription": "Read an attribute from an organization or department value.",
+      "callFormat": {
+        "type": "func",
+        "func": "getOrgAttr",
+        "params": [
+          [],
+          {},
+          []
+        ]
+      },
+      "parameters": [
+        {
+          "index": 0,
+          "name": "orgValue",
+          "type": "organization expression",
+          "description": "Department/organization value, often from getUserAttr(..., Department, ...)."
+        },
+        {
+          "index": 1,
+          "name": "attribute",
+          "type": "attribute descriptor object",
+          "description": "Export-backed object such as { key: \"Name\", label: \"Name\" }."
+        },
+        {
+          "index": 2,
+          "name": "defaultValue",
+          "type": "expression token array",
+          "description": "Fallback token array or [] for blank fallback."
+        }
+      ],
+      "returnType": "text",
+      "examples": [
+        {
+          "description": "Current user department name",
+          "expression": "getOrgAttr(getUserAttr(Context:Current User, Department, N/A), Name, N/A)"
+        },
+        {
+          "description": "Current user parent department name",
+          "expression": "getOrgAttr(getOrgAttr(getUserAttr(Context:Current User, Department, N/A), Parent, N/A), Name, N/A)"
+        }
+      ],
+      "businessScenarios": [
+        "Display department name",
+        "Display parent department",
+        "Find department manager for a profile summary"
+      ],
+      "keywords": [
+        "department",
+        "organization",
+        "parent department",
+        "manager"
+      ],
+      "observedAttributes": [
+        "Name",
+        "ParentID",
+        "Manager"
+      ],
+      "generationNotes": [
+        "The exported runtime function name is getOrgAttr, not getDeptAttr. Preserve getOrgAttr in generated tokens."
+      ],
+      "safetyNotes": [
+        "Do not generate getDeptAttr unless a future export proves that exact runtime function name."
+      ],
+      "sourceReferences": [
+        "Expression Runtime Test v1 Patch.yap:user-profile-expression-export"
+      ]
+    },
+    "getLocAttr": {
+      "name": "getLocAttr",
+      "category": "user/profile",
+      "bilingualDescription": "Read an attribute from a location value.",
+      "callFormat": {
+        "type": "func",
+        "func": "getLocAttr",
+        "params": [
+          [],
+          {},
+          []
+        ]
+      },
+      "parameters": [
+        {
+          "index": 0,
+          "name": "locationValue",
+          "type": "location expression",
+          "description": "Location value, often from getUserAttr(..., Location, ...)."
+        },
+        {
+          "index": 1,
+          "name": "attribute",
+          "type": "attribute descriptor object",
+          "description": "Export-backed object such as { key: \"Name\", label: \"Name\" }."
+        },
+        {
+          "index": 2,
+          "name": "defaultValue",
+          "type": "expression token array",
+          "description": "Fallback token array or [] for blank fallback."
+        }
+      ],
+      "returnType": "text",
+      "examples": [
+        {
+          "description": "Current user location name",
+          "expression": "getLocAttr(getUserAttr(Context:Current User, Location, N/A), Name, N/A)"
+        },
+        {
+          "description": "Current user location manager",
+          "expression": "getLocAttr(getUserAttr(Context:Current User, Location, N/A), Manager, N/A)"
+        }
+      ],
+      "businessScenarios": [
+        "Display requester office/location",
+        "Route or document location manager where tenant data exists"
+      ],
+      "keywords": [
+        "location",
+        "office",
+        "location manager"
+      ],
+      "observedAttributes": [
+        "Name",
+        "Manager"
+      ],
+      "generationNotes": [
+        "Use only observed location attributes until more exports prove additional keys."
+      ],
+      "safetyNotes": [
+        "Location data may be tenant-dependent; provide fallback values."
+      ],
+      "sourceReferences": [
+        "Expression Runtime Test v1 Patch.yap:user-profile-expression-export"
+      ]
+    },
+    "JSONStringfy": {
+      "name": "JSONStringfy",
+      "category": "conversion",
+      "bilingualDescription": "Serialize a value or query-result collection to JSON text.",
+      "callFormat": {
+        "type": "func",
+        "func": "JSONStringfy",
+        "params": [
+          []
+        ]
+      },
+      "parameters": [
+        {
+          "index": 0,
+          "name": "value",
+          "type": "any",
+          "description": "Value or query-result collection to serialize"
+        }
+      ],
+      "returnType": "text",
+      "examples": [
+        {
+          "description": "Display a query result collection",
+          "expression": "JSONStringfy(var_CollectionofQueryItems)"
+        }
+      ],
+      "businessScenarios": [
+        "Debug query result collections",
+        "Display temp collection contents"
+      ],
+      "keywords": [
+        "JSON",
+        "JSONStringfy",
+        "stringify",
+        "query collection",
+        "temp variable"
+      ],
+      "generationNotes": [
+        "Use the exact export-backed spelling JSONStringfy from the Form Actions Phase 2 export."
+      ],
+      "safetyNotes": [
+        "Treat JSONStringify spelling as unproven until an export-backed token is available."
+      ],
+      "sourceReferences": [
+        "Form Actions Phase 1 Test v1 Runtime.yap:form action query collection display"
+      ]
+    }
+  },
+  "screenshotObservedFunctions": [
+    {
+      "name": "addWorkDays",
+      "category": "date",
+      "observedIn": "BDB9E882-A50F-41CD-A067-DDD261A9D81A.png:functionTab",
+      "supportLevel": "observed_in_expression_editor_ui_metadata_pending",
+      "generationSafe": false,
+      "notes": "Visible in the Expression Editor Function tab, but not included in the parsed function knowledge base; do not generate until parameter metadata or export-backed token examples are captured."
+    },
+    {
+      "name": "addWorkHours",
+      "category": "date",
+      "observedIn": "BDB9E882-A50F-41CD-A067-DDD261A9D81A.png:functionTab",
+      "supportLevel": "observed_in_expression_editor_ui_metadata_pending",
+      "generationSafe": false,
+      "notes": "Visible in the Expression Editor Function tab, but not included in the parsed function knowledge base; do not generate until parameter metadata or export-backed token examples are captured."
+    }
+  ],
+  "inconsistencies": [
+    {
+      "item": "strIndex",
+      "status": "baseline_only",
+      "notes": "The first pass included runtime name strIndex, but the second function knowledge base omits it. Preserve camel-case strIndex from the baseline and do not rename to strindex."
+    },
+    {
+      "item": "datePicker",
+      "status": "primitive_param_placeholder",
+      "notes": "The second knowledge base call_format includes a primitive boolean placeholder for showTime. Validator should continue warning on primitive params unless export-backed for the target property."
+    },
+    {
+      "item": "addWorkDays/addWorkHours",
+      "status": "screenshot_observed_only",
+      "notes": "Visible in Function tab screenshot but absent from both normalized baselines; keep as deferred metadata pending."
+    },
+    "Expression Runtime Test v1 Patch user notes mentioned getDeptAttr, but the decoded export uses getOrgAttr for department/organization attributes. Preserve getOrgAttr until getDeptAttr is export-backed.",
+    {
+      "note": "Form Actions Phase 2 export uses function token JSONStringfy. User-facing notes may spell JSONStringify, but that alias was not found as an expression token in the export."
+    }
+  ]
+}

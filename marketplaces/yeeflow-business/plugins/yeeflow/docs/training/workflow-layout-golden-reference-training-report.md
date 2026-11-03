@@ -1,0 +1,139 @@
+# Workflow Layout Golden Reference Training Report
+
+## Objective
+
+Train the plugin to generate readable workflow diagrams for Approval form workflows, Data list workflows, and Scheduled workflows. The training focuses on node placement, SequenceFlow routing, concise action naming, and connector descriptions. It does not prove runtime task routing or assignee execution.
+
+## References Studied
+
+- `workflow_ref_ememo.json`
+- `workflow_ref_expense_reimbursement.json`
+- `Workflow actions layout.json`
+
+The source files were inspected read-only. Raw exports are not bundled into the plugin.
+
+## Extracted Patterns
+
+- Complex workflows use a main path with clear horizontal progression.
+- Branches, rejection, cancellation, and exception paths move to separate vertical lanes.
+- Long or cross-lane transitions use rounded line style and/or explicit `vertices[]`.
+- Nodes carry top-level `position.x` and `position.y`.
+- SequenceFlow elements reference source and target node ids and may include `vertices[]` for routing.
+- Large workflows reserve enough graph area rather than placing all nodes in one small cluster.
+- Approval Assignment Task nodes require at least `Approved` and `Rejected` outgoing SequenceFlows.
+- Complete Assignment Task nodes require canonical `Completed` outcome spelling.
+- Workflow action nodes must not keep Designer defaults such as `Assignment Task`, `Content List`, `Inclusive Gateway`, or `Gateway`. They must use short business-specific Action names such as `Line manager approval`, `Department head approval`, `Finance manager approval`, `Cashier confirm`, `IT security check`, or `Request clarification`.
+- SequenceFlow `properties.documentation` must be a non-empty, short business Description. Use `Submitted`, `Approved`, `Rejected`, `Completed`, or concise branch labels such as `Amount >= 5000`; do not keep empty strings or defaults such as `Sequence flow_1`.
+- Business-field branch fan-out, such as amount thresholds, must use an `InclusiveGateway` before branching.
+- Branch targets from the same Inclusive Gateway should align on one vertical column when they represent sibling choices.
+- A shared `EndRejectEvent` should collect no more than three adjacent Approval Assignment Task rejection paths.
+- A single `EndRejectEvent` should sit vertically above or below the source task, or centered above/below a two- or three-task source group by node center points.
+- For first-row Approval Assignment Tasks, the shared `EndRejectEvent` must be placed above the source row. For lower-row Approval Assignment Tasks, the shared `EndRejectEvent` must be placed below the source row.
+- A shared `EndRejectEvent` may only collect rejected paths from Approval Assignment Tasks on the same horizontal lane. Approval Assignment Tasks on different y lanes require separate rejection endpoints.
+- Workflow diagrams should use the Workflow Designer's roughly 16:9 visible canvas. Complex workflows should use additional rows/layers instead of placing every node on one long horizontal line, and generated workflows should not exceed five vertical rows.
+- Medium workflow width should be treated as a readability advisory, not a standalone compression target. The generator must not shrink standard column spacing simply to pass a `2600px` width check.
+- Human readability is stricter than geometry-only midpoint routing. A workflow can pass routeX/routeY midpoint checks and still fail if long labels overlap, too many vertical connector segments share the same lane, or branch labels are squeezed into one visual wall.
+- Workflow generation must be motif-first, not vertices-first. The `Workflow actions layout.json` reference is readable because nodes are placed into local approval, gateway, branch, action, and rejection motifs. Most SequenceFlows can then use rounded auto-routing with empty `vertices[]`. If many non-return connectors need vertices, the node layout is wrong.
+- Standard forward rejected/cross-lane lines do not require explicit `vertices[]` when the spacing already prevents overlap. Backward/return lines still require vertices.
+- Long return/backward connectors that cross more than two workflow rows must not calculate `routeY` from only the source and target rows. They must use an open adjacent row-gap midpoint and must not place the horizontal segment inside any intermediate row's node bounds.
+- Long connectors with vertical route segments must also calculate a safe `routeX` from adjacent column gaps. Vertical segments must not pass through intermediate workflow node bounds or sit on a task/gateway center line when a column-gap midpoint is available.
+- Inclusive Gateway branches are local fan-out motifs. Branch targets should stay close to the gateway, distributed into upper/lower lanes, rather than becoming far-away targets repaired with long connectors.
+- Normal End nodes with multiple incoming branches are local merge motifs. Place them beside and vertically within the incoming source group instead of using a distant global End.
+- Local rejected connectors to nearby `EndRejectEvent` nodes should not use explicit vertices. If vertices are needed for a local rejection path, the rejection endpoint is probably placed incorrectly.
+- Local forward/merge connectors, including nearby `Completed` and `Approved` lines between branch/action lanes, should not use explicit vertices merely because they cross y lanes. The generator should default these links to empty `vertices[]`; if they need many bends, the branch or merge nodes are in the wrong place.
+- Visible business-condition connector labels must be short; full logic belongs in `conditioninfo`.
+
+## Bad/Good Design Comparison Update
+
+The July 2026 `workflow bad design.json` and `Workflow good design.json` comparison clarifies the vertex boundary:
+
+- Bad design had four vertex-routed flows; good design kept only two.
+- `IT security check -> Procurement availability` and `Standard accessory check -> Procurement availability` removed vertices because they are nearby forward local merge links.
+- `Vendor quotation -> Asset registration` kept vertices because it is a same-column vertical branch route where explicit right-side routing is clearer.
+- `Request clarification -> Line manager approval` kept vertices because it is a true long backward/return route, but its route lane moved from an excessive external y value into the readable workflow area.
+
+Training conclusion: do not train the generator to remove all vertices. Train it to remove unnecessary vertices from nearby forward local merge links while preserving vertices for same-column vertical branch routes and real long return/backward paths.
+
+## Workflow Actions Layout V2 Standard
+
+The focused workflow actions reference establishes these minimum/recommended geometry rules:
+
+| Rule | Standard |
+| --- | --- |
+| Main approval lane | Stable horizontal backbone, commonly around the same `y` value |
+| Start to first task | About 305 px |
+| Task to task | About 335 px |
+| Task to gateway | About 320 px |
+| Gateway to branch targets | About 195 px minimum |
+| Approval task reject end | Above or below by at least 110-125 px |
+| Gateway branch targets | Same `x` column within about 80 px |
+| Gateway target locality | Business branch target center should stay within about 650 px of gateway center |
+| Shared rejection endpoint | Maximum 3 approval task sources |
+| Shared rejection source lane | All sources must be on the same horizontal lane within about 40 px |
+| Multi-source normal End | Local merge within about 650 px of incoming source group |
+| Connector label length | Business-condition display label should stay within about 42 chars |
+| Local reject vertices | No vertices for nearby rejected connectors within about 760 x 260 px |
+| Local forward/merge vertices | No vertices for nearby Completed/Approved merge connectors within about 1250 x 360 px |
+| Designer canvas usage | Prefer roughly 16:9 visible area instead of one-row sprawl |
+| Maximum vertical rows | 5 rows/layers |
+
+The plugin validator now checks the semantic layout contract, not just visual coordinates:
+
+- `WORKFLOW_LAYOUT_APPROVAL_TASK_OUTCOME_MISSING`
+- `WORKFLOW_LAYOUT_COMPLETE_TASK_OUTCOME_MISSING`
+- `WORKFLOW_LAYOUT_COMPLETE_TASK_OUTCOME_MISSPELLED`
+- `WORKFLOW_LAYOUT_BUSINESS_BRANCH_GATEWAY_MISSING`
+- `WORKFLOW_LAYOUT_GATEWAY_BRANCH_COLUMN_MISMATCH`
+- `WORKFLOW_LAYOUT_BACKWARD_FLOW_VERTICES_MISSING`
+- `WORKFLOW_LAYOUT_END_REJECT_TOO_MANY_SOURCES`
+- `WORKFLOW_LAYOUT_END_REJECT_SOURCE_LANES_MISMATCH`
+- `WORKFLOW_LAYOUT_END_REJECT_POSITION_MISMATCH`
+- `WORKFLOW_LAYOUT_TOO_MANY_VERTICAL_ROWS`
+- `WORKFLOW_LAYOUT_SINGLE_ROW_SPRAWL`
+- `WORKFLOW_LAYOUT_ROUTE_Y_CROSSES_INTERMEDIATE_ROW`
+- `WORKFLOW_LAYOUT_ROUTE_X_CROSSES_INTERMEDIATE_COLUMN`
+- `WORKFLOW_LAYOUT_GATEWAY_BRANCH_TOO_FAR`
+- `WORKFLOW_LAYOUT_END_MERGE_TOO_FAR`
+- `WORKFLOW_LAYOUT_END_MERGE_VERTICAL_MISMATCH`
+- `WORKFLOW_LAYOUT_LOCAL_REJECT_VERTICES_UNNECESSARY`
+- `WORKFLOW_LAYOUT_LOCAL_FORWARD_VERTICES_UNNECESSARY`
+- `WORKFLOW_LAYOUT_CONNECTOR_LABEL_TOO_LONG`
+
+## Plugin Changes
+
+- Added `docs/reference/workflow-layout-golden-references.json`.
+- Added `docs/standards/workflow-layout-golden-reference-standard.md`.
+- Added `scripts/validate-workflow-layout-golden-reference.mjs`.
+- Added `scripts/test-workflow-layout-golden-reference-gates.mjs`.
+- Added the workflow layout gate to `scripts/yapk-first-generation-preflight.mjs`.
+- Updated full-app materialization so generated approval workflow graphs use spaced lanes and vertex-routed rejected/cross-lane SequenceFlow paths.
+- Updated full-app materialization so generated approval workflow `EndRejectEvent` nodes are placed vertically above the approval source task group instead of being pushed to the far right.
+- Updated full-app materialization and validation so shared `EndRejectEvent` placement is calculated from source task center points. Three-source groups now center on the source span center rather than a fixed coordinate or top-left x value.
+- Updated the workflow layout gate so first-row approval tasks require reject endpoints above the row, while lower-row approval tasks require reject endpoints below the row.
+- Updated the workflow layout gate so standard-spaced rejected/cross-lane lines are allowed without vertices, while explicit return/backward lines still require vertices.
+- Updated the workflow layout gate and materializer so multi-row return/backward connectors choose a safe adjacent row-gap midpoint; a route such as `y = 363` is now rejected when it passes through an intermediate row occupying `y = 320..406`.
+- Updated the workflow layout gate and materializer so long connector vertical segments choose a safe adjacent column-gap midpoint; vertical route segments are now rejected when they pass through an intermediate node's column bounds.
+- Updated the materializer so workflow action nodes derive concise business-specific Action names from planned node names, assignee roles, job positions, and branch/action hints. A Finance Manager task should generate `Finance manager approval`, not `Assignment Task`.
+- Updated the workflow layout gate, standalone `.ywf` validator, and package validator so default workflow action names, empty SequenceFlow descriptions, default `Sequence flow_*` descriptions, and overlong action/connector labels fail generated-final validation.
+- Updated the materializer so every generated SequenceFlow writes a non-empty `properties.documentation` aligned with the visible label, such as `Submitted`, `Approved`, `Rejected`, `Completed`, or a concise business condition.
+- Updated the medium-width workflow gate so `2600px` is no longer an isolated hard blocker. Medium workflows may exceed the advisory width when they are folded into readable rows, row density is acceptable, and no label/lane readability gate fails.
+- Added connector readability gates for long label collisions and over-dense shared vertical route lanes. These gates prevent the 0.9.22-style regression where a graph passed geometry checks but became visually worse because labels and vertical lanes were crowded.
+- Added vertex economy and detour economy gates. Generated workflows now fail when too many non-return/non-rejection connectors carry vertices or when a connector path detours far beyond the direct source-target distance. These gates force the generator to fix node placement instead of hiding layout problems behind increasingly complex `vertices[]`.
+- Added workflow motif gates for local Inclusive Gateway fan-out, local normal End merge placement, local rejected connector vertex economy, and concise connector labels. These gates make the validator compare generated layouts against the readable motifs in `Workflow actions layout.json`, not just individual line geometry.
+- Updated the workflow layout gate so shared `EndRejectEvent` nodes can only collect rejected paths from Approval Assignment Tasks on the same horizontal lane.
+- Updated the workflow layout gate so generated diagrams fail when they exceed five vertical rows or when large workflows are collapsed into a single over-wide horizontal row instead of using the 16:9 canvas area.
+- Updated the workflow designer style gate so generated Approval, Data list, and Scheduled workflow graphs use Workflow Designer v2 attributes: root `lineType = "rounded"`, root `graphver = 2`, each `SequenceFlow.properties.linetype = "rounded"`, each `SequenceFlow.properties.documentation` present as a non-empty business Description string, and each `SequenceFlow.dockers = []`. `graphzoom` is intentionally excluded as a hard gate.
+- Updated cache artifact expectations and package-validator guidance.
+
+## Proof Boundary
+
+This is export-proven and validator-backed layout training. It does not claim that workflow execution, approval routing, task assignment, or publish behavior is runtime-proven by the two reference files.
+
+## Required Follow-Up Validation
+
+Generated-final packages containing workflows must pass:
+
+```bash
+node scripts/validate-workflow-layout-golden-reference.mjs --package <generated-final.yapk>
+node scripts/yapk-first-generation-preflight.mjs --package <generated-final.yapk> --plan <yeeflow-app-plan.md> --json
+```

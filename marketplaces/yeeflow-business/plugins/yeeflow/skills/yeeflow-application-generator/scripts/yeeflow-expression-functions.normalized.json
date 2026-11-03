@@ -1,0 +1,2910 @@
+{
+  "source": "expression training data generator.txt",
+  "version": "2026-05-14",
+  "paramTokenConvention": "Function params are arrays of expression-token arrays, except zero-param functions use params: []. Some export examples include literal strings or booleans directly inside params; validators should warn, not hard-fail, when the surrounding shape is otherwise export-backed.",
+  "functions": {
+    "abs": {
+      "category": "math",
+      "minParams": 1,
+      "maxParams": 1,
+      "returnValueType": "number",
+      "description": "Returns the absolute value of the parameter.",
+      "knowledgeBaseCategory": "math",
+      "bilingualDescription": "Returns the absolute value of the parameter. If the parameter is negative, returns its positive value; if positive or zero, returns the original value.",
+      "parameters": [
+        {
+          "index": 0,
+          "name": "number",
+          "type": "number",
+          "description": "The number for which to calculate the absolute value, can be integer or decimal"
+        }
+      ],
+      "returnType": "number",
+      "examples": [
+        {
+          "description": "Calculate the absolute value of -5",
+          "expression": "abs(-5)"
+        }
+      ],
+      "businessScenarios": [
+        "Calculate amount difference",
+        "Get distance absolute value",
+        "Statistical fluctuation range"
+      ],
+      "keywords": [
+        "absolute value",
+        "abs",
+        "positive value",
+        "magnitude"
+      ],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ],
+      "generationNotes": [
+        "Select this function when the requested business scenario matches the enriched businessScenarios metadata."
+      ]
+    },
+    "arrayAverage": {
+      "category": "array",
+      "minParams": 1,
+      "maxParams": 4,
+      "optionalParams": [
+        "column",
+        "filterColumn",
+        "filterValue"
+      ],
+      "returnValueType": "number",
+      "description": "Calculate the average value of an array; object arrays may specify a column and optional equality filter.",
+      "knowledgeBaseCategory": "array",
+      "bilingualDescription": "Calculate the average value of an array. If array elements are objects, use column parameter to specify the property for calculation. Empty values are excluded from calculation.",
+      "parameters": [
+        {
+          "index": 0,
+          "name": "list",
+          "type": "array",
+          "description": "Array variable containing elements to calculate average"
+        },
+        {
+          "index": 1,
+          "name": "column",
+          "type": "string",
+          "description": "Optional, property name in object array for calculation"
+        },
+        {
+          "index": 2,
+          "name": "filterColumn",
+          "type": "string",
+          "description": "Optional, filter column name in object array"
+        },
+        {
+          "index": 3,
+          "name": "filterValue",
+          "type": "any",
+          "description": "Optional, only objects with filterColumn property equal to this value are included"
+        }
+      ],
+      "returnType": "number",
+      "examples": [
+        {
+          "description": "Calculate average score of students, only for math subject",
+          "expression": "arrayAverage(scores, 'score', 'subject', 'Mathematics')"
+        }
+      ],
+      "businessScenarios": [
+        "Calculate average score",
+        "Statistical average sales",
+        "Calculate average response time"
+      ],
+      "keywords": [
+        "array average",
+        "average",
+        "average calculation",
+        "mean"
+      ],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ],
+      "generationNotes": [
+        "Select this function when the requested business scenario matches the enriched businessScenarios metadata."
+      ]
+    },
+    "arrayConcat": {
+      "category": "array",
+      "minParams": 2,
+      "maxParams": 2,
+      "returnValueType": "array",
+      "description": "Return a new array containing elements of two arrays.",
+      "knowledgeBaseCategory": "array",
+      "bilingualDescription": "Returns a new array containing all elements of the two given arrays. Used to merge multiple arrays.",
+      "parameters": [
+        {
+          "index": 0,
+          "name": "arr1",
+          "type": "array",
+          "description": "First array, its elements will appear at the front of the new array"
+        },
+        {
+          "index": 1,
+          "name": "arr2",
+          "type": "array",
+          "description": "Second array, its elements will appear at the end of the new array"
+        }
+      ],
+      "returnType": "array",
+      "examples": [
+        {
+          "description": "Merge two student list arrays",
+          "expression": "arrayConcat(class1Students, class2Students)"
+        }
+      ],
+      "businessScenarios": [
+        "Merge order lists",
+        "Concatenate multiple department employee lists",
+        "Combine product categories"
+      ],
+      "keywords": [
+        "array concat",
+        "concatenate arrays",
+        "array join"
+      ],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ],
+      "generationNotes": [
+        "Select this function when the requested business scenario matches the enriched businessScenarios metadata."
+      ]
+    },
+    "arrayCount": {
+      "category": "array",
+      "minParams": 1,
+      "maxParams": 4,
+      "optionalParams": [
+        "column",
+        "filterColumn",
+        "filterValue"
+      ],
+      "returnValueType": "number",
+      "description": "Count items or non-empty object-column values in an array.",
+      "knowledgeBaseCategory": "array",
+      "bilingualDescription": "Count items in an array. If array elements are objects, use column parameter to specify the property for calculation. Empty values are excluded from counting.",
+      "parameters": [
+        {
+          "index": 0,
+          "name": "list",
+          "type": "array",
+          "description": "Array variable containing elements to count"
+        },
+        {
+          "index": 1,
+          "name": "column",
+          "type": "string",
+          "description": "Optional, property name in object array for counting"
+        },
+        {
+          "index": 2,
+          "name": "filterColumn",
+          "type": "string",
+          "description": "Optional, filter column name in object array"
+        },
+        {
+          "index": 3,
+          "name": "filterValue",
+          "type": "any",
+          "description": "Optional, only objects with filterColumn property equal to this value are counted"
+        }
+      ],
+      "returnType": "number",
+      "examples": [
+        {
+          "description": "Count number of students with math score greater than 60",
+          "expression": "arrayCount(students, 'score', 'subject', 'Mathematics')"
+        }
+      ],
+      "businessScenarios": [
+        "Count order quantity",
+        "Calculate number of employees",
+        "Count product types"
+      ],
+      "keywords": [
+        "array count",
+        "element count",
+        "count items"
+      ],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ],
+      "generationNotes": [
+        "Select this function when the requested business scenario matches the enriched businessScenarios metadata."
+      ]
+    },
+    "arrayIndex": {
+      "category": "array",
+      "minParams": 2,
+      "maxParams": 2,
+      "returnValueType": "number",
+      "description": "Locate a value in an array and return -1 when it does not exist.",
+      "knowledgeBaseCategory": "array",
+      "bilingualDescription": "Locate the position of a value in array, return index if found, otherwise -1. Used to determine if an element exists in the array.",
+      "parameters": [
+        {
+          "index": 0,
+          "name": "array",
+          "type": "array",
+          "description": "Array expression to search in"
+        },
+        {
+          "index": 1,
+          "name": "value",
+          "type": "any",
+          "description": "Value expression to lookup"
+        }
+      ],
+      "returnType": "number",
+      "examples": [
+        {
+          "description": "Find position of 'Alex Smith' in student array",
+          "expression": "arrayIndex(students, 'Alex Smith')"
+        }
+      ],
+      "businessScenarios": [
+        "Find product position in list",
+        "Check if username exists",
+        "Locate order index"
+      ],
+      "keywords": [
+        "array index",
+        "find position",
+        "element search"
+      ],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ],
+      "generationNotes": [
+        "Select this function when the requested business scenario matches the enriched businessScenarios metadata."
+      ]
+    },
+    "arrayMax": {
+      "category": "array",
+      "minParams": 1,
+      "maxParams": 4,
+      "optionalParams": [
+        "column",
+        "filterColumn",
+        "filterValue"
+      ],
+      "returnValueType": "number",
+      "description": "Calculate max value of an array or object-array column.",
+      "knowledgeBaseCategory": "array",
+      "bilingualDescription": "Calculate the max value of an array. If array elements are objects, use column parameter to specify the property for calculation. Empty values are excluded from calculation.",
+      "parameters": [
+        {
+          "index": 0,
+          "name": "list",
+          "type": "array",
+          "description": "Array variable containing elements to find maximum value"
+        },
+        {
+          "index": 1,
+          "name": "column",
+          "type": "string",
+          "description": "Optional, property name in object array for finding maximum value"
+        },
+        {
+          "index": 2,
+          "name": "filterColumn",
+          "type": "string",
+          "description": "Optional, filter column name in object array"
+        },
+        {
+          "index": 3,
+          "name": "filterValue",
+          "type": "any",
+          "description": "Optional, only objects with filterColumn property equal to this value are included"
+        }
+      ],
+      "returnType": "number",
+      "examples": [
+        {
+          "description": "Find highest score in student array, only for math subject",
+          "expression": "arrayMax(scores, 'score', 'subject', 'Mathematics')"
+        }
+      ],
+      "businessScenarios": [
+        "Find highest sales amount",
+        "Find maximum age",
+        "Calculate maximum temperature"
+      ],
+      "keywords": [
+        "array max",
+        "maximum element",
+        "maximum value"
+      ],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ],
+      "generationNotes": [
+        "Select this function when the requested business scenario matches the enriched businessScenarios metadata."
+      ]
+    },
+    "arrayMin": {
+      "category": "array",
+      "minParams": 1,
+      "maxParams": 4,
+      "optionalParams": [
+        "column",
+        "filterColumn",
+        "filterValue"
+      ],
+      "returnValueType": "number",
+      "description": "Calculate min value of an array or object-array column.",
+      "knowledgeBaseCategory": "array",
+      "bilingualDescription": "Calculate the min value of an array. If array elements are objects, use column parameter to specify the property for calculation. Empty values are excluded from calculation.",
+      "parameters": [
+        {
+          "index": 0,
+          "name": "list",
+          "type": "array",
+          "description": "Array variable containing elements to find minimum value"
+        },
+        {
+          "index": 1,
+          "name": "column",
+          "type": "string",
+          "description": "Optional, property name in object array for finding minimum value"
+        },
+        {
+          "index": 2,
+          "name": "filterColumn",
+          "type": "string",
+          "description": "Optional, filter column name in object array"
+        },
+        {
+          "index": 3,
+          "name": "filterValue",
+          "type": "any",
+          "description": "Optional, only objects with filterColumn property equal to this value are included"
+        }
+      ],
+      "returnType": "number",
+      "examples": [
+        {
+          "description": "Find lowest score in student array, only for math subject",
+          "expression": "arrayMin(scores, 'score', 'subject', 'Mathematics')"
+        }
+      ],
+      "businessScenarios": [
+        "Find lowest price",
+        "Find minimum age",
+        "Calculate minimum temperature"
+      ],
+      "keywords": [
+        "array min",
+        "minimum element",
+        "minimum value"
+      ],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ],
+      "generationNotes": [
+        "Select this function when the requested business scenario matches the enriched businessScenarios metadata."
+      ]
+    },
+    "arraySum": {
+      "category": "array",
+      "minParams": 1,
+      "maxParams": 4,
+      "optionalParams": [
+        "column",
+        "filterColumn",
+        "filterValue"
+      ],
+      "returnValueType": "number",
+      "description": "Sum values in an array or object-array column.",
+      "knowledgeBaseCategory": "array",
+      "bilingualDescription": "Sum the values in an array. If array elements are objects, use column parameter to specify the property to sum. Empty values are excluded from calculation.",
+      "parameters": [
+        {
+          "index": 0,
+          "name": "list",
+          "type": "array",
+          "description": "Array variable containing elements to sum"
+        },
+        {
+          "index": 1,
+          "name": "column",
+          "type": "string",
+          "description": "Optional, property name in object array to sum"
+        },
+        {
+          "index": 2,
+          "name": "filterColumn",
+          "type": "string",
+          "description": "Optional, filter column name in object array"
+        },
+        {
+          "index": 3,
+          "name": "filterValue",
+          "type": "any",
+          "description": "Optional, only objects with filterColumn property equal to this value are included"
+        }
+      ],
+      "returnType": "number",
+      "examples": [
+        {
+          "description": "Calculate sum of all math scores in student array",
+          "expression": "arraySum(scores, 'score', 'subject', 'Mathematics')"
+        }
+      ],
+      "businessScenarios": [
+        "Calculate total sales amount",
+        "Count total number of people",
+        "Sum calculation"
+      ],
+      "keywords": [
+        "array sum",
+        "total sum",
+        "summation"
+      ],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ],
+      "generationNotes": [
+        "Select this function when the requested business scenario matches the enriched businessScenarios metadata."
+      ]
+    },
+    "ceil": {
+      "category": "math",
+      "minParams": 1,
+      "maxParams": 1,
+      "returnValueType": "number",
+      "description": "Returns the smallest integer not less than the parameter.",
+      "knowledgeBaseCategory": "math",
+      "bilingualDescription": "Returns the smallest integer value not less than the parameter, i.e., rounds up. Commonly used for calculating complete unit quantities.",
+      "parameters": [
+        {
+          "index": 0,
+          "name": "number",
+          "type": "number",
+          "description": "The number to round up"
+        }
+      ],
+      "returnType": "integer",
+      "examples": [
+        {
+          "description": "Calculate the result of rounding 3.2 up",
+          "expression": "ceil(3.2)"
+        }
+      ],
+      "businessScenarios": [
+        "Calculate minimum packaging quantity",
+        "Determine minimum required resources",
+        "Round up calculation"
+      ],
+      "keywords": [
+        "ceil",
+        "ceiling",
+        "round up"
+      ],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ],
+      "generationNotes": [
+        "Select this function when the requested business scenario matches the enriched businessScenarios metadata."
+      ]
+    },
+    "concat": {
+      "category": "string",
+      "minParams": 1,
+      "maxParams": 4,
+      "optionalParams": [
+        "s2",
+        "s3",
+        "s4"
+      ],
+      "returnValueType": "text",
+      "description": "Concatenate string arguments.",
+      "knowledgeBaseCategory": "string",
+      "bilingualDescription": "Concatenates multiple strings into a single string. Can concatenate any number of arguments, commonly used for concatenating names, addresses, generating complete descriptions, etc.",
+      "parameters": [
+        {
+          "index": 0,
+          "name": "s1",
+          "type": "string",
+          "description": "First string to concatenate"
+        },
+        {
+          "index": 1,
+          "name": "s2",
+          "type": "string",
+          "description": "Optional, second string to concatenate"
+        },
+        {
+          "index": 2,
+          "name": "s3",
+          "type": "string",
+          "description": "Optional, third string to concatenate"
+        },
+        {
+          "index": 3,
+          "name": "s4",
+          "type": "string",
+          "description": "Optional, fourth string to concatenate"
+        }
+      ],
+      "returnType": "string",
+      "examples": [
+        {
+          "description": "Concatenate last name and first name into full name",
+          "expression": "concat('Smith', 'Alex')"
+        }
+      ],
+      "businessScenarios": [
+        "Concatenate customer full name",
+        "Generate complete address",
+        "Combine product code and name"
+      ],
+      "keywords": [
+        "string concatenation",
+        "concatenate",
+        "join"
+      ],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ],
+      "generationNotes": [
+        "Select this function when the requested business scenario matches the enriched businessScenarios metadata."
+      ]
+    },
+    "currentUser": {
+      "category": "user/system",
+      "minParams": 0,
+      "maxParams": 0,
+      "returnValueType": "text",
+      "description": "Returns ID of current user.",
+      "knowledgeBaseCategory": "system",
+      "bilingualDescription": "Returns ID of current user. Used to get current logged-in user's identity, commonly used for permission control and personalized display.",
+      "parameters": [],
+      "returnType": "string",
+      "examples": [
+        {
+          "description": "Get current user's ID",
+          "expression": "currentUser()"
+        }
+      ],
+      "businessScenarios": [
+        "Record operating user",
+        "Permission verification",
+        "Personalized display"
+      ],
+      "keywords": [
+        "current user",
+        "user ID",
+        "logged-in user"
+      ],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ],
+      "generationNotes": [
+        "Select this function when the requested business scenario matches the enriched businessScenarios metadata."
+      ]
+    },
+    "date": {
+      "category": "date/time",
+      "minParams": 3,
+      "maxParams": 6,
+      "optionalParams": [
+        "hour",
+        "minute",
+        "second"
+      ],
+      "returnValueType": "date",
+      "description": "Create a system-formatted date string.",
+      "knowledgeBaseCategory": "date",
+      "bilingualDescription": "Create a system-formatted date string based on year, month, day, hour, minute, and second parameters. Can create specific date and time.",
+      "parameters": [
+        {
+          "index": 0,
+          "name": "year",
+          "type": "number",
+          "description": "Year, four-digit number"
+        },
+        {
+          "index": 1,
+          "name": "month",
+          "type": "number",
+          "description": "Month, 1-12"
+        },
+        {
+          "index": 2,
+          "name": "day",
+          "type": "number",
+          "description": "Day, 1-31"
+        },
+        {
+          "index": 3,
+          "name": "hour",
+          "type": "number",
+          "description": "Optional, hour, 0-23"
+        },
+        {
+          "index": 4,
+          "name": "minute",
+          "type": "number",
+          "description": "Optional, minute, 0-59"
+        },
+        {
+          "index": 5,
+          "name": "second",
+          "type": "number",
+          "description": "Optional, second, 0-59"
+        }
+      ],
+      "returnType": "date",
+      "examples": [
+        {
+          "description": "Create date for January 1, 2024 at 12:30",
+          "expression": "date(2024, 1, 1, 12, 30, 0)"
+        }
+      ],
+      "businessScenarios": [
+        "Create specific date",
+        "Generate birth date",
+        "Set deadline time"
+      ],
+      "keywords": [
+        "create date",
+        "date construction",
+        "date generation"
+      ],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ],
+      "generationNotes": [
+        "Select this function when the requested business scenario matches the enriched businessScenarios metadata."
+      ]
+    },
+    "dateAdd": {
+      "category": "date/time",
+      "minParams": 3,
+      "maxParams": 3,
+      "returnValueType": "date",
+      "description": "Add or subtract year, month, day, hour, minute, or second intervals from a date.",
+      "knowledgeBaseCategory": "date",
+      "bilingualDescription": "Add or subtract the specified time interval from the date. Can add year, month, day, hour, minute, second units, commonly used to calculate future or past dates.",
+      "parameters": [
+        {
+          "index": 0,
+          "name": "date",
+          "type": "date/string",
+          "description": "Original time or time expression"
+        },
+        {
+          "index": 1,
+          "name": "type",
+          "type": "string",
+          "description": "Time interval type to add, including year, month, day, hour, minute, second"
+        },
+        {
+          "index": 2,
+          "name": "addedValue",
+          "type": "number",
+          "description": "Value to add to original time, can be positive (future) or negative (past)"
+        }
+      ],
+      "returnType": "date",
+      "examples": [
+        {
+          "description": "Calculate date 3 days before current time",
+          "expression": "dateAdd(now(), 'day', -3)"
+        }
+      ],
+      "businessScenarios": [
+        "Calculate due date",
+        "Schedule meeting time",
+        "Calculate project deadline"
+      ],
+      "keywords": [
+        "date add/subtract",
+        "time calculation",
+        "date offset"
+      ],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ],
+      "generationNotes": [
+        "Select this function when the requested business scenario matches the enriched businessScenarios metadata."
+      ]
+    },
+    "dateDiff": {
+      "category": "date/time",
+      "minParams": 4,
+      "maxParams": 4,
+      "returnValueType": "number",
+      "description": "Return the number of time intervals between two dates.",
+      "knowledgeBaseCategory": "date",
+      "bilingualDescription": "Calculate the number of time intervals between two dates. Can specify units like year, month, day, hour, minute, second. Returns negative number if first date is later than second date.",
+      "parameters": [
+        {
+          "index": 0,
+          "name": "date1",
+          "type": "date/string",
+          "description": "First date or time expression"
+        },
+        {
+          "index": 1,
+          "name": "date2",
+          "type": "date/string",
+          "description": "Second date or time expression for comparison"
+        },
+        {
+          "index": 2,
+          "name": "type",
+          "type": "string",
+          "description": "Time interval type, including year, month, day, hour, minute, second"
+        },
+        {
+          "index": 3,
+          "name": "precise",
+          "type": "boolean",
+          "description": "Optional, if true returns floating point number, otherwise returns integer (rounded down)"
+        }
+      ],
+      "returnType": "number",
+      "examples": [
+        {
+          "description": "Calculate day difference between current time and January 1, 2024",
+          "expression": "dateDiff(now(), '2024-01-01', 'day', true)"
+        }
+      ],
+      "businessScenarios": [
+        "Calculate age/work years",
+        "Statistical order processing time",
+        "Calculate project duration"
+      ],
+      "keywords": [
+        "date difference",
+        "time interval",
+        "date comparison"
+      ],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ],
+      "generationNotes": [
+        "Select this function when the requested business scenario matches the enriched businessScenarios metadata.",
+        "For generated token arrays, pass the date unit parameter as a raw lowercase string such as \"year\" or \"day\". Do not wrap it as [{type:\"str\",value:\"Year\"}], which renders as formcraft.formula.datetype.[object Object]."
+      ]
+    },
+    "dateFormat": {
+      "category": "date/time",
+      "minParams": 2,
+      "maxParams": 2,
+      "returnValueType": "text",
+      "description": "Format a date/time with a format string such as YYYY, MM, DD, HH, mm, ss.",
+      "knowledgeBaseCategory": "date",
+      "bilingualDescription": "Format the given date/time according to specified format. Supports various format symbols, such as YYYY for four-digit year, MM for month, etc.",
+      "parameters": [
+        {
+          "index": 0,
+          "name": "date",
+          "type": "date/string",
+          "description": "Date/time string or expression"
+        },
+        {
+          "index": 1,
+          "name": "format",
+          "type": "string",
+          "description": "Format string, e.g., 'YYYY-MM-DD HH:mm:ss'"
+        }
+      ],
+      "returnType": "string",
+      "examples": [
+        {
+          "description": "Format current time as '2024-01-01 12:30:00'",
+          "expression": "dateFormat(now(), 'YYYY-MM-DD HH:mm:ss')"
+        }
+      ],
+      "businessScenarios": [
+        "Date display formatting",
+        "Generate report timestamp",
+        "Export data date format"
+      ],
+      "keywords": [
+        "date formatting",
+        "time formatting",
+        "format conversion"
+      ],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ],
+      "generationNotes": [
+        "Select this function when the requested business scenario matches the enriched businessScenarios metadata."
+      ]
+    },
+    "datePart": {
+      "category": "date/time",
+      "minParams": 2,
+      "maxParams": 2,
+      "returnValueType": "number",
+      "enumHints": {
+        "type": [
+          "Year",
+          "Quarter",
+          "Month",
+          "dayofweek",
+          "day",
+          "hour",
+          "minute",
+          "second"
+        ]
+      },
+      "description": "Return a selected date part.",
+      "knowledgeBaseCategory": "date",
+      "bilingualDescription": "Extract specified part from date, such as year, month, day, hour, minute, second, etc. Used to get specific components of a date.",
+      "parameters": [
+        {
+          "index": 0,
+          "name": "date",
+          "type": "date/string",
+          "description": "Original date or date expression"
+        },
+        {
+          "index": 1,
+          "name": "type",
+          "type": "string",
+          "description": "Date part to extract, including year, quarter, month, dayofweek, day, hour, minute, second"
+        }
+      ],
+      "returnType": "number",
+      "examples": [
+        {
+          "description": "Get month of current date",
+          "expression": "datePart(now(), 'month')"
+        }
+      ],
+      "businessScenarios": [
+        "Extract birth year",
+        "Get order month",
+        "Analyze time period"
+      ],
+      "keywords": [
+        "date part",
+        "extract date",
+        "get year/month/day"
+      ],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ],
+      "generationNotes": [
+        "Select this function when the requested business scenario matches the enriched businessScenarios metadata."
+      ]
+    },
+    "datePicker": {
+      "category": "date/time",
+      "minParams": 2,
+      "maxParams": 2,
+      "returnValueType": "date",
+      "description": "Select a date/time; second parameter controls display time.",
+      "knowledgeBaseCategory": "date",
+      "bilingualDescription": "Select the date and time. Can specify default selected date and whether to show time through parameters.",
+      "parameters": [
+        {
+          "index": 0,
+          "name": "date",
+          "type": "date/string",
+          "description": "Date to select, can be date string or expression"
+        },
+        {
+          "index": 1,
+          "name": "showTime",
+          "type": "boolean",
+          "description": "Whether to show time selection, true shows, false does not show"
+        }
+      ],
+      "returnType": "date",
+      "examples": [
+        {
+          "description": "Select date and show time",
+          "expression": "datePicker('2024-01-01', true)"
+        }
+      ],
+      "businessScenarios": [
+        "Date picker",
+        "Appointment time selection",
+        "Deadline setting"
+      ],
+      "keywords": [
+        "date picker",
+        "time selection",
+        "datetime picker"
+      ],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ],
+      "safetyNotes": [
+        "Knowledge-base call_format includes a primitive parameter placeholder; validate export-backed token shape before generating primitive params."
+      ],
+      "generationNotes": [
+        "Select this function when the requested business scenario matches the enriched businessScenarios metadata."
+      ]
+    },
+    "day": {
+      "category": "date/time",
+      "minParams": 1,
+      "maxParams": 1,
+      "returnValueType": "number",
+      "description": "Returns the day of the month.",
+      "knowledgeBaseCategory": "date",
+      "bilingualDescription": "Returns the day of the month for the specified date (1-31). Used to extract the day part of a date.",
+      "parameters": [
+        {
+          "index": 0,
+          "name": "date",
+          "type": "date/string",
+          "description": "Date expression to extract day from"
+        }
+      ],
+      "returnType": "number",
+      "examples": [
+        {
+          "description": "Get which day of the month is the current date",
+          "expression": "day(now())"
+        }
+      ],
+      "businessScenarios": [
+        "Calculate billing date",
+        "Statistical daily data",
+        "Date analysis"
+      ],
+      "keywords": [
+        "day",
+        "day number",
+        "date extraction"
+      ],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ],
+      "generationNotes": [
+        "Select this function when the requested business scenario matches the enriched businessScenarios metadata."
+      ]
+    },
+    "fixed": {
+      "category": "math",
+      "minParams": 2,
+      "maxParams": 2,
+      "returnValueType": "number",
+      "description": "Truncate a number to the requested decimal places.",
+      "knowledgeBaseCategory": "math",
+      "bilingualDescription": "Truncate number to specified decimal places. If digit is 0, result has no decimal point or fractional part. Digit can be negative to cause specified digits left of decimal point to become zero.",
+      "parameters": [
+        {
+          "index": 0,
+          "name": "number",
+          "type": "number",
+          "description": "The number to truncate"
+        },
+        {
+          "index": 1,
+          "name": "digit",
+          "type": "number",
+          "description": "Number of decimal places to keep, can be positive, 0, or negative"
+        }
+      ],
+      "returnType": "number",
+      "examples": [
+        {
+          "description": "Truncate 3.14159 to two decimal places",
+          "expression": "fixed(3.14159, 2)"
+        }
+      ],
+      "businessScenarios": [
+        "Amount formatting",
+        "Data precision control",
+        "Report numerical processing"
+      ],
+      "keywords": [
+        "truncate decimal",
+        "keep decimal places",
+        "number formatting"
+      ],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ],
+      "generationNotes": [
+        "Select this function when the requested business scenario matches the enriched businessScenarios metadata."
+      ]
+    },
+    "floor": {
+      "category": "math",
+      "minParams": 1,
+      "maxParams": 1,
+      "returnValueType": "number",
+      "description": "Returns the largest integer not greater than the parameter.",
+      "knowledgeBaseCategory": "math",
+      "bilingualDescription": "Returns the largest integer value not greater than the parameter, i.e., rounds down. Commonly used to calculate complete unit quantities or remove decimal parts.",
+      "parameters": [
+        {
+          "index": 0,
+          "name": "number",
+          "type": "number",
+          "description": "The number to round down"
+        }
+      ],
+      "returnType": "integer",
+      "examples": [
+        {
+          "description": "Calculate the result of rounding 3.9 down",
+          "expression": "floor(3.9)"
+        }
+      ],
+      "businessScenarios": [
+        "Calculate complete packaging quantity",
+        "Determine maximum available resources",
+        "Round down calculation"
+      ],
+      "keywords": [
+        "floor",
+        "floor function",
+        "round down"
+      ],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ],
+      "generationNotes": [
+        "Select this function when the requested business scenario matches the enriched businessScenarios metadata."
+      ]
+    },
+    "formatNumber": {
+      "category": "string",
+      "minParams": 3,
+      "maxParams": 3,
+      "returnValueType": "text",
+      "description": "Format a number with decimals and optional thousandths flag.",
+      "knowledgeBaseCategory": "string",
+      "bilingualDescription": "Format a number and return a string. Can specify number of decimal places and whether to show thousand separator.",
+      "parameters": [
+        {
+          "index": 0,
+          "name": "expression",
+          "type": "number",
+          "description": "Numeric expression, the number to format"
+        },
+        {
+          "index": 1,
+          "name": "digit",
+          "type": "number",
+          "description": "Number of decimal places to keep"
+        },
+        {
+          "index": 2,
+          "name": "thousandths",
+          "type": "boolean/number",
+          "description": "Whether to show thousand separator, 1 for true, 0 for false"
+        }
+      ],
+      "returnType": "string",
+      "examples": [
+        {
+          "description": "Format 1234567.89 as string with thousand separator and two decimal places",
+          "expression": "formatNumber(1234567.89, 2, 1)"
+        }
+      ],
+      "businessScenarios": [
+        "Amount formatting display",
+        "Report number formatting",
+        "Data export formatting"
+      ],
+      "keywords": [
+        "number formatting",
+        "thousand separator",
+        "format number"
+      ],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ],
+      "generationNotes": [
+        "Select this function when the requested business scenario matches the enriched businessScenarios metadata."
+      ]
+    },
+    "getAttr": {
+      "category": "utility",
+      "minParams": 2,
+      "maxParams": 3,
+      "optionalParams": [
+        "defaultValue"
+      ],
+      "returnValueType": "unknown",
+      "description": "Get a value at an object path and return a default when undefined.",
+      "knowledgeBaseCategory": "object",
+      "bilingualDescription": "Gets the value at path of object. If the resolved value is undefined, the defaultValue is returned. Used for safely accessing nested object properties.",
+      "parameters": [
+        {
+          "index": 0,
+          "name": "object",
+          "type": "object",
+          "description": "The object to query"
+        },
+        {
+          "index": 1,
+          "name": "path",
+          "type": "string",
+          "description": "The path of the property to get, e.g., 'user.address.city'"
+        },
+        {
+          "index": 2,
+          "name": "defaultValue",
+          "type": "any",
+          "description": "Optional, default value returned when path doesn't exist"
+        }
+      ],
+      "returnType": "any",
+      "examples": [
+        {
+          "description": "Get city property of address in user object, return 'Unknown' if doesn't exist",
+          "expression": "getAttr(user, 'address.city', 'Unknown')"
+        }
+      ],
+      "businessScenarios": [
+        "Safe access to object properties",
+        "Get configuration items",
+        "Process nested data"
+      ],
+      "keywords": [
+        "get attribute",
+        "object path",
+        "safe access"
+      ],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ],
+      "generationNotes": [
+        "Select this function when the requested business scenario matches the enriched businessScenarios metadata."
+      ]
+    },
+    "hour": {
+      "category": "date/time",
+      "minParams": 1,
+      "maxParams": 1,
+      "returnValueType": "number",
+      "description": "Returns the hour for a time.",
+      "knowledgeBaseCategory": "date",
+      "bilingualDescription": "Returns the hour for the specified time (0-23). Used to extract hour information from time.",
+      "parameters": [
+        {
+          "index": 0,
+          "name": "time",
+          "type": "date/string",
+          "description": "Time expression to extract hour from"
+        }
+      ],
+      "returnType": "number",
+      "examples": [
+        {
+          "description": "Get hour of current time",
+          "expression": "hour(now())"
+        }
+      ],
+      "businessScenarios": [
+        "Analyze time period",
+        "Statistical hourly data",
+        "Time analysis"
+      ],
+      "keywords": [
+        "hour",
+        "time extraction",
+        "get hour"
+      ],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ],
+      "generationNotes": [
+        "Select this function when the requested business scenario matches the enriched businessScenarios metadata."
+      ]
+    },
+    "iif": {
+      "category": "logical",
+      "minParams": 3,
+      "maxParams": 3,
+      "returnValueType": "unknown",
+      "description": "Return then value when condition is true, otherwise else value.",
+      "knowledgeBaseCategory": "logic",
+      "bilingualDescription": "Returns one of two values depending on a condition evaluation. If condition is true returns first value, otherwise returns second value. Similar to if-else statement.",
+      "parameters": [
+        {
+          "index": 0,
+          "name": "condition",
+          "type": "boolean",
+          "description": "Logical expression, condition to evaluate, result is true or false"
+        },
+        {
+          "index": 1,
+          "name": "then",
+          "type": "any",
+          "description": "Value returned when condition is true"
+        },
+        {
+          "index": 2,
+          "name": "else",
+          "type": "any",
+          "description": "Value returned when condition is false"
+        }
+      ],
+      "returnType": "any",
+      "examples": [
+        {
+          "description": "If score is greater than or equal to 60 return 'Pass', otherwise return 'Fail'",
+          "expression": "iif(score >= 60, 'Pass', 'Fail')"
+        }
+      ],
+      "businessScenarios": [
+        "Determine grade based on score",
+        "Determine customer level based on amount",
+        "Conditional discount calculation"
+      ],
+      "keywords": [
+        "conditional judgment",
+        "if else",
+        "ternary operation",
+        "iif"
+      ],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ],
+      "generationNotes": [
+        "Select this function when the requested business scenario matches the enriched businessScenarios metadata."
+      ]
+    },
+    "isFalse": {
+      "category": "logical",
+      "minParams": 1,
+      "maxParams": 1,
+      "returnValueType": "boolean",
+      "description": "Evaluate whether an expression is false-like.",
+      "knowledgeBaseCategory": "logic",
+      "bilingualDescription": "Determines if an expression is false. Returns true in following cases: null, 0, empty string, string 'false', string 'False', boolean false, otherwise returns false.",
+      "parameters": [
+        {
+          "index": 0,
+          "name": "parameter",
+          "type": "any",
+          "description": "The expression to evaluate"
+        }
+      ],
+      "returnType": "boolean",
+      "examples": [
+        {
+          "description": "Determine if variable value is false",
+          "expression": "isFalse(value)"
+        }
+      ],
+      "businessScenarios": [
+        "Validate form input",
+        "Check switch status",
+        "Determine if condition is met"
+      ],
+      "keywords": [
+        "is false",
+        "false value judgment",
+        "boolean judgment"
+      ],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ],
+      "generationNotes": [
+        "Select this function when the requested business scenario matches the enriched businessScenarios metadata."
+      ]
+    },
+    "isNullOrEmpty": {
+      "category": "logical",
+      "minParams": 1,
+      "maxParams": 1,
+      "returnValueType": "boolean",
+      "description": "Return true if an expression is null or empty string.",
+      "knowledgeBaseCategory": "validation",
+      "bilingualDescription": "Checks if expression is NULL or empty string. Returns true if null or empty string, otherwise returns false. Used to verify if input is valid.",
+      "parameters": [
+        {
+          "index": 0,
+          "name": "checkExpression",
+          "type": "any",
+          "description": "The expression to be checked"
+        }
+      ],
+      "returnType": "boolean",
+      "examples": [
+        {
+          "description": "Check if username is empty or null",
+          "expression": "isNullOrEmpty(username)"
+        }
+      ],
+      "businessScenarios": [
+        "Form validation",
+        "Required field check",
+        "Data integrity validation"
+      ],
+      "keywords": [
+        "null check",
+        "empty string",
+        "validate input"
+      ],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ],
+      "generationNotes": [
+        "Select this function when the requested business scenario matches the enriched businessScenarios metadata."
+      ]
+    },
+    "isTrue": {
+      "category": "logical",
+      "minParams": 1,
+      "maxParams": 1,
+      "returnValueType": "boolean",
+      "description": "Evaluate whether an expression is true-like.",
+      "knowledgeBaseCategory": "logic",
+      "bilingualDescription": "Determines if an expression is true. Returns false in following cases: null, 0, empty string, string 'false', string 'False', boolean false, otherwise returns true.",
+      "parameters": [
+        {
+          "index": 0,
+          "name": "parameter",
+          "type": "any",
+          "description": "The expression to evaluate"
+        }
+      ],
+      "returnType": "boolean",
+      "examples": [
+        {
+          "description": "Determine if variable value is true",
+          "expression": "isTrue(value)"
+        }
+      ],
+      "businessScenarios": [
+        "Validate form input",
+        "Check switch status",
+        "Determine if condition is met"
+      ],
+      "keywords": [
+        "is true",
+        "true value judgment",
+        "boolean judgment"
+      ],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ],
+      "generationNotes": [
+        "Select this function when the requested business scenario matches the enriched businessScenarios metadata."
+      ]
+    },
+    "join": {
+      "category": "array",
+      "minParams": 1,
+      "maxParams": 2,
+      "optionalParams": [
+        "separator"
+      ],
+      "returnValueType": "text",
+      "description": "Join array values with comma or provided separator.",
+      "knowledgeBaseCategory": "string",
+      "bilingualDescription": "Returns a string by combining all the elements in the array with either commas or a specified separator string. If no separator is provided, commas are used.",
+      "parameters": [
+        {
+          "index": 0,
+          "name": "array",
+          "type": "array",
+          "description": "Array variable containing elements to join"
+        },
+        {
+          "index": 1,
+          "name": "separator",
+          "type": "string",
+          "description": "Optional, separator, default is comma"
+        }
+      ],
+      "returnType": "string",
+      "examples": [
+        {
+          "description": "Join array ['apple','banana','orange'] with comma into string",
+          "expression": "join(fruits, ', ')"
+        }
+      ],
+      "businessScenarios": [
+        "Generate tag string",
+        "Concatenate options",
+        "Export CSV data"
+      ],
+      "keywords": [
+        "array join",
+        "join strings",
+        "join array"
+      ],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ],
+      "generationNotes": [
+        "Select this function when the requested business scenario matches the enriched businessScenarios metadata."
+      ]
+    },
+    "left": {
+      "category": "string",
+      "minParams": 2,
+      "maxParams": 2,
+      "returnValueType": "text",
+      "description": "Return leftmost characters from a string.",
+      "knowledgeBaseCategory": "string",
+      "bilingualDescription": "Returns the leftmost specified number of characters from the string. Used to extract prefix part of string.",
+      "parameters": [
+        {
+          "index": 0,
+          "name": "str",
+          "type": "string",
+          "description": "Original string"
+        },
+        {
+          "index": 1,
+          "name": "len",
+          "type": "number",
+          "description": "Number of characters to extract"
+        }
+      ],
+      "returnType": "string",
+      "examples": [
+        {
+          "description": "Extract first 5 characters from string 'Hello World'",
+          "expression": "left('Hello World', 5)"
+        }
+      ],
+      "businessScenarios": [
+        "Extract first letter of name",
+        "Extract product code prefix",
+        "Get string prefix"
+      ],
+      "keywords": [
+        "left extract",
+        "left characters",
+        "string extraction"
+      ],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ],
+      "generationNotes": [
+        "Select this function when the requested business scenario matches the enriched businessScenarios metadata."
+      ]
+    },
+    "len": {
+      "category": "string",
+      "minParams": 1,
+      "maxParams": 1,
+      "returnValueType": "number",
+      "description": "Return array item count or character count.",
+      "knowledgeBaseCategory": "string",
+      "bilingualDescription": "Returns the length of the value. If value is array, returns number of elements; if other type, returns number of characters. Used to get string length or array size.",
+      "parameters": [
+        {
+          "index": 0,
+          "name": "checkExpression",
+          "type": "any",
+          "description": "Expression to check length, can be array, string or other type"
+        }
+      ],
+      "returnType": "number",
+      "examples": [
+        {
+          "description": "Get length of string 'Hello'",
+          "expression": "len('Hello')"
+        }
+      ],
+      "businessScenarios": [
+        "Validate input length",
+        "Count array elements",
+        "Check string length"
+      ],
+      "keywords": [
+        "length",
+        "character count",
+        "array size"
+      ],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ],
+      "generationNotes": [
+        "Select this function when the requested business scenario matches the enriched businessScenarios metadata."
+      ]
+    },
+    "log": {
+      "category": "math",
+      "minParams": 1,
+      "maxParams": 2,
+      "optionalParams": [
+        "baseOrNumber"
+      ],
+      "returnValueType": "number",
+      "description": "Return natural logarithm or logarithm using a provided base.",
+      "knowledgeBaseCategory": "math",
+      "bilingualDescription": "Calculate logarithm. If called with one parameter, returns natural logarithm (base e). If called with two parameters, returns logarithm of second parameter to base of first parameter.",
+      "parameters": [
+        {
+          "index": 0,
+          "name": "n1",
+          "type": "number",
+          "description": "If one parameter, number to calculate natural logarithm; if two parameters, base of logarithm"
+        },
+        {
+          "index": 1,
+          "name": "n2",
+          "type": "number",
+          "description": "Optional, number to calculate logarithm of"
+        }
+      ],
+      "returnType": "number",
+      "examples": [
+        {
+          "description": "Calculate logarithm of 100 to base 10",
+          "expression": "log(10, 100)"
+        }
+      ],
+      "businessScenarios": [
+        "Scientific calculation",
+        "Data analysis",
+        "Financial calculation"
+      ],
+      "keywords": [
+        "logarithm",
+        "natural logarithm",
+        "log"
+      ],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ],
+      "generationNotes": [
+        "Select this function when the requested business scenario matches the enriched businessScenarios metadata."
+      ]
+    },
+    "lower": {
+      "category": "string",
+      "minParams": 1,
+      "maxParams": 1,
+      "returnValueType": "text",
+      "description": "Convert text to lowercase.",
+      "knowledgeBaseCategory": "string",
+      "bilingualDescription": "Converts uppercase character data to lowercase. Used to unify string case format.",
+      "parameters": [
+        {
+          "index": 0,
+          "name": "expression",
+          "type": "string",
+          "description": "String expression to convert to lowercase"
+        }
+      ],
+      "returnType": "string",
+      "examples": [
+        {
+          "description": "Convert string 'Hello World' to lowercase",
+          "expression": "lower('Hello World')"
+        }
+      ],
+      "businessScenarios": [
+        "Unify username format",
+        "Standardize input",
+        "Case conversion"
+      ],
+      "keywords": [
+        "lowercase conversion",
+        "convert to lowercase",
+        "case"
+      ],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ],
+      "generationNotes": [
+        "Select this function when the requested business scenario matches the enriched businessScenarios metadata."
+      ]
+    },
+    "max": {
+      "category": "math",
+      "minParams": 1,
+      "maxParams": 4,
+      "returnValueType": "number",
+      "description": "Return maximum numeric value.",
+      "knowledgeBaseCategory": "math",
+      "bilingualDescription": "Returns the maximum value in the input parameters. Can compare multiple numbers and find the maximum value.",
+      "parameters": [
+        {
+          "index": 0,
+          "name": "numbers",
+          "type": "number...",
+          "description": "Numbers to compare, can pass 2 to 4 parameters"
+        }
+      ],
+      "returnType": "number",
+      "examples": [
+        {
+          "description": "Find maximum value among 3, 7, 2, 9",
+          "expression": "max(3, 7, 2, 9)"
+        }
+      ],
+      "businessScenarios": [
+        "Find highest score",
+        "Compare multiple prices",
+        "Get maximum value"
+      ],
+      "keywords": [
+        "maximum",
+        "maximum number",
+        "compare numbers"
+      ],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ],
+      "generationNotes": [
+        "Select this function when the requested business scenario matches the enriched businessScenarios metadata."
+      ]
+    },
+    "min": {
+      "category": "math",
+      "minParams": 1,
+      "maxParams": 4,
+      "returnValueType": "number",
+      "description": "Return minimum numeric value.",
+      "knowledgeBaseCategory": "math",
+      "bilingualDescription": "Returns the minimum value in the input parameters. Can compare multiple numbers and find the minimum value.",
+      "parameters": [
+        {
+          "index": 0,
+          "name": "numbers",
+          "type": "number...",
+          "description": "Numbers to compare, can pass 2 to 4 parameters"
+        }
+      ],
+      "returnType": "number",
+      "examples": [
+        {
+          "description": "Find minimum value among 3, 7, 2, 9",
+          "expression": "min(3, 7, 2, 9)"
+        }
+      ],
+      "businessScenarios": [
+        "Find lowest score",
+        "Compare multiple prices",
+        "Get minimum value"
+      ],
+      "keywords": [
+        "minimum",
+        "minimum number",
+        "compare numbers"
+      ],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ],
+      "generationNotes": [
+        "Select this function when the requested business scenario matches the enriched businessScenarios metadata."
+      ]
+    },
+    "minute": {
+      "category": "date/time",
+      "minParams": 1,
+      "maxParams": 1,
+      "returnValueType": "number",
+      "description": "Return minute for a time.",
+      "knowledgeBaseCategory": "date",
+      "bilingualDescription": "Returns the minute for the specified time (0-59). Used to extract minute information from time.",
+      "parameters": [
+        {
+          "index": 0,
+          "name": "time",
+          "type": "date/string",
+          "description": "Time expression to extract minute from"
+        }
+      ],
+      "returnType": "number",
+      "examples": [
+        {
+          "description": "Get minute of current time",
+          "expression": "minute(now())"
+        }
+      ],
+      "businessScenarios": [
+        "Analyze time period",
+        "Statistical minute data",
+        "Time analysis"
+      ],
+      "keywords": [
+        "minute",
+        "time extraction",
+        "get minute"
+      ],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ],
+      "generationNotes": [
+        "Select this function when the requested business scenario matches the enriched businessScenarios metadata."
+      ]
+    },
+    "month": {
+      "category": "date/time",
+      "minParams": 1,
+      "maxParams": 1,
+      "returnValueType": "number",
+      "description": "Return month for a date.",
+      "knowledgeBaseCategory": "date",
+      "bilingualDescription": "Returns the month for the specified date (1-12). Used to extract month information from date.",
+      "parameters": [
+        {
+          "index": 0,
+          "name": "date",
+          "type": "date/string",
+          "description": "Date expression to extract month from"
+        }
+      ],
+      "returnType": "number",
+      "examples": [
+        {
+          "description": "Get month of current date",
+          "expression": "month(now())"
+        }
+      ],
+      "businessScenarios": [
+        "Monthly statistics",
+        "Birth month",
+        "Seasonal analysis"
+      ],
+      "keywords": [
+        "month",
+        "date extraction",
+        "get month"
+      ],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ],
+      "generationNotes": [
+        "Select this function when the requested business scenario matches the enriched businessScenarios metadata."
+      ]
+    },
+    "now": {
+      "category": "date/time",
+      "minParams": 0,
+      "maxParams": 0,
+      "returnValueType": "date",
+      "description": "Return current date and time.",
+      "knowledgeBaseCategory": "date",
+      "bilingualDescription": "Returns the current date and time. Commonly used for recording timestamps, calculating time differences related to current time, etc.",
+      "parameters": [],
+      "returnType": "date",
+      "examples": [
+        {
+          "description": "Get current system date and time",
+          "expression": "now()"
+        }
+      ],
+      "businessScenarios": [
+        "Record creation time",
+        "Calculate due time",
+        "Timestamp generation"
+      ],
+      "keywords": [
+        "current time",
+        "now",
+        "current date"
+      ],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ],
+      "generationNotes": [
+        "Select this function when the requested business scenario matches the enriched businessScenarios metadata."
+      ]
+    },
+    "number": {
+      "category": "conversion",
+      "minParams": 1,
+      "maxParams": 1,
+      "returnValueType": "number",
+      "description": "Convert a value to number; invalid/null becomes 0.",
+      "knowledgeBaseCategory": "conversion",
+      "bilingualDescription": "Converts input value to a number. If input is null or invalid, returns 0. Used to convert string or other types to number.",
+      "parameters": [
+        {
+          "index": 0,
+          "name": "X",
+          "type": "any",
+          "description": "The value to convert to number"
+        }
+      ],
+      "returnType": "number",
+      "examples": [
+        {
+          "description": "Convert string '123' to number 123",
+          "expression": "number('123')"
+        }
+      ],
+      "businessScenarios": [
+        "String to number conversion",
+        "Data type conversion",
+        "Input value standardization"
+      ],
+      "keywords": [
+        "convert to number",
+        "number conversion",
+        "type conversion"
+      ],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ],
+      "generationNotes": [
+        "Select this function when the requested business scenario matches the enriched businessScenarios metadata."
+      ]
+    },
+    "pow": {
+      "category": "math",
+      "minParams": 2,
+      "maxParams": 2,
+      "returnValueType": "number",
+      "description": "Return X raised to Y.",
+      "knowledgeBaseCategory": "math",
+      "bilingualDescription": "Returns the value of X raised to the power of Y. Used to calculate exponentiation, such as square, cube, etc.",
+      "parameters": [
+        {
+          "index": 0,
+          "name": "X",
+          "type": "number",
+          "description": "Base number"
+        },
+        {
+          "index": 1,
+          "name": "Y",
+          "type": "number",
+          "description": "Exponent"
+        }
+      ],
+      "returnType": "number",
+      "examples": [
+        {
+          "description": "Calculate 2 to the power of 3",
+          "expression": "pow(2, 3)"
+        }
+      ],
+      "businessScenarios": [
+        "Calculate area",
+        "Compound interest calculation",
+        "Scientific calculation"
+      ],
+      "keywords": [
+        "power operation",
+        "exponent",
+        "power"
+      ],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ],
+      "generationNotes": [
+        "Select this function when the requested business scenario matches the enriched businessScenarios metadata."
+      ]
+    },
+    "rand": {
+      "category": "math",
+      "minParams": 0,
+      "maxParams": 0,
+      "returnValueType": "number",
+      "description": "Return random floating point value from 0 inclusive to 1 exclusive.",
+      "knowledgeBaseCategory": "math",
+      "bilingualDescription": "Returns a random floating-point value in the range 0 <= v < 1.0. Used to generate random numbers, such as for lottery, random sorting, etc.",
+      "parameters": [],
+      "returnType": "number",
+      "examples": [
+        {
+          "description": "Generate a random number between 0 and 1",
+          "expression": "rand()"
+        }
+      ],
+      "businessScenarios": [
+        "Random draw",
+        "Generate test data",
+        "Random sorting"
+      ],
+      "keywords": [
+        "random number",
+        "rand",
+        "random generation"
+      ],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ],
+      "generationNotes": [
+        "Select this function when the requested business scenario matches the enriched businessScenarios metadata."
+      ]
+    },
+    "removeDuplicates": {
+      "category": "array",
+      "minParams": 1,
+      "maxParams": 1,
+      "returnValueType": "array",
+      "description": "Return a new array with duplicate values removed.",
+      "knowledgeBaseCategory": "array",
+      "bilingualDescription": "Remove all duplicates from a given array and return a new array containing unique elements. If elements in the array are objects, they will be converted to JSON strings for comparison.",
+      "parameters": [
+        {
+          "index": 0,
+          "name": "arr",
+          "type": "array",
+          "description": "Original array from which to remove duplicates"
+        }
+      ],
+      "returnType": "array",
+      "examples": [
+        {
+          "description": "Remove duplicates from array [1, 2, 2, 3, 3, 3]",
+          "expression": "removeDuplicates([1, 2, 2, 3, 3, 3])"
+        }
+      ],
+      "businessScenarios": [
+        "Deduplicate user list",
+        "Clean duplicate data",
+        "Get unique values"
+      ],
+      "keywords": [
+        "deduplicate",
+        "remove duplicates",
+        "unique array"
+      ],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ],
+      "generationNotes": [
+        "Select this function when the requested business scenario matches the enriched businessScenarios metadata."
+      ]
+    },
+    "repeat": {
+      "category": "string",
+      "minParams": 2,
+      "maxParams": 2,
+      "returnValueType": "text",
+      "description": "Repeat a string a given number of times.",
+      "knowledgeBaseCategory": "string",
+      "bilingualDescription": "Returns a string consisting of the specified string repeated specified number of times. If count is less than 1, returns an empty string.",
+      "parameters": [
+        {
+          "index": 0,
+          "name": "str",
+          "type": "string",
+          "description": "The string to repeat"
+        },
+        {
+          "index": 1,
+          "name": "count",
+          "type": "number",
+          "description": "Number of times to repeat"
+        }
+      ],
+      "returnType": "string",
+      "examples": [
+        {
+          "description": "Repeat string 'abc' 3 times",
+          "expression": "repeat('abc', 3)"
+        }
+      ],
+      "businessScenarios": [
+        "Generate separator line",
+        "Create test data",
+        "String repetition"
+      ],
+      "keywords": [
+        "repeat string",
+        "string repetition",
+        "repeat"
+      ],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ],
+      "generationNotes": [
+        "Select this function when the requested business scenario matches the enriched businessScenarios metadata."
+      ]
+    },
+    "replace": {
+      "category": "string",
+      "minParams": 4,
+      "maxParams": 4,
+      "returnValueType": "text",
+      "enumHints": {
+        "type": [
+          "1",
+          "0",
+          "2"
+        ]
+      },
+      "description": "Replace first/all/last occurrence; type 1 all, 0 first, 2 last.",
+      "knowledgeBaseCategory": "string",
+      "bilingualDescription": "Replacing first/all/last occurrence of a specified string value with another string value. Can replace first occurrence, last occurrence, or all occurrences of pattern.",
+      "parameters": [
+        {
+          "index": 0,
+          "name": "expression",
+          "type": "string",
+          "description": "The string expression to be searched"
+        },
+        {
+          "index": 1,
+          "name": "pattern",
+          "type": "string",
+          "description": "The substring to be found"
+        },
+        {
+          "index": 2,
+          "name": "replacement",
+          "type": "string",
+          "description": "The replacement string"
+        },
+        {
+          "index": 3,
+          "name": "type",
+          "type": "number",
+          "description": "Replacement type: 0 for first, 1 for all, 2 for last"
+        }
+      ],
+      "returnType": "string",
+      "examples": [
+        {
+          "description": "Replace all 'l' with 'L' in string 'hello world'",
+          "expression": "replace('hello world', 'l', 'L', 1)"
+        }
+      ],
+      "businessScenarios": [
+        "Text replacement",
+        "Template filling",
+        "Data cleaning"
+      ],
+      "keywords": [
+        "replace",
+        "string replacement",
+        "text replacement"
+      ],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ],
+      "generationNotes": [
+        "Select this function when the requested business scenario matches the enriched businessScenarios metadata."
+      ]
+    },
+    "right": {
+      "category": "string",
+      "minParams": 2,
+      "maxParams": 2,
+      "returnValueType": "text",
+      "description": "Return rightmost characters from a string.",
+      "knowledgeBaseCategory": "string",
+      "bilingualDescription": "Returns the rightmost specified number of characters from the string. Used to extract suffix part of string.",
+      "parameters": [
+        {
+          "index": 0,
+          "name": "str",
+          "type": "string",
+          "description": "Original string"
+        },
+        {
+          "index": 1,
+          "name": "len",
+          "type": "number",
+          "description": "Number of characters to extract"
+        }
+      ],
+      "returnType": "string",
+      "examples": [
+        {
+          "description": "Extract last 5 characters from string 'Hello World'",
+          "expression": "right('Hello World', 5)"
+        }
+      ],
+      "businessScenarios": [
+        "Extract file extension",
+        "Get last few digits of ID card",
+        "Extract string suffix"
+      ],
+      "keywords": [
+        "right extract",
+        "right characters",
+        "string extraction"
+      ],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ],
+      "generationNotes": [
+        "Select this function when the requested business scenario matches the enriched businessScenarios metadata."
+      ]
+    },
+    "round": {
+      "category": "math",
+      "minParams": 1,
+      "maxParams": 2,
+      "optionalParams": [
+        "digits"
+      ],
+      "returnValueType": "number",
+      "description": "Round to nearest integer or specified fractional digits.",
+      "knowledgeBaseCategory": "math",
+      "bilingualDescription": "Rounds a value to the nearest integer or to the specified number of fractional digits. Used for numerical precision control.",
+      "parameters": [
+        {
+          "index": 0,
+          "name": "number",
+          "type": "number",
+          "description": "The number expression to be processed"
+        },
+        {
+          "index": 1,
+          "name": "digits",
+          "type": "number",
+          "description": "Optional, number of fractional digits to keep, default is 0"
+        }
+      ],
+      "returnType": "number",
+      "examples": [
+        {
+          "description": "Round 3.14159 to two decimal places",
+          "expression": "round(3.14159, 2)"
+        }
+      ],
+      "businessScenarios": [
+        "Amount calculation",
+        "Data precision control",
+        "Report numerical processing"
+      ],
+      "keywords": [
+        "round",
+        "rounding",
+        "rounding"
+      ],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ],
+      "generationNotes": [
+        "Select this function when the requested business scenario matches the enriched businessScenarios metadata."
+      ]
+    },
+    "second": {
+      "category": "date/time",
+      "minParams": 1,
+      "maxParams": 1,
+      "returnValueType": "number",
+      "description": "Return second for a time.",
+      "knowledgeBaseCategory": "date",
+      "bilingualDescription": "Returns the second for the specified time (0-59). Used to extract second information from time.",
+      "parameters": [
+        {
+          "index": 0,
+          "name": "time",
+          "type": "date/string",
+          "description": "Time expression to extract second from"
+        }
+      ],
+      "returnType": "number",
+      "examples": [
+        {
+          "description": "Get second of current time",
+          "expression": "second(now())"
+        }
+      ],
+      "businessScenarios": [
+        "Timing",
+        "Precise time analysis",
+        "Second-level statistics"
+      ],
+      "keywords": [
+        "second",
+        "time extraction",
+        "get second"
+      ],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ],
+      "generationNotes": [
+        "Select this function when the requested business scenario matches the enriched businessScenarios metadata."
+      ]
+    },
+    "split": {
+      "category": "string",
+      "minParams": 2,
+      "maxParams": 2,
+      "returnValueType": "array",
+      "description": "Split a string by separator.",
+      "knowledgeBaseCategory": "string",
+      "bilingualDescription": "Splits a string into an array of substrings based on a specified delimiter. Used to parse string data.",
+      "parameters": [
+        {
+          "index": 0,
+          "name": "string",
+          "type": "string",
+          "description": "The string variable to split"
+        },
+        {
+          "index": 1,
+          "name": "separator",
+          "type": "string",
+          "description": "A string that separates the substrings"
+        }
+      ],
+      "returnType": "array",
+      "examples": [
+        {
+          "description": "Split string 'apple,banana,orange' into array with comma",
+          "expression": "split('apple,banana,orange', ',')"
+        }
+      ],
+      "businessScenarios": [
+        "Parse CSV data",
+        "Split path",
+        "String parsing"
+      ],
+      "keywords": [
+        "split string",
+        "string splitting",
+        "split"
+      ],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ],
+      "generationNotes": [
+        "Select this function when the requested business scenario matches the enriched businessScenarios metadata."
+      ]
+    },
+    "strIndex": {
+      "category": "string",
+      "minParams": 2,
+      "maxParams": 3,
+      "optionalParams": [
+        "start_location"
+      ],
+      "returnValueType": "number",
+      "description": "Search one expression inside another and return its starting position.",
+      "sourceReferences": [
+        "expression training data generator.txt:firstPass"
+      ],
+      "safetyNotes": [
+        "Missing from expression training data generator_2.txt function knowledge base; preserve exact first-pass runtime name and do not rename from case-insensitive text."
+      ]
+    },
+    "subString": {
+      "category": "string",
+      "minParams": 3,
+      "maxParams": 3,
+      "returnValueType": "text",
+      "description": "Return part of a string from start for length.",
+      "knowledgeBaseCategory": "string",
+      "bilingualDescription": "Extract part of string, or text. Can specify start position and length, used to extract part of a string.",
+      "parameters": [
+        {
+          "index": 0,
+          "name": "expression",
+          "type": "string",
+          "description": "A string, or text expression"
+        },
+        {
+          "index": 1,
+          "name": "start",
+          "type": "number",
+          "description": "Integer expression that specifies where the returned characters start. If less than 1, starts at first character."
+        },
+        {
+          "index": 2,
+          "name": "length",
+          "type": "number",
+          "description": "Positive integer expression that specifies how many characters will be returned. If negative, returns empty string."
+        }
+      ],
+      "returnType": "string",
+      "examples": [
+        {
+          "description": "Extract 5 characters starting from 6th character in string 'Hello World'",
+          "expression": "subString('Hello World', 6, 5)"
+        }
+      ],
+      "businessScenarios": [
+        "Extract part of text",
+        "Truncate string",
+        "Get substring"
+      ],
+      "keywords": [
+        "substring",
+        "string extraction",
+        "extract substring"
+      ],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ],
+      "generationNotes": [
+        "Select this function when the requested business scenario matches the enriched businessScenarios metadata."
+      ]
+    },
+    "text": {
+      "category": "conversion",
+      "minParams": 1,
+      "maxParams": 1,
+      "returnValueType": "text",
+      "description": "Convert a value to text.",
+      "knowledgeBaseCategory": "conversion",
+      "bilingualDescription": "Converts input value to a string value. Used to convert number, date or other types to string format.",
+      "parameters": [
+        {
+          "index": 0,
+          "name": "X",
+          "type": "any",
+          "description": "The value to convert to string"
+        }
+      ],
+      "returnType": "string",
+      "examples": [
+        {
+          "description": "Convert number 123 to string '123'",
+          "expression": "text(123)"
+        }
+      ],
+      "businessScenarios": [
+        "Number to string conversion",
+        "Data type conversion",
+        "Generate text"
+      ],
+      "keywords": [
+        "convert to string",
+        "text conversion",
+        "string conversion"
+      ],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ],
+      "generationNotes": [
+        "Select this function when the requested business scenario matches the enriched businessScenarios metadata."
+      ]
+    },
+    "trim": {
+      "category": "string",
+      "minParams": 1,
+      "maxParams": 1,
+      "returnValueType": "text",
+      "description": "Remove whitespace from both ends.",
+      "knowledgeBaseCategory": "string",
+      "bilingualDescription": "Removes whitespace from both ends of a string. Includes spaces, tabs, newlines, etc., used to clean user input.",
+      "parameters": [
+        {
+          "index": 0,
+          "name": "string",
+          "type": "string",
+          "description": "The string to process"
+        }
+      ],
+      "returnType": "string",
+      "examples": [
+        {
+          "description": "Remove spaces from both ends of string '  Hello World  '",
+          "expression": "trim('  Hello World  ')"
+        }
+      ],
+      "businessScenarios": [
+        "Clean user input",
+        "Data standardization",
+        "Remove spaces"
+      ],
+      "keywords": [
+        "trim spaces",
+        "trim string",
+        "trim"
+      ],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ],
+      "generationNotes": [
+        "Select this function when the requested business scenario matches the enriched businessScenarios metadata."
+      ]
+    },
+    "UniqueID": {
+      "category": "user/system",
+      "minParams": 0,
+      "maxParams": 0,
+      "returnValueType": "text",
+      "description": "Generate a unique id.",
+      "knowledgeBaseCategory": "system",
+      "bilingualDescription": "Generate a unique id. Typically used to create unique identifiers for records, such as order numbers, user IDs, etc.",
+      "parameters": [],
+      "returnType": "string",
+      "examples": [
+        {
+          "description": "Generate a unique ID",
+          "expression": "UniqueID()"
+        }
+      ],
+      "businessScenarios": [
+        "Generate order number",
+        "Create user ID",
+        "Unique identifier generation"
+      ],
+      "keywords": [
+        "unique ID",
+        "generate ID",
+        "unique identifier"
+      ],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ],
+      "generationNotes": [
+        "Select this function when the requested business scenario matches the enriched businessScenarios metadata."
+      ]
+    },
+    "upper": {
+      "category": "string",
+      "minParams": 1,
+      "maxParams": 1,
+      "returnValueType": "text",
+      "description": "Convert text to uppercase.",
+      "knowledgeBaseCategory": "string",
+      "bilingualDescription": "Converts lowercase character data to uppercase. Used to unify string case format.",
+      "parameters": [
+        {
+          "index": 0,
+          "name": "expression",
+          "type": "string",
+          "description": "String expression to convert to uppercase"
+        }
+      ],
+      "returnType": "string",
+      "examples": [
+        {
+          "description": "Convert string 'Hello World' to uppercase",
+          "expression": "upper('Hello World')"
+        }
+      ],
+      "businessScenarios": [
+        "Unify username format",
+        "Standardize input",
+        "Case conversion"
+      ],
+      "keywords": [
+        "uppercase conversion",
+        "convert to uppercase",
+        "uppercase"
+      ],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ],
+      "generationNotes": [
+        "Select this function when the requested business scenario matches the enriched businessScenarios metadata."
+      ]
+    },
+    "weekNum": {
+      "category": "date/time",
+      "minParams": 1,
+      "maxParams": 2,
+      "optionalParams": [
+        "useISO"
+      ],
+      "returnValueType": "number",
+      "description": "Return week number for a date.",
+      "knowledgeBaseCategory": "date",
+      "bilingualDescription": "Returns the week number of a specific date. Can use European week numbering system (ISO 8601) or US week numbering system.",
+      "parameters": [
+        {
+          "index": 0,
+          "name": "date",
+          "type": "date/string",
+          "description": "The expression of the date"
+        },
+        {
+          "index": 1,
+          "name": "useISO",
+          "type": "boolean",
+          "description": "Optional boolean value. If true, use European week numbering system (ISO 8601). 1 stands for true, 0 stands for false."
+        }
+      ],
+      "returnType": "number",
+      "examples": [
+        {
+          "description": "Get week number of current date in the year (using ISO standard)",
+          "expression": "weekNum(now(), 1)"
+        }
+      ],
+      "businessScenarios": [
+        "Weekly report statistics",
+        "Schedule planning",
+        "Time analysis"
+      ],
+      "keywords": [
+        "week number",
+        "week count",
+        "get week number"
+      ],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ],
+      "generationNotes": [
+        "Select this function when the requested business scenario matches the enriched businessScenarios metadata."
+      ]
+    },
+    "year": {
+      "category": "date/time",
+      "minParams": 1,
+      "maxParams": 1,
+      "returnValueType": "number",
+      "description": "Return year for a date.",
+      "knowledgeBaseCategory": "date",
+      "bilingualDescription": "Returns the year for the specified date (four-digit number). Used to extract year information from date.",
+      "parameters": [
+        {
+          "index": 0,
+          "name": "date",
+          "type": "date/string",
+          "description": "Date expression to extract year from"
+        }
+      ],
+      "returnType": "number",
+      "examples": [
+        {
+          "description": "Get year of current date",
+          "expression": "year(now())"
+        }
+      ],
+      "businessScenarios": [
+        "Yearly statistics",
+        "Birth year",
+        "Annual analysis"
+      ],
+      "keywords": [
+        "year",
+        "date extraction",
+        "get year"
+      ],
+      "sourceReferences": [
+        "expression training data generator_2.txt:functionKnowledgeBase"
+      ],
+      "generationNotes": [
+        "Select this function when the requested business scenario matches the enriched businessScenarios metadata."
+      ]
+    },
+    "getUserAttr": {
+      "category": "user/system",
+      "minParams": 3,
+      "maxParams": 3,
+      "returnValueType": "text",
+      "description": "Read an attribute from a Yeeflow user value or Context:Current User.",
+      "knowledgeBaseCategory": "user/profile",
+      "bilingualDescription": "Read an attribute from a user value or the current user context.",
+      "parameters": [
+        {
+          "index": 0,
+          "name": "userOrContext",
+          "type": "user/application expression",
+          "description": "User variable, nested user expression, or Context:Current User token."
+        },
+        {
+          "index": 1,
+          "name": "attribute",
+          "type": "attribute descriptor object",
+          "description": "Export-backed object such as { key: \"Email\", label: \"Email\" }."
+        },
+        {
+          "index": 2,
+          "name": "defaultValue",
+          "type": "expression token array",
+          "description": "Fallback token array, commonly [{ type: \"str\", value: \"N/A\" }] or [] for blank fallback."
+        }
+      ],
+      "returnType": "text",
+      "examples": [
+        {
+          "description": "Current user email",
+          "expression": "getUserAttr(Context:Current User, Email, N/A)"
+        },
+        {
+          "description": "Current user manager name",
+          "expression": "getUserAttr(getUserAttr(Context:Current User, Line Manager, N/A), Name, N/A)"
+        }
+      ],
+      "businessScenarios": [
+        "Show current requester profile fields",
+        "Pre-fill user profile summary",
+        "Persist readable requester metadata after workflow approval"
+      ],
+      "keywords": [
+        "current user",
+        "profile",
+        "requester",
+        "manager",
+        "email",
+        "employee number",
+        "job title"
+      ],
+      "observedAttributes": [
+        "Name_CN",
+        "SPAccount",
+        "DepartmentID",
+        "LineManager",
+        "EmployeeNo",
+        "Email",
+        "IsAdmin",
+        "Photo",
+        "JobTitle",
+        "JobGrade",
+        "OfficeAddress",
+        "Phone",
+        "Mobile",
+        "Telephone",
+        "Remark",
+        "LocationID",
+        "LastLoginTime",
+        "ServiceStartDate",
+        "LatestHireDate",
+        "Created",
+        "CreatedBy"
+      ],
+      "sourceReferences": [
+        "Expression Runtime Test v1 Patch.yap:user-profile-expression-export"
+      ],
+      "generationNotes": [
+        "Use the exact exported attribute descriptor object shape for the second parameter. Prefer Context:Current User token for current-login-user profile display."
+      ],
+      "safetyNotes": [
+        "Export-backed for display Text controls. Persistence through calculated variables needs generated runtime proof."
+      ]
+    },
+    "getOrgAttr": {
+      "category": "user/system",
+      "minParams": 3,
+      "maxParams": 3,
+      "returnValueType": "text",
+      "description": "Read an attribute from a Yeeflow organization/department value.",
+      "knowledgeBaseCategory": "user/profile",
+      "bilingualDescription": "Read an attribute from an organization or department value.",
+      "parameters": [
+        {
+          "index": 0,
+          "name": "orgValue",
+          "type": "organization expression",
+          "description": "Department/organization value, often from getUserAttr(..., Department, ...)."
+        },
+        {
+          "index": 1,
+          "name": "attribute",
+          "type": "attribute descriptor object",
+          "description": "Export-backed object such as { key: \"Name\", label: \"Name\" }."
+        },
+        {
+          "index": 2,
+          "name": "defaultValue",
+          "type": "expression token array",
+          "description": "Fallback token array or [] for blank fallback."
+        }
+      ],
+      "returnType": "text",
+      "examples": [
+        {
+          "description": "Current user department name",
+          "expression": "getOrgAttr(getUserAttr(Context:Current User, Department, N/A), Name, N/A)"
+        },
+        {
+          "description": "Current user parent department name",
+          "expression": "getOrgAttr(getOrgAttr(getUserAttr(Context:Current User, Department, N/A), Parent, N/A), Name, N/A)"
+        }
+      ],
+      "businessScenarios": [
+        "Display department name",
+        "Display parent department",
+        "Find department manager for a profile summary"
+      ],
+      "keywords": [
+        "department",
+        "organization",
+        "parent department",
+        "manager"
+      ],
+      "observedAttributes": [
+        "Name",
+        "ParentID",
+        "Manager"
+      ],
+      "sourceReferences": [
+        "Expression Runtime Test v1 Patch.yap:user-profile-expression-export"
+      ],
+      "generationNotes": [
+        "The exported runtime function name is getOrgAttr, not getDeptAttr. Preserve getOrgAttr in generated tokens."
+      ],
+      "safetyNotes": [
+        "Do not generate getDeptAttr unless a future export proves that exact runtime function name."
+      ]
+    },
+    "getLocAttr": {
+      "category": "user/system",
+      "minParams": 3,
+      "maxParams": 3,
+      "returnValueType": "text",
+      "description": "Read an attribute from a Yeeflow location value.",
+      "knowledgeBaseCategory": "user/profile",
+      "bilingualDescription": "Read an attribute from a location value.",
+      "parameters": [
+        {
+          "index": 0,
+          "name": "locationValue",
+          "type": "location expression",
+          "description": "Location value, often from getUserAttr(..., Location, ...)."
+        },
+        {
+          "index": 1,
+          "name": "attribute",
+          "type": "attribute descriptor object",
+          "description": "Export-backed object such as { key: \"Name\", label: \"Name\" }."
+        },
+        {
+          "index": 2,
+          "name": "defaultValue",
+          "type": "expression token array",
+          "description": "Fallback token array or [] for blank fallback."
+        }
+      ],
+      "returnType": "text",
+      "examples": [
+        {
+          "description": "Current user location name",
+          "expression": "getLocAttr(getUserAttr(Context:Current User, Location, N/A), Name, N/A)"
+        },
+        {
+          "description": "Current user location manager",
+          "expression": "getLocAttr(getUserAttr(Context:Current User, Location, N/A), Manager, N/A)"
+        }
+      ],
+      "businessScenarios": [
+        "Display requester office/location",
+        "Route or document location manager where tenant data exists"
+      ],
+      "keywords": [
+        "location",
+        "office",
+        "location manager"
+      ],
+      "observedAttributes": [
+        "Name",
+        "Manager"
+      ],
+      "sourceReferences": [
+        "Expression Runtime Test v1 Patch.yap:user-profile-expression-export"
+      ],
+      "generationNotes": [
+        "Use only observed location attributes until more exports prove additional keys."
+      ],
+      "safetyNotes": [
+        "Location data may be tenant-dependent; provide fallback values."
+      ]
+    },
+    "JSONStringfy": {
+      "category": "conversion",
+      "minParams": 1,
+      "maxParams": 1,
+      "optionalParams": [],
+      "returnValueType": "text",
+      "description": "Serialize a value or query-result collection to JSON text. Export-backed spelling from Form Actions Phase 2 is JSONStringfy.",
+      "parameters": [
+        {
+          "index": 0,
+          "name": "value",
+          "type": "any",
+          "description": "Value or query-result collection to serialize."
+        }
+      ],
+      "returnType": "text",
+      "examples": [
+        {
+          "description": "Display a query result temp collection as JSON text.",
+          "expression": "JSONStringfy(var_CollectionofQueryItems)"
+        }
+      ],
+      "businessScenarios": [
+        "Debug/display query result collections",
+        "Inspect temporary query data in a form action test"
+      ],
+      "keywords": [
+        "json",
+        "stringify",
+        "query result",
+        "collection display"
+      ],
+      "sourceReferences": [
+        "Form Actions Phase 1 Test v1 Runtime.yap:form action query collection display"
+      ],
+      "generationNotes": [
+        "Use exact export-backed function spelling JSONStringfy. Do not rename to JSONStringify until an export proves that alias."
+      ],
+      "safetyNotes": [
+        "Use for display/debugging of query collections; do not persist raw JSON unless the business requirement explicitly asks for serialized query data."
+      ]
+    }
+  },
+  "categories": {
+    "math": [
+      "abs",
+      "ceil",
+      "fixed",
+      "floor",
+      "log",
+      "max",
+      "min",
+      "pow",
+      "rand",
+      "round"
+    ],
+    "string": [
+      "concat",
+      "formatNumber",
+      "left",
+      "len",
+      "lower",
+      "repeat",
+      "replace",
+      "right",
+      "split",
+      "strIndex",
+      "subString",
+      "trim",
+      "upper"
+    ],
+    "date/time": [
+      "date",
+      "dateAdd",
+      "dateDiff",
+      "dateFormat",
+      "datePart",
+      "datePicker",
+      "day",
+      "hour",
+      "minute",
+      "month",
+      "now",
+      "second",
+      "weekNum",
+      "year"
+    ],
+    "array": [
+      "arrayAverage",
+      "arrayConcat",
+      "arrayCount",
+      "arrayIndex",
+      "arrayMax",
+      "arrayMin",
+      "arraySum",
+      "join",
+      "removeDuplicates"
+    ],
+    "logical": [
+      "iif",
+      "isFalse",
+      "isNullOrEmpty",
+      "isTrue"
+    ],
+    "conversion": [
+      "number",
+      "text",
+      "JSONStringfy"
+    ],
+    "user/system": [
+      "UniqueID",
+      "currentUser",
+      "getLocAttr",
+      "getOrgAttr",
+      "getUserAttr"
+    ],
+    "utility": [
+      "getAttr"
+    ]
+  },
+  "enrichment": {
+    "enrichedOn": "2026-05-15",
+    "source": "expression training data generator_2.txt",
+    "enrichedFunctionCount": 54,
+    "baselineFunctionCount": 55,
+    "missingFromKnowledgeBase": [
+      "strIndex"
+    ],
+    "presentInKnowledgeBaseButMissingFromBaseline": [],
+    "screenshotObservedFunctionsMetadataPending": [
+      "addWorkDays",
+      "addWorkHours"
+    ],
+    "userProfileExpressions": {
+      "source": "Expression Runtime Test v1 Patch.yap:user-profile-expression-export",
+      "functions": [
+        "getUserAttr",
+        "getOrgAttr",
+        "getLocAttr"
+      ],
+      "note": "getDeptAttr was requested as a possible name but was not present in the export; the exact exported department function is getOrgAttr."
+    }
+  }
+}

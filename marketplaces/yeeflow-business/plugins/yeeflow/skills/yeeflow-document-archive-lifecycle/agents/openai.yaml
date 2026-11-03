@@ -1,0 +1,4 @@
+interface:
+  display_name: "Yeeflow Document Archive Lifecycle"
+  short_description: "Reuse documents and preserve attachment version history"
+  default_prompt: "Use $yeeflow-document-archive-lifecycle to map document reuse, renewal and approval-time archive writeback."

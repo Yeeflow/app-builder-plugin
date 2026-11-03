@@ -1,0 +1,104 @@
+{
+  "mirrors": [
+    {
+      "source": "skills/installed/yeeflow-workflow-stage-ui/SKILL.md",
+      "destination": "skills/yeeflow-workflow-stage-ui/SKILL.md"
+    },
+    {
+      "source": "skills/installed/yeeflow-workflow-stage-ui/agents/openai.yaml",
+      "destination": "skills/yeeflow-workflow-stage-ui/agents/openai.yaml"
+    },
+    {
+      "source": "skills/installed/yeeflow-workflow-stage-ui/references/native-task-progress.md",
+      "destination": "skills/yeeflow-workflow-stage-ui/references/native-task-progress.md"
+    },
+    {
+      "source": "skills/installed/yeeflow-attachment-ocr-orchestrator/SKILL.md",
+      "destination": "skills/yeeflow-attachment-ocr-orchestrator/SKILL.md"
+    },
+    {
+      "source": "skills/installed/yeeflow-attachment-ocr-orchestrator/agents/openai.yaml",
+      "destination": "skills/yeeflow-attachment-ocr-orchestrator/agents/openai.yaml"
+    },
+    {
+      "source": "skills/installed/yeeflow-attachment-ocr-orchestrator/references/single-attachment-contract.md",
+      "destination": "skills/yeeflow-attachment-ocr-orchestrator/references/single-attachment-contract.md"
+    },
+    {
+      "source": "skills/installed/yeeflow-document-archive-lifecycle/SKILL.md",
+      "destination": "skills/yeeflow-document-archive-lifecycle/SKILL.md"
+    },
+    {
+      "source": "skills/installed/yeeflow-document-archive-lifecycle/agents/openai.yaml",
+      "destination": "skills/yeeflow-document-archive-lifecycle/agents/openai.yaml"
+    },
+    {
+      "source": "skills/installed/yeeflow-document-archive-lifecycle/references/reuse-and-writeback.md",
+      "destination": "skills/yeeflow-document-archive-lifecycle/references/reuse-and-writeback.md"
+    },
+    {
+      "source": "docs/standards/document-workflow-project-patterns.md",
+      "destination": "docs/standards/document-workflow-project-patterns.md"
+    },
+    {
+      "source": "docs/document-workflow-skills-evidence.md",
+      "destination": "docs/document-workflow-skills-evidence.md"
+    },
+    {
+      "source": "scripts/lib/document-workflow-patterns.mjs",
+      "destination": "scripts/lib/document-workflow-patterns.mjs"
+    },
+    {
+      "source": "scripts/test-document-workflow-patterns.mjs",
+      "destination": "scripts/test-document-workflow-patterns.mjs"
+    },
+    {
+      "source": "docs/yeeflow-skill-routing.md",
+      "destination": "docs/yeeflow-skill-routing.md"
+    },
+    {
+      "source": "scripts/test-document-workflow-distribution.mjs",
+      "destination": "scripts/test-document-workflow-distribution.mjs"
+    },
+    {
+      "source": "docs/standards/document-workflow-distribution.json",
+      "destination": "docs/standards/document-workflow-distribution.json"
+    },
+    {
+      "source": "docs/releases/yeeflow-app-builder-v1.19.0-rc1.md",
+      "destination": "docs/releases/yeeflow-app-builder-v1.19.0-rc1.md"
+    },
+    {
+      "source": "skills/installed/yeeflow-approval-form-generator/SKILL.md",
+      "destination": "skills/yeeflow-approval-form-generator/SKILL.md"
+    },
+    {
+      "source": "skills/installed/yeeflow-expression-generator/SKILL.md",
+      "destination": "skills/yeeflow-expression-generator/SKILL.md"
+    },
+    {
+      "source": "skills/installed/yeeflow-data-list-generator/SKILL.md",
+      "destination": "skills/yeeflow-data-list-generator/SKILL.md"
+    },
+    {
+      "source": "skills/installed/yeeflow-dashboard-generator/SKILL.md",
+      "destination": "skills/yeeflow-dashboard-generator/SKILL.md"
+    },
+    {
+      "source": "skills/installed/yeeflow-custom-code-generator/SKILL.md",
+      "destination": "skills/yeeflow-custom-code-generator/SKILL.md"
+    },
+    {
+      "source": "skills/installed/yeeflow-runtime-test-orchestrator/SKILL.md",
+      "destination": "skills/yeeflow-runtime-test-orchestrator/SKILL.md"
+    },
+    {
+      "source": "docs/releases/yeeflow-app-builder-v1.19.0.md",
+      "destination": "docs/releases/yeeflow-app-builder-v1.19.0.md"
+    },
+    {
+      "source": "docs/releases/yeeflow-app-builder-v1.19.0-install-smoke.md",
+      "destination": "docs/releases/yeeflow-app-builder-v1.19.0-install-smoke.md"
+    }
+  ]
+}

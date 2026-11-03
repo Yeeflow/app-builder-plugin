@@ -1,0 +1,7 @@
+# Yeeflow App Builder 1.20.0-rc2
+
+When ChatGPT exposes multiple registered-App connections, its tool wrapper requires a host-provided `link_id`. RC1's broad ban on account selection through tool arguments could reject that supported route. RC2 explicitly permits exact listed host connection values, while keeping the upstream MCP profile call selector-free and prohibiting invented fields, credentials and local profiles. The shared rule is distributed across all 31 skills.
+
+Private registered-App testing in one ChatGPT Personal workspace retained two accounts and passed twelve initial, alternating and concurrent profile reads with distinct, stable identities. Per-account workspace discovery succeeded with 20 and 11 returned rows; TotalCount=0 prevents a complete-pagination claim. The direct-MCP local layout did not expose Connect another account, so this UI and runtime evidence applies to the separate registered-App projection. The test App and its connection identifiers are excluded from the repository and public artifacts.
+
+Separate-user isolation, grant refresh/reconnect/revocation, negative permission checks, independent model conversations and business writes remain unverified. See the [acceptance matrix](../standards/multi-account-oauth.md). No business data, production server or version under store review was changed. This remains a GitHub/private-marketplace RC; stable stays at 1.19.0. Claude changes are generated mirror synchronization only.

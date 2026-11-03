@@ -1,0 +1,23 @@
+{
+  "incident": "generated workflow opens on an empty Designer canvas until the user pans down and right",
+  "graphzoom": 1,
+  "graphposition": {
+    "x": -330,
+    "y": -245,
+    "width": 2671,
+    "height": 620
+  },
+  "modelNodeExtent": {
+    "left": -170,
+    "top": -85,
+    "right": 2181,
+    "bottom": 126
+  },
+  "expectedError": "APPROVAL_WORKFLOW_GRAPHPOSITION_ORIGIN_MISMATCH",
+  "correctedContract": {
+    "leftInset": 90,
+    "topInset": 45,
+    "expectedGraphposition": { "x": -80, "y": -40, "width": 2351, "height": 211 },
+    "formula": "graphposition.x = minNodeX + 90; graphposition.y = minNodeY + 45"
+  }
+}

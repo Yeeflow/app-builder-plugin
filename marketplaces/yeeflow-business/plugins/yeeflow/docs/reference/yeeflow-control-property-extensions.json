@@ -1,0 +1,1126 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Study-backed extension registry for Yeeflow control property paths that are not yet present in the product catalog.",
+  "baseline": "Product catalog paths remain authoritative. Extension entries require explicit evidence before strong UI fidelity claims.",
+  "allowedConfidence": [
+    "product_catalog",
+    "export_proven",
+    "runtime_proven",
+    "human_reviewed",
+    "needs_study",
+    "unknown"
+  ],
+  "allowedStatus": [
+    "product_catalog",
+    "export_proven",
+    "runtime_proven",
+    "human_reviewed",
+    "needs_study",
+    "unknown"
+  ],
+  "extensions": [],
+  "patterns": [
+    {
+      "id": "radio-filter.dropdown.visual-fidelity.180px",
+      "controlType": "radio-filter",
+      "patternName": "Radio filter dropdown visual fidelity, fixed 180px",
+      "status": "evidence-backed",
+      "source": "manual-export-study",
+      "confidence": "high",
+      "evidenceSummary": "Derived from redacted/manual Marketing Event Event Portfolio region filter evidence for event_portfolio_region_filter. This is an extension-layer visual usage pattern, not a product-catalog replacement.",
+      "requiredProperties": {
+        "type": "radio-filter",
+        "attrs.layout": "dropdown",
+        "attrs.displayStyle": "dropdown",
+        "attrs.dropdown-enable": true,
+        "attrs.search-enable": false,
+        "attrs.more-enable": false,
+        "attrs.displayTitle": false,
+        "attrs.lablay": [
+          null,
+          "hide"
+        ],
+        "attrs.placeholder": "present",
+        "attrs.style.gap": [
+          null,
+          0
+        ],
+        "attrs.style.direction": [
+          null,
+          "column"
+        ],
+        "attrs.style.widthtype": [
+          null,
+          "1"
+        ],
+        "attrs.style.width": [
+          null,
+          180
+        ],
+        "attrs.style.widthu": [
+          null,
+          "px"
+        ],
+        "attrs.style.align_items": [
+          null,
+          "stretch"
+        ],
+        "attrs.style.justify_content": [
+          null,
+          "center"
+        ],
+        "attrs.style.wrap": [
+          null,
+          "nowrap"
+        ],
+        "attrs.common.positioning.widthtype": [
+          null,
+          "3"
+        ],
+        "attrs.common.positioning.width": [
+          null,
+          180
+        ],
+        "attrs.common.positioning.widthu": [
+          null,
+          "px"
+        ],
+        "attrs.common.sizing.width": [
+          null,
+          180
+        ],
+        "attrs.common.sizing.minWidth": [
+          null,
+          180
+        ],
+        "attrs.common.sizing.maxWidth": [
+          null,
+          180
+        ],
+        "attrs.common.sizing.height": [
+          null,
+          48
+        ],
+        "attrs.common.sizing.minHeight": [
+          null,
+          48
+        ],
+        "attrs.common.sizing.maxHeight": [
+          null,
+          48
+        ],
+        "attrs.common.margin": "zero",
+        "attrs.common.padding": "zero",
+        "attrs.common.border.normal.type": "0",
+        "attrs.common.border.normal.color": "transparent",
+        "attrs.edit.placeholder.color": "#5f6b7a",
+        "attrs.edit.normal.color": "#263241",
+        "attrs.edit.normal.border.type": "1",
+        "attrs.edit.normal.border.color": "var(--c--neutral-light-active)",
+        "attrs.edit.normal.border.radius": 8,
+        "attrs.edit.pd": 8,
+        "attrs.edit.pcolor": "var(--c--neutral-dark-hover)",
+        "attrs.dropdown.body.border.boxShadow": "present"
+      },
+      "optionalProperties": {
+        "attrs.dropdown.body.border.radius": 8
+      },
+      "proofBoundary": "Validates declared/redacted control metadata only. It does not prove pixel-perfect rendering or parse screenshots.",
+      "notes": "Use for high-fidelity generated Region-style dropdown filters when the product catalog control path exists but the exact visual composition requires export-backed styling."
+    },
+    {
+      "id": "relative-period.dropdown.visual-fidelity.180px",
+      "controlType": "relative-period",
+      "patternName": "Relative period dropdown visual fidelity, fixed 180px",
+      "status": "evidence-backed",
+      "source": "manual-export-study",
+      "confidence": "high",
+      "evidenceSummary": "Derived from redacted/manual Marketing Event Event Portfolio period filter evidence for event_portfolio_period_filter. This is an extension-layer visual usage pattern, not a product-catalog replacement.",
+      "requiredProperties": {
+        "type": "relative-period",
+        "attrs.layout": "dropdown",
+        "attrs.displayStyle": "dropdown",
+        "attrs.dropdown-enable": true,
+        "attrs.search-enable": false,
+        "attrs.more-enable": false,
+        "attrs.displayTitle": false,
+        "attrs.lablay": [
+          null,
+          "hide"
+        ],
+        "attrs.placeholder": "present",
+        "attrs.field": "present",
+        "attrs.choice-options": "nonempty",
+        "attrs.style.gap": [
+          null,
+          0
+        ],
+        "attrs.style.direction": [
+          null,
+          "column"
+        ],
+        "attrs.style.widthtype": [
+          null,
+          "1"
+        ],
+        "attrs.style.width": [
+          null,
+          180
+        ],
+        "attrs.style.widthu": [
+          null,
+          "px"
+        ],
+        "attrs.style.align_items": [
+          null,
+          "stretch"
+        ],
+        "attrs.style.justify_content": [
+          null,
+          "center"
+        ],
+        "attrs.style.wrap": [
+          null,
+          "nowrap"
+        ],
+        "attrs.common.positioning.widthtype": [
+          null,
+          "3"
+        ],
+        "attrs.common.positioning.width": [
+          null,
+          180
+        ],
+        "attrs.common.positioning.widthu": [
+          null,
+          "px"
+        ],
+        "attrs.common.sizing.width": [
+          null,
+          180
+        ],
+        "attrs.common.sizing.minWidth": [
+          null,
+          180
+        ],
+        "attrs.common.sizing.maxWidth": [
+          null,
+          180
+        ],
+        "attrs.common.sizing.height": [
+          null,
+          48
+        ],
+        "attrs.common.sizing.minHeight": [
+          null,
+          48
+        ],
+        "attrs.common.sizing.maxHeight": [
+          null,
+          48
+        ],
+        "attrs.common.margin": "zero",
+        "attrs.common.padding": "zero",
+        "attrs.common.border.normal.type": "0",
+        "attrs.common.border.normal.color": "transparent",
+        "attrs.edit.placeholder.color": "#5f6b7a",
+        "attrs.edit.normal.color": "#263241",
+        "attrs.edit.normal.border.type": "1",
+        "attrs.edit.normal.border.color": "var(--c--neutral-light-active)",
+        "attrs.edit.normal.border.radius": 8,
+        "attrs.edit.pd": 8,
+        "attrs.edit.pcolor": "var(--c--neutral-dark-hover)",
+        "attrs.dropdown.body.border.radius": 8,
+        "attrs.dropdown.body.border.boxShadow": "present"
+      },
+      "optionalProperties": {},
+      "proofBoundary": "Validates declared/redacted control metadata only. It does not prove pixel-perfect rendering or parse screenshots.",
+      "notes": "Relative period filters must declare the bound field and nonempty choice-options before claiming the dropdown visual-fidelity pattern."
+    },
+    {
+      "id": "icon.filter.native.16px",
+      "controlType": "icon",
+      "patternName": "Native filter icon, 16px centered",
+      "status": "evidence-backed",
+      "source": "manual-export-study",
+      "confidence": "high",
+      "evidenceSummary": "Derived from redacted/manual Marketing Event Event Portfolio native filter icon evidence for event_portfolio_filter_icon_native.",
+      "requiredProperties": {
+        "type": "icon",
+        "attrs.icon.icon": "fa-regular fa-filter",
+        "attrs.icon.view": "default",
+        "attrs.icon.shape": "2",
+        "attrs.icon.align": [
+          null,
+          "center"
+        ],
+        "attrs.icon.size": [
+          null,
+          16
+        ],
+        "attrs.common.positioning.widthtype": [
+          null,
+          "2"
+        ],
+        "attrs.common.margin": "zero",
+        "attrs.common.padding": "zero",
+        "attrs.style.widthtype": [
+          null,
+          "2"
+        ]
+      },
+      "optionalProperties": {},
+      "proofBoundary": "Validates declared/redacted control metadata only. It does not prove pixel-perfect rendering or parse screenshots.",
+      "notes": "Use a real Yeeflow icon control for filter affordances; do not use heading/text glyphs as visual substitutes."
+    },
+    {
+      "id": "container.filter-action-row.full-width-space-between",
+      "controlType": "container",
+      "patternName": "Filter/action parent row, full-width space-between",
+      "status": "evidence-backed",
+      "source": "manual-export-study",
+      "confidence": "high",
+      "evidenceSummary": "Derived from redacted Marketing Event Event Portfolio filter/action row hierarchy evidence. The parent row owns full-width layout only.",
+      "requiredProperties": {
+        "type": "container",
+        "attrs.style.widthtype": "1",
+        "attrs.style.direction": "row",
+        "attrs.style.align_items": "center",
+        "attrs.style.justify_content": "space-between",
+        "attrs.style.wrap": "nowrap",
+        "nv_label": "present"
+      },
+      "optionalProperties": {
+        "attrs.style.gap": "present"
+      },
+      "proofBoundary": "Validates declared/redacted control metadata and decoded Resource attr shapes only. It does not prove pixel-perfect rendering or parse screenshots.",
+      "notes": "Use this pattern for the outer Event Portfolio-style toolbar row. Do not apply inline widthtype to the parent row."
+    },
+    {
+      "id": "container.filter-group.inline-row",
+      "controlType": "container",
+      "patternName": "Inline left filter group row",
+      "status": "evidence-backed",
+      "source": "manual-export-study",
+      "confidence": "high",
+      "evidenceSummary": "Derived from redacted Marketing Event filter group hierarchy evidence. The second-layer filter group is inline and left-justified.",
+      "requiredProperties": {
+        "type": "container",
+        "attrs.style.widthtype": "2",
+        "attrs.style.direction": "row",
+        "attrs.style.align_items": "center",
+        "attrs.style.justify_content": "flex-start",
+        "attrs.style.wrap": "nowrap",
+        "nv_label": "present"
+      },
+      "optionalProperties": {},
+      "proofBoundary": "Validates declared/redacted control metadata and decoded Resource attr shapes only.",
+      "notes": "Use this pattern for the left filter-controls group inside a full-width toolbar row."
+    },
+    {
+      "id": "container.action-group.inline-row",
+      "controlType": "container",
+      "patternName": "Inline right action group row",
+      "status": "evidence-backed",
+      "source": "manual-export-study",
+      "confidence": "high",
+      "evidenceSummary": "Derived from redacted Marketing Event action group hierarchy evidence. The second-layer action group is inline and right-justified.",
+      "requiredProperties": {
+        "type": "container",
+        "attrs.style.widthtype": "2",
+        "attrs.style.direction": "row",
+        "attrs.style.align_items": "center",
+        "attrs.style.justify_content": "flex-end",
+        "attrs.style.wrap": "nowrap",
+        "nv_label": "present"
+      },
+      "optionalProperties": {},
+      "proofBoundary": "Validates declared/redacted control metadata and decoded Resource attr shapes only.",
+      "notes": "Use this pattern for the right action-controls group inside a full-width toolbar row."
+    },
+    {
+      "id": "container.filter-wrapper.inline-default-height",
+      "controlType": "container",
+      "patternName": "Inline default-height Data Filter wrapper",
+      "status": "evidence-backed",
+      "source": "manual-export-study",
+      "confidence": "high",
+      "evidenceSummary": "Derived from redacted Marketing Event filter wrapper evidence. Filter wrappers provide hierarchy only and do not own fixed filter width.",
+      "requiredProperties": {
+        "type": "container",
+        "attrs.style.widthtype": "2",
+        "attrs.style.height": "0",
+        "nv_label": "present"
+      },
+      "forbiddenProperties": {
+        "attrs.style.width": "fixed-filter-width",
+        "attrs.style.cushei": "custom-filter-height"
+      },
+      "optionalProperties": {
+        "attrs.style.direction": "column"
+      },
+      "proofBoundary": "Validates declared/redacted control metadata and decoded Resource attr shapes only.",
+      "notes": "Use wrapper containers for hierarchy, not to fake Data Filter width. Fixed 180px width belongs to the Data Filter control."
+    },
+    {
+      "id": "data-filter.dropdown.owns-fixed-180px-width",
+      "controlType": "data-filter",
+      "patternName": "Data Filter owns fixed 180px dropdown width",
+      "status": "evidence-backed",
+      "source": "manual-export-study",
+      "confidence": "high",
+      "evidenceSummary": "Derived from redacted Marketing Event Data Filter evidence showing fixed 180px sizing belongs to the Data Filter control Resource attrs, not the wrapper container.",
+      "requiredProperties": {
+        "attrs.style.width": [
+          null,
+          180
+        ],
+        "attrs.style.widthu": [
+          null,
+          "px"
+        ],
+        "attrs.common.sizing.width": [
+          null,
+          180
+        ],
+        "attrs.common.sizing.minWidth": [
+          null,
+          180
+        ],
+        "attrs.common.sizing.maxWidth": [
+          null,
+          180
+        ]
+      },
+      "optionalProperties": {
+        "attrs.style.widthtype": [
+          null,
+          "1"
+        ]
+      },
+      "proofBoundary": "Validates declared/redacted control metadata and decoded Resource attr shapes only.",
+      "notes": "Status and Event Type filters should not retain legacy 120px or 140px wrapper widths under the high-fidelity 180px dropdown pattern."
+    },
+    {
+      "id": "control.navigator-label.nv_label",
+      "controlType": "*",
+      "patternName": "Yeeflow designer Navigator semantic label",
+      "status": "evidence-backed",
+      "source": "manual-export-study",
+      "confidence": "high",
+      "evidenceSummary": "Manual designer evidence shows nv_label controls the Yeeflow designer Navigator-visible control name. id is internal/stable, while label/name alone are not sufficient.",
+      "requiredProperties": {
+        "nv_label": "present"
+      },
+      "forbiddenValues": {
+        "nv_label": [
+          "Container",
+          "Text",
+          "Grid"
+        ]
+      },
+      "optionalProperties": {
+        "id": "stable internal generator or patch identifier",
+        "label": "human-facing descriptive label",
+        "name": "human-facing descriptive name"
+      },
+      "proofBoundary": "Validates declared/redacted control metadata and decoded Resource attr shapes only.",
+      "notes": "Important generated structural controls should use semantic stable nv_label values such as event_portfolio_filter_group."
+    },
+    {
+      "id": "non-container.common.positioning.width-modes",
+      "controlType": "*",
+      "patternName": "Non-Container Advanced-tab width modes",
+      "status": "evidence-backed",
+      "source": "manual-export-study",
+      "confidence": "high",
+      "evidenceSummary": "Derived from redacted Yeeflow designer/export evidence showing non-Container runtime-effective width mode is stored under attrs.common.positioning rather than Container attrs.style.",
+      "requiredProperties": {
+        "nonContainer.width.full": {
+          "attrs.common.positioning.widthtype": [
+            null,
+            "1"
+          ]
+        },
+        "nonContainer.width.inline": {
+          "attrs.common.positioning.widthtype": [
+            null,
+            "2"
+          ]
+        },
+        "nonContainer.width.custom": {
+          "attrs.common.positioning.widthtype": [
+            null,
+            "3"
+          ],
+          "attrs.common.positioning.width": "present",
+          "attrs.common.positioning.widthu": "present"
+        }
+      },
+      "forbiddenProperties": {
+        "attrs.style.widthtype": "container-only width mode for runtime-effective layout",
+        "attrs.style.width": "container-only fixed width when common.positioning is absent"
+      },
+      "optionalProperties": {},
+      "proofBoundary": "Validates declared/redacted control metadata only. It does not prove pixel-perfect rendering or parse screenshots.",
+      "notes": "Container remains a special layout control; do not apply Container width rules to Data Filter, Icon, Heading, Summary, Collection, or other non-Container controls."
+    },
+    {
+      "id": "non-container.common.positioning.custom-width",
+      "controlType": "*",
+      "patternName": "Non-Container custom runtime width",
+      "status": "evidence-backed",
+      "source": "manual-export-study",
+      "confidence": "high",
+      "evidenceSummary": "Derived from redacted designer/export evidence for runtime-effective custom width on non-Container controls.",
+      "requiredProperties": {
+        "attrs.common.positioning.widthtype": [
+          null,
+          "3"
+        ],
+        "attrs.common.positioning.width": "present",
+        "attrs.common.positioning.widthu": "present"
+      },
+      "optionalProperties": {
+        "attrs.common.sizing": "may provide min/max constraints but does not replace positioning width mode"
+      },
+      "proofBoundary": "Validates declared/redacted control metadata only.",
+      "notes": "Use this when a non-Container control claims custom runtime width."
+    },
+    {
+      "id": "non-container.common.margin-padding",
+      "controlType": "*",
+      "patternName": "Non-Container Advanced-tab margin and padding",
+      "status": "evidence-backed",
+      "source": "manual-export-study",
+      "confidence": "high",
+      "evidenceSummary": "Derived from redacted designer/export evidence showing non-Container Advanced-tab spacing is stored under attrs.common.margin and attrs.common.padding.",
+      "requiredProperties": {
+        "attrs.common.margin": "present",
+        "attrs.common.padding": "present"
+      },
+      "optionalProperties": {},
+      "proofBoundary": "Validates declared/redacted control metadata only.",
+      "notes": "Do not use Container attrs.style spacing as proof of non-Container Advanced-tab spacing."
+    },
+    {
+      "id": "non-container.common.border-normal-hover-shadow",
+      "controlType": "*",
+      "patternName": "Non-Container Advanced-tab normal/hover border and shadow",
+      "status": "evidence-backed",
+      "source": "manual-export-study",
+      "confidence": "high",
+      "evidenceSummary": "Derived from redacted designer/export evidence showing border, radius, hover style, and shadow live under attrs.common.border for non-Container controls.",
+      "requiredProperties": {
+        "attrs.common.border.normal": "present",
+        "attrs.common.border.hover": "present"
+      },
+      "optionalProperties": {
+        "attrs.common.border.normal.boxShadow": "normal-state shadow when used",
+        "attrs.common.border.hover.boxShadow": "hover-state shadow when used"
+      },
+      "proofBoundary": "Validates declared/redacted control metadata only.",
+      "notes": "Hover shadow must be checked under attrs.common.border.hover, not inferred from screenshots."
+    },
+    {
+      "id": "non-container.common.background-classic",
+      "controlType": "*",
+      "patternName": "Non-Container classic background",
+      "status": "evidence-backed",
+      "source": "manual-export-study",
+      "confidence": "high",
+      "evidenceSummary": "Derived from redacted designer/export evidence showing classic background color for non-Container controls under attrs.common.background.normal.",
+      "requiredProperties": {
+        "attrs.common.background.normal.classic": "present"
+      },
+      "optionalProperties": {
+        "attrs.common.background.hover.classic": "hover classic background when used"
+      },
+      "proofBoundary": "Validates declared/redacted control metadata only.",
+      "notes": "Classic background color is an Advanced-tab common property for non-Container controls."
+    },
+    {
+      "id": "non-container.common.background-image",
+      "controlType": "*",
+      "patternName": "Non-Container classic background image",
+      "status": "evidence-backed",
+      "source": "manual-export-study",
+      "confidence": "high",
+      "evidenceSummary": "Derived from redacted designer/export evidence showing non-Container background images under attrs.common.background.normal.classic.image.",
+      "requiredProperties": {
+        "attrs.common.background.normal.classic.image": "present"
+      },
+      "optionalProperties": {
+        "attrs.common.background.normal.classic.size": "image sizing when used",
+        "attrs.common.background.normal.classic.position": "image position when used"
+      },
+      "proofBoundary": "Validates declared/redacted control metadata only.",
+      "notes": "Do not commit raw image assets as evidence for this pattern."
+    },
+    {
+      "id": "non-container.common.background-gradient-two-color",
+      "controlType": "*",
+      "patternName": "Non-Container two-color gradient background",
+      "status": "evidence-backed",
+      "source": "manual-export-study",
+      "confidence": "high",
+      "evidenceSummary": "Derived from redacted designer/export evidence showing designer-supported gradients as two-color common background metadata.",
+      "requiredProperties": {
+        "attrs.common.background.normal.gradient.colors": "two-colors"
+      },
+      "optionalProperties": {
+        "attrs.common.background.hover.gradient.colors": "two-colors"
+      },
+      "proofBoundary": "Validates declared/redacted control metadata only.",
+      "notes": "More complex gradient/background styling requires explicit custom CSS evidence before generation."
+    },
+    {
+      "id": "data-filter.dropdown.runtime-effective-custom-180px-width",
+      "controlType": "data-filter",
+      "patternName": "Data Filter dropdown runtime-effective custom 180px width",
+      "status": "evidence-backed",
+      "source": "manual-export-study",
+      "confidence": "high",
+      "evidenceSummary": "Derived from redacted Marketing Event Data Filter evidence showing the runtime-effective fixed dropdown width is the non-Container Advanced-tab custom width under attrs.common.positioning.",
+      "requiredProperties": {
+        "attrs.common.positioning.widthtype": [
+          null,
+          "3"
+        ],
+        "attrs.common.positioning.width": [
+          null,
+          180
+        ],
+        "attrs.common.positioning.widthu": [
+          null,
+          "px"
+        ]
+      },
+      "optionalProperties": {
+        "attrs.common.sizing.width": [
+          null,
+          180
+        ],
+        "attrs.common.sizing.minWidth": [
+          null,
+          180
+        ],
+        "attrs.common.sizing.maxWidth": [
+          null,
+          180
+        ]
+      },
+      "proofBoundary": "Validates declared/redacted control metadata and decoded Resource attr shapes only.",
+      "notes": "attrs.style width can appear in normalized study specs, but it is not sufficient runtime-effective width proof for Data Filter dropdowns."
+    },
+    {
+      "id": "kpi-card.container.rich-card",
+      "controlType": "container",
+      "patternName": "KPI card rich outer Container structure",
+      "status": "evidence-backed",
+      "source": "manual-runtime-study",
+      "confidence": "high",
+      "evidenceSummary": "Requires a Container-based outer rich card shell for KPI cards that claim design/content fidelity. Derived from redacted Marketing Event Event Portfolio design/runtime fidelity findings; extension-layer guidance only, not a product-catalog replacement.",
+      "requiredProperties": {},
+      "optionalProperties": {},
+      "proofBoundary": "Validates declared/redacted metadata and synthetic fixtures only. It does not decode private payloads, parse screenshots, call Yeeflow APIs, or prove pixel-perfect rendering.",
+      "notes": "Use with the normalized product catalog and existing extension registry; do not invent control-property paths or force mock values as runtime proof."
+    },
+    {
+      "id": "kpi-card.icon-tile.fixed-centered",
+      "controlType": "container",
+      "patternName": "KPI fixed centered icon tile",
+      "status": "evidence-backed",
+      "source": "manual-runtime-study",
+      "confidence": "high",
+      "evidenceSummary": "Requires fixed icon tile sizing and centered native icon placement. Derived from redacted Marketing Event Event Portfolio design/runtime fidelity findings; extension-layer guidance only, not a product-catalog replacement.",
+      "requiredProperties": {},
+      "optionalProperties": {},
+      "proofBoundary": "Validates declared/redacted metadata and synthetic fixtures only. It does not decode private payloads, parse screenshots, call Yeeflow APIs, or prove pixel-perfect rendering.",
+      "notes": "Use with the normalized product catalog and existing extension registry; do not invent control-property paths or force mock values as runtime proof."
+    },
+    {
+      "id": "kpi-card.body.inline-icon-text-stack",
+      "controlType": "container",
+      "patternName": "KPI inline icon and text-stack body",
+      "status": "evidence-backed",
+      "source": "manual-runtime-study",
+      "confidence": "high",
+      "evidenceSummary": "Requires inline icon/text composition with a vertical text stack. Derived from redacted Marketing Event Event Portfolio design/runtime fidelity findings; extension-layer guidance only, not a product-catalog replacement.",
+      "requiredProperties": {},
+      "optionalProperties": {},
+      "proofBoundary": "Validates declared/redacted metadata and synthetic fixtures only. It does not decode private payloads, parse screenshots, call Yeeflow APIs, or prove pixel-perfect rendering.",
+      "notes": "Use with the normalized product catalog and existing extension registry; do not invent control-property paths or force mock values as runtime proof."
+    },
+    {
+      "id": "kpi-card.summary-value.hierarchy",
+      "controlType": "summary",
+      "patternName": "KPI Summary value hierarchy",
+      "status": "evidence-backed",
+      "source": "manual-runtime-study",
+      "confidence": "high",
+      "evidenceSummary": "Requires a Summary/value role with primary-value hierarchy, not raw variable text. Derived from redacted Marketing Event Event Portfolio design/runtime fidelity findings; extension-layer guidance only, not a product-catalog replacement.",
+      "requiredProperties": {},
+      "optionalProperties": {},
+      "proofBoundary": "Validates declared/redacted metadata and synthetic fixtures only. It does not decode private payloads, parse screenshots, call Yeeflow APIs, or prove pixel-perfect rendering.",
+      "notes": "Use with the normalized product catalog and existing extension registry; do not invent control-property paths or force mock values as runtime proof."
+    },
+    {
+      "id": "kpi-card.trend-helper-text.hierarchy",
+      "controlType": "heading",
+      "patternName": "KPI trend and helper hierarchy",
+      "status": "evidence-backed",
+      "source": "manual-runtime-study",
+      "confidence": "high",
+      "evidenceSummary": "Requires separate trend and helper text roles below the value. Derived from redacted Marketing Event Event Portfolio design/runtime fidelity findings; extension-layer guidance only, not a product-catalog replacement.",
+      "requiredProperties": {},
+      "optionalProperties": {},
+      "proofBoundary": "Validates declared/redacted metadata and synthetic fixtures only. It does not decode private payloads, parse screenshots, call Yeeflow APIs, or prove pixel-perfect rendering.",
+      "notes": "Use with the normalized product catalog and existing extension registry; do not invent control-property paths or force mock values as runtime proof."
+    },
+    {
+      "id": "summary.value.no-raw-variable",
+      "controlType": "summary",
+      "patternName": "Summary visible value raw-variable prevention",
+      "status": "evidence-backed",
+      "source": "manual-runtime-study",
+      "confidence": "high",
+      "evidenceSummary": "Visible Summary value text must not render internal variable tokens. Derived from redacted Marketing Event Event Portfolio design/runtime fidelity findings; extension-layer guidance only, not a product-catalog replacement.",
+      "requiredProperties": {},
+      "optionalProperties": {},
+      "proofBoundary": "Validates declared/redacted metadata and synthetic fixtures only. It does not decode private payloads, parse screenshots, call Yeeflow APIs, or prove pixel-perfect rendering.",
+      "notes": "Use with the normalized product catalog and existing extension registry; do not invent control-property paths or force mock values as runtime proof."
+    },
+    {
+      "id": "summary.value.live-data-boundary",
+      "controlType": "summary",
+      "patternName": "Summary live data boundary",
+      "status": "evidence-backed",
+      "source": "manual-runtime-study",
+      "confidence": "high",
+      "evidenceSummary": "Live KPI values may differ from mock values only when reported as a live-data boundary. Derived from redacted Marketing Event Event Portfolio design/runtime fidelity findings; extension-layer guidance only, not a product-catalog replacement.",
+      "requiredProperties": {},
+      "optionalProperties": {},
+      "proofBoundary": "Validates declared/redacted metadata and synthetic fixtures only. It does not decode private payloads, parse screenshots, call Yeeflow APIs, or prove pixel-perfect rendering.",
+      "notes": "Use with the normalized product catalog and existing extension registry; do not invent control-property paths or force mock values as runtime proof."
+    },
+    {
+      "id": "summary.text-stack.title-value-trend-helper",
+      "controlType": "summary",
+      "patternName": "Summary title value trend helper text stack",
+      "status": "evidence-backed",
+      "source": "manual-runtime-study",
+      "confidence": "high",
+      "evidenceSummary": "Requires title, value, trend, and helper roles for rich KPI text stacks. Derived from redacted Marketing Event Event Portfolio design/runtime fidelity findings; extension-layer guidance only, not a product-catalog replacement.",
+      "requiredProperties": {},
+      "optionalProperties": {},
+      "proofBoundary": "Validates declared/redacted metadata and synthetic fixtures only. It does not decode private payloads, parse screenshots, call Yeeflow APIs, or prove pixel-perfect rendering.",
+      "notes": "Use with the normalized product catalog and existing extension registry; do not invent control-property paths or force mock values as runtime proof."
+    },
+    {
+      "id": "table.status.badge-treatment",
+      "controlType": "collection",
+      "patternName": "Table status badge treatment",
+      "status": "evidence-backed",
+      "source": "manual-runtime-study",
+      "confidence": "high",
+      "evidenceSummary": "Status fields in design-fidelity tables require badge-style treatment metadata. Derived from redacted Marketing Event Event Portfolio design/runtime fidelity findings; extension-layer guidance only, not a product-catalog replacement.",
+      "requiredProperties": {},
+      "optionalProperties": {},
+      "proofBoundary": "Validates declared/redacted metadata and synthetic fixtures only. It does not decode private payloads, parse screenshots, call Yeeflow APIs, or prove pixel-perfect rendering.",
+      "notes": "Use with the normalized product catalog and existing extension registry; do not invent control-property paths or force mock values as runtime proof."
+    },
+    {
+      "id": "table.progress.bar-treatment",
+      "controlType": "collection",
+      "patternName": "Table progress bar treatment",
+      "status": "evidence-backed",
+      "source": "manual-runtime-study",
+      "confidence": "high",
+      "evidenceSummary": "Progress fields in design-fidelity tables require progress-bar treatment metadata. Derived from redacted Marketing Event Event Portfolio design/runtime fidelity findings; extension-layer guidance only, not a product-catalog replacement.",
+      "requiredProperties": {},
+      "optionalProperties": {},
+      "proofBoundary": "Validates declared/redacted metadata and synthetic fixtures only. It does not decode private payloads, parse screenshots, call Yeeflow APIs, or prove pixel-perfect rendering.",
+      "notes": "Use with the normalized product catalog and existing extension registry; do not invent control-property paths or force mock values as runtime proof."
+    },
+    {
+      "id": "table.owner.avatar-person-treatment",
+      "controlType": "collection",
+      "patternName": "Table owner avatar/person treatment",
+      "status": "evidence-backed",
+      "source": "manual-runtime-study",
+      "confidence": "high",
+      "evidenceSummary": "Owner/person fields require avatar/person treatment when the design calls for it. Derived from redacted Marketing Event Event Portfolio design/runtime fidelity findings; extension-layer guidance only, not a product-catalog replacement.",
+      "requiredProperties": {},
+      "optionalProperties": {},
+      "proofBoundary": "Validates declared/redacted metadata and synthetic fixtures only. It does not decode private payloads, parse screenshots, call Yeeflow APIs, or prove pixel-perfect rendering.",
+      "notes": "Use with the normalized product catalog and existing extension registry; do not invent control-property paths or force mock values as runtime proof."
+    },
+    {
+      "id": "table.header-row.hierarchy",
+      "controlType": "collection",
+      "patternName": "Table header hierarchy",
+      "status": "evidence-backed",
+      "source": "manual-runtime-study",
+      "confidence": "high",
+      "evidenceSummary": "Table headers require declared hierarchy and spacing when claiming design fidelity. Derived from redacted Marketing Event Event Portfolio design/runtime fidelity findings; extension-layer guidance only, not a product-catalog replacement.",
+      "requiredProperties": {},
+      "optionalProperties": {},
+      "proofBoundary": "Validates declared/redacted metadata and synthetic fixtures only. It does not decode private payloads, parse screenshots, call Yeeflow APIs, or prove pixel-perfect rendering.",
+      "notes": "Use with the normalized product catalog and existing extension registry; do not invent control-property paths or force mock values as runtime proof."
+    },
+    {
+      "id": "table.row-density.design-fidelity",
+      "controlType": "collection",
+      "patternName": "Table row density fidelity",
+      "status": "evidence-backed",
+      "source": "manual-runtime-study",
+      "confidence": "high",
+      "evidenceSummary": "Table rows require declared design-matching density/spacing. Derived from redacted Marketing Event Event Portfolio design/runtime fidelity findings; extension-layer guidance only, not a product-catalog replacement.",
+      "requiredProperties": {},
+      "optionalProperties": {},
+      "proofBoundary": "Validates declared/redacted metadata and synthetic fixtures only. It does not decode private payloads, parse screenshots, call Yeeflow APIs, or prove pixel-perfect rendering.",
+      "notes": "Use with the normalized product catalog and existing extension registry; do not invent control-property paths or force mock values as runtime proof."
+    },
+    {
+      "id": "container.action-button.add-list-item",
+      "controlType": "container",
+      "patternName": "Action Container add-list behavior",
+      "status": "evidence-backed",
+      "source": "manual-runtime-study",
+      "confidence": "high",
+      "evidenceSummary": "Action-looking add-list Containers require action-type 5 and target list metadata. Derived from redacted Marketing Event Event Portfolio design/runtime fidelity findings; extension-layer guidance only, not a product-catalog replacement.",
+      "requiredProperties": {},
+      "optionalProperties": {},
+      "proofBoundary": "Validates declared/redacted metadata and synthetic fixtures only. It does not decode private payloads, parse screenshots, call Yeeflow APIs, or prove pixel-perfect rendering.",
+      "notes": "Use with the normalized product catalog and existing extension registry; do not invent control-property paths or force mock values as runtime proof."
+    },
+    {
+      "id": "container.action-button.fixed-size",
+      "controlType": "container",
+      "patternName": "Action Container fixed size",
+      "status": "evidence-backed",
+      "source": "manual-runtime-study",
+      "confidence": "high",
+      "evidenceSummary": "Action Containers require fixed size when design specifies button dimensions. Derived from redacted Marketing Event Event Portfolio design/runtime fidelity findings; extension-layer guidance only, not a product-catalog replacement.",
+      "requiredProperties": {},
+      "optionalProperties": {},
+      "proofBoundary": "Validates declared/redacted metadata and synthetic fixtures only. It does not decode private payloads, parse screenshots, call Yeeflow APIs, or prove pixel-perfect rendering.",
+      "notes": "Use with the normalized product catalog and existing extension registry; do not invent control-property paths or force mock values as runtime proof."
+    },
+    {
+      "id": "container.action-button.child-heading-label",
+      "controlType": "container",
+      "patternName": "Action Container child Heading/Text label",
+      "status": "evidence-backed",
+      "source": "manual-runtime-study",
+      "confidence": "high",
+      "evidenceSummary": "Action labels should be visible child Heading/Text controls. Derived from redacted Marketing Event Event Portfolio design/runtime fidelity findings; extension-layer guidance only, not a product-catalog replacement.",
+      "requiredProperties": {},
+      "optionalProperties": {},
+      "proofBoundary": "Validates declared/redacted metadata and synthetic fixtures only. It does not decode private payloads, parse screenshots, call Yeeflow APIs, or prove pixel-perfect rendering.",
+      "notes": "Use with the normalized product catalog and existing extension registry; do not invent control-property paths or force mock values as runtime proof."
+    },
+    {
+      "id": "container.action-button.semantic-nv-label",
+      "controlType": "container",
+      "patternName": "Action Container semantic Navigator label",
+      "status": "evidence-backed",
+      "source": "manual-runtime-study",
+      "confidence": "high",
+      "evidenceSummary": "Action Containers require semantic nv_label for designer traceability. Derived from redacted Marketing Event Event Portfolio design/runtime fidelity findings; extension-layer guidance only, not a product-catalog replacement.",
+      "requiredProperties": {},
+      "optionalProperties": {},
+      "proofBoundary": "Validates declared/redacted metadata and synthetic fixtures only. It does not decode private payloads, parse screenshots, call Yeeflow APIs, or prove pixel-perfect rendering.",
+      "notes": "Use with the normalized product catalog and existing extension registry; do not invent control-property paths or force mock values as runtime proof."
+    },
+    {
+      "id": "visible-runtime-text.no-raw-variable-names",
+      "controlType": "text",
+      "patternName": "Visible runtime raw-variable prevention",
+      "status": "evidence-backed",
+      "source": "manual-runtime-study",
+      "confidence": "high",
+      "evidenceSummary": "Visible runtime text must not contain raw variable or binding tokens. Derived from redacted Marketing Event Event Portfolio design/runtime fidelity findings; extension-layer guidance only, not a product-catalog replacement.",
+      "requiredProperties": {},
+      "optionalProperties": {},
+      "proofBoundary": "Validates declared/redacted metadata and synthetic fixtures only. It does not decode private payloads, parse screenshots, call Yeeflow APIs, or prove pixel-perfect rendering.",
+      "notes": "Use with the normalized product catalog and existing extension registry; do not invent control-property paths or force mock values as runtime proof."
+    },
+    {
+      "id": "decoded-resource.visible-text.no-raw-variable-names",
+      "controlType": "text",
+      "patternName": "Decoded Resource visible raw-variable prevention",
+      "status": "evidence-backed",
+      "source": "manual-runtime-study",
+      "confidence": "high",
+      "evidenceSummary": "Decoded Resource visible text fields must not expose raw variable tokens. Derived from redacted Marketing Event Event Portfolio design/runtime fidelity findings; extension-layer guidance only, not a product-catalog replacement.",
+      "requiredProperties": {},
+      "optionalProperties": {},
+      "proofBoundary": "Validates declared/redacted metadata and synthetic fixtures only. It does not decode private payloads, parse screenshots, call Yeeflow APIs, or prove pixel-perfect rendering.",
+      "notes": "Use with the normalized product catalog and existing extension registry; do not invent control-property paths or force mock values as runtime proof."
+    },
+    {
+      "id": "runtime-sample-data.users-search.account-id",
+      "controlType": "runtime-proof-metadata",
+      "patternName": "Runtime sample-data users-search AccountID provenance",
+      "status": "evidence-backed",
+      "source": "redacted-runtime-api-study",
+      "confidence": "high",
+      "evidenceSummary": "Derived from the Marketing Event Event Portfolio v1.0.38 redacted runtime/API evidence: /users/search exposed usable user identifiers via AccountID for User/person sample-data repair. Store only redacted provenance.",
+      "requiredProperties": {
+        "usersSearchAccountIdProvenanceRedacted": true,
+        "rawUserIdsStored": false
+      },
+      "optionalProperties": {
+        "redactedAccountIdPreview": "present"
+      },
+      "proofBoundary": "Metadata-only proof pattern. Does not authorize live API calls and must not store raw user IDs, tenant URLs, or raw responses.",
+      "notes": "Use when runtime User/person control proof needs redacted user identifier provenance."
+    },
+    {
+      "id": "runtime-sample-data.items-update.user-field",
+      "controlType": "runtime-proof-metadata",
+      "patternName": "Runtime sample-data item PATCH for blank User fields",
+      "status": "evidence-backed",
+      "source": "redacted-runtime-api-study",
+      "confidence": "high",
+      "evidenceSummary": "Derived from redacted Marketing Event evidence where scoped PATCH /lists/{appID}/{listID}/items/{id} populated Text21 / Event Owner (User) on existing Events rows.",
+      "requiredProperties": {
+        "existingUserValuesWereBlank": true,
+        "itemPatchProof": true,
+        "runtimeVerification": true
+      },
+      "optionalProperties": {
+        "patchedField": "redacted User/person field reference"
+      },
+      "proofBoundary": "Only redacted PATCH proof metadata may be committed. Raw item IDs, user IDs, request bodies, and responses are forbidden.",
+      "notes": "Use when existing sample rows are present but User/person values are blank."
+    },
+    {
+      "id": "runtime-sample-data.items-batch-create.events",
+      "controlType": "runtime-proof-metadata",
+      "patternName": "Runtime Events sample-data batch create proof",
+      "status": "evidence-backed",
+      "source": "redacted-runtime-api-study",
+      "confidence": "high",
+      "evidenceSummary": "Derived from redacted Marketing Event evidence where POST /lists/{appID}/{listID}/items/batch created additional Events sample rows for runtime fidelity proof.",
+      "requiredProperties": {
+        "additionalRuntimeRowsRequired": true,
+        "batchCreateProof": true
+      },
+      "optionalProperties": {
+        "createdRowCount": "redacted count only"
+      },
+      "proofBoundary": "Does not authorize package or API writes in plugin training. Store redacted metadata only.",
+      "notes": "Use only for runtime proof planning/reporting after explicit user-approved live operations outside this branch."
+    },
+    {
+      "id": "runtime-sample-data.query-verify-retry-backoff",
+      "controlType": "runtime-proof-metadata",
+      "patternName": "Runtime sample-data query verification retry/backoff",
+      "status": "evidence-backed",
+      "source": "redacted-runtime-api-study",
+      "confidence": "high",
+      "evidenceSummary": "Derived from Marketing Event batch-create evidence: immediate query verification can lag after batch create, so proof metadata must include retry/backoff or delayed verification before failing.",
+      "requiredProperties": {
+        "batchCreateProof": true,
+        "verifyRetryBackoff": true
+      },
+      "optionalProperties": {
+        "attempts": "redacted numeric count",
+        "delayMs": "redacted numeric delay"
+      },
+      "proofBoundary": "Metadata-only proof pattern. Does not retry live APIs inside validator.",
+      "notes": "Use when runtime sample rows are batch-created and verified through eventually consistent list queries."
+    },
+    {
+      "id": "collection.grid-table.root-overflow-hidden",
+      "controlType": "collection",
+      "patternName": "Collection grid-table root overflow hidden",
+      "status": "evidence-backed",
+      "source": "manual-export-study",
+      "confidence": "high",
+      "evidenceSummary": "Derived from Marketing Event Event Pipeline grid-table manual subtree: root grid-table container uses overflow hidden to preserve rounded corners.",
+      "requiredProperties": {
+        "rootOverflowHidden": true
+      },
+      "optionalProperties": {},
+      "proofBoundary": "Declared/redacted metadata only; no screenshot parsing.",
+      "notes": "Required when claiming grid-table presentation fidelity."
+    },
+    {
+      "id": "collection.grid-table.header-item-align-center",
+      "controlType": "collection",
+      "patternName": "Collection grid-table header and item center alignment",
+      "status": "evidence-backed",
+      "source": "manual-export-study",
+      "confidence": "high",
+      "evidenceSummary": "Derived from Marketing Event Event Pipeline grid-table manual subtree: header grid and item grid align-items center.",
+      "requiredProperties": {
+        "headerAlignItems": "center",
+        "itemAlignItems": "center"
+      },
+      "optionalProperties": {},
+      "proofBoundary": "Declared/redacted metadata only.",
+      "notes": "Prevents header/body vertical drift."
+    },
+    {
+      "id": "collection.grid-table.cell-padding-parity",
+      "controlType": "collection",
+      "patternName": "Collection grid-table cell padding parity",
+      "status": "evidence-backed",
+      "source": "manual-export-study",
+      "confidence": "high",
+      "evidenceSummary": "Derived from Marketing Event Event Pipeline grid-table manual subtree: header/body cells use matching padding such as 12px horizontal and 8px vertical.",
+      "requiredProperties": {
+        "headerCellPadding": "matches bodyCellPadding",
+        "bodyCellPadding": "matches headerCellPadding"
+      },
+      "optionalProperties": {},
+      "proofBoundary": "Declared/redacted metadata only.",
+      "notes": "Use for table spacing fidelity claims."
+    },
+    {
+      "id": "collection.grid-table.progress-column-control",
+      "controlType": "collection",
+      "patternName": "Collection grid-table progress column real progress control",
+      "status": "evidence-backed",
+      "source": "manual-export-study",
+      "confidence": "high",
+      "evidenceSummary": "Derived from Marketing Event Event Pipeline grid-table manual subtree: Registration progress column should use a real progress control derived from numeric source data.",
+      "requiredProperties": {
+        "progressColumn.controlType": "progress",
+        "progressColumn.sourceFieldType": "Number"
+      },
+      "optionalProperties": {
+        "progressExpression": "Registration Count / 600"
+      },
+      "proofBoundary": "Declared/redacted metadata only.",
+      "notes": "Dynamic text or raw formula text is not acceptable for progress-like columns."
+    },
+    {
+      "id": "collection.grid-table.dynamic-user-column-control",
+      "controlType": "collection",
+      "patternName": "Collection grid-table owner column Dynamic user control",
+      "status": "evidence-backed",
+      "source": "manual-export-study",
+      "confidence": "high",
+      "evidenceSummary": "Derived from Marketing Event Event Pipeline grid-table manual subtree and Events field study: Owner/person column should use Dynamic user/person control bound to a User/identity field.",
+      "requiredProperties": {
+        "ownerColumn.controlType": "dynamic-user",
+        "ownerColumn.boundFieldType": "User"
+      },
+      "optionalProperties": {},
+      "proofBoundary": "Declared/redacted metadata only; runtime proof also needs nonblank User values.",
+      "notes": "Plain text owner fields do not prove person-control fidelity."
+    },
+    {
+      "id": "collection.grid-table.semantic-nv-labels",
+      "controlType": "collection",
+      "patternName": "Collection grid-table semantic Navigator labels",
+      "status": "evidence-backed",
+      "source": "manual-export-study",
+      "confidence": "high",
+      "evidenceSummary": "Derived from Yeeflow designer Navigator evidence: generated grid-table subtree controls need semantic nv_label for traceability.",
+      "requiredProperties": {
+        "generatedControls[].nv_label": "semantic"
+      },
+      "optionalProperties": {},
+      "proofBoundary": "Declared/redacted metadata only.",
+      "notes": "Generic labels such as Container are not semantic."
+    },
+    {
+      "id": "kpi.value-display.format-number-expression",
+      "controlType": "summary",
+      "patternName": "KPI value display formatNumber expression",
+      "status": "evidence-backed",
+      "source": "manual-export-study",
+      "confidence": "high",
+      "evidenceSummary": "Derived from supplied Marketing Event KPI snippets using formatNumber for Approved Budget and Registration Rate display values.",
+      "requiredProperties": {
+        "valueExpression": "formatNumber(...)"
+      },
+      "optionalProperties": {},
+      "proofBoundary": "Expression-format metadata only; runtime values remain live.",
+      "notes": "Use for presentation-quality visible KPI headings."
+    },
+    {
+      "id": "kpi.value-display.compact-number-kmb",
+      "controlType": "summary",
+      "patternName": "KPI compact K/M/B number display",
+      "status": "evidence-backed",
+      "source": "manual-export-study",
+      "confidence": "high",
+      "evidenceSummary": "Derived from supplied Approved Budget card using formatNumber plus K/M compact display.",
+      "requiredProperties": {
+        "requiresCompactNumber": true,
+        "valueExpression": "formatNumber(...) with K/M/B logic"
+      },
+      "optionalProperties": {},
+      "proofBoundary": "Presentation formatting only; does not force mock values.",
+      "notes": "Large money/count metrics should not render as raw 225000-style values."
+    },
+    {
+      "id": "kpi.value-display.fixed-decimal",
+      "controlType": "summary",
+      "patternName": "KPI fixed decimal rate/percentage display",
+      "status": "evidence-backed",
+      "source": "manual-export-study",
+      "confidence": "high",
+      "evidenceSummary": "Derived from supplied Registration Rate card using formatNumber(value, 2, true).",
+      "requiredProperties": {
+        "requiresFixedDecimal": true,
+        "valueExpression": "formatNumber(value, 2, true)"
+      },
+      "optionalProperties": {},
+      "proofBoundary": "Presentation formatting only; live values may differ from mock targets.",
+      "notes": "Use for rates and percentages."
+    },
+    {
+      "id": "kpi.value-display.no-raw-long-decimal",
+      "controlType": "summary",
+      "patternName": "KPI no raw long decimal display",
+      "status": "evidence-backed",
+      "source": "runtime-fidelity-study",
+      "confidence": "high",
+      "evidenceSummary": "Derived from Marketing Event runtime findings where long raw decimals were content-fidelity failures.",
+      "requiredProperties": {
+        "longRawDecimalVisible": false
+      },
+      "optionalProperties": {},
+      "proofBoundary": "Declared/runtime text metadata only.",
+      "notes": "Values like 217.16666666666666 fail unless explicitly waived."
+    },
+    {
+      "id": "kpi.value-display.no-unformatted-large-number",
+      "controlType": "summary",
+      "patternName": "KPI no unformatted large number display",
+      "status": "evidence-backed",
+      "source": "runtime-fidelity-study",
+      "confidence": "high",
+      "evidenceSummary": "Derived from Marketing Event runtime findings where large raw KPI values needed compact formatting.",
+      "requiredProperties": {
+        "unformattedLargeNumberVisible": false
+      },
+      "optionalProperties": {
+        "formattingWaived": "explicit waiver only"
+      },
+      "proofBoundary": "Declared/runtime text metadata only.",
+      "notes": "Large values should be compacted or explicitly waived."
+    }
+  ],
+  "exampleEntryShape": {
+    "controlType": "container",
+    "propertyPath": "attrs.style.example_missing_catalog_path",
+    "valueType": "string",
+    "allowDevice": false,
+    "source": "future_redacted_study",
+    "confidence": "needs_study",
+    "evidence": [
+      "redacted export/runtime artifact path or study reference"
+    ],
+    "status": "needs_study",
+    "notes": "Example only. Do not treat as an active extension."
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "templatePurpose": "Synthetic redacted runtime evidence template for UI/Summary/KPI hard-gate validators.",
+  "redactionStatus": "synthetic-only-no-private-endpoints-no-identifiers-no-response-bodies-no-payloads",
+  "appName": "Synthetic Marketing Event Management",
+  "pageName": "Event Portfolio Dashboard",
+  "pageType": "dashboard",
+  "evidenceTimestamp": "YYYY-MM-DDTHH:mm:ssZ",
+  "screenshotPath": "REDACTED_RUNTIME_SCREENSHOT_PATH.png",
+  "runtimeScreenshotCaptured": true,
+  "installOrSigningOnly": false,
+  "runtimeProofStatus": "runtime screenshot evidence required before UI-quality claim",
+  "dynamicVisibleKpiRuntimeProven": false,
+  "dynamicBindingShape": "fallback-example-not-dynamic-proof",
+  "visibleBindingShape": "fallback-example-not-dynamic-proof",
+  "proofBoundaryNotes": [
+    "UI runtime proof is based on redacted screenshot/evidence metadata only.",
+    "Dynamic visible KPI binding is proven only for the exact UUID Summary v1.0.1 shape when before/after mutation evidence and refreshed/recalculated runtime evidence are present.",
+    "This fallback example is not dynamic proof.",
+    "Fallback KPI values are explicitly labeled as fallback and must remain so until runtime evidence proves dynamic rendering.",
+    "Install/signing/API acceptance is not visual runtime UI proof."
+  ],
+  "provenUuidSummaryV101ShapeExample": {
+    "exampleStatus": "synthetic-shape-example-not-live-proof",
+    "dynamicVisibleKpiRuntimeProven": true,
+    "dynamicBindingShape": "uuid-summary-v1.0.1",
+    "visibleBindingShape": "attrs.headc.title.variable[]",
+    "summaryControlIds": [
+      "11111111-1111-4111-8111-111111111111",
+      "22222222-2222-4222-8222-222222222222",
+      "33333333-3333-4333-8333-333333333333",
+      "44444444-4444-4444-8444-444444444444"
+    ],
+    "packageShapeRequired": {
+      "summaryIdsAreUuids": true,
+      "resourceReportIdsContainSummaryIds": true,
+      "resourceExtsContainPivotSummaryEntries": true,
+      "summarySaveVarUsesExpressionObjects": true,
+      "resourceTempVarsDeclareSavedVariables": true,
+      "visibleKpiBindsThroughHeadcTitleVariable": true,
+      "summaryFieldMetadataComplete": true,
+      "staticFallbackValuesUsedForProof": false
+    },
+    "mutationProof": {
+      "beforeValues": {
+        "totalRecords": 3,
+        "amountSum": 600,
+        "openCount": 2,
+        "apacAmount": 300
+      },
+      "sourceDataMutated": true,
+      "mutationSummary": "Synthetic example: add one redacted source row with amount 400, status Open, and region APAC.",
+      "afterValues": {
+        "totalRecords": 4,
+        "amountSum": 1000,
+        "openCount": 3,
+        "apacAmount": 700
+      },
+      "expectedAfterValues": {
+        "totalRecords": 4,
+        "amountSum": 1000,
+        "openCount": 3,
+        "apacAmount": 700
+      },
+      "refreshedRecalculatedRuntimeEvidenceCaptured": true,
+      "asyncRecalculationNote": "Summary recalculation can be asynchronous or cache-delayed; final after-evidence must be captured after refresh/recalculation."
+    },
+    "limitations": [
+      "Does not prove semantic or non-UUID Summary IDs.",
+      "Does not prove approval forms, public forms, unsupported surfaces, or other visible binding shapes.",
+      "Marketing Event dashboards still need their own before/after mutation proof before claiming runtime dynamic KPI success."
+    ]
+  },
+  "kpiValuesVisible": true,
+  "hiddenSummaryVisible": false,
+  "dashboardCardsCardLike": true,
+  "filtersActionsVisible": true,
+  "tablesGridsNonScaffold": true,
+  "badgesDistinct": true,
+  "pageLooksPlainScaffold": false,
+  "kpis": [
+    {
+      "label": "Planned Events",
+      "renderedText": "Fallback: 12 planned events",
+      "fallback": true,
+      "fallbackLabeled": true,
+      "dynamicBindingClaimed": false,
+      "runtimeProven": false,
+      "proofState": "fallback-labeled-dynamic-binding-not-proven"
+    },
+    {
+      "label": "Open Risks",
+      "renderedText": "Fallback: 3 open risks",
+      "fallback": true,
+      "fallbackLabeled": true,
+      "dynamicBindingClaimed": false,
+      "runtimeProven": false,
+      "proofState": "fallback-labeled-dynamic-binding-not-proven"
+    }
+  ],
+  "summaryControls": {
+    "designerConfigured": true,
+    "validatorValid": true,
+    "runtimeProvenVisibleDynamicKpi": false,
+    "hiddenContainerExpectedHidden": true,
+    "hiddenSummaryVisibilityStatus": "not-visible-in-runtime-evidence"
+  },
+  "cards": [
+    {
+      "name": "Planned Events KPI card",
+      "cardLike": true,
+      "visibleValue": true
+    }
+  ],
+  "filters": [
+    {
+      "name": "Event status filter",
+      "visible": true,
+      "interactiveState": "not-tested-in-template"
+    }
+  ],
+  "tables": [
+    {
+      "name": "Event portfolio grid",
+      "nonScaffold": true,
+      "meaningfulHeaders": true,
+      "rowActionVisibleWhenPlanned": true
+    }
+  ],
+  "badges": [
+    {
+      "name": "Event status badge",
+      "visuallyDistinct": true
+    }
+  ],
+  "privateDataPolicy": {
+    "privateEndpointIncluded": false,
+    "privateIdentifierIncluded": false,
+    "apiResponseBodyIncluded": false,
+    "packagePayloadIncluded": false,
+    "rawResourceIncluded": false,
+    "rawSignIncluded": false,
+    "oauthTokenIncluded": false,
+    "apiKeyIncluded": false
+  },
+  "proofPromotionNote": "KPI Runtime Binding Proof v1.0.1 promotes only the exact UUID Summary shape. Other shapes remain unproven unless focused runtime evidence proves them, and fallback values must remain explicitly labeled fallback."
+}

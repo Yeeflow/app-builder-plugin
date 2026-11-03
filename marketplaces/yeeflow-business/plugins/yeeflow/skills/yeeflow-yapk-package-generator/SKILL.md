@@ -1,0 +1,423 @@
+---
+name: yeeflow-yapk-package-generator
+description: Inspect, validate, compare, and plan Yeeflow .yapk existing-application upgrade packages using the product YAPK schema, including AppExportPackageInfo wrapper checks, Resource Brotli/AppPackageInfo decode attempts, signing-boundary guidance, safe redacted summaries, and future edit-encode-sign-runtime generation workflow.
+---
+
+# Yeeflow YAPK Package Generator
++## Hosted MCP-Only Yeeflow Access
+
+For live Yeeflow work, use only the appropriate hosted MCP tool. Its service negotiates authentication; standalone OAuth, local REST/API helpers, API-key fallbacks, profile/environment configuration, and direct endpoint calls are retired and must not be used. `workspace_list` is the sole workspace-discovery route. Require explicit confirmation for writes, and treat MCP acceptance as distinct from materialization and runtime proof.
+
+## Retired Collection References
+
+`collection_control_grid_table` and `collection_control_grid_table_with_multiselect` are retired migration-only IDs. This rule supersedes legacy examples later in this historical skill text: use `collection_control_responsive` or `collection_control_responsive_multiple_select` for every new Dashboard Collection. Keep the old export artifacts only for migration/readback compatibility, never as a new generated-final choice.
+
+## UI Generation Hard-Gate Skill
+
+Phase 3B adds workflow-level enforcement. Final reports for high-quality UI work must include contract, scope, runtime evidence, and structure-comparison artifact paths as applicable. Run `scripts/inspect-ui-closed-loop-workflow-enforcement.mjs` before claiming high-quality UI or design fidelity. Generation from design/mockup requires a UI contract. UI upgrades require a scope manifest. Runtime UI quality claims require runtime evidence. Design fidelity claims require structure comparison. Dynamic KPI proof requires before/after mutation evidence. Install/sign/upgrade success is not visual proof.
+
+Use `yeeflow-ui-generation-hard-gates` before producing or upgrading `.yapk` packages that include dashboard/UI changes, Summary/KPI dashboards, visible KPI claims, runtime screenshot proof, sandbox page proof, or UI lineage decisions. High-quality UI requires a page-by-page implementation contract; uncertain UI/runtime patterns should be proven on a sandbox page first; use export-proven Yeeflow control/style shapes; Summary/KPI controls require designer-shaped hidden Summary configuration; Summary controls must bind real fields, filters, temp variables, `save_var` expression objects, layout-resource `Resource.ReportIds`, matching layout-resource `Resource.exts`, and layout-resource `Resource.tempVars`; top-level `Pages[].ReportIds` is optional compatibility metadata; dynamic visible KPI binding is proven only for the exact UUID Summary v1.0.1 shape with before/after mutation proof and refreshed/recalculated runtime evidence; Summary recalculation can be asynchronous or cache-delayed; semantic/non-UUID Summary IDs and other unsupported shapes remain unproven; for every other shape, visible KPI dynamic binding is not considered solved unless runtime-proven; fallback KPI values must be explicitly labeled as fallback; runtime screenshot evidence is required before claiming UI quality; install/signing/API acceptance is not runtime UI proof; UI upgrades must preserve ListSetID, app identity, existing IDs, and declared change scope; broad scaffold-like UI must not be claimed as high-quality UI. Data Analytics controls require UUID/runtime-safe IDs for Pie chart, Column chart, Line chart, Gauge, Funnel chart, Color block heatmap, Summary, and Pivot table. Preserve existing Data Analytics control IDs during upgrades.
+
+## Generated-Final YAPK ID And Navigation Hard Gates
+
+Generated-final `.yapk` output must use API-issued numeric content IDs from `GET /utils/generate/ids?count=<n>` and must emit a redacted `dist/<app-name>-id-provenance-report.json` with `sourceMarker: "api-generated"`, path-to-purpose mappings, duplicate checks, unused-ID accounting, generator provenance metadata, and no non-API IDs. Local ID generation, hardcoded generated IDs, copied sample/export IDs, random values, timestamps, UUID fallback, and deterministic local-only seeds are forbidden for generated-final `.yapk`. Runtime navigation groups must include API-issued `ID`, `AppID`, `ListSetID`, `Type: "classes"`, `Title`, `Icon`, and `list[]`; children must include `AppID`, `Title`, `ListID`, `ListSetID`, and `Type`, with dashboards/pages as `Type: 103` plus `LayoutID`, approval forms as `Type: 105`, and data lists as `Type: 1`. Run `scripts/validate-yapk-id-provenance.mjs` and `scripts/validate-yapk-navigation-runtime-metadata.mjs`; stop before signing, install, upgrade-check, or handoff if either gate fails. `setsign`/`verifysign` and install acceptance do not prove ID provenance or navigation runtime metadata completeness.
+
+YAPK upgrade ID stability hard gate: upgrade/new-version `.yapk` output must preserve IDs for existing semantic resources from the previous package/lineage manifest. Only newly added resources may consume newly API-issued IDs, removed IDs must not be reused, replacing all IDs is a hard failure, layout semantic keys must include list title, layout title, layout type, and index/equivalent disambiguator, and `scripts/validate-yapk-upgrade-id-stability.mjs` must pass before signing, upgrade-check, upgrade apply, install-like writes, or handoff. Missing previous package/manifest fails closed; signing/install/upgrade acceptance is not ID-continuity proof.
+
+Existing-app YAPK upgrade scope hard gates: before signing readiness, upgrade-check, upgrade apply, or handoff, run `scripts/validate-yapk-upgrade-scope.mjs --previous-package <previous.yapk> --new-package <upgrade.yapk> --scope <scope.json>` and `scripts/validate-yapk-upgrade-report-scope.mjs --previous-package <previous.yapk> --new-package <upgrade.yapk> --scope <scope.json> [--report-proof <report-proof.json>]`. Every upgrade must declare target resource type, target list/page/form/report/workflow, allowed changes, and disallowed unrelated changes. Field-only/list-only upgrades fail if dashboards, approval forms, workflows, navigation, FormNewReports, or DataReports change unless explicitly declared. Visible default-view fields must be present in both `LayoutView.layout[]` and `LayoutView.query[]` with matching FieldName/FieldID. Approval DefResources must not be opportunistically carried or rebuilt for field/list-only upgrades; if intentionally included, they must be canonical Brotli/base64, UUID-page, Main/Content, unique-control-ID, graph-position, task-url, assignee, and Approved/Rejected-route complete.
+
+Upgrade payload generation must omit unchanged already-installed Form reports from `FormNewReports[]` for every non-Report scope. This is required for Approval upgrades as well as Dashboard, Data List, workflow, and navigation upgrades because Version Management can interpret a carried report as a duplicate create. Remove only matching report navigation payload items. Any new or modified report requires explicit report scope plus new/update-safe proof; unrelated navigation changes remain blocked.
+
+Use `scripts/materialize-yapk-focused-upgrade-scope.mjs` to produce the focused candidate before signing. The materializer compares previous/candidate report definitions and omits only exact unchanged installed reports; it must not suppress changed report content. Run report-scope and general upgrade-scope validators against that output.
+
+Focused upgrade output must use Version Management-compatible UUID PackageId metadata. If a cloned/generated candidate still has a numeric content ID in wrapper `PackageId`, replace it with a new UUID during focused-scope materialization and clear `Sign`; preserve decoded application/list/form IDs separately through the ID-lineage gate.
+
+Version Management proof gate: `upgrade-check-yapk` and `upgrade-apply-yapk` API status `0` are submitted/accepted only, never final success. After apply, run `scripts/inspect-yapk-upgrade-version-row.mjs --evidence <version-management-proof.json> --package-id <PackageId>` and require the submitted PackageId row to be `Succeed`. Save screenshot or structured DOM proof. Failed rows require sanitized exact View error log text. Runtime proof must then open the affected surface and prove the intended change, such as the new data-list field label. For Approval workflow upgrades, include `expectedApprovalWorkflow` from the package-side DefResource summary and a runtime `liveDefBlobSummary` / `liveDesignerSummary` after Version Management `Succeed`; prove Designer open, publish success, and matching task/assignee/Approved-condition/Rejected-condition summary. Keep API acceptance, Version Management final status, and runtime proof as separate report layers.
+
+YAPK upgrade app identity hard gate: UI upgrade output must also pass `scripts/inspect-yapk-upgrade-app-identity.mjs` with package lineage metadata before signing, upgrade-check, upgrade apply, install-like writes, or handoff. Generated ListSetID must match the installed/previous app ListSetID, package classification must be upgrade when the user requested an update, existing app identity and existing resource IDs must not drift, existing resources must stay within declared change scope, package lineage must be present, and `Resource.ReplaceIds` must be rebuilt from final package contents. This complements semantic ID stability; install/signing/upgrade acceptance is not ListSetID or runtime UI proof.
+
+## Dashboard Grid-Table Collection Pattern Gate
+
+Dashboard/app page root content-area padding is a hard gate: every generated or upgraded Type 103 dashboard/app page must serialize `Pages[].LayoutInResources[].Resource` with root `attrs.container.cw = "2"` and `attrs.container.padding = [null, { top: "--sp--s0", right: "--sp--s0", bottom: "--sp--s0", left: "--sp--s0" }]`. Scalar padding, object/numeric padding, numeric array padding, `attrs.common.padding`, or `attrs.style.padding` alone are invalid for the root content area. Normalize existing dashboard/app page roots to this exact token-array shape before signing, installing, importing, or upgrading. Inner layout containers may keep intentional spacing.
+
+Data-list custom form root content-area padding uses the same hard gate: every generated or upgraded New, Edit, View, Detail, or custom form under `Data.Childs[].Layouts[].LayoutInResources[].Resource` or `Childs[].Layouts[].LayoutInResources[].Resource` must parse to a root with `attrs.container.cw = "2"` and the same `--sp--s0` token-array padding. Scalar zero, numeric object zero, `attrs.common.padding`, or `attrs.style.padding` alone remain compatibility fallbacks only and do not satisfy generated-final validation. Normalize existing data-list custom form roots to this shape before signing, installing, importing, or upgrading. Inner form sections, cards, grids, controls, and content wrappers may keep intentional spacing.
+
+Dashboard record-list sections that require the grid-table visual/runtime pattern must use grid-table style `collection` controls, not dashboard `data-list` controls, unless the user explicitly requests Data table. Pair each Collection with a header `flex_grid` in one wrapper container, set both `attrs.container.gap = 0` and `attrs.style.gap = [null, 0]`, and stop before signing, install, upgrade-check, or handoff if `scripts/validate-dashboard-grid-table-collections.mjs` fails. Planned row-click details require `attrs.data.link`, `attrs.data.opentype = "slide"`, `attrs.data.modalsize = 2`, and a concrete Type `1` custom detail layout with schema-compatible `LayoutView`; hide duplicate dashboard headers with `attrs.hideHeaderAll = true`, use visible title typography such as `attrs.heads.ty = [null, "h5-medium"]`, include Text style metadata, and never let helper metadata leak into encoded package objects. Signing/install acceptance does not prove dashboard runtime/designer visual fidelity.
+
+Dashboard resource generation must consume a Dashboard Golden Reference Selection artifact before blueprint/resource output. Default operational dashboards use `event_portfolio_dashboard_golden_reference` as a component/region reference inside the Dashboard Page Layouts v1.1 shell, not as a competing root page shell. Preserve machine-checkable provenance and export-shape parity for `event_portfolio_header_band`, `event_portfolio_filter_group`, `kpi_cards_wrapper`, `event_portfolio_kpi_row`, `event_portfolio_pipeline_section`, `Event Pipeline Grid-Table`, `event_portfolio_campaign_readiness_section`, and `campaign_readiness_grid_table_container`; generated resources must map app-specific lists/fields/metrics/actions instead of copying Marketing Event field names. Only the registered grid-table internal flex grids may remain grid/flex_grid at layout level. Static filter contract validation does not prove runtime linkage; browser proof must show selected filter values changing table/KPI data before reporting runtime filter success. Stop before signing, install, upgrade-check, or handoff if `scripts/validate-dashboard-golden-reference-conformance.mjs` fails.
+
+Dashboard Page Layouts v1.1 is the page-level shell for generated or regenerated Dashboard pages. Copy and normalize `dashboard-page-layouts-v1.1` before mapping Event Portfolio component regions into approved v1.1 slots such as `section_content_area`. For dashboard-only upgrades, only Dashboard page resources may change unless explicitly requested; preserve data lists, fields, forms, workflows, reports, navigation, icon, permissions, app metadata, and existing Dashboard `LayoutID` values. Run `scripts/validate-dashboard-page-layout-template.mjs --upgrade-scope <scope.json>` before signing readiness.
+
+Dashboard Page Layouts v1.1 controlled-slot enforcement: generated or regenerated dashboards may adapt business text, bindings, filters, KPI values, FontAwesome icons, actions, and Collection/table fields only inside the registered allowed business-content containers. Removed sections must be registered repeatable/removable modules, and added layout modules must be copies of registered repeatable/removable modules with structure, hierarchy, control types, width, padding, direction, gap, background, and required children preserved. Approved repeatable modules may be reordered for business priority, but empty `section_content_area`, empty `content_card_wrapper`, empty `2_columns_section`, empty `3_columns_section`, empty `2_columns_60/40_section`, and empty `kpi_metrics_wrapper` must be removed from generated-final resources. Generate KPI card containers only when App Plan Summary Metrics require them and keep exactly the planned count. Do not satisfy dashboard requirements with invented layout containers, business controls directly under root `Content`, copied Event Portfolio root shells, or visual-only Operations/action placeholders. Generator normalization may change `Main`/`Content` labels, semantic Navigator names, required background/padding/full-width encodings, and empty `actions` arrays without treating that as structural mutation.
+
+Dashboard Collection dataset presentation is closed-list. Before signing, install, upgrade-check, or handoff, run `scripts/validate-dashboard-dataset-presentation-golden-references.mjs --package <file.yapk> --app-plan <yeeflow-app-plan.md>` when an App Plan exists. Every Dashboard `collection` control must carry or inherit one approved reference: `collection_control_responsive_card_grid`, `collection_control_card_with_multiselect_toolbar`, `collection_control_grid_table`, `collection_control_grid_table_with_multiselect`, or `Event Pipeline Grid-Table`. The App Plan must select exactly one approved reference per Dashboard dataset region using the registry's `suitableSourceResourceTypes`, `whenToUse`, `whenNotToUse`, and `requiredBusinessSignals`. Search/fulltext is a mapped behavior on the selected approved template, not a separate golden reference; generated packages or App Plans that still use `collection_control_grid_table_with_search` must fail as unknown. Every approved Collection reference is a component-level dataset region inside Dashboard Page Layouts v1.1 and must live in approved business-content slots such as `section_content_area`; packages fail when Collection templates are placed directly under root `Content`, copied source shells, page headers, or structural wrappers. Unknown IDs, missing provenance, simplified grid tables, missing multiselect contracts, copied source fields/labels/IDs, copied Event fields in unrelated apps, missing planned regions, mismatched region templates, collapsed template diversity, or missing explicit Collection-root provenance are blockers.
+
+Data Analytics presentation is also closed-list. Before signing, install, upgrade-check, or handoff, run `scripts/validate-data-analytics-golden-references.mjs --package <file.yapk>`. Generated Pie chart, Column chart, Bar chart, Line chart, Area chart, and Pivot table templates must clone one approved source template from `docs/reference/data-analytics-golden-references.json` and carry approved template provenance. Chart-with-title templates must preserve their wrapper subtree, style, layout, and typography; only the chart container data binding and title Text value may change. Pivot table output must preserve the exported pivot-table style settings. Data Analytics templates are allowed on Dashboard pages and Data List forms only, never Approval forms. On Dashboard Page Layouts v1.1 pages, place Data Analytics templates only inside `2_columns_section` or `3_columns_section`; do not put analytics controls directly under root `Content`, page title/header regions, Operations, KPI wrappers, Collection-only regions, or copied source-app shells. The package must also register the runtime chart/pivot model: the chart/pivot control ID must appear in the same layout resource's `Resource.ReportIds[]`, and `Resource.exts[]` must contain a matching entry with `category: "___Pivot___"`, expected `key`, `i` equal to the control ID, source `AppID/ListID/ListSetID`, chart type when applicable, and non-empty source-field-backed `settings.rows[]` and `settings.values[]`. Missing runtime `exts[]`, missing `ReportIds[]`, unresolved source fields, or provenance-only chart controls are signing blockers.
+
+For `collection_control_responsive_card_grid`, validation must treat `docs/reference/collection-control-responsive-card-grid.template.json` as the export-shaped source template. Packages must include `collection_control_responsive_card_wrapper`, required slots, `card_col_body` Collection root, responsive layout/filter/fulltext shape, Dynamic controls matched to data-source field types, and valid item-operation actions only when item operations are present. Do not accept generic card Collections, ad hoc responsive cards, `dynamic-image` without an Image field, or edit/delete controls for Form Report/Data Report view-only datasets.
+
+For `collection_control_card_with_multiselect_toolbar`, validation must treat `docs/reference/collection-control-card-with-multiselect-toolbar.template.json` as the export-shaped source template. Packages must include `card_with_multiselect_toolbar_wrapper`, required slots, page-level `filterVars`/`tempVars`/`actions`/`filter`/`formAction`, Collection root `attrs.actions[]`, and an unchanged `card_col_item_multi_select` with checked/unchecked icon controls. Only `card_col_title_wrapper`, `op_normal`, `op_multipleselected`, `card_col_item`, and `card_col_item_operations` are editable business-content regions. Generic card Collections with checkbox icons, missing selected-state variables, missing action bindings, missing subject-style Dynamic field, or missing Dynamic user/image/file family preservation are generated-final blockers.
+
+Generated Dashboard Collection actions must never retain source-template layout placeholders. Replace `{{DetailLayoutID}}`, `{{layout}}`, `{{LayoutID}}`, `{{layoutId}}`, `{{PageID}}`, and `{{pageId}}` with the selected source list's concrete detail layout ID, or remove/blank the edit/open action when no concrete detail layout is planned. This applies inside Collection `attrs.actions[]`, action `steps[]`, button `control_action` payloads, and any nested layout/link/page target fields.
+
+For `collection_control_grid_table`, use `docs/reference/collection-control-grid-table.template.json` as the export-shaped source of truth. Copy `grid_table_col_wrapper` and all descendants, not a simplified header-plus-Collection lookalike. Business mapping may edit only `grid_table_col_title_wrapper`, `op_normal`, `grid_table_col_header`, `grid_col_item`, and optional `grid_table_col_item_operations`. Preserve style/layout/typography outside those regions, keep `grid_table_col_header` and `grid_col_item` column count/width/property parity, map field types to Dynamic user/image/file/field controls, and omit item operation menus for Form Report/Data Report display-only sources. If item operations are present, every button must bind to a valid action; edit/delete require matching Collection actions, and delete requires the confirmation temp variable/conditional delete flow.
+
+For `collection_control_grid_table_with_multiselect`, validation must treat `docs/reference/collection-control-grid-table-with-multiselect.template.json` as the export-shaped source template. Packages must include `grid_table_col_multiselect_wrapper`, required slots, page-level `filterVars`/`tempVars`/`actions`/`filter`/`formAction`, Collection root `attrs.actions[]`, and an unchanged `grid_table_col_item_select` with checked/unchecked icon controls. Only `grid_table_col_title_wrapper`, `op_normal`, `op_multipleselected`, `grid_table_col_header`, and `grid_col_item` are editable business-content regions. `grid_table_col_header` and `grid_col_item` must preserve matching column count, column widths, and compatible grid properties. Generic grid-table Collections with checkbox icons, missing selected-state variables, missing action bindings, missing Dynamic control family preservation, or mismatched header/item columns are generated-final blockers.
+
+Dashboard install materialization root binding is mandatory. Every generated or copied Type `103` dashboard/app page in decoded `Pages[]` must set `ListID` to decoded `ListSet.ListID`; `LayoutID` remains the page layout resource ID and navigation Type `103` entries may target that `LayoutID`. Never keep a source/baseline Dashboard page `ListID` after copying or ID remap. Run `validate-yapk-package.js` and stop on `YAPK_DASHBOARD_PAGE_ROOT_BINDING_INVALID` before signing, install, upgrade-check, or handoff.
+
+Dashboard Page Layouts v1.1 Content padding must be preserved from the canonical template. Root page padding stays zero, but the `Content` container must not be forced to zero by obsolete normalization. Stop on `DASHBOARD_V11_CONTENT_PADDING_MISMATCH`.
+
+After package install/import, use the decoded package root `ListSet.ListID` / wrapper `ListID` as the canonical runtime URL source when available. Do not use install response `Data.ID` as an application root unless the API explicitly names it as `ListSetID` or equivalent. Treat API status `0` as submission/acceptance only. If install returns status `540017`, classify it as already installed in tenant and switch to upgrade-check / upgrade-apply flow after resolving the existing installed app identity; do not keep retrying fresh install. Preserve sanitized server `Message` text in reports for non-zero API statuses.
+
+High-quality dashboard/UI upgrades must also satisfy `docs/standards/ui-summary-kpi-runtime-hard-gates.md`: page-by-page UI implementation contract, export-proven style shapes, Summary/KPI designer-shaped metadata, visible KPI runtime evidence or explicitly labeled fallback, runtime screenshot evidence before UI-quality claims, and Collection grid-table quality when planned. Dynamic visible KPI binding is proven only for the exact UUID Summary v1.0.1 shape with before/after mutation proof and refreshed/recalculated runtime evidence; other shapes remain unproven unless focused runtime proof exists.
+
+## Canonical Schema Files
+
+YAPK validation uses `schemas/yapk-schema.json`. YAP validation uses `schemas/yap-schema.json`. Do not hardcode versioned schema filenames in runtime logic. To update a product schema standard later, replace the canonical file contents while keeping these filenames unchanged. Keep YAP and YAPK schema standards separate: YAPK uses `AppExportPackageInfo`, Brotli `AppPackageInfo`, and `Childs[].Fields`; YAP uses the YAP wrapper, `[______gizp______]` gzip `ListExportResult`, `Defs`, and `SimplePortal`.
+
+## Leave Request Guardrails
+
+Leave Request runtime repair proved that local YAPK validation, API signing, API install acceptance, and runtime UI proof are separate gates. Never call a generated `.yapk` upload-ready, install-ready, or handoff-ready when `Sign` is still a placeholder or all-zero 32-byte value. When OAuth/API-key access is available, validate content, call `POST /utils/apppackage/setsign`, confirm the expected signature shape, call `POST /utils/apppackage/verifysign`, and report signing proof separately from schema and runtime proof.
+
+If an approved app plan includes an approval workflow/form, do not ship `Forms: []` unless the package is explicitly marked incomplete/staged and the user approves that scope. Generated approval forms must include request/task pages, workflow control panel, workflow history, encoded process `DefResource`, and workflow childshapes.
+
+Root navigation must use export-proven grouped shape `{ "Type": "classes", "list": [...] }`. Do not use local-only `children` or `Childs` navigation groups. Use `Type: 103` for dashboard/page entries, `Type: 105` with `ListID = Forms[].Key` for approval forms, and `Type: 1` with a valid child list ID for data lists. Every intended page/list/form must be visible in navigation or documented as hidden/deferred.
+
+For new generated app plans, require the standard app-plan structure from canonical `docs/standards/app-plan-standard-template.md` when present, or a user-approved lightweight quick outline that still includes Data Model and Lists, Forms and Approval Forms, Application Navigation, UI/UX and Control Mapping, Generation Contract and Hard Gates, Proof Boundary, and Assumptions/Deferred Items, before YAPK generation. Treat its output package, signing, approval-form, navigation, advanced capability, plan-to-package conformance, proof-boundary, and runtime inspection clauses as binding during content validation, signing, and handoff reporting. Advanced capability coverage includes planned data-list views, custom list forms/public forms, list workflows, scheduled workflows, notifications, AI Agents/Copilots/knowledge resources, custom code/custom CSS, Form Reports, document views/forms, and named golden/template references. Do not call these runtime-proven from wrapper validity, schema validity, signing, or API acceptance alone.
+
+## YAPK Schema v5 Standard Additions
+
+YAPK validation uses `schemas/yapk-schema.json`, which now contains v5 schema content. The `x-yeeflow-standard-additions` section is actionable and not optional. Generated YAPK output must strictly follow those standards before signing, install dry-run, upgrade check, upgrade apply, or handoff. Package generation must stop if the generated output violates `schemas/yapk-schema.json` or any enforceable standard addition. API install success is not runtime render proof; report local validation, API acceptance, queued import, and runtime materialization/render proof as separate scopes.
+
+
+## FormNewReports Workflow Report Standard
+
+Current YAPK generated-app rule: `FormReports` is legacy workflow report storage and generated workflow reports must be written to `FormNewReports`, but official AppPackageInfo export shape still expects `FormReports` to be present as an array, usually empty. Generated `.yapk` app packages must include `FormReports: []`, `FormNewReports: []` when no workflow reports are planned, and `CustomServices: []` when no custom services are planned. A generated package with workflow report content only in legacy `FormReports` is invalid because current workflow reports must use `FormNewReports`.
+
+## v0.6.9 Runtime Hardening Gate
+
+Customer Success Renewal Management proved that schema/signature/API acceptance is still weaker than runtime materialization. Before signing, install, upgrade check, or upgrade apply, generated YAPK packages must pass schema-v5, actionable standard-addition, and product-runtime gates:
+
+- Wrapper is `AppExportPackageInfo`; `Resource` decodes as Brotli/base64 `AppPackageInfo`.
+- `AppPackageInfo` required keys are present.
+- `AppID = 41` packages use `TableCode: "flowcraft"` and `IndexCode: "flowcraft"` on root and child list resources.
+- Optional no-portal structures should be omitted unless a proven portal module is generated; `{}` and `[]` are invalid legacy `PortalInfo` shapes.
+- All YAPK read/edit/write scripts use lossless parsing/serialization for 64-bit IDs.
+- New package/list/field/layout/dashboard/resource IDs are API-issued. Local fallback IDs, rounded IDs, duplicate IDs, and unsafe JS numeric IDs are blockers.
+- After every generated YAPK mutation, validate the final decoded `AppPackageInfo` ID/remap coverage. Do not carry stale object IDs or remap assumptions from a baseline package into a broader generated package; missing final-package IDs can pass upload/signing and still fail during install/upgrade materialization.
+- Data lists preserve native/system `Title`; generated custom `Text0` primary fields are invalid.
+- FieldName suffix matches `FieldIndex`; storage family matches FieldName family; select/radio/checkbox/tag options are non-empty.
+- Default data views include visible columns and required system query fields. Generated child `List.LayoutView` is null unless custom form routing is fully resolved from export evidence.
+- Dashboard pages use current shell: `Type: 103`, `LayoutView: null`, `Ext2` containing `{"src":true}`, `LayoutInResources[0].ID` and `RefId` equal `LayoutID`, navigation targets included dashboard `LayoutID`, and JSON contains `Main > Content`.
+- Dashboard Data table controls require `attrs.data.list`, non-empty `attrs.listarr`, and each column must include `Field` and `FieldName`; `Field` resolves to a source list field or known system field.
+- Generated Text controls use native heading/Text shape: `type:"heading"`, `label:"Text"`, `attrs.headc.title.value` or `.variable`, `attrs.heads.ty`, and plain-string `attrs.heads.color`. Do not generate ad hoc `type:"text"` controls.
+- If the plan declares `three_column_workspace_shell`, the layout pattern lives inside page/form resources only; preserve the YAPK wrapper/content boundary (`AppExportPackageInfo`, Brotli `AppPackageInfo`, `Pages[]`, optional `Forms[]`/`FormNewReports[]` when planned, and `Childs[].Fields`). Validate meaningful left/main/right panel content, no placeholder-only final panels, current dashboard shell rules for dashboard pages, and approval task page URL rules for task pages before signing or handoff.
+
+Use `full-app-plan-conformance` for approved full applications; it requires plan/spec/template coverage. Use `focused-runtime-repair` for declared repair scopes; missing full plan/spec must not fail the repair when the scope is explicit, but all non-regression gates still apply.
+
+Package API helper operations are split: use `upgrade-check-yapk` for `UpgradeCheck:true` and `upgrade-apply-yapk` for committed `UpgradeCheck:false`. Never classify `UpgradeCheck:true` as applied success; it is only `upgrade_check_passed`. Never classify `UpgradeCheck:false` API status `0` as final success; it is `upgrade_submitted` until Version Management row status `Succeed` and runtime proof both pass.
+
+## v0.6.6 First-Generation Smoke Gate
+
+Account Health smoke testing added a pre-sign gate for new generated YAPK packages. Run `scripts/yapk-first-generation-preflight.mjs --package <file.yapk> --json` before signing or package-helper dry-runs. The preflight uses the canonical `schemas/yapk-schema.json`, decodes `Resource` as Brotli/base64 `AppPackageInfo`, runs the YAPK runtime validator, and runs the generated data-list system schema validator in strict mode.
+
+Do not write, sign, or hand off a generated YAPK when decoded app objects contain extra `AppID` fields, root `ListSet.LayoutView` is null/object/array instead of a JSON string, business sample/demo rows are embedded instead of emitted as companion seed data, structural Type `16` folder rows violate the export-proven `List.Items` contract, native/system `Title` is missing, a generated `Text0` primary field exists, FieldName suffix/index or storage family is mismatched, dashboard `Ext2` lacks `{"src":true}`, `LayoutInResources` IDs do not match `LayoutID`, Data table columns lack `Field`, or generated Text controls use ad hoc `type:"text"`.
+
+First-generation smoke fixtures must stay generated-final preflight-clean. Do not keep embedded seed rows, missing native Title metadata, or simplified dashboard shells in positive smoke fixtures. Those stale shapes belong in negative regression tests. Generated-final packages must not embed seed data in decoded list rows; seed rows belong in a separate post-install seed artifact and require explicit user approval before live execution.
+
+## Full Application Visual Quality Gate
+
+Vendor Onboarding full UI v2 proved that import/install success is not enough. Do not call a generated package a full UI application unless it implements the approved plan and mockup-derived pages, forms, controls, bindings, and actions at usable quality. Blank or generic Data List custom forms are quality failures. Default/plain buttons without action bindings are quality failures. Default alert copy such as `Alert` or `Here is the description` is a quality failure. Kanban and Collection controls without meaningful dynamic item templates and item actions are quality failures.
+
+For full application generation, run `scripts/inspect-generated-app-quality.mjs --package <package> --spec <approved-spec.md> --strict-visual-app-quality` before handoff. The strict gate must fail missing planned pages/forms, missing print pages, underbuilt dashboards, missing safe padding/card structure, placeholder controls, default buttons, missing actions, empty Kanban/Collection templates, and undocumented deferred scope. Do not return a minimal or technically importable scaffold when the user asked for the full approved application.
+
+## Vendor Onboarding v4.1 YAPK Hard Checks
+
+Treat the user-confirmed Vendor Onboarding v4.1 package family as a golden YAPK generation reference. For upgrade packages, preserve all existing IDs and allocate new IDs only for newly added resources. Dashboard pages must use the standard `Main > Content` shell with page content-area padding set to zero, layout Grid display captions disabled, meaningful Navigator labels on every control, and dynamic controls only inside row-context item templates such as Kanban, Collection, or Timeline. Active dashboard buttons must use the correct button/action control shape and bind to real actions, such as opening the Vendors new-item form or navigating to the compliance queue dashboard.
+
+KPI cards must not use static number Text controls. Use the Service Desk Pro Executive Dashboard pattern: hidden Summary controls calculate values, `attrs.save_var` writes them to dashboard temp variables, and visible formatted Text controls display the temp variable values. Generated data lists inside YAPK packages must pass system schema validation: native `Title`, no generated `Text0` primary field, unique field identifiers, `FieldName` suffix matching `FieldIndex`, valid storage family, populated select/multi-select choices, default view display fields, lookup display fields selected and resolved, and sample data seeded in lookup dependency order. The remaining Vendor lookup picker no-record behavior is a known product-team follow-up; do not weaken lookup display-field validation to work around it.
+
+## Packaged Generation Standards
+
+Apply the packaged standards in `docs/standards/` before generating or returning application packages. `data-list-generation-standard.md` requires native `Title`, no generated `Text0` primary field, runtime-visible choice options in Rules.choices, not Rules.Options, full default view display/query shapes, lookup relationships for related lists, dependency-ordered sample rows, and selected lookup display fields. `dashboard-summary-card-generation-standard.md` applies only to Dashboard pages and supported Data List custom forms because Summary controls are not available on approval forms or Data List public forms; do not generate Summary controls on unsupported surfaces. `account-health-smoke-issue-summary.md` records the first-generation smoke failures that must remain regression-tested. Run the matching validators and treat missing standards compliance as a generation failure, not a cosmetic warning.
+
+## YAPK-First Application Delivery Workflow
+
+YAPK is the default package type for new app delivery as well as existing app upgrades. Generate YAP only when explicitly requested or when a fallback/debug task is specifically about YAP import. For a new app, validate decoded application content first, then wrap as `AppExportPackageInfo` with Brotli/base64 `AppPackageInfo`.
+
+If package API automation is requested, use OAuth workspace discovery first and ignore local `YEEFLOW_WORKSPACE_ID` for package write target selection. Ask the user to choose a redacted `flowcraft` workspace, then pass `--selected-workspace-id` or documented user-selected `--workspace-id`; otherwise stop with `workspace_selection_required` before request shaping. Ask before auto-installing a new YAPK. For existing app changes, generate a versioned YAPK and call upgrade automation only after the target app/package is clearly identified and confirmed. Classify API results as `success`, `already_installed`, `api_rejected`, or `http_rejected`; keep duplicate/already-installed responses separate from unknown failures and suggest upgrade, cleanup, or renamed/new-version delivery.
+
+
+## Three-Column Workspace Runtime Layout Mechanics
+
+When using or validating `three_column_workspace_shell`, choose dashboard Style 2 from `docs/standards/three-column-workspace-layout-standard.md` and `docs/studies/three-column-dashboard-layout-runtime-css-study.md`. Style 1 dashboards keep the standard `Main > Content` wrapper. Style 2 three-column workspace dashboards do not: `three_column_workspace_shell` must be the root page body layout container, with dashboard content width set to Full Width and page padding set to 0. Do not wrap the shell in default `Main > Content` containers; runtime testing showed those default-height/default-position parents can make the shell render blank or incorrectly.
+
+It is not enough to create three labeled sections. The page/form resource must contain one positioned row shell with three direct sibling panels, fixed-width left/right panels, fill-width main panel, full-height bounded panels, hidden outer panel overflow, scrollable body regions, sticky header/action regions, and meaningful bottom/support regions when present. Generated pages that stack the left, main, and right panels vertically, nest the shell under Style 1 wrappers, omit Full Width/zero page padding, or use layout-breaking icon widths must fail validation and must not claim this template. Icon controls inside the shell should use inline width behavior and intentionally bounded sizes for the panel/header context.
+
+Before signing, install, upgrade, or handoff, run template conformance with the template library when a checklist declares this pattern. Treat `THREE_COLUMN_*` findings such as `THREE_COLUMN_SHELL_NOT_ROOT`, `THREE_COLUMN_SHELL_NESTED_IN_MAIN_CONTENT`, `THREE_COLUMN_PARENT_HEIGHT_DEFAULT_RISK`, `THREE_COLUMN_PAGE_WIDTH_NOT_FULL`, `THREE_COLUMN_PAGE_PADDING_NOT_ZERO`, `THREE_COLUMN_ICON_WIDTH_NOT_INLINE`, `THREE_COLUMN_PANELS_STACKED_VERTICALLY`, `THREE_COLUMN_PANEL_WIDTH_MISSING`, `THREE_COLUMN_OVERFLOW_MISSING`, and `THREE_COLUMN_PLACEHOLDER_PANEL` as generated-final blockers. If exact selected-record/right-panel refresh binding is not proven, use safe static/sample detail content, but keep the layout mechanics correct. API install success is not runtime layout proof; manual runtime verification must confirm the panels render side by side and remain usable.
+
+## Multi-Column Form Workspace Pattern
+
+Use `docs/standards/multi-column-form-workspace-standard.md` and template `multi_column_form_workspace_shell` when a service desk, help desk, CRM workbench, support console, review queue, renewal review, case-management console, or operational inbox needs form actions, variables, selected-record state, comments/updates, dynamic form fields, or action-driven filtering. This is an approval/form workspace pattern, not a dashboard reporting pattern.
+
+During planning, choose a dashboard when the page is primarily reporting or monitoring. Choose the form workspace when the app needs navigation containers that set filter variables, ticket/list collection items that set selected/current record state, detail panels bound to that selected state, comment/update controls, or expand/collapse icon actions. Do not add fake workflow routing just to use the form surface; if the workflow is only Start to End, document that the form is being used as a no-submit workspace shell.
+
+When generating this pattern, build a row shell with left navigation, ticket/list collection, selected-record workspace, and right attributes/detail regions. Navigation rows should be icon plus text containers with click/form actions. Filter controls and menu actions should set variables consumed by collection filters or queries. Collection item actions should set selected/current record state. Details panels should use dynamic field/user/file controls bound to the selected record. Comment/update actions must target the selected record and related activity list only when the binding is validated. Avoid placeholder-only panels, fake Submit Request buttons, and claims of selected-record behavior when the actions and bindings are not implemented.
+
+Before signing, install, upgrade, or handoff, run template conformance when a checklist declares `multi_column_form_workspace_shell`, `four_column_service_desk_workspace`, `service_desk_inbox_workspace`, or `action_driven_ticket_workspace`. Treat `FORM_WORKSPACE_*` findings as generated-final blockers for pages that claim this pattern, including behavior errors (`FORM_WORKSPACE_NAV_ACTION_MISSING`, `FORM_WORKSPACE_FILTER_VARIABLE_MISSING`, `FORM_WORKSPACE_COLLECTION_FILTER_MISSING`, `FORM_WORKSPACE_SELECTED_RECORD_ACTION_MISSING`, `FORM_WORKSPACE_DETAIL_BINDING_MISSING`, `FORM_WORKSPACE_ICON_ACTION_MISSING`, `FORM_WORKSPACE_FAKE_SUBMIT_BUTTON`) and runtime layout-property errors (`FORM_WORKSPACE_SHELL_LAYOUT_PROPERTIES_MISSING`, `FORM_WORKSPACE_COLUMN_WIDTH_MISSING`, `FORM_WORKSPACE_COLUMN_HEIGHT_MISSING`, `FORM_WORKSPACE_COLUMN_OVERFLOW_MISSING`, `FORM_WORKSPACE_DIRECTION_INVALID`, `FORM_WORKSPACE_ELEMENT_GAP_MISSING`, `FORM_WORKSPACE_MENU_ITEM_LAYOUT_INVALID`, `FORM_WORKSPACE_TICKET_ITEM_LAYOUT_INVALID`, `FORM_WORKSPACE_ICON_WIDTH_NOT_INLINE`, `FORM_WORKSPACE_VERTICAL_TEXT_RISK`, `FORM_WORKSPACE_DEFAULT_CONTAINER_ONLY`). Use `docs/studies/normalized/service-desk-pro-form-workspace/reference-property-map.normalized.json` before generating this pattern; default-container-only or semantic-only four-column layouts must fail before package handoff. API install success is not runtime interaction proof; manually verify that columns render side by side, navigation filters, selected ticket refresh, detail bindings, comments, and collapse/expand actions work.
+
+The YAP Service Desk v8 smoke lessons are shared layout guidance for YAPK page/form resources but not a reason to mix package wrappers. Keep YAPK output as `AppExportPackageInfo` with Brotli/base64 `AppPackageInfo`; do not put YAP `ListExportResult` in YAPK `Resource`. When a YAPK form/page declares `multi_column_form_workspace_shell`, still enforce inline Icon/Text/Button/Dynamic field controls, contextual bounded icons, Hidden shell overflow, independent Scroll/Auto column overflow, and complete page/form materialization checks appropriate to YAPK. The YAP-only Type `105`, `Data.Forms[].ListID = 0`, and `DefResource.pageurls[].formdef.children` rules belong to YAP generation/debugging and should be translated only when a YAPK export proves the equivalent shape.
+
+## Public Tenant Safety
+
+- Never hardcode a tenant-specific Yeeflow URL. Use `https://<yourdomain>.yeeflow.com` in docs and examples.
+- For live user-facing API calls, use OAuth; if OAuth is not authenticated, ask the user to sign in through the Yeeflow plugin login flow.
+- Do not use API keys or local fallback credentials for live operations; use only the selected host OAuth connection.
+- Treat `YEEFLOW_BASE_URL` as a legacy API base URL alias only, not as a tenant URL.
+- Use only the host-selected OAuth connection for the requested account and organization. Local environment profiles cannot switch connected identities.
+- Validate and redact environment variables before API calls and never print API keys, raw API responses, tenant IDs, private URLs, raw `Resource`, raw `Sign`, decoded payloads, or generated runtime packages.
+- Keep generated examples tenant-neutral unless the user explicitly requests a target-tenant-specific package and provides safe mappings.
+
+Use this skill for Yeeflow `.yapk` version-management packages for existing application upgrades.
+
+For new full-application generation, first inspect `docs/reference/full-app-generation-entrypoints.json` with `scripts/inspect-full-app-generation-entrypoints.mjs` when the run is plugin-only or clean-room. This skill validates and packages generated `.yapk` content, but package validation and API automation are not themselves generic full-app generators. Use `scripts/materialize-full-app-generated-final.mjs` as the concrete generated-final package materialization handoff after planning gates pass and API-issued IDs are available only when it can honestly materialize the declared resource graph. Do not use delivery helpers, package API helpers, runtime-proof generators, or sample-specific generators as substitutes for the skill-orchestrated full-app generation entrypoint or the standalone materializer. If generated-final materialization cannot run because API-issued IDs are unavailable, report that hard stop directly. If it fails with `FULL_APP_MATERIALIZATION_RESOURCE_GRAPH_NOT_IMPLEMENTED`, do not emit, sign, or install a placeholder YAPK; route to full resource-graph generation instead. The failure report must not over-count App Plan rows as resources and must include exact planned resource names plus required output surfaces.
+
+## YAPK From Scratch Hardening
+
+YAPK-from-scratch generation is allowed only after the inner application content passes package/app/workflow publish-readiness validation. Generate and validate `AppPackageInfo` first, then Brotli/base64/sign only after content validators, graph validators, workflow publish-readiness checks, and placeholder scans pass.
+
+Shared YAP/YAPK application-content rule from Vendor Onboarding v1.12: generated dashboard Data table controls must use `attrs.listarr[].Field` for the actual source field internal name and `attrs.listarr[].FieldName` for the visible label. Missing `Field` can pass superficial label checks but fail at runtime with the deleted-fields query error. Preserve the same current-dashboard and YAP import rules when the inner content is later wrapped as YAPK: current dashboard shell `Type = 103`, `LayoutView = null`, `Ext2 = "{\"src\":true}"`, fixed `AppID = 41` for YAP imports, API-issued IDs for generated object IDs, integer `Field.Category`, unique IDs, populated `ReplaceIds`, and `CustomType = ListSite_<root ListID>` where applicable.
+
+YAPK schema v4 rule from Vendor Onboarding v1.13-v1.15, updated for v0.6.18 canonical schema: generated `.yapk` packages must be top-level `AppExportPackageInfo`, and `Resource` must be `base64(Brotli(JSON.stringify(AppPackageInfo)))`. Do not wrap YAP `ListExportResult` or direct `ListExportInfo` inside YAPK `Resource`. Decoded `AppPackageInfo` must include the canonical required objects/arrays `ListSet`, `Pages`, and `Childs`; optional modules such as `Forms`, `FormNewReports`, `DataReports`, `Groups`, `Tags`, `Metadatas`, `Agents`, `Connections`, `Knowledges`, `Themes`, and `Components` are generated when planned or needed by internal standards. Each `Childs[]` entry must use `Fields`, not YAP `Defs`, plus `List`, `Layouts`, `RemindRules`, `PublicForms`, and `FlowMappings`. `LongAsString` fields such as wrapper `TenantID`, wrapper `ListID`, and layout `LayoutID` stay numeric strings, but signing readiness requires `TenantID` to be the real target tenant ID, never placeholder `"0"`. Schema integer IDs such as `ListID`, `FieldID`, `ID`, and `RefId` must be emitted without JavaScript rounding; use lossless parsing/writing. For generated Vendor Onboarding-style packages, keep `AppID = 41`, use the generate-unique-ids API for new generated package/object IDs, and validate dashboard Data table `Field` bindings before signing.
+
+Signing and `verifysign` validate wrapper/resource integrity, not full business publish-readiness. Do not run `setsign` for generated content when any of these are present: missing/non-1 root or child list flags, unresolved sequence-flow variables, undeclared Set Variable targets, undeclared assignment-expression variables, unresolved required placeholders, or tenant-specific user/group/position placeholders.
+
+Official v0.6.19 proof boundary update: signing HTTP 200 alone is not package-signing proof; verify expected signature shape, 32-byte signature where applicable, and `verifysign` before install/upgrade is called signed. `upgrade_check_passed` and `upgrade_applied` are API proof only and do not prove navigation, dashboard bindings, approval form controls, requester-context actions, or designer/runtime correctness. Include separate proof sections and run runtime-binding validation before handoff.
+
+For YAPK apps with navigation groups, use API-issued long ids for app/navigation groups when runtime persistence requires ids; small local ids such as `1`, `2`, `3`, or `4` are generated-placeholder errors. Generate service portal payloads only when the approved app plan includes service portal behavior; otherwise keep portal resources, portal permissions, and portal navigation absent or explicitly rejected by the validator.
+
+For signing after the required validation gates, use the App Builder MCP package-signing tools. Verify the returned signature before installation and keep installation blocked on any failure.
+
+## API-Backed Install And Upgrade Automation
+
+For package delivery, use App Builder MCP tools only after explicit confirmation and a user-selected workspace from `workspace_list`; MCP acceptance remains distinct from runtime proof.
+
+For successful live new-app install, report selected workspace display name/category/redacted ID preview, result status, safe ListSetID, and an application access link only when the OAuth/session tenant URL and ListSetID are both safely resolved. Use `<tenant-url>/#/list-set/41/<listset-id>`. If unavailable, report `Application link: unavailable; ListSetID or tenant URL was not safely resolved.` Never derive the tenant URL from `.env.local`.
+
+Business Travel hardening rules: set `Flags = 1` on root app/list-set and child list resources; declare every workflow variable used by sequence flows, Set Variable nodes, task assignments, form bindings, summaries, and ContentList mappings; remove stale renamed variables from conditions; do not use placeholders such as `__POSITION_ID_REQUIRED_*`; direct position assignment requires a real numeric tenant position ID or a user-approved post-import binding/fallback. Preserve the proof boundary: these rules harden content validation and do not prove arbitrary YAPK-from-scratch generation for all app types or tenant-specific routing.
+
+Current proof boundary:
+
+- `.yapk` wrapper schema is product-schema-backed as `AppExportPackageInfo`.
+- Product schema describes `Resource` as a Brotli compressed string whose decompressed JSON should match `AppPackageInfo`.
+- In the current local study, readable historical `.yapk` artifacts did not Brotli-decode through tested variants, so Resource decode is not yet artifact-proven for those files.
+- A focused runtime-generation attempt against `Projects Center_1-v1..0.yapk` found that the original Resource emits complete parseable `AppPackageInfo` JSON from a streaming Brotli decoder before ending with `Z_BUF_ERROR`. Product's provided C# compression helper returns `MemoryStream.ToArray()` after `BrotliStream.Flush()` but before disposing the `BrotliStream`, which explains an unfinished Brotli stream. Treat this as a tolerant decode path, not as a general permission to ignore decompression errors.
+- The same focused experiment added one minimal data list, re-encoded Resource with finalized standard Brotli, called `setsign`, and passed `verifysign`. User confirmed v1.4 upgraded successfully, the generated text-only list appeared, the add form rendered, and saving a record succeeded. Treat only this minimal text-only data-list-add path as runtime-proven.
+- After `.env.local` credentials were added, the signing service accepted the same original `Projects Center_1-v1..0.yapk` wrapper when `/v1` was appended to the configured base URL: `setsign` returned a 32-byte sign and `verifysign` passed for both regenerated and original signs. This proves server-side signing/verification for the original valid Resource, not local Resource decoding or content mutation.
+- `setsign` / `verifysign` are evidence-backed for wrappers with already-valid existing Resource payloads.
+- Wrapper-only signed packages can be accepted but do not change app content when `Resource` is unchanged.
+- `.yap` gzip Resource encoding is not valid `.yapk` Resource encoding.
+- Offline `.yapk` content generation is proven only for the focused minimal text-only data-list-add path tested in `Projects Center_1-v1..0.yapk`; broader field types and richer app mutations remain experimental until separately runtime-proven.
+
+## Default Workflow
+
+1. Preserve originals. Do not copy raw `.yapk` files into the repo.
+2. Inspect wrapper metadata with redaction. Never print raw `Resource`, `Sign`, tenant IDs, app IDs, list IDs, package IDs, private URLs, API keys, raw API responses, or decoded full payloads.
+3. Validate wrapper required keys:
+   - `PackageId`
+   - `TenantID`
+   - `AppID`
+   - `ListID`
+   - `Title`
+   - `Description`
+   - `IconUrl`
+   - `Resource`
+   - `Notes`
+   - `Author`
+   - `Date`
+   - `Version`
+   - `Sign`
+4. Check schema rules:
+   - `TenantID` and `ListID` should be numeric strings.
+   - `Date` should be UTC `yyyy-MM-ddTHH:mm:ssZ`.
+   - `Resource` must not use the `.yap` `[______gizp______]` prefix.
+5. Attempt Resource decode using project tooling:
+   - `node scripts/inspect-yapk-schema-standard.mjs <package.yapk>`
+   - `node validate-yapk-package.js <package.yapk> [--baseline <baseline.yapk>]`
+6. If Resource decodes, validate decoded `AppPackageInfo` shape:
+   - canonical required top-level keys: `ListSet`, `Pages`, `Childs`
+   - optional modules such as `Forms`, `FormNewReports`, `DataReports`, `Groups`, `Tags`, `Metadatas`, `Agents`, `Connections`, `Knowledges`, `Themes`, and `Components` must be present when generated, planned, or required by internal completeness standards
+   - `ListPackageInfo` children require `List`, `Fields`, `Layouts`, `RemindRules`, `PublicForms`, `FlowMappings`
+   - `FieldName` must end with digits and suffix must equal `FieldIndex`
+   - `InternalName` must match `^[a-zA-Z0-9_]+$`
+   - `NoRule.Prefix` must contain `{index}`
+   - `List.Type` uses the product enum values
+   - `List.Flags` includes `Show = 1`
+7. Compare packages using safe stats only:
+   - Resource string length
+   - decoded byte length
+   - Brotli success/failure
+   - decoded top-level key list when available
+   - list/page/form/report/module counts
+   - Resource changed/unchanged boolean
+   - common-prefix/suffix and same-position byte ratio
+
+## Generation Boundary
+
+Do not claim `.yapk` generation is solved just because the wrapper validates or signs.
+
+Future generation requires all of:
+
+1. Decode `Resource` to schema-valid `AppPackageInfo`. If standard Brotli ends with `Z_BUF_ERROR`, a streaming decoder may be used only when the emitted UTF-8 text parses as complete JSON with the expected `AppPackageInfo` keys.
+2. Edit the decoded object safely.
+3. Brotli encode the updated top-level `.yapk` wrapper `Resource` with the current official export-compatible shape: `JSON.stringify(AppPackageInfo)` plus trailing JSON-whitespace padding, Brotli quality `1`, and the final compressed byte omitted. Validators must decode this through the shared tolerant Brotli path.
+4. Put the encoded Resource into a valid wrapper.
+5. Sign with a product-supported signing path.
+6. Verify the signature.
+7. Runtime upgrade in Yeeflow and confirm the intended content changed.
+
+Until step 7 succeeds for the exact mutation type, classify output as schema study, planning guidance, or experimental validation only. Continue using `.yap` for generated new/cloned application creation. For `.yapk`, the current proven generation scope is a minimal text-only data list.
+
+When editing decoded `AppPackageInfo`, preserve 64-bit numeric IDs. Plain JavaScript `JSON.parse` rounds large IDs and must not be used for app-content mutation unless a lossless JSON parser is used. The first focused edit used Python JSON handling for the app payload and Node only for byte-level compression/API calls.
+
+## What To Load
+
+Use these project references when present:
+
+- `docs/yeeflow-yapk-version-package-study.md`
+- `docs/studies/normalized/yapk-schema-standard/`
+- `yeeflow-yapk-schema-standard-summary.json`
+- `validate-yapk-package.js`
+- `scripts/inspect-yapk-schema-standard.mjs`
+
+Also use:
+
+- `yeeflow-package-validator` for import-safety framing.
+- `yeeflow-runtime-test-orchestrator` when a user explicitly asks for runtime upgrade proof.
+- `yeeflow-application-builder` only for business-solution design or `.yap` clone alternatives.
+
+## Stop Conditions
+
+Stop and report the proof boundary when:
+
+- Resource does not Brotli-decode to JSON.
+- Resource decodes but fails schema-critical `AppPackageInfo` checks.
+- The task requires app-content mutation but no product-supported Resource-generation/signing/runtime proof is available.
+- The only successful change is wrapper metadata or `Sign`, because unchanged Resource means unchanged app content.
+- Any raw package, payload, private ID, API response, secret, screenshot, or decoded full payload would need to be committed.
+
+## Runtime-generation Experiment Notes
+
+For `Projects Center_1-v1..0.yapk`, the safe result is:
+
+- wrapper JSON parse: succeeded
+- Resource base64 decode: succeeded
+- Resource standard Brotli sync decode: failed with final `unexpected end of file`
+- Resource tolerant streaming decode: emitted complete parseable `AppPackageInfo` JSON
+- requested data-list add: completed locally
+- finalized standard Brotli re-encode: completed
+- `setsign`/`verifysign`: passed
+- generated package: `<local manual-test package path>`
+- runtime upgrade/list/form materialization: user-proven
+- record creation: failed with `Add failed`
+
+The v1.2 add-fix package adjusted save-path-sensitive list metadata:
+
+- generated list `TableCode`: `flowcraft`
+- date field `FieldName`: `Datetime4`
+- date field `FieldType`: `Datetime`
+- layout references updated to `Datetime4`
+- generated package: `<local manual-test package path>`
+- `setsign`/`verifysign`: passed
+- runtime add-item retest: pending
+
+User runtime result for v1.2:
+
+- upgrade failed
+- error: `Data list: YAPK Runtime Test List (field invalid 'Test Date Datetime4!=Datetime4')`
+- conclusion: do not change this package's generated date field from `Datetime4` / `Datetime` to `Datetime4` / `Datetime`
+
+The v1.3 table-code-only package keeps the upgrade-valid date field shape and changes only:
+
+- generated list `TableCode`: `flowcraft`
+- generated package: `<local manual-test package path>`
+- `setsign`/`verifysign`: passed
+- inspector/validator: passed
+- runtime result: upgrade succeeded, but add-item save still failed
+- conclusion: `TableCode` was not the missing save-path piece
+
+The v1.4 text-only isolation package removes the `Test Date` field to test whether the save failure is caused by Datetime control materialization:
+
+- generated package: `<local manual-test package path>`
+- fields: `Name`, `Test Status`, `Test Notes`
+- `setsign`/`verifysign`: passed
+- inspector/validator: passed
+- runtime result: upgrade succeeded, list rendered, add form rendered, and saving a new item succeeded
+- conclusion: first complete runtime proof for decode -> edit -> encode -> sign -> verify -> upgrade -> add-item-save, scoped to a minimal text-only data list
+
+Do not generalize this to Datetime fields yet. v1.1 and v1.3 both failed record creation while including the generated Datetime field, and v1.2 failed upgrade when the Datetime field casing was changed.
+
+Ask product to confirm whether the provided `BrotliHelper.Compress(byte[])` should dispose/close `BrotliStream` before reading `MemoryStream.ToArray()`.
+
+When using the signing APIs:
+
+- use the discovered hosted MCP signing/package tool under the selected OAuth connection; if unavailable, report the missing capability rather than invoking a local auth wrapper
+- do not read local environment files for live authentication or account selection
+- Do not use API keys or local fallback credentials for live operations; use only the selected host OAuth connection.
+- let the hosted service own signing endpoint selection and credential handling; do not configure direct API overrides
+- treat `YEEFLOW_BASE_URL` only as a legacy API base URL alias
+- derive tenant links from OAuth token context; use `YEEFLOW_TENANT_URL` only as an optional manual tenant UI/browser-link fallback, not for signing API calls
+- Use only the host-selected OAuth connection for the requested account and organization. Local environment profiles cannot switch connected identities.
+- never print or persist raw API responses, `Resource`, or `Sign`
+- treat a successful `setsign`/`verifysign` on an unchanged Resource as wrapper/signing proof only
+
+Generated-final YAPK packages must be preflight-clean before signing. When an approved App Plan exists, run `scripts/yapk-first-generation-preflight.mjs --package <file.yapk> --plan <yeeflow-app-plan.md> --json` and stop before `setsign` if any canonical schema, export-shape, resource completeness, ID provenance, navigation, app icon, dashboard materialization, or redacted-output gate fails. API status `0` means submitted/accepted only; final success requires Version Management `Succeed` evidence plus separate runtime proof.
+
+For Dashboard-only upgrades of existing complete applications, do not build or sign sparse Dashboard-only packages. Build a full upgrade package that preserves non-Dashboard resource groups unchanged, run `scripts/validate-yapk-upgrade-scope.mjs`, and save a non-Dashboard unchanged diff proof. After `upgrade-check` or `upgrade-apply`, `apiStatus: 0` is still only submitted/accepted; final success requires the exact Version Management `PackageId` row to reach `Succeed`, failed-row error-log capture when applicable, and Dashboard runtime proof with business rows, no `No data`, no `[object Object]`, real Data List Collection binding, Search filter behavior when generated, and unchanged Data Lists/Forms.
+
+Do not embed business sample/demo rows in generated-final package decoded `Childs[].ListDatas`, `Childs[].List.ListDatas`, or `Childs[].List.Items`. Emit sample data only as a separate seed artifact/script and run live seeding only with explicit user approval, after install/materialization proof, using `TriggerFlow: false` by default and before/after count reporting. Type `16` Document Library structural root folders are the only `List.Items` exception: they must be explicitly planned, use API-issued object-key IDs with provenance, satisfy the complete export shape, omit file payloads, and pass plan-to-package folder conformance.
+
+Generated-final approval forms must use designer/materialization-safe `DefResource`, not merely decodable `::brotli::` placeholders. Require request/task/print page registrations where planned, `formdef.children`, unique designer ids, workflow panel/history where applicable, `MultiAssignmentTask`, task assignee metadata, task URL aliases, graph positions, and explicit Approved/Rejected paths.
+
+Dashboard generation must domain-normalize every selected template. Do not leave source-template labels such as `All tasks - Multiple select`, `Active Survey Programs`, Event/Survey/Project terms in unrelated apps, or visible raw control labels such as `Grid`, `Container`, `Text`, or `Placeholder`. Every visible Collection column/card/action/filter/KPI label must map to the current App Plan field/action/metric contract or be removed. When seed data is used to prove runtime dashboards, include seed-derived expected KPI values and compare them with visible KPI text before claiming business KPI correctness.
+
+Sub List Dynamic Runtime Proof V1.2 note: the user-corrected `Sub List Dynamic Runtime Proof-V1.1.yapk` is the baseline for grid/header fixes. Generate V1.2 from that YAPK rather than the older `.yap`: tolerant-decode the V1.1 Resource, remove the stale standalone V1 header grid, wrap body-grid field controls in containers, re-encode with finalized standard Brotli, update wrapper PackageId/Version/Date/Notes, then run `setsign` and `verifysign`. The generated V1.2 package signed and verified; do not claim runtime proof until V1.2 is upgraded/imported and manually tested.
+
+Sub List Dynamic Runtime Proof V1.4 note: V1.3 rendering was user-confirmed for the Purchase Request Dynamic Sub List, but the row menu only had Duplicate/Delete. V1.4 is generated from V1.3 by mutating only the Purchase Request form row menu to Duplicate, Insert before, Insert after, Move up, and Move down, preserving visible Delete in the last column. Sign and verify the wrapper as usual, but keep Insert/Move runtime behavior pending until user testing confirms it.
+
+Sub List Dynamic Runtime Proof V1.5 note: V1.4 decoded locally with the five menu items but runtime still showed the old Duplicate/Delete menu. The earlier add-form generation had collapsed the Purchase Request `ProcModelID`, `DefResourceID`, and `DeployedDefID` to the same rounded large value. For form-definition mutations in YAPK upgrades, bump the target form `DefResourceID` and `DeployedDefID` along with `DefResource` so Yeeflow materializes the fresh deployed form definition. V1.5 applies that fix and remains runtime-pending.
+
+If product states the format is exactly `base64(Brotli(AppPackageInfo JSON))`, ask for one of:
+
+- a fresh `.yapk` known to decode with that exact path,
+- the expected safe byte statistics for the decoded Brotli payload,
+- confirmation that this specific package was generated by the same schema-standard exporter,
+- or the product-side decode trace/error for this exact package.
+
+<!-- plugin-resource-access -->
+## Portable access to bundled resources
+
+Resolve this plugin's root from the current host-provided skill location: a skill is under `<plugin-root>/skills/<skill-name>`. Never hardcode a developer checkout, a macOS home directory, a Linux cache path, or a particular plugin version.
+
+Use the skill-resource reader for files within the selected skill subtree. Shared references such as `docs/reference/...`, root validators and `core/...` are relative to the plugin root, not the current working directory. When the resource reader cannot read outside the skill subtree, read the existing shared file through the host's filesystem tools at its resolved plugin-root path. A resource-interface error alone does not prove the bundled file is missing. If no filesystem reader is available, report that access limitation; do not invent reference contents.
+
+Resolve scripts relative to the mounted plugin and run with the host's available Node runtime. The application-generator validator entrypoint delegates to the root validator so shared dependencies resolve from the same package, including when launched from a temporary directory. Do not install dependencies or call remote write tools merely to read a template. Keep skill reads, script validation, live MCP reads, and business runtime acceptance as separate evidence.
+
+## Unified Yeeflow MCP connection
+
+Use the single `yeeflow_mcp` connection definition at `https://api.yeeflow.com/v1/mcp` for all live Yeeflow work. App Builder, Operations, Admin and Service Portal are capability domains within this connection, not separate servers or logins. Each account can use an independently authorized host connection to this same definition. Discover the current host-exposed tool names and schemas; do not invent namespace prefixes or assume tool contracts stayed identical after migration.
+
+A single OAuth connection does not grant additional permissions. Operations serves business users; application structure/settings and resource creation require the appropriate application-administrator rights. Organization administration and Service Portal capabilities retain their own permission and context checks. Editor/Visitor access is not application-administrator access. On authentication failure reconnect this unified endpoint through the host; on permission denial stop the denied action without falling back to a former endpoint or another identity. Keep existing confirmation, readback, pagination, RowVersion and data-minimization rules.
+
+## Independent sign-in and multiple connected accounts
+
+On ChatGPT/OpenAI hosts, each user installs the same plugin and authorizes their own Yeeflow account through the host's OAuth connection flow. The host stores and selects independent connections, including additional accounts connected from plugin settings. Do not ask users to create an MCP server, supply an App ID, paste credentials, or configure local tokens. Do not implement custom account selectors, local profiles, environment variables or shared credentials. When the host-exposed tool schema declares a connection-routing parameter such as `link_id`, use only an exact connection value from the host-provided account list for the requested identity. This parameter selects a host-managed OAuth grant; it is not a Yeeflow business argument or a credential. Never invent routing fields or connection values, or forward account selectors to the upstream MCP server. Other hosts must follow their own supported connector/account-management flow; do not assume they expose OpenAI multi-account settings.
+
+Before any account-dependent read or write, use the connection that matches the user's requested account and organization. If several connected accounts could match and the intended identity is ambiguous, ask the user to select the account and organization before accessing their business data. Do not guess from an email address alone, assume the most recently used account, or silently use every connection. If the host does not expose the requested connection or cannot route to it, preserve the operation and ask the user to select or connect that account in plugin settings; do not invent an account selector argument.
+
+When the host exposes an authenticated profile tool, discover its actual name and schema. The upstream designated profile tool declares `_meta["openai/profile"]: true`, accepts an empty object and returns the profile represented by the selected connection's credentials. The host may add a connection-routing field to its exposed wrapper; follow that actual schema while keeping the upstream profile call free of account selectors. Use its stable opaque `id` to distinguish profiles and its optional display fields for labels. Do not treat email, nickname or display name as a stable identity. A profile tool helps identification; it does not enable multi-account access or grant permissions. Do not invent a profile tool or bypass host routing when it is unavailable.
+
+After switching connections or organizations, call `workspace_list` again and rediscover the target application/resources and permissions. Scope all reused IDs, RowVersion values, cached results and permission conclusions to the selected connection and organization; never carry them across identities. Bind write confirmation and readback to that same account, organization, target and action. If identity changes after confirmation, obtain confirmation for the new target before writing.
+
+On authentication failure, reconnect only the affected connection. On permission denial, stop the denied operation; never retry it using another connected account. Read multiple accounts only when the user explicitly requests that scope, and label each result by its account and organization. Do not include credentials, access tokens or private profile IDs in user-facing results or generated artifacts.

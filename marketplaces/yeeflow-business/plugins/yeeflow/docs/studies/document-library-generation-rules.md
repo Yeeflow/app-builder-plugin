@@ -1,0 +1,103 @@
+# Yeeflow Document Library Generation Rules
+
+These rules are promoted from the `Projects Center.yap`, `Document Library Sample.yap`, and `Projects Center_1-v1.7 (1).yapk` export studies.
+
+Runtime update: `document-library-sample-new-library-only.v1.yap`, generated from only the `New Document Library` resource in `Document Library Sample.yap`, imported and ran successfully in Yeeflow by user manual test. Treat that `New Document Library` shape as the canonical minimal base definition for future generated document libraries. Do not treat the earlier generated `Baseline Documents` experiment as the base definition.
+
+V2 runtime update: `Enterprise Document Center` imported and opened in Yeeflow with three Type `16` document libraries generated from the canonical `New Document Library` base. Runtime accepted multiple libraries, simple custom fields, multiple configured views, and export-backed root-level folder rows. The package still generated no uploaded file rows or document binaries. Manual folder creation was also runtime-tested across all three libraries.
+
+Dashboard control study update: `Enterprise Document Center Folders Runtime.yap` proves dashboard `Doc library` controls use `type = "document-library"` inside a Type `103` dashboard page resource. Root-bound controls reference the target Type `16` library through `attrs.data.list`; folder-bound controls add `attrs.data.folder.path = "0/<folder ListDataID>"`; one export-observed dynamic folder example adds `attrs.data.customPath` expression tokens. See `docs/studies/doc-library-control-dashboard-study.md` and `doc-library-control-reference.normalized.json`.
+
+## Generator Rules
+
+- Treat Document Library as a first-class app child resource.
+- Generate it with `ListModel.Type = 16`.
+- Full-app materialization must preserve the App Plan resource type. A row, heading, or navigation item planned as `Document Library` must create a Type `16` child resource; it must not be downgraded to a Type `1` Data List with `file-upload` fields.
+- If the business needs both a document index/register and real file storage, generate two resources: a Type `1` Data List for the register/workflow metadata and a Type `16` Document Library for the native documents.
+- Keep the package-specific child-resource envelope. `.yap` uses `ListModel`, `Defs`, `Layouts`, and optional `ListDatas`; generated-final `.yapk` uses `List`, `Fields`, `Layouts`, and Type `16` structural folders under `List.Items`.
+- Link it into root app navigation with `Type = 16` for mixed/richer apps. For document-library-only packages that intentionally mirror `Document Library Sample.yap`, root `LayoutView = {"sortVer":1}` and `Item.Layouts = []` are export-proven and should validate with warnings.
+- Use `CustomType = "ListSite_<root app list id>"` for app-owned libraries.
+- Keep top-level `Resource.SimplePortal = null`; both known-good document-library exports use `null`, while generated packages with `[]` failed at Yeeflow create.
+- Preserve native document-library metadata instead of applying normal data-list `Title` rules blindly.
+- For generated-final `.yapk`, preserve the export-proven Type `16` field shape. Do not rewrite `Bigint1` / `Bigint2` to Decimal fields merely to satisfy the normal Data List schema branch, and do not force the Document Library `Title` metadata to the normal Data List `Status = 0` shape.
+- Do not fake uploaded document rows in baseline packages.
+- Generate root-level folder rows only when using the export-backed shape for the target package:
+  - `.yap`: `ListDatas[folderId]` contains the row and `ListDataID` equals the object key.
+  - generated-final `.yapk`: `Childs[].List.Items[folderId]` contains the row and the row omits `ListDataID`; the object key is the folder ID.
+  - `Title` is the folder name.
+  - `Bigint1 = "0"` for root folders.
+  - `Text1 = "folder"`.
+  - `Bigint2 = ""`.
+  - `Text2 = ""`.
+  - `Text3 = "0_<lowercase folder title>"`.
+  - omit `Text4`; do not include upload payloads.
+  - include blank values for generated custom fields on the library.
+  - `.yap` includes folder row IDs in `ReplaceIds`; generated-final `.yapk` records every folder object-key ID in API-issued ID provenance using the conceptual path `decoded.Childs[index].List.Items[index].$key`.
+- Do not generate nested folder rows until nested folder behavior is export-backed and runtime-tested.
+- Do not include raw file/document content, private document metadata, or downloaded files in generated packages.
+- Dashboard Doc library controls can be generated after the target Type `16` libraries and folder rows exist. Use `type = "document-library"`, `attrs.data.list`, optional `attrs.data.folder`, `attrs.listarr`, and optional `attrs.caption`. Keep approval form, data-list form, and document-library form contexts unclaimed until generated runtime tests prove those contexts.
+
+## Required Default Fields
+
+Generate these export-proven document-library fields:
+
+| FieldName | Display label | FieldType | Control Type | Notes |
+| --- | --- | --- | --- | --- |
+| `Title` | Name | `Text` | `input` | Native name field; keep `IsSystem = true`, `IsIndex = true`, and `Rules.isLibrary = true` |
+| `Bigint1` | ParentID | `Bigint` | `input_number` | Folder hierarchy field; `Rules.isNotInListFiles = true` |
+| `Text1` | Type | `Text` | `input` | Document type marker |
+| `Bigint2` | FileSize | `Bigint` | `input_number` | Size field; view label may display as Size; readonly |
+| `Text2` | Extension | `Text` | `input` | Extension field; readonly |
+| `Text3` | UniqueName | `Text` | `input` | Unique stored-name field; not shown in list files |
+| `Text4` | Upload File | `Text` | `file-upload` | Upload control; `required = true`, `isLabrary = true` |
+
+The native Document Library `Title` field preserves `Status = 1`. Normal Type `1` Data Lists continue to require native `Title.Status = 0`; validators must branch on the owning resource type instead of applying either status globally.
+
+## Views
+
+Document-library views can reuse data-list view generation where compatible. A newly created library may export an empty default view `LayoutView = ""`; this is runtime-proven for the one-library `New Document Library` baseline. For the minimal runtime baseline, preserve the sample-proven empty-string default view before adding configured view JSON. The v2 `Enterprise Document Center` runtime pass accepted additional configured Type `0` views for multiple document libraries.
+
+Cross-resource data-view guidance: configured views should keep top-level metadata on `Layouts[]` (`Title`, `Type`, `Ext1.Url`, `IsDefault`, `IsItemPerm`) and view settings in parsed `LayoutView`. Data-list export proves Type `0` list, `999` gallery, `104` kanban, and `100` calendar, but document-library exports in this repository only prove Type `0` document-library views. Warn rather than hard-fail when a generated document library uses a product-documented but Type `16`-unproven view type.
+
+## Custom Forms
+
+Document-library custom forms reuse the data-list custom form storage shape. Generate New/Edit/View custom forms only when the intended mapping is clear:
+
+- `ListModel.LayoutView.add`
+- `ListModel.LayoutView.edit`
+- `ListModel.LayoutView.view`
+
+The runtime-proven minimal `New Document Library` baseline has one `New file` upload form but no `ListModel.LayoutView` assignment. Configured libraries assign `add`, `edit`, and `view` together. Avoid partial New-only assignment until runtime proof confirms it is safe.
+
+## Validator Rules
+
+- Recognize `ListModel.Type = 16` as document library.
+- The canonical YAPK schema gate must apply a Type `16` compatibility projection for native system-managed support fields before evaluating the normal `ListFieldInfo` schema. This projection is validation-only and must not mutate the package Resource.
+- `validate-yapk-package.js` may accept `FieldType = Bigint` only for export-proven native Type `16` fields `Bigint1` and `Bigint2`; the same fields remain invalid on Type `1` Data Lists.
+- Data List system-schema and generated-export-shape gates must require `Title.Status = 1` for Type `16` Document Libraries and `Title.Status = 0` for normal Type `1` Data Lists.
+- Navigation runtime metadata must accept `Type = 16` only when `ListID` resolves to an included Type `16` child resource. A Type `16` navigation item targeting a Type `1` list is a hard failure.
+- Plan-to-package conformance must fail if any App Plan `Document Library` resource is missing from `Childs[]` as Type `16`, or if its navigation item is generated as Type `1`.
+- Plan-to-package conformance must fail if the only generated representation of a planned Document Library is a Type `1` Data List with upload fields.
+- Warn on missing or unusual document-library default fields.
+- Warn when `Text4` is not a `file-upload` field with library upload rules.
+- Warn when `Bigint1` / ParentID is missing.
+- For generated-final `.yapk`, allow non-empty `List.Items` only on Type `16` Document Libraries and only when every row satisfies the structural root-folder contract. Type `1` `List.Items` remains forbidden.
+- Require generated-final folder IDs to be API-style numeric object keys and included in ID provenance; the row itself must omit `ListDataID`.
+- Fail generated-final folder rows with missing Title, `Bigint1 != "0"`, `Text1 != "folder"`, nonblank `Bigint2`/`Text2`, incorrect `Text3`, a `Text4` upload value, unknown fields, non-string values, or nonblank custom-field values.
+- Plan-to-package conformance must fail when an App Plan root folder is missing from the target Type `16` `List.Items` object.
+- Validate FieldID uniqueness across the app.
+- Validate `ListDataID` uniqueness for sample/folder rows.
+- Validate field `ListID` ownership.
+- Validate view references when view JSON is present.
+- Validate custom form bindings against document-library fields.
+- Continue treating normal sample/demo records as post-install seed artifacts; this exception is only for export-shaped structural folders, not arbitrary `List.Items` data.
+- Run `scripts/test-document-library-materialization-gates.mjs` after materializer, package schema, package validator, or navigation validator changes. The regression must prove both positive Type `16` handling and negative Type `1`/Type `16` boundary cases.
+
+## Remaining Unknowns
+
+- Runtime import/open behavior for the minimal generated Type `16` `New Document Library` shape is proven by `document-library-sample-new-library-only.v1.yap`.
+- Runtime import/open behavior for multiple generated Type `16` libraries with simple custom fields, configured views, and root-level generated folder rows is partially proven by `Enterprise Document Center`.
+- Baseline v1 and v2 uploaded successfully but Yeeflow returned `Created failed` at the final import step. Baseline v3 was validation-only and used the misleading generated title `Baseline Documents`; do not use it as the canonical base. The runtime-proven base is the `New Document Library` sample clone with default view `LayoutView = ""`.
+- Nested generated folder-row behavior and exhaustive open/navigation behavior for every generated folder.
+- Upload persistence and how Name, Type, Extension, Size, UniqueName, and Upload File are populated after upload.
+- Whether New/Edit/View custom form assignment has additional document-library-specific runtime constraints.

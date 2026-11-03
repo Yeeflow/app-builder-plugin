@@ -1,0 +1,17 @@
+{
+  "name": "yeeflow-workspace",
+  "interface": {
+    "displayName": "Yeeflow Workspace"
+  },
+  "plugins": [
+    {
+      "name": "dev-6aa92fbbda188191b817592fdc390db2",
+      "pluginId": "plugin_asdk_app_6aa92fbbda188191b817592fdc390db2",
+      "source": {
+        "source": "local",
+        "path": "./plugins/yeeflow"
+      },
+      "category": "Developer Tools"
+    }
+  ]
+}
