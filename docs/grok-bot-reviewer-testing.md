@@ -1,15 +1,15 @@
 # Yeeflow plugin: reviewer testing instructions (Grok Bot / Cursor)
 
-Plugin: `yeeflow` · Version: 1.20.1 · Publisher: Yeeflow (support@yeeflow.com)
+Plugin: `yeeflow` · Version: 1.20.2 ([release](https://github.com/Yeeflow/app-builder-plugin/releases/tag/yeeflow-cursor-plugin-v1.20.2), [notes](releases/yeeflow-app-builder-v1.20.2.md)) · Publisher: Yeeflow (support@yeeflow.com)
 Components: 31 skills, 1 remote MCP server (`yeeflow_mcp`, `https://api.yeeflow.com/v1/mcp`, Streamable HTTP, OAuth).
 The plugin bundles no credentials, no hooks and no local MCP server.
 
-> Publisher checklist before submitting: choose the reviewer account option in section 1, replace every `[ ]` placeholder, and send any password through the channel the reviewer asks for. Never commit it here. Include the "Publisher testing so far" paragraph below, kept in line with the validation records ([Cursor and setup](grok-bot-cursor-validation-2026-10-28.md), [Grok Bot development connection](grok-bot-dev-connection-validation-2026-10-28.md)).
+> Publisher checklist before submitting: choose the reviewer account option in section 1, replace every `[ ]` placeholder, and send any password through the channel the reviewer asks for. Never commit it here. Include the "Publisher testing so far" paragraph below, kept in line with the evidence records ([1.20.2 release notes and install smoke](releases/yeeflow-app-builder-v1.20.2.md), [Cursor and setup, 1.20.1](grok-bot-cursor-validation-2026-10-28.md), [Grok Bot development connection, 1.20.1](grok-bot-dev-connection-validation-2026-10-28.md)). State which release each result came from.
 
 **Publisher testing so far (include in the submission):**
 
 ```text
-Publisher testing before listing: The released 1.20.1 package was installed as a Cursor local plugin. Cursor loaded the plugin, 31 skills and its own yeeflow_mcp connection; plugin OAuth completed; current_user_get, get_profile and workspace_list succeeded through the plugin connection; skills were invoked in safe dry-run mode (no live writes). We could not install the unlisted plugin in Grok Bot from an individual account. Instead we ran a Grok Bot development connection: the same MCP server as a custom MCP server (OAuth and read calls succeeded) plus the checksum-verified released skill files read through a private loader skill. In that setup the application builder produced a plan without writes, the feature configuration guide ran its bundled helper, the expression validator ran, and a requested write paused for confirmation and was declined. Grok Bot plugin installation, the remaining skills and full live business workflows are untested by us.
+Publisher testing before listing: Release 1.20.2 was installed as a Cursor local plugin: Cursor loaded the plugin, 31 skills and its own yeeflow_mcp connection; authenticated current_user_get and workspace_list calls succeeded through that connection; and the bundled expression validator accepted a four-parameter dateDiff without the primitive-parameter warning. The earlier 1.20.1 Cursor local install also completed plugin OAuth and get_profile, and skills were invoked in safe dry-run mode (no live writes). We could not install the unlisted plugin in Grok Bot from an individual account. Instead, with the 1.20.1 release files, we ran a Grok Bot development connection: the same MCP server as a custom MCP server (OAuth and read calls succeeded) plus the checksum-verified released skill files read through a private loader skill. In that setup the application builder produced a plan without writes, the feature configuration guide ran its bundled helper, the expression validator ran, and a requested write paused for confirmation and was declined. Grok Bot plugin installation, a Grok Bot development connection on 1.20.2, the remaining skills, full live business workflows and Designer/runtime behaviour are untested by us.
 ```
 
 ---
@@ -17,7 +17,7 @@ Publisher testing before listing: The released 1.20.1 package was installed as a
 ## Short version (paste into the "Testing Instructions" field)
 
 ```text
-Yeeflow is a low-code business application platform. The plugin adds 31 skills and one hosted MCP server (https://api.yeeflow.com/v1/mcp, OAuth; no API key).
+Yeeflow is a low-code business application platform. The plugin adds 31 skills and one hosted MCP server (https://api.yeeflow.com/v1/mcp, OAuth; no API key). Release 1.20.2: https://github.com/Yeeflow/app-builder-plugin/releases/tag/yeeflow-cursor-plugin-v1.20.2
 
 Option A test account: a dedicated reviewer account in a sandbox tenant: [REVIEWER EMAIL]. Password: [PROVIDED SEPARATELY]. The account can only reach the "Grok Review Sandbox" workspace. For a reviewer-created trial instead, use the separate Option B instructions below.
 
@@ -35,7 +35,7 @@ All writes require explicit user confirmation. Support: support@yeeflow.com.
 **Option B short version (reviewer-created trial):**
 
 ```text
-Yeeflow is a low-code business application platform. The plugin adds 31 skills and one hosted MCP server (https://api.yeeflow.com/v1/mcp, OAuth; no API key).
+Yeeflow is a low-code business application platform. The plugin adds 31 skills and one hosted MCP server (https://api.yeeflow.com/v1/mcp, OAuth; no API key). Release 1.20.2: https://github.com/Yeeflow/app-builder-plugin/releases/tag/yeeflow-cursor-plugin-v1.20.2
 
 Create a free Yeeflow trial at https://www.yeeflow.com, verify your email, and finish creating an organization. The trial starts without sample data; see https://support.yeeflow.com/en/articles/8656028-signing-up-for-new-yeeflow-account.
 
