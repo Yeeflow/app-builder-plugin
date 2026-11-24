@@ -2,7 +2,7 @@
 
 Use this to test Yeeflow inside Grok Bot before the marketplace listing. It is **not** a plugin install: the MCP server is a custom connection and the skills are loaded by Grok Bot from the released files. Record results in a new dated validation record; do not edit the 2026-10-28 record retroactively.
 
-The 2026-10-28 run used the 1.20.1 release ([results](grok-bot-dev-connection-validation-2026-10-28.md)). This kit now targets the 1.20.2 release; a 1.20.2 run has not been recorded yet. It extracts to a new folder, `/workspace/yeeflow-plugin-1.20.2`, so it does not collide with earlier test files.
+The 2026-10-28 run used the 1.20.1 release ([results](grok-bot-dev-connection-validation-2026-10-28.md)). This kit targets the 1.20.2 release; a 1.20.2 run on 2026-11-03 is recorded in [its results](grok-bot-dev-connection-validation-2026-11-03.md) (that run used a loader named `yeeflow-dev-loader-1202`). It extracts to a new folder, `/workspace/yeeflow-plugin-1.20.2`, so it does not collide with earlier test files.
 
 Time: about 15–20 minutes. Account: a Yeeflow test or sandbox account. Writes: none, except an optional write that is declined at the confirmation step.
 
