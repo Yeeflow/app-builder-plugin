@@ -12,9 +12,18 @@ The plugin bundles no credentials, no hooks and no local MCP server.
 Publisher testing before listing: Release 1.20.2 was installed as a Cursor local plugin: Cursor loaded the plugin, 31 skills and its own yeeflow_mcp connection; authenticated current_user_get and workspace_list calls succeeded through that connection; and the bundled expression validator accepted a four-parameter dateDiff without the primitive-parameter warning. The earlier 1.20.1 Cursor local install also completed plugin OAuth and get_profile, and skills were invoked in safe dry-run mode (no live writes). We could not install the unlisted plugin in Grok Bot from an individual account. Instead we ran Grok Bot development connections: the same MCP server as a custom MCP server plus the checksum-verified released skill files read through a private loader skill. With 1.20.2 (3 November 2026): current_user_get, get_profile and workspace_list succeeded; the application builder produced a plan without writes; the feature configuration guide ran its bundled helper, though its dependent-dropdown answer was partly inferred; and the bundled expression validator accepted a four-parameter dateDiff with no issues. An earlier 1.20.1 run also showed a requested write pausing for confirmation and being declined; the 1.20.2 run did not repeat a write request. Grok Bot plugin installation, the remaining skills, any approved write, full live business workflows and Designer/runtime behaviour are untested by us.
 ```
 
+**Form version (paste into the marketplace form's "Testing Instructions" field).** The form limits this field to 600 characters, so it links to these instructions and the evidence above instead of including them. Keep it consistent with the "Publisher testing" paragraph.
+
+```text
+Reviewer steps and test evidence: https://github.com/Yeeflow/app-builder-plugin/blob/main/docs/grok-bot-reviewer-testing.md
+Release 1.20.2: https://github.com/Yeeflow/app-builder-plugin/releases/tag/yeeflow-cursor-plugin-v1.20.2
+Account: free trial at yeeflow.com. Install, Authenticate, then ask "Use Yeeflow to list my workspaces" and "Use the Yeeflow application builder skill to plan a visitor registration app. Do not create anything yet."
+Our tests: 1.20.2 as a Cursor local plugin; Grok Bot only via custom MCP plus released skills (loader). Grok Bot plugin install and most skills untested.
+```
+
 ---
 
-## Short version (paste into the "Testing Instructions" field)
+## Short version (for reviewers; longer than the form allows)
 
 ```text
 Yeeflow is a low-code business application platform. The plugin adds 31 skills and one hosted MCP server (https://api.yeeflow.com/v1/mcp, OAuth; no API key). Release 1.20.2: https://github.com/Yeeflow/app-builder-plugin/releases/tag/yeeflow-cursor-plugin-v1.20.2
